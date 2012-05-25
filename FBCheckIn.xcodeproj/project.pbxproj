@@ -1,0 +1,785 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B73F6CE7156ED27F004A20E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73F6CE6156ED27F004A20E4 /* UIKit.framework */; };
+		B73F6CE9156ED27F004A20E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73F6CE8156ED27F004A20E4 /* Foundation.framework */; };
+		B73F6CEB156ED27F004A20E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73F6CEA156ED27F004A20E4 /* CoreGraphics.framework */; };
+		B73F6CF1156ED280004A20E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B73F6CEF156ED280004A20E4 /* InfoPlist.strings */; };
+		B73F6CF3156ED281004A20E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6CF2156ED281004A20E4 /* main.m */; };
+		B73F6CF7156ED281004A20E4 /* TYAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6CF6156ED281004A20E4 /* TYAppDelegate.m */; };
+		B73F6CFF156ED281004A20E4 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73F6CFE156ED281004A20E4 /* SenTestingKit.framework */; };
+		B73F6D00156ED281004A20E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73F6CE6156ED27F004A20E4 /* UIKit.framework */; };
+		B73F6D01156ED281004A20E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73F6CE8156ED27F004A20E4 /* Foundation.framework */; };
+		B73F6D09156ED281004A20E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D07156ED281004A20E4 /* InfoPlist.strings */; };
+		B73F6D0C156ED281004A20E4 /* FBCheckInTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D0B156ED281004A20E4 /* FBCheckInTests.m */; };
+		B73F6D55156ED835004A20E4 /* TYFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D53156ED835004A20E4 /* TYFriendsViewController.m */; };
+		B73F6D56156ED835004A20E4 /* TYFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D53156ED835004A20E4 /* TYFriendsViewController.m */; };
+		B73F6D57156ED835004A20E4 /* TYFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D54156ED835004A20E4 /* TYFriendsViewController.xib */; };
+		B73F6D58156ED835004A20E4 /* TYFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D54156ED835004A20E4 /* TYFriendsViewController.xib */; };
+		B73F6D5C156ED846004A20E4 /* TYCheckInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D5A156ED846004A20E4 /* TYCheckInViewController.m */; };
+		B73F6D5D156ED846004A20E4 /* TYCheckInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D5A156ED846004A20E4 /* TYCheckInViewController.m */; };
+		B73F6D5E156ED846004A20E4 /* TYCheckInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D5B156ED846004A20E4 /* TYCheckInViewController.xib */; };
+		B73F6D5F156ED846004A20E4 /* TYCheckInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D5B156ED846004A20E4 /* TYCheckInViewController.xib */; };
+		B73F6D81156ED86B004A20E4 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D65156ED86B004A20E4 /* Facebook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73F6D82156ED86B004A20E4 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D65156ED86B004A20E4 /* Facebook.m */; };
+		B73F6D83156ED86B004A20E4 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D67156ED86B004A20E4 /* FBDialog.bundle */; };
+		B73F6D84156ED86B004A20E4 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D67156ED86B004A20E4 /* FBDialog.bundle */; };
+		B73F6D85156ED86B004A20E4 /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D69156ED86B004A20E4 /* FBDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73F6D86156ED86B004A20E4 /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D69156ED86B004A20E4 /* FBDialog.m */; };
+		B73F6D87156ED86B004A20E4 /* FBFrictionlessRequestSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D6B156ED86B004A20E4 /* FBFrictionlessRequestSettings.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73F6D88156ED86B004A20E4 /* FBFrictionlessRequestSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D6B156ED86B004A20E4 /* FBFrictionlessRequestSettings.m */; };
+		B73F6D89156ED86B004A20E4 /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D6D156ED86B004A20E4 /* FBLoginDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73F6D8A156ED86B004A20E4 /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D6D156ED86B004A20E4 /* FBLoginDialog.m */; };
+		B73F6D8B156ED86B004A20E4 /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D6F156ED86B004A20E4 /* FBRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73F6D8C156ED86B004A20E4 /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D6F156ED86B004A20E4 /* FBRequest.m */; };
+		B73F6D8D156ED86B004A20E4 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D73156ED86B004A20E4 /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73F6D8E156ED86B004A20E4 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D73156ED86B004A20E4 /* NSObject+SBJSON.m */; };
+		B73F6D8F156ED86B004A20E4 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D75156ED86B004A20E4 /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73F6D90156ED86B004A20E4 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D75156ED86B004A20E4 /* NSString+SBJSON.m */; };
+		B73F6D91156ED86B004A20E4 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D77156ED86B004A20E4 /* SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73F6D92156ED86B004A20E4 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D77156ED86B004A20E4 /* SBJSON.m */; };
+		B73F6D93156ED86B004A20E4 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D79156ED86B004A20E4 /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73F6D94156ED86B004A20E4 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D79156ED86B004A20E4 /* SBJsonBase.m */; };
+		B73F6D95156ED86B004A20E4 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D7B156ED86B004A20E4 /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73F6D96156ED86B004A20E4 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D7B156ED86B004A20E4 /* SBJsonParser.m */; };
+		B73F6D97156ED86B004A20E4 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D7D156ED86B004A20E4 /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73F6D98156ED86B004A20E4 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D7D156ED86B004A20E4 /* SBJsonWriter.m */; };
+		B73F6DA1156ED8C0004A20E4 /* TYMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D9F156ED8C0004A20E4 /* TYMapViewController.m */; };
+		B73F6DA2156ED8C0004A20E4 /* TYMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D9F156ED8C0004A20E4 /* TYMapViewController.m */; };
+		B73F6DA3156ED8C0004A20E4 /* TYMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DA0156ED8C0004A20E4 /* TYMapViewController.xib */; };
+		B73F6DA4156ED8C0004A20E4 /* TYMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DA0156ED8C0004A20E4 /* TYMapViewController.xib */; };
+		B73F6DAF156ED926004A20E4 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DAA156ED926004A20E4 /* NSDate+Helper.m */; };
+		B73F6DB0156ED926004A20E4 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DAA156ED926004A20E4 /* NSDate+Helper.m */; };
+		B73F6DB1156ED926004A20E4 /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DAC156ED926004A20E4 /* NSString+Common.m */; };
+		B73F6DB2156ED926004A20E4 /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DAC156ED926004A20E4 /* NSString+Common.m */; };
+		B73F6DB3156ED926004A20E4 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DAE156ED926004A20E4 /* UIColor+HexString.m */; };
+		B73F6DB4156ED926004A20E4 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DAE156ED926004A20E4 /* UIColor+HexString.m */; };
+		B73F6DB7156ED930004A20E4 /* DebugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DB6156ED930004A20E4 /* DebugLog.m */; };
+		B73F6DB8156ED930004A20E4 /* DebugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DB6156ED930004A20E4 /* DebugLog.m */; };
+		B73F6DBC156ED937004A20E4 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DB9156ED937004A20E4 /* SVProgressHUD.bundle */; };
+		B73F6DBD156ED938004A20E4 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DB9156ED937004A20E4 /* SVProgressHUD.bundle */; };
+		B73F6DBE156ED938004A20E4 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DBB156ED937004A20E4 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73F6DBF156ED938004A20E4 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DBB156ED937004A20E4 /* SVProgressHUD.m */; };
+		B73F6DC6156EDC60004A20E4 /* libxml2.2.7.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B73F6DC5156EDC60004A20E4 /* libxml2.2.7.3.dylib */; };
+		B73F6DD1156EE4D8004A20E4 /* TYRaisedTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DD0156EE4D8004A20E4 /* TYRaisedTabBarController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73F6DD2156EE4D8004A20E4 /* TYRaisedTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DD0156EE4D8004A20E4 /* TYRaisedTabBarController.m */; };
+		B73F6DDF156EF38C004A20E4 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DDE156EF38C004A20E4 /* map.png */; };
+		B73F6DE0156EF38C004A20E4 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DDE156EF38C004A20E4 /* map.png */; };
+		B73F6DE2156EF3AD004A20E4 /* friends.png in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DE1156EF3AD004A20E4 /* friends.png */; };
+		B73F6DE3156EF3AD004A20E4 /* friends.png in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DE1156EF3AD004A20E4 /* friends.png */; };
+		B73F6DE5156EF87F004A20E4 /* checkin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DE4156EF87F004A20E4 /* checkin@2x.png */; };
+		B73F6DE6156EF87F004A20E4 /* checkin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DE4156EF87F004A20E4 /* checkin@2x.png */; };
+		B73F6DE8156EFE7F004A20E4 /* checkin.png in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DE7156EFE7F004A20E4 /* checkin.png */; };
+		B73F6DE9156EFE7F004A20E4 /* checkin.png in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DE7156EFE7F004A20E4 /* checkin.png */; };
+		B73F6DED156F144A004A20E4 /* PPCheckInCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DEC156F144A004A20E4 /* PPCheckInCell.m */; };
+		B73F6DEE156F144A004A20E4 /* PPCheckInCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DEC156F144A004A20E4 /* PPCheckInCell.m */; };
+		B73F6DF0156F1506004A20E4 /* PPCheckInCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DEF156F1506004A20E4 /* PPCheckInCell.xib */; };
+		B73F6DF1156F1506004A20E4 /* PPCheckInCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DEF156F1506004A20E4 /* PPCheckInCell.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B73F6D02156ED281004A20E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B73F6CD9156ED27F004A20E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B73F6CE1156ED27F004A20E4;
+			remoteInfo = FBCheckIn;
+		};
+		B73F6D9A156ED86B004A20E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B73F6D61156ED86B004A20E4 /* facebook-ios-sdk.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = "facebook-ios-sdk";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B73F6CE2156ED27F004A20E4 /* FBCheckIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBCheckIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B73F6CE6156ED27F004A20E4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B73F6CE8156ED27F004A20E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B73F6CEA156ED27F004A20E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B73F6CEE156ED280004A20E4 /* FBCheckIn-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FBCheckIn-Info.plist"; sourceTree = "<group>"; };
+		B73F6CF0156ED280004A20E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B73F6CF2156ED281004A20E4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B73F6CF4156ED281004A20E4 /* FBCheckIn-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FBCheckIn-Prefix.pch"; sourceTree = "<group>"; };
+		B73F6CF5156ED281004A20E4 /* TYAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYAppDelegate.h; sourceTree = "<group>"; };
+		B73F6CF6156ED281004A20E4 /* TYAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYAppDelegate.m; sourceTree = "<group>"; };
+		B73F6CFD156ED281004A20E4 /* FBCheckInTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FBCheckInTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B73F6CFE156ED281004A20E4 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		B73F6D06156ED281004A20E4 /* FBCheckInTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FBCheckInTests-Info.plist"; sourceTree = "<group>"; };
+		B73F6D08156ED281004A20E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B73F6D0A156ED281004A20E4 /* FBCheckInTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBCheckInTests.h; sourceTree = "<group>"; };
+		B73F6D0B156ED281004A20E4 /* FBCheckInTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBCheckInTests.m; sourceTree = "<group>"; };
+		B73F6D52156ED835004A20E4 /* TYFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYFriendsViewController.h; path = Screens/TYFriendsViewController.h; sourceTree = "<group>"; };
+		B73F6D53156ED835004A20E4 /* TYFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYFriendsViewController.m; path = Screens/TYFriendsViewController.m; sourceTree = "<group>"; };
+		B73F6D54156ED835004A20E4 /* TYFriendsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYFriendsViewController.xib; path = Screens/TYFriendsViewController.xib; sourceTree = "<group>"; };
+		B73F6D59156ED846004A20E4 /* TYCheckInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYCheckInViewController.h; path = Screens/TYCheckInViewController.h; sourceTree = "<group>"; };
+		B73F6D5A156ED846004A20E4 /* TYCheckInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYCheckInViewController.m; path = Screens/TYCheckInViewController.m; sourceTree = "<group>"; };
+		B73F6D5B156ED846004A20E4 /* TYCheckInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYCheckInViewController.xib; path = Screens/TYCheckInViewController.xib; sourceTree = "<group>"; };
+		B73F6D60156ED86B004A20E4 /* facebook_ios_sdk_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = facebook_ios_sdk_Prefix.pch; path = "facebook-ios-sdk/src/facebook_ios_sdk_Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		B73F6D61156ED86B004A20E4 /* facebook-ios-sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "facebook-ios-sdk.xcodeproj"; path = "facebook-ios-sdk/src/facebook-ios-sdk.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		B73F6D64156ED86B004A20E4 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Facebook.h; path = "facebook-ios-sdk/src/Facebook.h"; sourceTree = SOURCE_ROOT; };
+		B73F6D65156ED86B004A20E4 /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Facebook.m; path = "facebook-ios-sdk/src/Facebook.m"; sourceTree = SOURCE_ROOT; };
+		B73F6D66156ED86B004A20E4 /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBConnect.h; path = "facebook-ios-sdk/src/FBConnect.h"; sourceTree = SOURCE_ROOT; };
+		B73F6D67156ED86B004A20E4 /* FBDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBDialog.bundle; path = "facebook-ios-sdk/src/FBDialog.bundle"; sourceTree = SOURCE_ROOT; };
+		B73F6D68156ED86B004A20E4 /* FBDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBDialog.h; path = "facebook-ios-sdk/src/FBDialog.h"; sourceTree = SOURCE_ROOT; };
+		B73F6D69156ED86B004A20E4 /* FBDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBDialog.m; path = "facebook-ios-sdk/src/FBDialog.m"; sourceTree = SOURCE_ROOT; };
+		B73F6D6A156ED86B004A20E4 /* FBFrictionlessRequestSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBFrictionlessRequestSettings.h; path = "facebook-ios-sdk/src/FBFrictionlessRequestSettings.h"; sourceTree = SOURCE_ROOT; };
+		B73F6D6B156ED86B004A20E4 /* FBFrictionlessRequestSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBFrictionlessRequestSettings.m; path = "facebook-ios-sdk/src/FBFrictionlessRequestSettings.m"; sourceTree = SOURCE_ROOT; };
+		B73F6D6C156ED86B004A20E4 /* FBLoginDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBLoginDialog.h; path = "facebook-ios-sdk/src/FBLoginDialog.h"; sourceTree = SOURCE_ROOT; };
+		B73F6D6D156ED86B004A20E4 /* FBLoginDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBLoginDialog.m; path = "facebook-ios-sdk/src/FBLoginDialog.m"; sourceTree = SOURCE_ROOT; };
+		B73F6D6E156ED86B004A20E4 /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBRequest.h; path = "facebook-ios-sdk/src/FBRequest.h"; sourceTree = SOURCE_ROOT; };
+		B73F6D6F156ED86B004A20E4 /* FBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBRequest.m; path = "facebook-ios-sdk/src/FBRequest.m"; sourceTree = SOURCE_ROOT; };
+		B73F6D71156ED86B004A20E4 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		B73F6D72156ED86B004A20E4 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		B73F6D73156ED86B004A20E4 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		B73F6D74156ED86B004A20E4 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		B73F6D75156ED86B004A20E4 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		B73F6D76156ED86B004A20E4 /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		B73F6D77156ED86B004A20E4 /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
+		B73F6D78156ED86B004A20E4 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		B73F6D79156ED86B004A20E4 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		B73F6D7A156ED86B004A20E4 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		B73F6D7B156ED86B004A20E4 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		B73F6D7C156ED86B004A20E4 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		B73F6D7D156ED86B004A20E4 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		B73F6D9E156ED8C0004A20E4 /* TYMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYMapViewController.h; path = Screens/TYMapViewController.h; sourceTree = "<group>"; };
+		B73F6D9F156ED8C0004A20E4 /* TYMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYMapViewController.m; path = Screens/TYMapViewController.m; sourceTree = "<group>"; };
+		B73F6DA0156ED8C0004A20E4 /* TYMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYMapViewController.xib; path = Screens/TYMapViewController.xib; sourceTree = "<group>"; };
+		B73F6DA9156ED926004A20E4 /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Helper.h"; path = "Libraries/Categories/NSDate+Helper.h"; sourceTree = "<group>"; };
+		B73F6DAA156ED926004A20E4 /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Helper.m"; path = "Libraries/Categories/NSDate+Helper.m"; sourceTree = "<group>"; };
+		B73F6DAB156ED926004A20E4 /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Common.h"; path = "Libraries/Categories/NSString+Common.h"; sourceTree = "<group>"; };
+		B73F6DAC156ED926004A20E4 /* NSString+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Common.m"; path = "Libraries/Categories/NSString+Common.m"; sourceTree = "<group>"; };
+		B73F6DAD156ED926004A20E4 /* UIColor+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+HexString.h"; path = "Libraries/Categories/UIColor+HexString.h"; sourceTree = "<group>"; };
+		B73F6DAE156ED926004A20E4 /* UIColor+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+HexString.m"; path = "Libraries/Categories/UIColor+HexString.m"; sourceTree = "<group>"; };
+		B73F6DB5156ED930004A20E4 /* DebugLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugLog.h; path = Libraries/DebugLog/DebugLog.h; sourceTree = "<group>"; };
+		B73F6DB6156ED930004A20E4 /* DebugLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DebugLog.m; path = Libraries/DebugLog/DebugLog.m; sourceTree = "<group>"; };
+		B73F6DB9156ED937004A20E4 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SVProgressHUD.bundle; path = Libraries/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle; sourceTree = "<group>"; };
+		B73F6DBA156ED937004A20E4 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVProgressHUD.h; path = Libraries/SVProgressHUD/SVProgressHUD/SVProgressHUD.h; sourceTree = "<group>"; };
+		B73F6DBB156ED937004A20E4 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVProgressHUD.m; path = Libraries/SVProgressHUD/SVProgressHUD/SVProgressHUD.m; sourceTree = "<group>"; };
+		B73F6DC5156EDC60004A20E4 /* libxml2.2.7.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.7.3.dylib; path = usr/lib/libxml2.2.7.3.dylib; sourceTree = SDKROOT; };
+		B73F6DCF156EE4D8004A20E4 /* TYRaisedTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYRaisedTabBarController.h; sourceTree = "<group>"; };
+		B73F6DD0156EE4D8004A20E4 /* TYRaisedTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYRaisedTabBarController.m; sourceTree = "<group>"; };
+		B73F6DDE156EF38C004A20E4 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
+		B73F6DE1156EF3AD004A20E4 /* friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friends.png; sourceTree = "<group>"; };
+		B73F6DE4156EF87F004A20E4 /* checkin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkin@2x.png"; sourceTree = "<group>"; };
+		B73F6DE7156EFE7F004A20E4 /* checkin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkin.png; sourceTree = "<group>"; };
+		B73F6DEB156F144A004A20E4 /* PPCheckInCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PPCheckInCell.h; path = Screens/UITableViewCells/PPCheckInCell.h; sourceTree = "<group>"; };
+		B73F6DEC156F144A004A20E4 /* PPCheckInCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PPCheckInCell.m; path = Screens/UITableViewCells/PPCheckInCell.m; sourceTree = "<group>"; };
+		B73F6DEF156F1506004A20E4 /* PPCheckInCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PPCheckInCell.xib; path = Screens/UITableViewCells/PPCheckInCell.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B73F6CDF156ED27F004A20E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B73F6DC6156EDC60004A20E4 /* libxml2.2.7.3.dylib in Frameworks */,
+				B73F6CE7156ED27F004A20E4 /* UIKit.framework in Frameworks */,
+				B73F6CE9156ED27F004A20E4 /* Foundation.framework in Frameworks */,
+				B73F6CEB156ED27F004A20E4 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B73F6CF9156ED281004A20E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B73F6CFF156ED281004A20E4 /* SenTestingKit.framework in Frameworks */,
+				B73F6D00156ED281004A20E4 /* UIKit.framework in Frameworks */,
+				B73F6D01156ED281004A20E4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B73F6CD7156ED27F004A20E4 = {
+			isa = PBXGroup;
+			children = (
+				B73F6DC5156EDC60004A20E4 /* libxml2.2.7.3.dylib */,
+				B73F6CEC156ED280004A20E4 /* FBCheckIn */,
+				B73F6D04156ED281004A20E4 /* FBCheckInTests */,
+				B73F6CE5156ED27F004A20E4 /* Frameworks */,
+				B73F6CE3156ED27F004A20E4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B73F6CE3156ED27F004A20E4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6CE2156ED27F004A20E4 /* FBCheckIn.app */,
+				B73F6CFD156ED281004A20E4 /* FBCheckInTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B73F6CE5156ED27F004A20E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6CE6156ED27F004A20E4 /* UIKit.framework */,
+				B73F6CE8156ED27F004A20E4 /* Foundation.framework */,
+				B73F6CEA156ED27F004A20E4 /* CoreGraphics.framework */,
+				B73F6CFE156ED281004A20E4 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B73F6CEC156ED280004A20E4 /* FBCheckIn */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6DEA156F1429004A20E4 /* UITableViewCells */,
+				B73F6D9C156ED8A1004A20E4 /* Libraries */,
+				B73F6D15156ED297004A20E4 /* FacebookSDK */,
+				B73F6CF5156ED281004A20E4 /* TYAppDelegate.h */,
+				B73F6CF6156ED281004A20E4 /* TYAppDelegate.m */,
+				B73F6D52156ED835004A20E4 /* TYFriendsViewController.h */,
+				B73F6D53156ED835004A20E4 /* TYFriendsViewController.m */,
+				B73F6D54156ED835004A20E4 /* TYFriendsViewController.xib */,
+				B73F6D59156ED846004A20E4 /* TYCheckInViewController.h */,
+				B73F6D5A156ED846004A20E4 /* TYCheckInViewController.m */,
+				B73F6D5B156ED846004A20E4 /* TYCheckInViewController.xib */,
+				B73F6DC4156ED965004A20E4 /* Resources */,
+				B73F6D9E156ED8C0004A20E4 /* TYMapViewController.h */,
+				B73F6D9F156ED8C0004A20E4 /* TYMapViewController.m */,
+				B73F6DA0156ED8C0004A20E4 /* TYMapViewController.xib */,
+				B73F6CED156ED280004A20E4 /* Supporting Files */,
+			);
+			path = FBCheckIn;
+			sourceTree = "<group>";
+		};
+		B73F6CED156ED280004A20E4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6CEE156ED280004A20E4 /* FBCheckIn-Info.plist */,
+				B73F6CEF156ED280004A20E4 /* InfoPlist.strings */,
+				B73F6CF2156ED281004A20E4 /* main.m */,
+				B73F6CF4156ED281004A20E4 /* FBCheckIn-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B73F6D04156ED281004A20E4 /* FBCheckInTests */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6D0A156ED281004A20E4 /* FBCheckInTests.h */,
+				B73F6D0B156ED281004A20E4 /* FBCheckInTests.m */,
+				B73F6D05156ED281004A20E4 /* Supporting Files */,
+			);
+			path = FBCheckInTests;
+			sourceTree = "<group>";
+		};
+		B73F6D05156ED281004A20E4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6D06156ED281004A20E4 /* FBCheckInTests-Info.plist */,
+				B73F6D07156ED281004A20E4 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B73F6D15156ED297004A20E4 /* FacebookSDK */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6D60156ED86B004A20E4 /* facebook_ios_sdk_Prefix.pch */,
+				B73F6D61156ED86B004A20E4 /* facebook-ios-sdk.xcodeproj */,
+				B73F6D64156ED86B004A20E4 /* Facebook.h */,
+				B73F6D65156ED86B004A20E4 /* Facebook.m */,
+				B73F6D66156ED86B004A20E4 /* FBConnect.h */,
+				B73F6D67156ED86B004A20E4 /* FBDialog.bundle */,
+				B73F6D68156ED86B004A20E4 /* FBDialog.h */,
+				B73F6D69156ED86B004A20E4 /* FBDialog.m */,
+				B73F6D6A156ED86B004A20E4 /* FBFrictionlessRequestSettings.h */,
+				B73F6D6B156ED86B004A20E4 /* FBFrictionlessRequestSettings.m */,
+				B73F6D6C156ED86B004A20E4 /* FBLoginDialog.h */,
+				B73F6D6D156ED86B004A20E4 /* FBLoginDialog.m */,
+				B73F6D6E156ED86B004A20E4 /* FBRequest.h */,
+				B73F6D6F156ED86B004A20E4 /* FBRequest.m */,
+				B73F6D70156ED86B004A20E4 /* JSON */,
+			);
+			name = FacebookSDK;
+			sourceTree = "<group>";
+		};
+		B73F6D62156ED86B004A20E4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6D9B156ED86B004A20E4 /* libfacebook_ios_sdk.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B73F6D70156ED86B004A20E4 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6D71156ED86B004A20E4 /* JSON.h */,
+				B73F6D72156ED86B004A20E4 /* NSObject+SBJSON.h */,
+				B73F6D73156ED86B004A20E4 /* NSObject+SBJSON.m */,
+				B73F6D74156ED86B004A20E4 /* NSString+SBJSON.h */,
+				B73F6D75156ED86B004A20E4 /* NSString+SBJSON.m */,
+				B73F6D76156ED86B004A20E4 /* SBJSON.h */,
+				B73F6D77156ED86B004A20E4 /* SBJSON.m */,
+				B73F6D78156ED86B004A20E4 /* SBJsonBase.h */,
+				B73F6D79156ED86B004A20E4 /* SBJsonBase.m */,
+				B73F6D7A156ED86B004A20E4 /* SBJsonParser.h */,
+				B73F6D7B156ED86B004A20E4 /* SBJsonParser.m */,
+				B73F6D7C156ED86B004A20E4 /* SBJsonWriter.h */,
+				B73F6D7D156ED86B004A20E4 /* SBJsonWriter.m */,
+			);
+			name = JSON;
+			path = "facebook-ios-sdk/src/JSON";
+			sourceTree = SOURCE_ROOT;
+		};
+		B73F6D9C156ED8A1004A20E4 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6DC3156ED95A004A20E4 /* CustomNavigationController */,
+				B73F6DC2156ED954004A20E4 /* CustomTabBar */,
+				B73F6DC1156ED941004A20E4 /* DebugLog */,
+				B73F6DC0156ED93A004A20E4 /* SVProgressHUD */,
+				B73F6D9D156ED8A5004A20E4 /* Categories */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		B73F6D9D156ED8A5004A20E4 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6DA9156ED926004A20E4 /* NSDate+Helper.h */,
+				B73F6DAA156ED926004A20E4 /* NSDate+Helper.m */,
+				B73F6DAB156ED926004A20E4 /* NSString+Common.h */,
+				B73F6DAC156ED926004A20E4 /* NSString+Common.m */,
+				B73F6DAD156ED926004A20E4 /* UIColor+HexString.h */,
+				B73F6DAE156ED926004A20E4 /* UIColor+HexString.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		B73F6DC0156ED93A004A20E4 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6DB9156ED937004A20E4 /* SVProgressHUD.bundle */,
+				B73F6DBA156ED937004A20E4 /* SVProgressHUD.h */,
+				B73F6DBB156ED937004A20E4 /* SVProgressHUD.m */,
+			);
+			name = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		B73F6DC1156ED941004A20E4 /* DebugLog */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6DB5156ED930004A20E4 /* DebugLog.h */,
+				B73F6DB6156ED930004A20E4 /* DebugLog.m */,
+			);
+			name = DebugLog;
+			sourceTree = "<group>";
+		};
+		B73F6DC2156ED954004A20E4 /* CustomTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6DCF156EE4D8004A20E4 /* TYRaisedTabBarController.h */,
+				B73F6DD0156EE4D8004A20E4 /* TYRaisedTabBarController.m */,
+			);
+			name = CustomTabBar;
+			sourceTree = "<group>";
+		};
+		B73F6DC3156ED95A004A20E4 /* CustomNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CustomNavigationController;
+			sourceTree = "<group>";
+		};
+		B73F6DC4156ED965004A20E4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6DE7156EFE7F004A20E4 /* checkin.png */,
+				B73F6DE4156EF87F004A20E4 /* checkin@2x.png */,
+				B73F6DDE156EF38C004A20E4 /* map.png */,
+				B73F6DE1156EF3AD004A20E4 /* friends.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		B73F6DEA156F1429004A20E4 /* UITableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				B73F6DEB156F144A004A20E4 /* PPCheckInCell.h */,
+				B73F6DEC156F144A004A20E4 /* PPCheckInCell.m */,
+				B73F6DEF156F1506004A20E4 /* PPCheckInCell.xib */,
+			);
+			name = UITableViewCells;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B73F6CE1156ED27F004A20E4 /* FBCheckIn */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B73F6D0F156ED281004A20E4 /* Build configuration list for PBXNativeTarget "FBCheckIn" */;
+			buildPhases = (
+				B73F6CDE156ED27F004A20E4 /* Sources */,
+				B73F6CDF156ED27F004A20E4 /* Frameworks */,
+				B73F6CE0156ED27F004A20E4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FBCheckIn;
+			productName = FBCheckIn;
+			productReference = B73F6CE2156ED27F004A20E4 /* FBCheckIn.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B73F6CFC156ED281004A20E4 /* FBCheckInTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B73F6D12156ED281004A20E4 /* Build configuration list for PBXNativeTarget "FBCheckInTests" */;
+			buildPhases = (
+				B73F6CF8156ED281004A20E4 /* Sources */,
+				B73F6CF9156ED281004A20E4 /* Frameworks */,
+				B73F6CFA156ED281004A20E4 /* Resources */,
+				B73F6CFB156ED281004A20E4 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B73F6D03156ED281004A20E4 /* PBXTargetDependency */,
+			);
+			name = FBCheckInTests;
+			productName = FBCheckInTests;
+			productReference = B73F6CFD156ED281004A20E4 /* FBCheckInTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B73F6CD9156ED27F004A20E4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = PP;
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = B73F6CDC156ED27F004A20E4 /* Build configuration list for PBXProject "FBCheckIn" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B73F6CD7156ED27F004A20E4;
+			productRefGroup = B73F6CE3156ED27F004A20E4 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B73F6D62156ED86B004A20E4 /* Products */;
+					ProjectRef = B73F6D61156ED86B004A20E4 /* facebook-ios-sdk.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				B73F6CE1156ED27F004A20E4 /* FBCheckIn */,
+				B73F6CFC156ED281004A20E4 /* FBCheckInTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B73F6D9B156ED86B004A20E4 /* libfacebook_ios_sdk.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libfacebook_ios_sdk.a;
+			remoteRef = B73F6D9A156ED86B004A20E4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B73F6CE0156ED27F004A20E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B73F6CF1156ED280004A20E4 /* InfoPlist.strings in Resources */,
+				B73F6D57156ED835004A20E4 /* TYFriendsViewController.xib in Resources */,
+				B73F6D5E156ED846004A20E4 /* TYCheckInViewController.xib in Resources */,
+				B73F6D83156ED86B004A20E4 /* FBDialog.bundle in Resources */,
+				B73F6DA3156ED8C0004A20E4 /* TYMapViewController.xib in Resources */,
+				B73F6DBC156ED937004A20E4 /* SVProgressHUD.bundle in Resources */,
+				B73F6DDF156EF38C004A20E4 /* map.png in Resources */,
+				B73F6DE2156EF3AD004A20E4 /* friends.png in Resources */,
+				B73F6DE5156EF87F004A20E4 /* checkin@2x.png in Resources */,
+				B73F6DE8156EFE7F004A20E4 /* checkin.png in Resources */,
+				B73F6DF0156F1506004A20E4 /* PPCheckInCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B73F6CFA156ED281004A20E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B73F6D09156ED281004A20E4 /* InfoPlist.strings in Resources */,
+				B73F6D58156ED835004A20E4 /* TYFriendsViewController.xib in Resources */,
+				B73F6D5F156ED846004A20E4 /* TYCheckInViewController.xib in Resources */,
+				B73F6D84156ED86B004A20E4 /* FBDialog.bundle in Resources */,
+				B73F6DA4156ED8C0004A20E4 /* TYMapViewController.xib in Resources */,
+				B73F6DBD156ED938004A20E4 /* SVProgressHUD.bundle in Resources */,
+				B73F6DE0156EF38C004A20E4 /* map.png in Resources */,
+				B73F6DE3156EF3AD004A20E4 /* friends.png in Resources */,
+				B73F6DE6156EF87F004A20E4 /* checkin@2x.png in Resources */,
+				B73F6DE9156EFE7F004A20E4 /* checkin.png in Resources */,
+				B73F6DF1156F1506004A20E4 /* PPCheckInCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B73F6CFB156ED281004A20E4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B73F6CDE156ED27F004A20E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B73F6CF3156ED281004A20E4 /* main.m in Sources */,
+				B73F6CF7156ED281004A20E4 /* TYAppDelegate.m in Sources */,
+				B73F6D55156ED835004A20E4 /* TYFriendsViewController.m in Sources */,
+				B73F6D5C156ED846004A20E4 /* TYCheckInViewController.m in Sources */,
+				B73F6D81156ED86B004A20E4 /* Facebook.m in Sources */,
+				B73F6D85156ED86B004A20E4 /* FBDialog.m in Sources */,
+				B73F6D87156ED86B004A20E4 /* FBFrictionlessRequestSettings.m in Sources */,
+				B73F6D89156ED86B004A20E4 /* FBLoginDialog.m in Sources */,
+				B73F6D8B156ED86B004A20E4 /* FBRequest.m in Sources */,
+				B73F6D8D156ED86B004A20E4 /* NSObject+SBJSON.m in Sources */,
+				B73F6D8F156ED86B004A20E4 /* NSString+SBJSON.m in Sources */,
+				B73F6D91156ED86B004A20E4 /* SBJSON.m in Sources */,
+				B73F6D93156ED86B004A20E4 /* SBJsonBase.m in Sources */,
+				B73F6D95156ED86B004A20E4 /* SBJsonParser.m in Sources */,
+				B73F6D97156ED86B004A20E4 /* SBJsonWriter.m in Sources */,
+				B73F6DA1156ED8C0004A20E4 /* TYMapViewController.m in Sources */,
+				B73F6DAF156ED926004A20E4 /* NSDate+Helper.m in Sources */,
+				B73F6DB1156ED926004A20E4 /* NSString+Common.m in Sources */,
+				B73F6DB3156ED926004A20E4 /* UIColor+HexString.m in Sources */,
+				B73F6DB7156ED930004A20E4 /* DebugLog.m in Sources */,
+				B73F6DBE156ED938004A20E4 /* SVProgressHUD.m in Sources */,
+				B73F6DD1156EE4D8004A20E4 /* TYRaisedTabBarController.m in Sources */,
+				B73F6DED156F144A004A20E4 /* PPCheckInCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B73F6CF8156ED281004A20E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B73F6D0C156ED281004A20E4 /* FBCheckInTests.m in Sources */,
+				B73F6D56156ED835004A20E4 /* TYFriendsViewController.m in Sources */,
+				B73F6D5D156ED846004A20E4 /* TYCheckInViewController.m in Sources */,
+				B73F6D82156ED86B004A20E4 /* Facebook.m in Sources */,
+				B73F6D86156ED86B004A20E4 /* FBDialog.m in Sources */,
+				B73F6D88156ED86B004A20E4 /* FBFrictionlessRequestSettings.m in Sources */,
+				B73F6D8A156ED86B004A20E4 /* FBLoginDialog.m in Sources */,
+				B73F6D8C156ED86B004A20E4 /* FBRequest.m in Sources */,
+				B73F6D8E156ED86B004A20E4 /* NSObject+SBJSON.m in Sources */,
+				B73F6D90156ED86B004A20E4 /* NSString+SBJSON.m in Sources */,
+				B73F6D92156ED86B004A20E4 /* SBJSON.m in Sources */,
+				B73F6D94156ED86B004A20E4 /* SBJsonBase.m in Sources */,
+				B73F6D96156ED86B004A20E4 /* SBJsonParser.m in Sources */,
+				B73F6D98156ED86B004A20E4 /* SBJsonWriter.m in Sources */,
+				B73F6DA2156ED8C0004A20E4 /* TYMapViewController.m in Sources */,
+				B73F6DB0156ED926004A20E4 /* NSDate+Helper.m in Sources */,
+				B73F6DB2156ED926004A20E4 /* NSString+Common.m in Sources */,
+				B73F6DB4156ED926004A20E4 /* UIColor+HexString.m in Sources */,
+				B73F6DB8156ED930004A20E4 /* DebugLog.m in Sources */,
+				B73F6DBF156ED938004A20E4 /* SVProgressHUD.m in Sources */,
+				B73F6DD2156EE4D8004A20E4 /* TYRaisedTabBarController.m in Sources */,
+				B73F6DEE156F144A004A20E4 /* PPCheckInCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B73F6D03156ED281004A20E4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B73F6CE1156ED27F004A20E4 /* FBCheckIn */;
+			targetProxy = B73F6D02156ED281004A20E4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B73F6CEF156ED280004A20E4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B73F6CF0156ED280004A20E4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		B73F6D07156ED281004A20E4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B73F6D08156ED281004A20E4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B73F6D0D156ED281004A20E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		B73F6D0E156ED281004A20E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B73F6D10156ED281004A20E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FBCheckIn/FBCheckIn-Prefix.pch";
+				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
+				INFOPLIST_FILE = "FBCheckIn/FBCheckIn-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		B73F6D11156ED281004A20E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FBCheckIn/FBCheckIn-Prefix.pch";
+				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
+				INFOPLIST_FILE = "FBCheckIn/FBCheckIn-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		B73F6D13156ED281004A20E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FBCheckIn.app/FBCheckIn";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FBCheckIn/FBCheckIn-Prefix.pch";
+				INFOPLIST_FILE = "FBCheckInTests/FBCheckInTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		B73F6D14156ED281004A20E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FBCheckIn.app/FBCheckIn";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FBCheckIn/FBCheckIn-Prefix.pch";
+				INFOPLIST_FILE = "FBCheckInTests/FBCheckInTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B73F6CDC156ED27F004A20E4 /* Build configuration list for PBXProject "FBCheckIn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B73F6D0D156ED281004A20E4 /* Debug */,
+				B73F6D0E156ED281004A20E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B73F6D0F156ED281004A20E4 /* Build configuration list for PBXNativeTarget "FBCheckIn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B73F6D10156ED281004A20E4 /* Debug */,
+				B73F6D11156ED281004A20E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B73F6D12156ED281004A20E4 /* Build configuration list for PBXNativeTarget "FBCheckInTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B73F6D13156ED281004A20E4 /* Debug */,
+				B73F6D14156ED281004A20E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B73F6CD9156ED27F004A20E4 /* Project object */;
+}
