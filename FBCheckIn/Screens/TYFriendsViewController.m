@@ -20,6 +20,7 @@
     if(self) {
         self.tabBarItem.image = [UIImage imageNamed:@"friends.png"];
         self.tabBarItem.title = @"Friends";
+        self.title = @"Check-ins";
     }
     return self;
 }

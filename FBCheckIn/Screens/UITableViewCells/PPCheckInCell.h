@@ -12,5 +12,5 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *checkInLocation;
 @property (nonatomic, strong) IBOutlet UILabel *name;
-@property (nonatomic, strong) IBOutlet UIImage *picture;
+@property (nonatomic, strong) IBOutlet UIImageView *picture;
 @end

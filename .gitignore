@@ -13,3 +13,8 @@ build/*
 xcuserdata
 profile
 *.moved-aside
+
+# Hide the facebook API Key.
+
+FBCheckIn/config.plist
+FBCheckIn/FBCheckIn-Info.plist

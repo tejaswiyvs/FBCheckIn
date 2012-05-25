@@ -81,6 +81,8 @@
 		B73F6DEE156F144A004A20E4 /* PPCheckInCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DEC156F144A004A20E4 /* PPCheckInCell.m */; };
 		B73F6DF0156F1506004A20E4 /* PPCheckInCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DEF156F1506004A20E4 /* PPCheckInCell.xib */; };
 		B73F6DF1156F1506004A20E4 /* PPCheckInCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DEF156F1506004A20E4 /* PPCheckInCell.xib */; };
+		B73F6DF3156F3484004A20E4 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DF2156F3483004A20E4 /* config.plist */; };
+		B73F6DF4156F3484004A20E4 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DF2156F3483004A20E4 /* config.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,6 +176,7 @@
 		B73F6DEB156F144A004A20E4 /* PPCheckInCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PPCheckInCell.h; path = Screens/UITableViewCells/PPCheckInCell.h; sourceTree = "<group>"; };
 		B73F6DEC156F144A004A20E4 /* PPCheckInCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PPCheckInCell.m; path = Screens/UITableViewCells/PPCheckInCell.m; sourceTree = "<group>"; };
 		B73F6DEF156F1506004A20E4 /* PPCheckInCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PPCheckInCell.xib; path = Screens/UITableViewCells/PPCheckInCell.xib; sourceTree = "<group>"; };
+		B73F6DF2156F3483004A20E4 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +254,7 @@
 				B73F6D9F156ED8C0004A20E4 /* TYMapViewController.m */,
 				B73F6DA0156ED8C0004A20E4 /* TYMapViewController.xib */,
 				B73F6CED156ED280004A20E4 /* Supporting Files */,
+				B73F6DF2156F3483004A20E4 /* config.plist */,
 			);
 			path = FBCheckIn;
 			sourceTree = "<group>";
@@ -515,6 +519,7 @@
 				B73F6DE5156EF87F004A20E4 /* checkin@2x.png in Resources */,
 				B73F6DE8156EFE7F004A20E4 /* checkin.png in Resources */,
 				B73F6DF0156F1506004A20E4 /* PPCheckInCell.xib in Resources */,
+				B73F6DF3156F3484004A20E4 /* config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +538,7 @@
 				B73F6DE6156EF87F004A20E4 /* checkin@2x.png in Resources */,
 				B73F6DE9156EFE7F004A20E4 /* checkin.png in Resources */,
 				B73F6DF1156F1506004A20E4 /* PPCheckInCell.xib in Resources */,
+				B73F6DF4156F3484004A20E4 /* config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,6 +704,7 @@
 				GCC_PREFIX_HEADER = "FBCheckIn/FBCheckIn-Prefix.pch";
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
 				INFOPLIST_FILE = "FBCheckIn/FBCheckIn-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -711,6 +718,7 @@
 				GCC_PREFIX_HEADER = "FBCheckIn/FBCheckIn-Prefix.pch";
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
 				INFOPLIST_FILE = "FBCheckIn/FBCheckIn-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

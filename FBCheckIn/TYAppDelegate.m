@@ -13,18 +13,22 @@
 
 @interface TYAppDelegate ()
 -(void) makeTabBar;
+-(void) setupFacebook;
+-(NSString *) appId;
 @end
 
 @implementation TYAppDelegate
 
 @synthesize window = _window;
 @synthesize tabBar = _tabBar;
+@synthesize facebook = _facebook;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     [self makeTabBar];
+    [self setupFacebook];
     self.window.rootViewController = self.tabBar;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -78,6 +82,39 @@
     [localControllers addObject:mapsNavController];
     
     self.tabBar.viewControllers = localControllers;
+}
+
+// For iOS 4.2+ support
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [self.facebook handleOpenURL:url]; 
+}
+
+- (void)fbDidLogin {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[self.facebook accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[self.facebook expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];    
+}
+
+
+-(void) setupFacebook {
+    self.facebook = [[Facebook alloc] initWithAppId:[self appId] andDelegate:self];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] 
+        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        self.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    if (![self.facebook isSessionValid]) {
+        [self.facebook authorize:nil];
+    }
+}
+
+-(NSString *) appId {
+    NSString *configPlistPath = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
+    NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:configPlistPath];
+    return [dictionary objectForKey:@"facebook_app_id"];
 }
 
 @end
