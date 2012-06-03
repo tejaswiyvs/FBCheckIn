@@ -22,7 +22,6 @@
 @interface TYHomeViewController ()
 -(void) checkInButtonClicked:(id) sender;
 -(void) loadCheckIns;
--(void) reloadIfDone;
 -(void) subscribeToNotifications;
 -(void) unsubscribeFromNotifications;
 @end
@@ -31,11 +30,6 @@
 
 @synthesize tableView = _tableView;
 @synthesize checkIns = _checkIns;
-@synthesize checkInRequest = _checkInRequest;
-@synthesize pagesRequest = _pagesRequest;
-@synthesize usersRequest = _usersRequest;
-@synthesize pagesRequestCompleted = _pagesRequestCompleted;
-@synthesize usersRequestCompleted = _usersRequestCompleted;
 @synthesize facebook = _facebook;
 
 -(id) initWithTabBar {
@@ -123,111 +117,59 @@
 
 -(void) loadCheckIns {
     [SVProgressHUD showWithStatus:@"Loading Check-ins..."];
-    NSString *fql = @"SELECT checkin_id, author_uid, page_id, coords FROM checkin WHERE (author_uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) OR author_uid=me()) LIMIT 50";
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:fql, @"query", nil];
-    self.checkInRequest = [self.facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
+    NSString *fql1 = @"SELECT checkin_id, author_uid, page_id, coords FROM checkin WHERE (author_uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) OR author_uid=me()) LIMIT 50";
+    NSString *fql2 = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me FROM user WHERE uid in (SELECT author_uid FROM #query1)";
+    NSString *fql3 = @"SELECT page_id, name, description, categories, pic, fan_count, website, checkins, location FROM page WHERE page_id IN (SELECT page_id FROM #query1)";
+    
+    NSString* fql = [NSString stringWithFormat:
+                     @"{\"query1\":\"%@\",\"query2\":\"%@\",\"query3\":\"%@\"}",fql1,fql2,fql3];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:fql forKey:@"queries"];   
+
+    [self.facebook requestWithMethodName:@"fql.multiquery" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
 
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    [SVProgressHUD dismissWithError:@"Could not load check-ins" afterDelay:5.0];
-    if (request == self.checkInRequest) {
-        
-    }
-    else if(request == self.pagesRequest) {
-        
-    }
-    else if (request == self.usersRequest) {
-        
-    }
+    [SVProgressHUD dismissWithError:@"Could not load check-ins" afterDelay:2.5];
     NSLog(@"%@", error);
 }
 
 -(void)request:(FBRequest *)request didLoad:(id)result {
-    if (request == self.checkInRequest) {
-        NSString *userRequestsString = @"[";
-        NSString *pageRequestsString = @"[";
-        for (NSDictionary *checkInDict in (NSArray *) result) {
-            TYCheckIn *checkIn = [[TYCheckIn alloc] initWithDictionary:checkInDict];
+    NSLog(@"%@", result);
+    NSDictionary *checkinFqlDict = [(NSArray *) result objectAtIndex:0];
+    NSDictionary *userFqlDict = [(NSArray *) result objectAtIndex:1];
+    NSDictionary *pagesFqlDict = [(NSArray *) result objectAtIndex:2];
+    
+    NSArray *checkIns = [checkinFqlDict objectForKey:@"fql_result_set"];
+    NSArray *users = [userFqlDict objectForKey:@"fql_result_set"];
+    NSArray *pages = [pagesFqlDict objectForKey:@"fql_result_set"];
+    
+    NSMutableDictionary *userObjects = [NSMutableDictionary dictionary];
+    NSMutableDictionary *pageObjects = [NSMutableDictionary dictionary];
+    
+    for (NSDictionary *userDictionary in users) {
+        TYUser *user = [[TYUser alloc] initWithDictionary:userDictionary];
+        [userObjects setObject:user forKey:[NSString stringWithFormat:@"user_%@", user.userId]];
+    }
+    
+    for (NSDictionary *pageDictionary in pages) {
+        TYPage *page = [[TYPage alloc] initWithDictionary:pageDictionary];
+        [pageObjects setObject:page forKey:[NSString stringWithFormat:@"page_%@", page.pageId]];
+    }
+    
+    for (NSDictionary *checkInDictionary in checkIns) {
+        TYCheckIn *checkIn = [[TYCheckIn alloc] initWithDictionary:checkInDictionary];
+        TYUser *user = [userObjects objectForKey:[NSString stringWithFormat:@"user_%@", checkIn.user.userId]];
+        TYPage *page = [pageObjects objectForKey:[NSString stringWithFormat:@"page_%@", checkIn.page.pageId]];
+        if (user && page) {
+            checkIn.user = user;
+            checkIn.page = page;
             [self.checkIns addObject:checkIn];
-            NSString *userRequest = [NSString stringWithFormat:@"{ \"method\": \"GET\", \"relative_url\": \"%@\" }", checkIn.user.userId];
-            NSString *pageRequest = [NSString stringWithFormat:@"{ \"method\": \"GET\", \"relative_url\": \"%@\" }", checkIn.page.pageId];
-            userRequestsString = [userRequestsString stringByAppendingFormat:@"%@,", userRequest];
-            pageRequestsString = [pageRequestsString stringByAppendingFormat:@"%@,", pageRequest];
         }
-        userRequestsString = [userRequestsString substringToIndex:[userRequestsString length] - 1];
-        pageRequestsString = [pageRequestsString substringToIndex:[pageRequestsString length] - 1];
-        userRequestsString = [userRequestsString stringByAppendingString:@"]"];
-        pageRequestsString = [pageRequestsString stringByAppendingString:@"]"];
-        NSLog(@"%@", userRequestsString);
-        NSLog(@"%@", pageRequestsString);
-        NSMutableDictionary *userRequestParams = [NSMutableDictionary dictionaryWithObject:userRequestsString forKey:@"batch"];
-        NSMutableDictionary *pageRequestParams = [NSMutableDictionary dictionaryWithObject:pageRequestsString forKey:@"batch"];
-        self.usersRequest = [self.facebook requestWithGraphPath:@"me" andParams:userRequestParams andHttpMethod:@"POST" andDelegate:self];
-        self.pagesRequest = [self.facebook requestWithGraphPath:@"me" andParams:pageRequestParams andHttpMethod:@"POST" andDelegate:self];
     }
-    else if(request == self.pagesRequest) {
-        NSMutableDictionary *pagesDictionary = [[NSMutableDictionary alloc] init];
-        for (NSDictionary *pageDictionary in (NSArray *) result) {
-            NSNumber *responseCode = [pageDictionary objectForKey:@"code"];
-            if ([responseCode intValue] == 200) {
-                NSString *responseBodyStr = [pageDictionary objectForKey:@"body"];
-                NSDictionary *responseBody = [responseBodyStr objectFromJSONString];
-                TYPage *page = [[TYPage alloc] initWithDictionary:responseBody];
-                [pagesDictionary setObject:page forKey:page.pageId];
-            }
-        }
-        for (TYCheckIn *checkIn in self.checkIns) {
-            TYPage *page = checkIn.page;
-            NSString *pageId = [NSString stringWithFormat:@"%@", page.pageId];
-            TYPage *downloadedPage = [pagesDictionary objectForKey:pageId];
-            if(downloadedPage) {
-                checkIn.page = downloadedPage;                
-            }
-            else {
-                TYPage *errorPage = [[TYPage alloc] init];
-                errorPage.pageId = page.pageId;
-                errorPage.pageName = @"Unknown location";
-                checkIn.page = errorPage;
-            }
-        }
-        self.pagesRequestCompleted = YES;
-        [self reloadIfDone];
-    }
-    else if (request == self.usersRequest) {
-        NSMutableDictionary *usersDictionary = [[NSMutableDictionary alloc] init];
-        for (NSDictionary *userDictionary in (NSArray *) result) {
-            NSNumber *responseCode = [userDictionary objectForKey:@"code"];
-            if ([responseCode intValue] == 200) {
-                NSString *responseBodyStr = [userDictionary objectForKey:@"body"];
-                NSDictionary *responseBody = [responseBodyStr objectFromJSONString];
-                TYUser *user = [[TYUser alloc] initWithDictionary:responseBody];
-                [usersDictionary setObject:user forKey:user.userId];
-            }
-        }
-        for (TYCheckIn *checkIn in self.checkIns) {
-            TYUser *user = checkIn.user;
-            NSString *userId = [NSString stringWithFormat:@"%@", user.userId];
-            TYUser *downloadedUser = [usersDictionary objectForKey:userId];
-            if(downloadedUser) {
-                checkIn.user = downloadedUser;                
-            }
-            else {
-                [self.checkIns removeObject:checkIn];
-            }
-        }
-        self.usersRequestCompleted = YES; 
-        [self reloadIfDone]; 
-    }
+    [self.tableView reloadData];
 }
 
 #pragma mark - Helpers
-
--(void) reloadIfDone {
-    if (self.usersRequestCompleted && self.pagesRequestCompleted) {
-        [SVProgressHUD dismiss];
-        [self.tableView reloadData];
-    }
-}
 
 -(void) receivedLoginNotification:(NSNotification *) notification {
     [self loadCheckIns];

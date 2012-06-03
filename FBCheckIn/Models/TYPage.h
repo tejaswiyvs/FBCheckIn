@@ -11,18 +11,21 @@
 
 @interface TYPage : NSObject
 
-@property (nonatomic, strong) NSString *pageId;
+@property (nonatomic, assign) int checkIns;
+@property (nonatomic, strong) NSString *pageDescription;
+@property (nonatomic, assign) int fanCount;
 @property (nonatomic, strong) NSString *pageName;
+@property (nonatomic, strong) NSString *pageId;
 @property (nonatomic, strong) NSString *pagePictureUrl;
 @property (nonatomic, strong) UIImage *pagePicture;
-@property (nonatomic, strong) NSString *category;
-@property (nonatomic, strong) NSString *pageDescription;
+@property (nonatomic, strong) NSMutableArray *categories;
 @property (nonatomic, strong) NSString *website;
-@property (nonatomic, strong) NSString *street;
-@property (nonatomic, strong) NSString *state;
-@property (nonatomic, strong) NSString *city;
-@property (nonatomic, strong) NSString *zip;
 @property (nonatomic, assign) CLLocationCoordinate2D location;
+@property (nonatomic, strong) NSString *city;
+@property (nonatomic, strong) NSString *country;
+@property (nonatomic, strong) NSString *state;
+@property (nonatomic, strong) NSString *street;
+@property (nonatomic, strong) NSString *zip;
 
 -(id) initWithDictionary:(NSDictionary *) pageDictionary;
 @end

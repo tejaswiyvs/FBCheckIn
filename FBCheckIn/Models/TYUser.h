@@ -14,7 +14,9 @@
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) NSString *middleName;
 @property (nonatomic, strong) NSString *fullName;
+@property (nonatomic, strong) NSString *sex;
 @property (nonatomic, strong) NSString *profilePictureUrl;
 @property (nonatomic, strong) UIImage *profilePicture;
 

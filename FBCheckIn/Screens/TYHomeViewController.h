@@ -12,13 +12,7 @@
 @interface TYHomeViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, FBRequestDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) FBRequest *checkInRequest;
-@property (nonatomic, strong) FBRequest *usersRequest;
-@property (nonatomic, strong) FBRequest *pagesRequest;
 @property (nonatomic, strong) Facebook *facebook;
-@property (nonatomic, assign) BOOL pagesRequestCompleted;
-@property (nonatomic, assign) BOOL usersRequestCompleted;
-
 
 @property (nonatomic, strong) NSMutableArray *checkIns;
 
