@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B705F637157BFC1A00A1BF86 /* TYFBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B705F636157BFC1A00A1BF86 /* TYFBManager.m */; };
+		B72D93DA1571C59F00665274 /* TYCheckIn.m in Sources */ = {isa = PBXBuildFile; fileRef = B72D93D91571C59F00665274 /* TYCheckIn.m */; };
+		B72D93DD1571C5AC00665274 /* TYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = B72D93DC1571C5AC00665274 /* TYUser.m */; };
+		B72D93E01571C5F100665274 /* TYPage.m in Sources */ = {isa = PBXBuildFile; fileRef = B72D93DF1571C5F100665274 /* TYPage.m */; };
+		B72D93E21571C66500665274 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B72D93E11571C66500665274 /* MapKit.framework */; };
+		B72D93E51571C8E000665274 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B72D93E41571C8E000665274 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B72D93E61571C8E000665274 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B72D93E41571C8E000665274 /* JSONKit.m */; };
+		B72D93E91571D0BA00665274 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B72D93E81571D0BA00665274 /* CoreLocation.framework */; };
 		B73F6CE7156ED27F004A20E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73F6CE6156ED27F004A20E4 /* UIKit.framework */; };
 		B73F6CE9156ED27F004A20E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73F6CE8156ED27F004A20E4 /* Foundation.framework */; };
 		B73F6CEB156ED27F004A20E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73F6CEA156ED27F004A20E4 /* CoreGraphics.framework */; };
@@ -18,10 +26,10 @@
 		B73F6D01156ED281004A20E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73F6CE8156ED27F004A20E4 /* Foundation.framework */; };
 		B73F6D09156ED281004A20E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D07156ED281004A20E4 /* InfoPlist.strings */; };
 		B73F6D0C156ED281004A20E4 /* FBCheckInTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D0B156ED281004A20E4 /* FBCheckInTests.m */; };
-		B73F6D55156ED835004A20E4 /* TYFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D53156ED835004A20E4 /* TYFriendsViewController.m */; };
-		B73F6D56156ED835004A20E4 /* TYFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D53156ED835004A20E4 /* TYFriendsViewController.m */; };
-		B73F6D57156ED835004A20E4 /* TYFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D54156ED835004A20E4 /* TYFriendsViewController.xib */; };
-		B73F6D58156ED835004A20E4 /* TYFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D54156ED835004A20E4 /* TYFriendsViewController.xib */; };
+		B73F6D55156ED835004A20E4 /* TYHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D53156ED835004A20E4 /* TYHomeViewController.m */; };
+		B73F6D56156ED835004A20E4 /* TYHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D53156ED835004A20E4 /* TYHomeViewController.m */; };
+		B73F6D57156ED835004A20E4 /* TYHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D54156ED835004A20E4 /* TYHomeViewController.xib */; };
+		B73F6D58156ED835004A20E4 /* TYHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D54156ED835004A20E4 /* TYHomeViewController.xib */; };
 		B73F6D5C156ED846004A20E4 /* TYCheckInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D5A156ED846004A20E4 /* TYCheckInViewController.m */; };
 		B73F6D5D156ED846004A20E4 /* TYCheckInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D5A156ED846004A20E4 /* TYCheckInViewController.m */; };
 		B73F6D5E156ED846004A20E4 /* TYCheckInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D5B156ED846004A20E4 /* TYCheckInViewController.xib */; };
@@ -77,12 +85,46 @@
 		B73F6DE6156EF87F004A20E4 /* checkin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DE4156EF87F004A20E4 /* checkin@2x.png */; };
 		B73F6DE8156EFE7F004A20E4 /* checkin.png in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DE7156EFE7F004A20E4 /* checkin.png */; };
 		B73F6DE9156EFE7F004A20E4 /* checkin.png in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DE7156EFE7F004A20E4 /* checkin.png */; };
-		B73F6DED156F144A004A20E4 /* PPCheckInCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DEC156F144A004A20E4 /* PPCheckInCell.m */; };
-		B73F6DEE156F144A004A20E4 /* PPCheckInCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DEC156F144A004A20E4 /* PPCheckInCell.m */; };
-		B73F6DF0156F1506004A20E4 /* PPCheckInCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DEF156F1506004A20E4 /* PPCheckInCell.xib */; };
-		B73F6DF1156F1506004A20E4 /* PPCheckInCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DEF156F1506004A20E4 /* PPCheckInCell.xib */; };
+		B73F6DED156F144A004A20E4 /* TYCheckInCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DEC156F144A004A20E4 /* TYCheckInCell.m */; };
+		B73F6DEE156F144A004A20E4 /* TYCheckInCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DEC156F144A004A20E4 /* TYCheckInCell.m */; };
+		B73F6DF0156F1506004A20E4 /* TYCheckInCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DEF156F1506004A20E4 /* TYCheckInCell.xib */; };
+		B73F6DF1156F1506004A20E4 /* TYCheckInCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DEF156F1506004A20E4 /* TYCheckInCell.xib */; };
 		B73F6DF3156F3484004A20E4 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DF2156F3483004A20E4 /* config.plist */; };
 		B73F6DF4156F3484004A20E4 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DF2156F3483004A20E4 /* config.plist */; };
+		B76FF730157178A900676F47 /* TYLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B76FF72E157178A900676F47 /* TYLogInViewController.m */; };
+		B76FF731157178A900676F47 /* TYLogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B76FF72F157178A900676F47 /* TYLogInViewController.xib */; };
+		B7E4203D1572E4A800105F8B /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E420291572E4A800105F8B /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B7E4203E1572E4A800105F8B /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E420291572E4A800105F8B /* AFHTTPClient.m */; };
+		B7E4203F1572E4A800105F8B /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E4202B1572E4A800105F8B /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B7E420401572E4A800105F8B /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E4202B1572E4A800105F8B /* AFHTTPRequestOperation.m */; };
+		B7E420411572E4A800105F8B /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E4202D1572E4A800105F8B /* AFImageRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B7E420421572E4A800105F8B /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E4202D1572E4A800105F8B /* AFImageRequestOperation.m */; };
+		B7E420431572E4A800105F8B /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E4202F1572E4A800105F8B /* AFJSONRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B7E420441572E4A800105F8B /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E4202F1572E4A800105F8B /* AFJSONRequestOperation.m */; };
+		B7E420451572E4A800105F8B /* AFJSONUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E420311572E4A800105F8B /* AFJSONUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B7E420461572E4A800105F8B /* AFJSONUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E420311572E4A800105F8B /* AFJSONUtilities.m */; };
+		B7E420471572E4A800105F8B /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E420331572E4A800105F8B /* AFNetworkActivityIndicatorManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B7E420481572E4A800105F8B /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E420331572E4A800105F8B /* AFNetworkActivityIndicatorManager.m */; };
+		B7E420491572E4A800105F8B /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E420361572E4A800105F8B /* AFPropertyListRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B7E4204A1572E4A800105F8B /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E420361572E4A800105F8B /* AFPropertyListRequestOperation.m */; };
+		B7E4204B1572E4A800105F8B /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E420381572E4A800105F8B /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B7E4204C1572E4A800105F8B /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E420381572E4A800105F8B /* AFURLConnectionOperation.m */; };
+		B7E4204D1572E4A800105F8B /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E4203A1572E4A800105F8B /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B7E4204E1572E4A800105F8B /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E4203A1572E4A800105F8B /* AFXMLRequestOperation.m */; };
+		B7E4204F1572E4A800105F8B /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E4203C1572E4A800105F8B /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B7E420501572E4A800105F8B /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E4203C1572E4A800105F8B /* UIImageView+AFNetworking.m */; };
+		B7F4E34D157AA4D100FE5719 /* TYUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F4E34B157AA4D100FE5719 /* TYUserViewController.m */; };
+		B7F4E34E157AA4D100FE5719 /* TYUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F4E34B157AA4D100FE5719 /* TYUserViewController.m */; };
+		B7F4E34F157AA4D100FE5719 /* TYUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E34C157AA4D100FE5719 /* TYUserViewController.xib */; };
+		B7F4E350157AA4D100FE5719 /* TYUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E34C157AA4D100FE5719 /* TYUserViewController.xib */; };
+		B7F4E354157AA4E800FE5719 /* TYPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F4E352157AA4E800FE5719 /* TYPlaceViewController.m */; };
+		B7F4E355157AA4E800FE5719 /* TYPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F4E352157AA4E800FE5719 /* TYPlaceViewController.m */; };
+		B7F4E356157AA4E800FE5719 /* TYPlaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E353157AA4E800FE5719 /* TYPlaceViewController.xib */; };
+		B7F4E357157AA4E800FE5719 /* TYPlaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E353157AA4E800FE5719 /* TYPlaceViewController.xib */; };
+		B7F4E35B157AA6EC00FE5719 /* TYCheckInDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F4E359157AA6EC00FE5719 /* TYCheckInDetailViewController.m */; };
+		B7F4E35C157AA6EC00FE5719 /* TYCheckInDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F4E359157AA6EC00FE5719 /* TYCheckInDetailViewController.m */; };
+		B7F4E35D157AA6EC00FE5719 /* TYCheckInDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E35A157AA6EC00FE5719 /* TYCheckInDetailViewController.xib */; };
+		B7F4E35E157AA6EC00FE5719 /* TYCheckInDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E35A157AA6EC00FE5719 /* TYCheckInDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +145,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B705F635157BFC1A00A1BF86 /* TYFBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYFBManager.h; path = Libraries/TYFBManager.h; sourceTree = "<group>"; };
+		B705F636157BFC1A00A1BF86 /* TYFBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYFBManager.m; path = Libraries/TYFBManager.m; sourceTree = "<group>"; };
+		B72D93D81571C59F00665274 /* TYCheckIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYCheckIn.h; path = Models/TYCheckIn.h; sourceTree = "<group>"; };
+		B72D93D91571C59F00665274 /* TYCheckIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYCheckIn.m; path = Models/TYCheckIn.m; sourceTree = "<group>"; };
+		B72D93DB1571C5AC00665274 /* TYUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYUser.h; path = Models/TYUser.h; sourceTree = "<group>"; };
+		B72D93DC1571C5AC00665274 /* TYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYUser.m; path = Models/TYUser.m; sourceTree = "<group>"; };
+		B72D93DE1571C5F100665274 /* TYPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYPage.h; path = Models/TYPage.h; sourceTree = "<group>"; };
+		B72D93DF1571C5F100665274 /* TYPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYPage.m; path = Models/TYPage.m; sourceTree = "<group>"; };
+		B72D93E11571C66500665274 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B72D93E31571C8E000665274 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Libraries/JSONKit/JSONKit.h; sourceTree = "<group>"; };
+		B72D93E41571C8E000665274 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = Libraries/JSONKit/JSONKit.m; sourceTree = "<group>"; };
+		B72D93E81571D0BA00665274 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B73F6CE2156ED27F004A20E4 /* FBCheckIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBCheckIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B73F6CE6156ED27F004A20E4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B73F6CE8156ED27F004A20E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -119,9 +173,9 @@
 		B73F6D08156ED281004A20E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B73F6D0A156ED281004A20E4 /* FBCheckInTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBCheckInTests.h; sourceTree = "<group>"; };
 		B73F6D0B156ED281004A20E4 /* FBCheckInTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBCheckInTests.m; sourceTree = "<group>"; };
-		B73F6D52156ED835004A20E4 /* TYFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYFriendsViewController.h; path = Screens/TYFriendsViewController.h; sourceTree = "<group>"; };
-		B73F6D53156ED835004A20E4 /* TYFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYFriendsViewController.m; path = Screens/TYFriendsViewController.m; sourceTree = "<group>"; };
-		B73F6D54156ED835004A20E4 /* TYFriendsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYFriendsViewController.xib; path = Screens/TYFriendsViewController.xib; sourceTree = "<group>"; };
+		B73F6D52156ED835004A20E4 /* TYHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYHomeViewController.h; path = Screens/TYHomeViewController.h; sourceTree = "<group>"; };
+		B73F6D53156ED835004A20E4 /* TYHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYHomeViewController.m; path = Screens/TYHomeViewController.m; sourceTree = "<group>"; };
+		B73F6D54156ED835004A20E4 /* TYHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYHomeViewController.xib; path = Screens/TYHomeViewController.xib; sourceTree = "<group>"; };
 		B73F6D59156ED846004A20E4 /* TYCheckInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYCheckInViewController.h; path = Screens/TYCheckInViewController.h; sourceTree = "<group>"; };
 		B73F6D5A156ED846004A20E4 /* TYCheckInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYCheckInViewController.m; path = Screens/TYCheckInViewController.m; sourceTree = "<group>"; };
 		B73F6D5B156ED846004A20E4 /* TYCheckInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYCheckInViewController.xib; path = Screens/TYCheckInViewController.xib; sourceTree = "<group>"; };
@@ -173,10 +227,43 @@
 		B73F6DE1156EF3AD004A20E4 /* friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friends.png; sourceTree = "<group>"; };
 		B73F6DE4156EF87F004A20E4 /* checkin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkin@2x.png"; sourceTree = "<group>"; };
 		B73F6DE7156EFE7F004A20E4 /* checkin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkin.png; sourceTree = "<group>"; };
-		B73F6DEB156F144A004A20E4 /* PPCheckInCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PPCheckInCell.h; path = Screens/UITableViewCells/PPCheckInCell.h; sourceTree = "<group>"; };
-		B73F6DEC156F144A004A20E4 /* PPCheckInCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PPCheckInCell.m; path = Screens/UITableViewCells/PPCheckInCell.m; sourceTree = "<group>"; };
-		B73F6DEF156F1506004A20E4 /* PPCheckInCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PPCheckInCell.xib; path = Screens/UITableViewCells/PPCheckInCell.xib; sourceTree = "<group>"; };
+		B73F6DEB156F144A004A20E4 /* TYCheckInCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYCheckInCell.h; path = Screens/UITableViewCells/TYCheckInCell.h; sourceTree = "<group>"; };
+		B73F6DEC156F144A004A20E4 /* TYCheckInCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYCheckInCell.m; path = Screens/UITableViewCells/TYCheckInCell.m; sourceTree = "<group>"; };
+		B73F6DEF156F1506004A20E4 /* TYCheckInCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYCheckInCell.xib; path = Screens/UITableViewCells/TYCheckInCell.xib; sourceTree = "<group>"; };
 		B73F6DF2156F3483004A20E4 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		B76FF72D157178A900676F47 /* TYLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYLogInViewController.h; path = Screens/TYLogInViewController.h; sourceTree = "<group>"; };
+		B76FF72E157178A900676F47 /* TYLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYLogInViewController.m; path = Screens/TYLogInViewController.m; sourceTree = "<group>"; };
+		B76FF72F157178A900676F47 /* TYLogInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYLogInViewController.xib; path = Screens/TYLogInViewController.xib; sourceTree = "<group>"; };
+		B7E420281572E4A800105F8B /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPClient.h; path = Libraries/AFNetworking/AFNetworking/AFHTTPClient.h; sourceTree = "<group>"; };
+		B7E420291572E4A800105F8B /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPClient.m; path = Libraries/AFNetworking/AFNetworking/AFHTTPClient.m; sourceTree = "<group>"; };
+		B7E4202A1572E4A800105F8B /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = Libraries/AFNetworking/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		B7E4202B1572E4A800105F8B /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = Libraries/AFNetworking/AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		B7E4202C1572E4A800105F8B /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFImageRequestOperation.h; path = Libraries/AFNetworking/AFNetworking/AFImageRequestOperation.h; sourceTree = "<group>"; };
+		B7E4202D1572E4A800105F8B /* AFImageRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFImageRequestOperation.m; path = Libraries/AFNetworking/AFNetworking/AFImageRequestOperation.m; sourceTree = "<group>"; };
+		B7E4202E1572E4A800105F8B /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFJSONRequestOperation.h; path = Libraries/AFNetworking/AFNetworking/AFJSONRequestOperation.h; sourceTree = "<group>"; };
+		B7E4202F1572E4A800105F8B /* AFJSONRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFJSONRequestOperation.m; path = Libraries/AFNetworking/AFNetworking/AFJSONRequestOperation.m; sourceTree = "<group>"; };
+		B7E420301572E4A800105F8B /* AFJSONUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFJSONUtilities.h; path = Libraries/AFNetworking/AFNetworking/AFJSONUtilities.h; sourceTree = "<group>"; };
+		B7E420311572E4A800105F8B /* AFJSONUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFJSONUtilities.m; path = Libraries/AFNetworking/AFNetworking/AFJSONUtilities.m; sourceTree = "<group>"; };
+		B7E420321572E4A800105F8B /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworkActivityIndicatorManager.h; path = Libraries/AFNetworking/AFNetworking/AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		B7E420331572E4A800105F8B /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityIndicatorManager.m; path = Libraries/AFNetworking/AFNetworking/AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		B7E420341572E4A800105F8B /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = Libraries/AFNetworking/AFNetworking/AFNetworking.h; sourceTree = "<group>"; };
+		B7E420351572E4A800105F8B /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPropertyListRequestOperation.h; path = Libraries/AFNetworking/AFNetworking/AFPropertyListRequestOperation.h; sourceTree = "<group>"; };
+		B7E420361572E4A800105F8B /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFPropertyListRequestOperation.m; path = Libraries/AFNetworking/AFNetworking/AFPropertyListRequestOperation.m; sourceTree = "<group>"; };
+		B7E420371572E4A800105F8B /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLConnectionOperation.h; path = Libraries/AFNetworking/AFNetworking/AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		B7E420381572E4A800105F8B /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLConnectionOperation.m; path = Libraries/AFNetworking/AFNetworking/AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		B7E420391572E4A800105F8B /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFXMLRequestOperation.h; path = Libraries/AFNetworking/AFNetworking/AFXMLRequestOperation.h; sourceTree = "<group>"; };
+		B7E4203A1572E4A800105F8B /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFXMLRequestOperation.m; path = Libraries/AFNetworking/AFNetworking/AFXMLRequestOperation.m; sourceTree = "<group>"; };
+		B7E4203B1572E4A800105F8B /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "Libraries/AFNetworking/AFNetworking/UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		B7E4203C1572E4A800105F8B /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "Libraries/AFNetworking/AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		B7F4E34A157AA4D100FE5719 /* TYUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYUserViewController.h; path = Screens/TYUserViewController.h; sourceTree = "<group>"; };
+		B7F4E34B157AA4D100FE5719 /* TYUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYUserViewController.m; path = Screens/TYUserViewController.m; sourceTree = "<group>"; };
+		B7F4E34C157AA4D100FE5719 /* TYUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYUserViewController.xib; path = Screens/TYUserViewController.xib; sourceTree = "<group>"; };
+		B7F4E351157AA4E800FE5719 /* TYPlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYPlaceViewController.h; path = Screens/TYPlaceViewController.h; sourceTree = "<group>"; };
+		B7F4E352157AA4E800FE5719 /* TYPlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYPlaceViewController.m; path = Screens/TYPlaceViewController.m; sourceTree = "<group>"; };
+		B7F4E353157AA4E800FE5719 /* TYPlaceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYPlaceViewController.xib; path = Screens/TYPlaceViewController.xib; sourceTree = "<group>"; };
+		B7F4E358157AA6EC00FE5719 /* TYCheckInDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYCheckInDetailViewController.h; path = Screens/TYCheckInDetailViewController.h; sourceTree = "<group>"; };
+		B7F4E359157AA6EC00FE5719 /* TYCheckInDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYCheckInDetailViewController.m; path = Screens/TYCheckInDetailViewController.m; sourceTree = "<group>"; };
+		B7F4E35A157AA6EC00FE5719 /* TYCheckInDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYCheckInDetailViewController.xib; path = Screens/TYCheckInDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +271,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B72D93E91571D0BA00665274 /* CoreLocation.framework in Frameworks */,
+				B72D93E21571C66500665274 /* MapKit.framework in Frameworks */,
 				B73F6DC6156EDC60004A20E4 /* libxml2.2.7.3.dylib in Frameworks */,
 				B73F6CE7156ED27F004A20E4 /* UIKit.framework in Frameworks */,
 				B73F6CE9156ED27F004A20E4 /* Foundation.framework in Frameworks */,
@@ -204,9 +293,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B72D93D71571C58100665274 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B72D93D81571C59F00665274 /* TYCheckIn.h */,
+				B72D93D91571C59F00665274 /* TYCheckIn.m */,
+				B72D93DB1571C5AC00665274 /* TYUser.h */,
+				B72D93DC1571C5AC00665274 /* TYUser.m */,
+				B72D93DE1571C5F100665274 /* TYPage.h */,
+				B72D93DF1571C5F100665274 /* TYPage.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		B72D93E71571C8E700665274 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				B72D93E31571C8E000665274 /* JSONKit.h */,
+				B72D93E41571C8E000665274 /* JSONKit.m */,
+			);
+			name = JSONKit;
+			sourceTree = "<group>";
+		};
 		B73F6CD7156ED27F004A20E4 = {
 			isa = PBXGroup;
 			children = (
+				B72D93E81571D0BA00665274 /* CoreLocation.framework */,
+				B72D93E11571C66500665274 /* MapKit.framework */,
 				B73F6DC5156EDC60004A20E4 /* libxml2.2.7.3.dylib */,
 				B73F6CEC156ED280004A20E4 /* FBCheckIn */,
 				B73F6D04156ED281004A20E4 /* FBCheckInTests */,
@@ -238,21 +351,36 @@
 		B73F6CEC156ED280004A20E4 /* FBCheckIn */ = {
 			isa = PBXGroup;
 			children = (
+				B72D93D71571C58100665274 /* Model */,
 				B73F6DEA156F1429004A20E4 /* UITableViewCells */,
 				B73F6D9C156ED8A1004A20E4 /* Libraries */,
 				B73F6D15156ED297004A20E4 /* FacebookSDK */,
 				B73F6CF5156ED281004A20E4 /* TYAppDelegate.h */,
 				B73F6CF6156ED281004A20E4 /* TYAppDelegate.m */,
-				B73F6D52156ED835004A20E4 /* TYFriendsViewController.h */,
-				B73F6D53156ED835004A20E4 /* TYFriendsViewController.m */,
-				B73F6D54156ED835004A20E4 /* TYFriendsViewController.xib */,
+				B705F635157BFC1A00A1BF86 /* TYFBManager.h */,
+				B705F636157BFC1A00A1BF86 /* TYFBManager.m */,
+				B73F6D52156ED835004A20E4 /* TYHomeViewController.h */,
+				B73F6D53156ED835004A20E4 /* TYHomeViewController.m */,
+				B73F6D54156ED835004A20E4 /* TYHomeViewController.xib */,
 				B73F6D59156ED846004A20E4 /* TYCheckInViewController.h */,
 				B73F6D5A156ED846004A20E4 /* TYCheckInViewController.m */,
 				B73F6D5B156ED846004A20E4 /* TYCheckInViewController.xib */,
-				B73F6DC4156ED965004A20E4 /* Resources */,
+				B7F4E358157AA6EC00FE5719 /* TYCheckInDetailViewController.h */,
+				B7F4E359157AA6EC00FE5719 /* TYCheckInDetailViewController.m */,
+				B7F4E35A157AA6EC00FE5719 /* TYCheckInDetailViewController.xib */,
+				B76FF72D157178A900676F47 /* TYLogInViewController.h */,
+				B76FF72E157178A900676F47 /* TYLogInViewController.m */,
+				B76FF72F157178A900676F47 /* TYLogInViewController.xib */,
+				B7F4E34A157AA4D100FE5719 /* TYUserViewController.h */,
+				B7F4E34B157AA4D100FE5719 /* TYUserViewController.m */,
+				B7F4E34C157AA4D100FE5719 /* TYUserViewController.xib */,
+				B7F4E351157AA4E800FE5719 /* TYPlaceViewController.h */,
+				B7F4E352157AA4E800FE5719 /* TYPlaceViewController.m */,
+				B7F4E353157AA4E800FE5719 /* TYPlaceViewController.xib */,
 				B73F6D9E156ED8C0004A20E4 /* TYMapViewController.h */,
 				B73F6D9F156ED8C0004A20E4 /* TYMapViewController.m */,
 				B73F6DA0156ED8C0004A20E4 /* TYMapViewController.xib */,
+				B73F6DC4156ED965004A20E4 /* Resources */,
 				B73F6CED156ED280004A20E4 /* Supporting Files */,
 				B73F6DF2156F3483004A20E4 /* config.plist */,
 			);
@@ -343,6 +471,8 @@
 		B73F6D9C156ED8A1004A20E4 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				B7E420271572E4A000105F8B /* AFNetworking */,
+				B72D93E71571C8E700665274 /* JSONKit */,
 				B73F6DC3156ED95A004A20E4 /* CustomNavigationController */,
 				B73F6DC2156ED954004A20E4 /* CustomTabBar */,
 				B73F6DC1156ED941004A20E4 /* DebugLog */,
@@ -414,11 +544,39 @@
 		B73F6DEA156F1429004A20E4 /* UITableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				B73F6DEB156F144A004A20E4 /* PPCheckInCell.h */,
-				B73F6DEC156F144A004A20E4 /* PPCheckInCell.m */,
-				B73F6DEF156F1506004A20E4 /* PPCheckInCell.xib */,
+				B73F6DEB156F144A004A20E4 /* TYCheckInCell.h */,
+				B73F6DEC156F144A004A20E4 /* TYCheckInCell.m */,
+				B73F6DEF156F1506004A20E4 /* TYCheckInCell.xib */,
 			);
 			name = UITableViewCells;
+			sourceTree = "<group>";
+		};
+		B7E420271572E4A000105F8B /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				B7E420281572E4A800105F8B /* AFHTTPClient.h */,
+				B7E420291572E4A800105F8B /* AFHTTPClient.m */,
+				B7E4202A1572E4A800105F8B /* AFHTTPRequestOperation.h */,
+				B7E4202B1572E4A800105F8B /* AFHTTPRequestOperation.m */,
+				B7E4202C1572E4A800105F8B /* AFImageRequestOperation.h */,
+				B7E4202D1572E4A800105F8B /* AFImageRequestOperation.m */,
+				B7E4202E1572E4A800105F8B /* AFJSONRequestOperation.h */,
+				B7E4202F1572E4A800105F8B /* AFJSONRequestOperation.m */,
+				B7E420301572E4A800105F8B /* AFJSONUtilities.h */,
+				B7E420311572E4A800105F8B /* AFJSONUtilities.m */,
+				B7E420321572E4A800105F8B /* AFNetworkActivityIndicatorManager.h */,
+				B7E420331572E4A800105F8B /* AFNetworkActivityIndicatorManager.m */,
+				B7E420341572E4A800105F8B /* AFNetworking.h */,
+				B7E420351572E4A800105F8B /* AFPropertyListRequestOperation.h */,
+				B7E420361572E4A800105F8B /* AFPropertyListRequestOperation.m */,
+				B7E420371572E4A800105F8B /* AFURLConnectionOperation.h */,
+				B7E420381572E4A800105F8B /* AFURLConnectionOperation.m */,
+				B7E420391572E4A800105F8B /* AFXMLRequestOperation.h */,
+				B7E4203A1572E4A800105F8B /* AFXMLRequestOperation.m */,
+				B7E4203B1572E4A800105F8B /* UIImageView+AFNetworking.h */,
+				B7E4203C1572E4A800105F8B /* UIImageView+AFNetworking.m */,
+			);
+			name = AFNetworking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -509,7 +667,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B73F6CF1156ED280004A20E4 /* InfoPlist.strings in Resources */,
-				B73F6D57156ED835004A20E4 /* TYFriendsViewController.xib in Resources */,
+				B73F6D57156ED835004A20E4 /* TYHomeViewController.xib in Resources */,
 				B73F6D5E156ED846004A20E4 /* TYCheckInViewController.xib in Resources */,
 				B73F6D83156ED86B004A20E4 /* FBDialog.bundle in Resources */,
 				B73F6DA3156ED8C0004A20E4 /* TYMapViewController.xib in Resources */,
@@ -518,8 +676,12 @@
 				B73F6DE2156EF3AD004A20E4 /* friends.png in Resources */,
 				B73F6DE5156EF87F004A20E4 /* checkin@2x.png in Resources */,
 				B73F6DE8156EFE7F004A20E4 /* checkin.png in Resources */,
-				B73F6DF0156F1506004A20E4 /* PPCheckInCell.xib in Resources */,
+				B73F6DF0156F1506004A20E4 /* TYCheckInCell.xib in Resources */,
 				B73F6DF3156F3484004A20E4 /* config.plist in Resources */,
+				B76FF731157178A900676F47 /* TYLogInViewController.xib in Resources */,
+				B7F4E34F157AA4D100FE5719 /* TYUserViewController.xib in Resources */,
+				B7F4E356157AA4E800FE5719 /* TYPlaceViewController.xib in Resources */,
+				B7F4E35D157AA6EC00FE5719 /* TYCheckInDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,7 +690,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B73F6D09156ED281004A20E4 /* InfoPlist.strings in Resources */,
-				B73F6D58156ED835004A20E4 /* TYFriendsViewController.xib in Resources */,
+				B73F6D58156ED835004A20E4 /* TYHomeViewController.xib in Resources */,
 				B73F6D5F156ED846004A20E4 /* TYCheckInViewController.xib in Resources */,
 				B73F6D84156ED86B004A20E4 /* FBDialog.bundle in Resources */,
 				B73F6DA4156ED8C0004A20E4 /* TYMapViewController.xib in Resources */,
@@ -537,8 +699,11 @@
 				B73F6DE3156EF3AD004A20E4 /* friends.png in Resources */,
 				B73F6DE6156EF87F004A20E4 /* checkin@2x.png in Resources */,
 				B73F6DE9156EFE7F004A20E4 /* checkin.png in Resources */,
-				B73F6DF1156F1506004A20E4 /* PPCheckInCell.xib in Resources */,
+				B73F6DF1156F1506004A20E4 /* TYCheckInCell.xib in Resources */,
 				B73F6DF4156F3484004A20E4 /* config.plist in Resources */,
+				B7F4E350157AA4D100FE5719 /* TYUserViewController.xib in Resources */,
+				B7F4E357157AA4E800FE5719 /* TYPlaceViewController.xib in Resources */,
+				B7F4E35E157AA6EC00FE5719 /* TYCheckInDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,7 +732,7 @@
 			files = (
 				B73F6CF3156ED281004A20E4 /* main.m in Sources */,
 				B73F6CF7156ED281004A20E4 /* TYAppDelegate.m in Sources */,
-				B73F6D55156ED835004A20E4 /* TYFriendsViewController.m in Sources */,
+				B73F6D55156ED835004A20E4 /* TYHomeViewController.m in Sources */,
 				B73F6D5C156ED846004A20E4 /* TYCheckInViewController.m in Sources */,
 				B73F6D81156ED86B004A20E4 /* Facebook.m in Sources */,
 				B73F6D85156ED86B004A20E4 /* FBDialog.m in Sources */,
@@ -587,7 +752,26 @@
 				B73F6DB7156ED930004A20E4 /* DebugLog.m in Sources */,
 				B73F6DBE156ED938004A20E4 /* SVProgressHUD.m in Sources */,
 				B73F6DD1156EE4D8004A20E4 /* TYRaisedTabBarController.m in Sources */,
-				B73F6DED156F144A004A20E4 /* PPCheckInCell.m in Sources */,
+				B73F6DED156F144A004A20E4 /* TYCheckInCell.m in Sources */,
+				B76FF730157178A900676F47 /* TYLogInViewController.m in Sources */,
+				B72D93DA1571C59F00665274 /* TYCheckIn.m in Sources */,
+				B72D93DD1571C5AC00665274 /* TYUser.m in Sources */,
+				B72D93E01571C5F100665274 /* TYPage.m in Sources */,
+				B72D93E51571C8E000665274 /* JSONKit.m in Sources */,
+				B7E4203D1572E4A800105F8B /* AFHTTPClient.m in Sources */,
+				B7E4203F1572E4A800105F8B /* AFHTTPRequestOperation.m in Sources */,
+				B7E420411572E4A800105F8B /* AFImageRequestOperation.m in Sources */,
+				B7E420431572E4A800105F8B /* AFJSONRequestOperation.m in Sources */,
+				B7E420451572E4A800105F8B /* AFJSONUtilities.m in Sources */,
+				B7E420471572E4A800105F8B /* AFNetworkActivityIndicatorManager.m in Sources */,
+				B7E420491572E4A800105F8B /* AFPropertyListRequestOperation.m in Sources */,
+				B7E4204B1572E4A800105F8B /* AFURLConnectionOperation.m in Sources */,
+				B7E4204D1572E4A800105F8B /* AFXMLRequestOperation.m in Sources */,
+				B7E4204F1572E4A800105F8B /* UIImageView+AFNetworking.m in Sources */,
+				B7F4E34D157AA4D100FE5719 /* TYUserViewController.m in Sources */,
+				B7F4E354157AA4E800FE5719 /* TYPlaceViewController.m in Sources */,
+				B7F4E35B157AA6EC00FE5719 /* TYCheckInDetailViewController.m in Sources */,
+				B705F637157BFC1A00A1BF86 /* TYFBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,7 +780,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B73F6D0C156ED281004A20E4 /* FBCheckInTests.m in Sources */,
-				B73F6D56156ED835004A20E4 /* TYFriendsViewController.m in Sources */,
+				B73F6D56156ED835004A20E4 /* TYHomeViewController.m in Sources */,
 				B73F6D5D156ED846004A20E4 /* TYCheckInViewController.m in Sources */,
 				B73F6D82156ED86B004A20E4 /* Facebook.m in Sources */,
 				B73F6D86156ED86B004A20E4 /* FBDialog.m in Sources */,
@@ -616,7 +800,21 @@
 				B73F6DB8156ED930004A20E4 /* DebugLog.m in Sources */,
 				B73F6DBF156ED938004A20E4 /* SVProgressHUD.m in Sources */,
 				B73F6DD2156EE4D8004A20E4 /* TYRaisedTabBarController.m in Sources */,
-				B73F6DEE156F144A004A20E4 /* PPCheckInCell.m in Sources */,
+				B73F6DEE156F144A004A20E4 /* TYCheckInCell.m in Sources */,
+				B72D93E61571C8E000665274 /* JSONKit.m in Sources */,
+				B7E4203E1572E4A800105F8B /* AFHTTPClient.m in Sources */,
+				B7E420401572E4A800105F8B /* AFHTTPRequestOperation.m in Sources */,
+				B7E420421572E4A800105F8B /* AFImageRequestOperation.m in Sources */,
+				B7E420441572E4A800105F8B /* AFJSONRequestOperation.m in Sources */,
+				B7E420461572E4A800105F8B /* AFJSONUtilities.m in Sources */,
+				B7E420481572E4A800105F8B /* AFNetworkActivityIndicatorManager.m in Sources */,
+				B7E4204A1572E4A800105F8B /* AFPropertyListRequestOperation.m in Sources */,
+				B7E4204C1572E4A800105F8B /* AFURLConnectionOperation.m in Sources */,
+				B7E4204E1572E4A800105F8B /* AFXMLRequestOperation.m in Sources */,
+				B7E420501572E4A800105F8B /* UIImageView+AFNetworking.m in Sources */,
+				B7F4E34E157AA4D100FE5719 /* TYUserViewController.m in Sources */,
+				B7F4E355157AA4E800FE5719 /* TYPlaceViewController.m in Sources */,
+				B7F4E35C157AA6EC00FE5719 /* TYCheckInDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,6 +976,7 @@
 				B73F6D11156ED281004A20E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B73F6D12156ED281004A20E4 /* Build configuration list for PBXNativeTarget "FBCheckInTests" */ = {
 			isa = XCConfigurationList;
@@ -786,6 +985,7 @@
 				B73F6D14156ED281004A20E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

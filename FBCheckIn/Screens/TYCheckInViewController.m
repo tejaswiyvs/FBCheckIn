@@ -14,6 +14,9 @@
 
 @implementation TYCheckInViewController
 
+@synthesize profilePicture = _profilePicture;
+@synthesize checkInLocation = _checkInLocation;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

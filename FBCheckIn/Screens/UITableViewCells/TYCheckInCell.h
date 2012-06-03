@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIImageView+AFNetworking.h"
 
-@interface PPCheckInCell : UITableViewCell
+@interface TYCheckInCell : UITableViewCell
 
 @property (nonatomic, strong) IBOutlet UILabel *checkInLocation;
 @property (nonatomic, strong) IBOutlet UILabel *name;
 @property (nonatomic, strong) IBOutlet UIImageView *picture;
+
 @end

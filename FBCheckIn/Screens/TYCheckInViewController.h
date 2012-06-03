@@ -10,4 +10,6 @@
 
 @interface TYCheckInViewController : UIViewController
 
+@property (nonatomic, strong) IBOutlet UIImageView *profilePicture;
+@property (nonatomic, strong) IBOutlet UILabel *checkInLocation;
 @end
