@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
-@interface TYMapViewController : UIViewController
+@interface TYMapViewController : UIViewController<MKMapViewDelegate>
 -(id) initWithTabBar;
+
+@property (nonatomic, strong) NSMutableArray *checkIns;
+@property (nonatomic, strong) IBOutlet MKMapView *mapView;
 @end
