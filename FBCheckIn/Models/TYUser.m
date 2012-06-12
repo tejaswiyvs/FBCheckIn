@@ -34,4 +34,8 @@
     }
     return self;
 }
+
+-(NSString *) shortName {
+    return [NSString stringWithFormat:@"%@ %@.", self.firstName, [self.lastName substringToIndex:1]];
+}
 @end

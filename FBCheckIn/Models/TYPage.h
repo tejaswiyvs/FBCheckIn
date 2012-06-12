@@ -26,6 +26,8 @@
 @property (nonatomic, strong) NSString *state;
 @property (nonatomic, strong) NSString *street;
 @property (nonatomic, strong) NSString *zip;
+@property (nonatomic, strong) NSString *phoneNumber;
 
 -(id) initWithDictionary:(NSDictionary *) pageDictionary;
+-(NSString *) shortAddress;
 @end

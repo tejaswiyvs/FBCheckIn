@@ -8,13 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "Facebook.h"
+#import "EGORefreshTableHeaderView.h"
 
-@interface TYHomeViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, FBRequestDelegate>
+@interface TYHomeViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, FBRequestDelegate, EGORefreshTableHeaderDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) Facebook *facebook;
+@property (nonatomic, strong) EGORefreshTableHeaderView *refreshHeaderView;
+@property (nonatomic, assign) BOOL reloading;
 
 @property (nonatomic, strong) NSMutableArray *checkIns;
 
 -(id) initWithTabBar;
+- (void)reloadTableViewDataSource;
+- (void)doneLoadingTableViewData;
+
 @end

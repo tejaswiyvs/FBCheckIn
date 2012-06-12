@@ -11,6 +11,8 @@
 #import "TYCheckInViewController.h"
 #import "TYMapViewController.h"
 #import "TYFBManager.h"
+#import "SCNavigationBar.h"
+#import "TYUITabBarController.h"
 
 @interface TYAppDelegate ()
 -(void) makeTabBar;
@@ -20,6 +22,7 @@
 
 @synthesize window = _window;
 @synthesize tabBar = _tabBar;
+@synthesize checkIns = _checkIns;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -28,6 +31,7 @@
     TYFBManager *manager = [TYFBManager sharedInstance];
     [manager login];
     [self makeTabBar];
+//    InstagramViewController *tabBar = [[InstagramViewController alloc] init];
     self.window.rootViewController = self.tabBar;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -65,11 +69,12 @@
 #pragma mark - Helpers
 
 -(void) makeTabBar {
-    self.tabBar = [[UITabBarController alloc] init];
+    self.tabBar = [[TYUITabBarController alloc] init];
     NSMutableArray *localControllers = [NSMutableArray array];
 
     TYHomeViewController *homeScreen = [[TYHomeViewController alloc] initWithTabBar];
-    UINavigationController *homeNavController = [[UINavigationController alloc] initWithRootViewController:homeScreen];
+    UINavigationController *homeNavController = [SCNavigationBar customizedNavigationController];
+    [homeNavController setViewControllers:[NSArray arrayWithObject:homeScreen]];
     [localControllers addObject:homeNavController];
     
     // Hack around having the middle button for UITabBarController
@@ -78,7 +83,8 @@
     [localControllers addObject:checkInNavController]; */
     
     TYMapViewController *mapsScreen = [[TYMapViewController alloc] initWithTabBar];
-    UINavigationController *mapsNavController = [[UINavigationController alloc] initWithRootViewController:mapsScreen];
+    UINavigationController *mapsNavController = [SCNavigationBar customizedNavigationController];
+    [mapsNavController setViewControllers:[NSArray arrayWithObject:mapsScreen]];
     [localControllers addObject:mapsNavController];
     
     self.tabBar.viewControllers = localControllers;

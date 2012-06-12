@@ -20,5 +20,6 @@
 @property (nonatomic, strong) NSString *profilePictureUrl;
 @property (nonatomic, strong) UIImage *profilePicture;
 
+-(NSString *) shortName;
 -(id) initWithDictionary:(NSDictionary *) userDictionary;
 @end

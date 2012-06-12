@@ -25,6 +25,7 @@
 @synthesize country = _country;
 @synthesize street = _street;
 @synthesize zip = _zip;
+@synthesize phoneNumber = _phoneNumber;
 
 -(id) initWithDictionary:(NSDictionary *) pageDictionary {
     self = [super init];
@@ -36,7 +37,7 @@
         for (NSDictionary *category in categories) {
             [self.categories addObject:[category objectForKey:@"name"]];
         }
-        self.pageDescription = [pageDictionary objectForKey:@"about"];
+        self.pageDescription = [pageDictionary objectForKey:@"description"];
         NSDictionary *locationDict = [pageDictionary objectForKey:@"location"];
         NSNumber *latitude = [locationDict objectForKey:@"latitude"];
         NSNumber *longitude = [locationDict objectForKey:@"longitude"];
@@ -50,6 +51,10 @@
         self.fanCount = [[pageDictionary objectForKey:@"fan_count"] intValue];
     }
     return self;
+}
+
+-(NSString *) shortAddress {
+    return [NSString stringWithFormat:@"%@, %@", self.street, self.state];
 }
 
 @end

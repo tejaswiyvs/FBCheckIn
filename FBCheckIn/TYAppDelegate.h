@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TYUITabBarController.h"
 
 @interface TYAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, strong) UITabBarController *tabBar;
+@property (nonatomic, strong) TYUITabBarController *tabBar;
+@property (nonatomic, strong) NSMutableArray *checkIns;
 
 @end

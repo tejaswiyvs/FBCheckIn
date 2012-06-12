@@ -7,9 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Facebook.h"
+#import "TYAppDelegate.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface TYCheckInViewController : UIViewController
+@interface TYCheckInViewController : UIViewController<FBRequestDelegate, UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) IBOutlet UIImageView *profilePicture;
-@property (nonatomic, strong) IBOutlet UILabel *checkInLocation;
+@property (nonatomic, strong) IBOutlet UISearchDisplayController *searchDisplayController;
+@property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) Facebook *facebook;
+@property (nonatomic, assign) CLLocationCoordinate2D currentLocation;
+
+@property (nonatomic, strong) NSMutableArray *allItems;
+@property (nonatomic, strong) NSMutableArray *searchResults;
+
 @end

@@ -7,26 +7,39 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Screens/TYHomeViewController.m"
-         timestampString = "360453238.615131"
+         filePath = "FBCheckIn/Screens/TYCheckInConfirmationViewController.m"
+         timestampString = "361171924.741577"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "119"
-         endingLineNumber = "119"
-         landmarkName = "-loadCheckIns"
+         startingLineNumber = "114"
+         endingLineNumber = "114"
+         landmarkName = "-request:didLoad:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Screens/TYHomeViewController.m"
-         timestampString = "360453148.212005"
+         filePath = "FBCheckIn/Screens/TYCheckInConfirmationViewController.m"
+         timestampString = "361171924.741577"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "137"
-         endingLineNumber = "137"
-         landmarkName = "-request:didLoad:"
+         startingLineNumber = "82"
+         endingLineNumber = "82"
+         landmarkName = "-checkInButtonClicked:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FBCheckIn/Screens/TYCheckInConfirmationViewController.m"
+         timestampString = "361171924.741577"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "110"
+         endingLineNumber = "110"
+         landmarkName = "-request:didFailWithError:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

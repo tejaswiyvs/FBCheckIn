@@ -9,12 +9,19 @@
 #import "TYCheckInDetailViewController.h"
 #import "TYUser.h"
 #import "TYPage.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface TYCheckInDetailViewController ()
 
 @end
 
 @implementation TYCheckInDetailViewController
+
+@synthesize userNameLbl = _userNameLbl;
+@synthesize pagePictureView = _pagePictureView;
+@synthesize pageNameLbl = _pageNameLbl;
+@synthesize pageDescriptionTxtView = _pageDescriptionTxtView;
+@synthesize pageAddressLbl = _pageAddressLbl;
 
 @synthesize checkIn = _checkIn;
 
@@ -30,14 +37,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self setTitle:self.checkIn.user.userName];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.pagePictureView = nil;
+    self.pageNameLbl = nil;
+    self.pageAddressLbl = nil;
+    self.pageDescriptionTxtView = nil;
+    self.userNameLbl = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

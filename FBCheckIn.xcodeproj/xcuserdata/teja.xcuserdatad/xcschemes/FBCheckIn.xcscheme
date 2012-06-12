@@ -14,8 +14,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B73F6CE1156ED27F004A20E4"
-               BuildableName = "FBCheckIn.app"
-               BlueprintName = "FBCheckIn"
+               BuildableName = "Facebook Check In.app"
+               BlueprintName = "Facebook Check In"
                ReferencedContainer = "container:FBCheckIn.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,8 +42,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B73F6CE1156ED27F004A20E4"
-            BuildableName = "FBCheckIn.app"
-            BlueprintName = "FBCheckIn"
+            BuildableName = "Facebook Check In.app"
+            BlueprintName = "Facebook Check In"
             ReferencedContainer = "container:FBCheckIn.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -61,8 +61,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B73F6CE1156ED27F004A20E4"
-            BuildableName = "FBCheckIn.app"
-            BlueprintName = "FBCheckIn"
+            BuildableName = "Facebook Check In.app"
+            BlueprintName = "Facebook Check In"
             ReferencedContainer = "container:FBCheckIn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -79,8 +79,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B73F6CE1156ED27F004A20E4"
-            BuildableName = "FBCheckIn.app"
-            BlueprintName = "FBCheckIn"
+            BuildableName = "Facebook Check In.app"
+            BlueprintName = "Facebook Check In"
             ReferencedContainer = "container:FBCheckIn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

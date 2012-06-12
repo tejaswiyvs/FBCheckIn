@@ -45,7 +45,7 @@ NSString * const kFBManagerLogOutNotification = @"fb_mgr_logout";
         self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
     }
     if (![self.facebook isSessionValid]) {
-        NSArray *permissions = [NSArray arrayWithObjects:@"user_about_me", @"friends_about_me", @"user_checkins", @"friends_checkins", @"publish_checkins", nil];
+        NSArray *permissions = [NSArray arrayWithObjects:@"user_about_me", @"friends_about_me", @"user_checkins", @"friends_checkins", @"publish_stream", nil];
         [self.facebook authorize:permissions];
     }
 }
