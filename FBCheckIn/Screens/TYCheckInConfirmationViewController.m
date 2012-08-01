@@ -16,6 +16,7 @@
 
 @interface TYCheckInConfirmationViewController ()
 -(void) doneButtonClicked:(id) sender;
+-(void) updateCheckInImage:(UIImage *) checkInImage;
 @end
 
 @implementation TYCheckInConfirmationViewController
@@ -32,6 +33,7 @@
 @synthesize txtFieldUp = _txtFieldUp;
 @synthesize checkInButton = _checkInButton;
 @synthesize doneButton = _doneButton;
+@synthesize checkInImage = _checkInImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -68,7 +70,7 @@
     [self.statusText.layer setBorderColor:[[UIColor darkGrayColor] CGColor]];
     [self.statusText.layer setBorderWidth:1.0f];
     [self.statusText.layer setCornerRadius:3.0f];
-    [self.statusText.layer setMasksToBounds:YES];
+    [self.statusText.layer setMasksToBounds:YES];    
 }
 
 - (void)viewDidUnload
@@ -103,11 +105,20 @@
 }
 
 -(IBAction)imageTapped:(id)sender {
-
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.allowsEditing = YES;
+    [picker setDelegate:self];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])  {
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else {
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    }
+    [self presentModalViewController:picker animated:YES];
 }
 
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    [SVProgressHUD dismissWithError:@"Couldn't check-in. Please try again"];
+    [SVProgressHUD showErrorWithStatus:@"Couldn't check-in. Please try again"];
 }
 
 -(void)request:(FBRequest *)request didLoad:(id)result {
@@ -153,5 +164,29 @@
 -(void) doneButtonClicked:(id) sender {
     [self.statusText resignFirstResponder];
     [self.navigationItem setRightBarButtonItem:self.checkInButton];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
+    [picker dismissModalViewControllerAnimated:YES];
+    self.checkInImage = image;
+    [self.userImgBtn setBackgroundImage:image forState:UIControlStateNormal];
+}
+
+#pragma mark - Helpers
+
+-(void) updateCheckInImage:(UIImage *) checkInImage {
+    if (self.checkInImage) {
+        [self.userImgBtn setBackgroundImage:self.checkInImage forState:UIControlStateNormal];
+    }
+    else {
+        UIImage *image = [UIImage imageNamed:@"add-photo-placeholder.png"];
+        [self.userImgBtn setBackgroundImage:image forState:UIControlStateNormal];
+    }
 }
 @end

@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Facebook.h"
 
-@interface TYTagFriendsViewController : UIViewController
+@interface TYTagFriendsViewController : UIViewController<FBRequestDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
+@property (nonatomic, strong) NSMutableArray *friends;
+@property (nonatomic, strong) NSMutableArray *taggedUsers;
+@property (nonatomic, strong) NSMutableArray *filteredFriends;
+@property (nonatomic, strong) FBRequest *loadFriendsRequest;
+@property (nonatomic, assign) BOOL searching;
+
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
 @end

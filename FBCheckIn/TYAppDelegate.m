@@ -35,6 +35,7 @@
     self.window.rootViewController = self.tabBar;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     return YES;
 }
 
@@ -67,6 +68,12 @@
 }
 
 #pragma mark - Helpers
+
+void uncaughtExceptionHandler(NSException *exception) {
+    NSLog(@"CRASH: %@", exception);
+    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+    // Internal error reporting
+}
 
 -(void) makeTabBar {
     self.tabBar = [[TYUITabBarController alloc] init];

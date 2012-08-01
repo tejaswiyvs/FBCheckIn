@@ -116,7 +116,7 @@
 }
 
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    [SVProgressHUD dismissWithError:@"Could not load check-ins" afterDelay:2.5];
+    [SVProgressHUD showErrorWithStatus:@"Could not load check-ins"];
     // TODO: Add a #if DEBUG condition.
     NSLog(@"%@", error);
 }

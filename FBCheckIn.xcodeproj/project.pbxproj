@@ -116,7 +116,7 @@
 		B73F6DB8156ED930004A20E4 /* DebugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DB6156ED930004A20E4 /* DebugLog.m */; };
 		B73F6DBC156ED937004A20E4 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DB9156ED937004A20E4 /* SVProgressHUD.bundle */; };
 		B73F6DBD156ED938004A20E4 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DB9156ED937004A20E4 /* SVProgressHUD.bundle */; };
-		B73F6DBE156ED938004A20E4 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DBB156ED937004A20E4 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73F6DBE156ED938004A20E4 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DBB156ED937004A20E4 /* SVProgressHUD.m */; };
 		B73F6DBF156ED938004A20E4 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DBB156ED937004A20E4 /* SVProgressHUD.m */; };
 		B73F6DC6156EDC60004A20E4 /* libxml2.2.7.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B73F6DC5156EDC60004A20E4 /* libxml2.2.7.3.dylib */; };
 		B73F6DDF156EF38C004A20E4 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DDE156EF38C004A20E4 /* map.png */; };
@@ -133,6 +133,10 @@
 		B73F6DF1156F1506004A20E4 /* TYCheckInCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DEF156F1506004A20E4 /* TYCheckInCell.xib */; };
 		B73F6DF3156F3484004A20E4 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DF2156F3483004A20E4 /* config.plist */; };
 		B73F6DF4156F3484004A20E4 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DF2156F3483004A20E4 /* config.plist */; };
+		B748B1E9159ACB8700043F7B /* add-photo-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = B748B1E8159ACB8700043F7B /* add-photo-placeholder.png */; };
+		B748B20E159C283800043F7B /* TYTagUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B748B20D159C283800043F7B /* TYTagUserCell.m */; };
+		B748B210159C285700043F7B /* TYTagUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B748B20F159C285700043F7B /* TYTagUserCell.xib */; };
+		B748B212159C290F00043F7B /* checkmark_korganizer.png in Resources */ = {isa = PBXBuildFile; fileRef = B748B211159C290F00043F7B /* checkmark_korganizer.png */; };
 		B76FF730157178A900676F47 /* TYLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B76FF72E157178A900676F47 /* TYLogInViewController.m */; };
 		B76FF731157178A900676F47 /* TYLogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B76FF72F157178A900676F47 /* TYLogInViewController.xib */; };
 		B7A06D00157F19F300169BDE /* SCNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A06CFF157F19F300169BDE /* SCNavigationBar.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -311,6 +315,11 @@
 		B73F6DEC156F144A004A20E4 /* TYCheckInCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYCheckInCell.m; path = Screens/UITableViewCells/TYCheckInCell.m; sourceTree = "<group>"; };
 		B73F6DEF156F1506004A20E4 /* TYCheckInCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYCheckInCell.xib; path = Screens/UITableViewCells/TYCheckInCell.xib; sourceTree = "<group>"; };
 		B73F6DF2156F3483004A20E4 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		B748B1E8159ACB8700043F7B /* add-photo-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-photo-placeholder.png"; sourceTree = "<group>"; };
+		B748B20C159C283800043F7B /* TYTagUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYTagUserCell.h; path = Screens/UITableViewCells/TYTagUserCell.h; sourceTree = "<group>"; };
+		B748B20D159C283800043F7B /* TYTagUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYTagUserCell.m; path = Screens/UITableViewCells/TYTagUserCell.m; sourceTree = "<group>"; };
+		B748B20F159C285700043F7B /* TYTagUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYTagUserCell.xib; path = Screens/UITableViewCells/TYTagUserCell.xib; sourceTree = "<group>"; };
+		B748B211159C290F00043F7B /* checkmark_korganizer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark_korganizer.png; sourceTree = "<group>"; };
 		B76FF72D157178A900676F47 /* TYLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYLogInViewController.h; path = Screens/TYLogInViewController.h; sourceTree = "<group>"; };
 		B76FF72E157178A900676F47 /* TYLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYLogInViewController.m; path = Screens/TYLogInViewController.m; sourceTree = "<group>"; };
 		B76FF72F157178A900676F47 /* TYLogInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYLogInViewController.xib; path = Screens/TYLogInViewController.xib; sourceTree = "<group>"; };
@@ -657,6 +666,8 @@
 		B73F6DC4156ED965004A20E4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B748B211159C290F00043F7B /* checkmark_korganizer.png */,
+				B748B1E8159ACB8700043F7B /* add-photo-placeholder.png */,
 				B736F6871583B1AE002A5614 /* table-header-bg.png */,
 				B736F6881583B1AF002A5614 /* table-header-bg@2x.png */,
 				B736F67D1582DBFB002A5614 /* fb-line.png */,
@@ -696,6 +707,9 @@
 				B7E10F28158535DC00FA9741 /* TYPageCell.h */,
 				B7E10F29158535DC00FA9741 /* TYPageCell.m */,
 				B7E10F2B158535F400FA9741 /* TYPageCell.xib */,
+				B748B20C159C283800043F7B /* TYTagUserCell.h */,
+				B748B20D159C283800043F7B /* TYTagUserCell.m */,
+				B748B20F159C285700043F7B /* TYTagUserCell.xib */,
 			);
 			name = UITableViewCells;
 			sourceTree = "<group>";
@@ -857,6 +871,9 @@
 				B7E10F2C158535F500FA9741 /* TYPageCell.xib in Resources */,
 				B7E10F3115854BFF00FA9741 /* TYCheckInConfirmation.xib in Resources */,
 				B7E10F361585507800FA9741 /* TYTagFriends.xib in Resources */,
+				B748B1E9159ACB8700043F7B /* add-photo-placeholder.png in Resources */,
+				B748B210159C285700043F7B /* TYTagUserCell.xib in Resources */,
+				B748B212159C290F00043F7B /* checkmark_korganizer.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -967,6 +984,7 @@
 				B7E10F2A158535DC00FA9741 /* TYPageCell.m in Sources */,
 				B7E10F2F15854BE300FA9741 /* TYCheckInConfirmationViewController.m in Sources */,
 				B7E10F351585507800FA9741 /* TYTagFriendsViewController.m in Sources */,
+				B748B20E159C283800043F7B /* TYTagUserCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

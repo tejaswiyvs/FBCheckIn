@@ -10,7 +10,7 @@
 #import "TYPage.h"
 #import "Facebook.h"
 
-@interface TYCheckInConfirmationViewController : UIViewController<FBRequestDelegate, UITextViewDelegate>
+@interface TYCheckInConfirmationViewController : UIViewController<FBRequestDelegate, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIButton *userImgBtn;
 @property (nonatomic, strong) IBOutlet UIImageView *placeImgView;
@@ -20,6 +20,7 @@
 @property (nonatomic, strong) UIBarButtonItem *checkInButton;
 @property (nonatomic, strong) UIBarButtonItem *doneButton;
 @property (nonatomic, strong) UIImage *placeImg;
+@property (nonatomic, strong) UIImage *checkInImage;
 @property (nonatomic, strong) TYPage *currentPage;
 @property (nonatomic, strong) NSMutableArray *taggedUsers;
 @property (nonatomic, strong) Facebook *facebook;
