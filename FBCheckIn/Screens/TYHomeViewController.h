@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Facebook.h"
 #import "EGORefreshTableHeaderView.h"
+#import "TYCheckInCache.h"
 
 @interface TYHomeViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, FBRequestDelegate, EGORefreshTableHeaderDelegate>
 

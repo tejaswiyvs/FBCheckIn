@@ -8,7 +8,7 @@
 
 #import "TYAppDelegate.h"
 #import "TYHomeViewController.h"
-#import "TYCheckInViewController.h"
+#import "TYPlacePicker.h"
 #import "TYMapViewController.h"
 #import "TYFBManager.h"
 #import "SCNavigationBar.h"
@@ -22,7 +22,6 @@
 
 @synthesize window = _window;
 @synthesize tabBar = _tabBar;
-@synthesize checkIns = _checkIns;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

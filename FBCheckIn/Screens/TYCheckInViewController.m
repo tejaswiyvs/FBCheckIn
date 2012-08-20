@@ -1,34 +1,43 @@
 //
-//  PPCheckInViewController.m
+//  TYCheckInConfirmationViewController.m
 //  FBCheckIn
 //
-//  Created by Tejaswi Y on 5/24/12.
+//  Created by Tejaswi Y on 6/10/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "TYCheckInViewController.h"
-#import "Facebook.h"
-#import "SVProgressHUD.h"
-#import "TYFBManager.h"
-#import "TYPageCell.h"
-#import "TYPage.h"
+#import "TYTagFriendsViewController.h"
 #import "UIImageView+AFNetworking.h"
-#import "TYCheckInConfirmationViewController.h"
+#import "TYFBManager.h"
+#import "SVProgressHUD.h"
+#import "JSONKit.h"
+#import <QuartzCore/QuartzCore.h>
+#import "TYUser.h"
 
 @interface TYCheckInViewController ()
--(void) cancelButtonClicked:(id) sender;
--(void) loadNearbyPages;
+-(void) doneButtonClicked:(id) sender;
+-(void) updateCheckInImage:(UIImage *) checkInImage;
+-(void) postImageToAlbum;
 @end
 
 @implementation TYCheckInViewController
 
-@synthesize searchDisplayController;
-@synthesize searchBar = _searchBar;
-@synthesize allItems = _allItems;
-@synthesize searchResults = _searchResults;
-@synthesize tableView = _tableView;
+@synthesize placeImg = _placeImg;
+@synthesize placeImgView = _placeImgView;
+@synthesize userImgBtn = _userImgBtn;
+@synthesize placeName = _placeName;
+@synthesize placeAddress = _placeAddress;
+@synthesize currentPage = _currentPage;
+@synthesize taggedUsers = _taggedUsers;
 @synthesize facebook = _facebook;
-@synthesize currentLocation = _currentLocation;
+@synthesize statusText = _statusText;
+@synthesize txtFieldUp = _txtFieldUp;
+@synthesize checkInButton = _checkInButton;
+@synthesize doneButton = _doneButton;
+@synthesize checkInImage = _checkInImage;
+@synthesize postCheckInRequest = _postCheckInRequest;
+@synthesize postImageRequest = _postImageRequest;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,95 +51,201 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonClicked:)];
-    [self.navigationItem setLeftBarButtonItem:cancelButton];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]]];
-    TYFBManager *manager = [TYFBManager sharedInstance];
-    self.facebook = manager.facebook;
-    [self loadNearbyPages];
+    
+    // Create a check-in button.
+    self.checkInButton = [[UIBarButtonItem alloc] initWithTitle:@"Check-in" style:UIBarButtonItemStyleDone target:self action:@selector(checkInButtonClicked:)];
+    
+    self.doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonClicked:)];
+    
+    [self.navigationItem setRightBarButtonItem:self.checkInButton];
+    
+    // Initialize facebook.
+    TYFBManager *fbMbr = [TYFBManager sharedInstance];
+    self.facebook = fbMbr.facebook;
+    
+    // Populate values.
+    [self.placeImgView.layer setBorderColor:[[UIColor darkGrayColor] CGColor]];
+    [self.placeImgView.layer setBorderWidth:3.0f];
+    [self.placeImgView.layer setCornerRadius:3.0f];
+    [self.placeImgView.layer setMasksToBounds:YES];
+    [self.placeImgView setImageWithURL:[NSURL URLWithString:self.currentPage.pagePictureUrl]];
+    [self.placeName setText:self.currentPage.pageName];
+    [self.placeAddress setText:[self.currentPage shortAddress]];
+    [self.statusText.layer setBorderColor:[[UIColor darkGrayColor] CGColor]];
+    [self.statusText.layer setBorderWidth:1.0f];
+    [self.statusText.layer setCornerRadius:3.0f];
+    [self.statusText.layer setMasksToBounds:YES];    
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    self.searchBar = nil;
-    self.searchDisplayController = nil;
-    self.tableView = nil;
+    // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
--(void) cancelButtonClicked:(id) sender {
-    [self dismissModalViewControllerAnimated:YES];
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 82.0f;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self.allItems count];
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *kReuseId = @"search_checkin_cell";
-    TYPageCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kReuseId];
-    if (!cell) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TYPageCell" owner:self options:nil];
-		for (id object in nib) {
-			if([object isKindOfClass:[TYPageCell class]])
-				cell = (TYPageCell *) object;
-		}
+-(IBAction)checkInButtonClicked:(id)sender {
+    if (self.checkInImage) {
+        [self postImageToAlbum];
+        return;
     }
-    TYPage *page = [self.allItems objectAtIndex:indexPath.row];
-    [cell.pageName setText:page.pageName];
-    [cell.pageAddress setText:[page shortAddress]];
-    [cell.pageImage setImageWithURL:[NSURL URLWithString:page.pagePictureUrl]];
-    [cell setPageDistanceWithCoorindate1:page.location andCoordinate2:self.currentLocation];
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    return cell;
+    [self checkInWithImage:nil];
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    TYPage *selectedPage = [self.allItems objectAtIndex:indexPath.row];
-    TYCheckInConfirmationViewController *confirmationScreen = [[TYCheckInConfirmationViewController alloc] initWithNibName:@"TYCheckInConfirmation" bundle:nil];
-    confirmationScreen.currentPage = selectedPage;
-    [self.navigationController pushViewController:confirmationScreen animated:YES];
+-(IBAction)tagFriendsButtonClicked:(id)sender {
+    TYTagFriendsViewController *tagScreen = [[TYTagFriendsViewController alloc] initWithNibName:@"TYTagFriends" bundle:nil];
+    tagScreen.delegate = self;
+    tagScreen.taggedUsers = self.taggedUsers;
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tagScreen];
+    [self presentModalViewController:navController animated:YES];
 }
 
-#pragma mark - Location
-
-#pragma mark - Facebook
-
--(void) loadNearbyPages {
-    [SVProgressHUD showWithStatus:@"Please wait ..."];
-    NSString *fql = @"SELECT page_id, name, description, categories, pic, fan_count, website, checkins, location FROM page WHERE page_id IN (SELECT page_id FROM place WHERE distance(latitude, longitude, \"28.492965\", \"-81.507847\") < 1000)";
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    fql, @"query",
-                                    nil];
-    [self.facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
+-(IBAction)imageTapped:(id)sender {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.allowsEditing = YES;
+    [picker setDelegate:self];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])  {
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else {
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    }
+    [self presentModalViewController:picker animated:YES];
 }
 
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    [SVProgressHUD showErrorWithStatus:@"Could not load check-ins"];
-    // TODO: Add a #if DEBUG condition.
-    NSLog(@"%@", error);
+    [SVProgressHUD showErrorWithStatus:@"Couldn't check-in. Please try again"];
 }
 
 -(void)request:(FBRequest *)request didLoad:(id)result {
-    self.allItems = [[NSMutableArray alloc] init];
-    for (NSDictionary *pageDictionary in ((NSArray *) result)) {
-        TYPage *page = [[TYPage alloc] initWithDictionary:pageDictionary];
-        [self.allItems addObject:page];
+    if (request == self.postImageRequest) {
+        NSString *otherId = [(NSDictionary *) result objectForKey:@"id"];
+        NSString *pictureUrl = [NSString stringWithFormat:@"http://www.facebook.com/%@", otherId];
+        [self checkInWithImage:pictureUrl];
+        return;
     }
-    
-    [SVProgressHUD dismiss];
-    [self.tableView reloadData];
+    else if(request == self.postCheckInRequest) {
+        [self dismissModalViewControllerAnimated:YES];
+    }
+    [SVProgressHUD dismiss]; 
+    NSLog(@"%@", result);
 }
 
+#pragma mark - Text Field Stuff
+
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+    [self.navigationItem setRightBarButtonItem:self.doneButton];
+    [self animateTextField:textView up:YES];
+	self.txtFieldUp = YES;
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView {
+    [self animateTextField:textView up:NO];
+    self.txtFieldUp = NO;
+}
+
+- (void) animateTextField: (UITextView*) textView up: (BOOL) up
+{
+    const int movementDistance = 80; // tweak as needed
+    const float movementDuration = 0.3f; // tweak as needed
+	
+    int movement = (up ? -movementDistance : movementDistance);
+	
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
+}
+
+-(void) textViewDoneBtnClicked:(id) sender {
+
+}
+
+-(IBAction)backgroundTap:(id)sender {
+    [self.navigationItem setRightBarButtonItem:self.checkInButton];
+    [self.statusText resignFirstResponder];
+}
+
+-(void) doneButtonClicked:(id) sender {
+    [self.statusText resignFirstResponder];
+    [self.navigationItem setRightBarButtonItem:self.checkInButton];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
+    [picker dismissModalViewControllerAnimated:YES];
+    self.checkInImage = image;
+    [self.userImgBtn setImage:image forState:UIControlStateNormal];
+    [[self.userImgBtn imageView] setContentMode:UIViewContentModeScaleAspectFill];
+}
+
+#pragma mark - Helpers
+
+-(void) updateCheckInImage:(UIImage *) checkInImage {
+    if (self.checkInImage) {
+        [self.userImgBtn setImage:self.checkInImage forState:UIControlStateNormal];
+    }
+    else {
+        UIImage *image = [UIImage imageNamed:@"add-photo-placeholder.png"];
+        [self.userImgBtn setImage:image forState:UIControlStateNormal];
+    }
+}
+
+-(void) postImageToAlbum {
+    if (self.checkInImage) {
+        [SVProgressHUD showWithStatus:@"Checking in..."];
+        NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+        [params setObject:self.checkInImage forKey:@"source"];
+        self.postImageRequest = [self.facebook requestWithGraphPath:[NSString stringWithFormat:@"/me/photos"] andParams:params andHttpMethod:@"POST" andDelegate:self];
+    }
+}
+
+-(void) checkInWithImage:(NSString *) postId {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    if (self.statusText && ![self.statusText.text isEqualToString:@""]) {
+        [params setObject:self.statusText.text forKey:@"message"];
+    }
+    
+    if (self.taggedUsers && [self.taggedUsers count] != 0) {
+        NSString *tagsString = @"";
+        for (TYUser *user in self.taggedUsers) {
+            tagsString = [tagsString stringByAppendingString:user.userId];
+            tagsString = [tagsString stringByAppendingString:@","];
+        }
+        
+        // Snip the trailing comma
+        if ([tagsString length] > 0) {
+            tagsString = [tagsString substringToIndex:([tagsString length] - 1)];
+        }
+        
+        [params setObject:tagsString forKey:@"tags"];
+    }
+    
+    if (self.checkInImage) {
+        [params setObject:postId forKey:@"picture"];
+    }
+    
+    [params setObject:self.currentPage.pageId forKey:@"place"];
+    NSString *coordinatesString = [NSString stringWithFormat:@"{\"latitude\" : \"%f\", \"longitude\" : \"%f\"}", self.currentPage.location.latitude, self.currentPage.location.longitude];
+    [params setObject:coordinatesString forKey:@"coordinates"];
+    
+    self.postCheckInRequest = [self.facebook requestWithGraphPath:@"me/feed" andParams:params andHttpMethod:@"POST" andDelegate:self];
+    [SVProgressHUD showWithStatus:@"Checking in..."];
+}
+
+#pragma mark - Tag User Delegate
+
+-(void) taggedUsers:(NSArray *) users {
+    self.taggedUsers = [NSMutableArray arrayWithArray:users];
+}
+
+-(void) tagUsersCancelled {
+}
 
 @end

@@ -44,8 +44,7 @@
     if (self = [super initWithFrame:frame]) {
 		
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-//		self.backgroundColor = [UIColor colorWithRed:226.0/255.0 green:231.0/255.0 blue:237.0/255.0 alpha:1.0];
-        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"table-header-bg.png"]];
+        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ego-header-view.png"]];
         NSLog(@"%@", NSStringFromCGRect(frame));
 
 		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 100.0f, self.frame.size.width, 20.0f)];

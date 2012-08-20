@@ -11,6 +11,7 @@
 #import "TYAnnotation.h"
 #import "TYCheckIn.h"
 #import "TYAnnotationUtil.h"
+#import "TYCheckInCache.h"
 
 @interface TYMapViewController ()
 
@@ -34,7 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.checkIns = ((TYAppDelegate *) [UIApplication sharedApplication].delegate).checkIns;
     for (TYCheckIn *checkIn in self.checkIns) {
         TYAnnotation *annotation = [[TYAnnotation alloc] initWithCoordinate:checkIn.location andPicture:checkIn.user.profilePicture];
         [self.mapView addAnnotation:annotation];

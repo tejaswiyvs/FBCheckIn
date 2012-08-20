@@ -45,7 +45,7 @@ NSString * const kFBManagerLogOutNotification = @"fb_mgr_logout";
         self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
     }
     if (![self.facebook isSessionValid]) {
-        NSArray *permissions = [NSArray arrayWithObjects:@"user_about_me", @"friends_about_me", @"user_checkins", @"friends_checkins", @"publish_stream", nil];
+        NSArray *permissions = [NSArray arrayWithObjects:@"user_about_me", @"friends_about_me", @"user_checkins", @"friends_checkins", @"user_status", @"friends_status", @"user_likes", @"friends_likes", @"publish_stream", nil];
         [self.facebook authorize:permissions];
     }
 }
@@ -62,7 +62,7 @@ NSString * const kFBManagerLogOutNotification = @"fb_mgr_logout";
     TYAppDelegate *appDelegate = (TYAppDelegate *) [UIApplication sharedApplication].delegate;
     TYLogInViewController *login = [[TYLogInViewController alloc] initWithNibName:@"TYLoginViewController" bundle:nil];
     [appDelegate.window.rootViewController presentModalViewController:login animated:YES];
-    [SVProgressHUD showErrorWithStatus:@"The login was cancelled. Please login your facebook account to use this app." duration:2.5];
+    [SVProgressHUD showErrorWithStatus:@"The login was cancelled. Please login your facebook account to use this app."];
 }
 
 - (void)fbDidLogout {
@@ -101,6 +101,6 @@ NSString * const kFBManagerLogOutNotification = @"fb_mgr_logout";
 }
 
 -(void) raiseLogOutNotification {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kFBManagerLoginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kFBManagerLogOutNotification object:nil];
 }
 @end

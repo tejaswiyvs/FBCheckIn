@@ -17,6 +17,8 @@
 @interface TYTagFriendsViewController ()
 -(void) getFacebookFriends;
 -(BOOL) userBelongsToTaggedUsers:(TYUser *) user;
+-(void) doneButtonClicked:(id) sender;
+-(void) cancelButtonClicked:(id) sender;
 @end
 
 @implementation TYTagFriendsViewController
@@ -50,9 +52,20 @@ const int kNumberOfSections = 2;
     
     // inits
     self.friends = [NSMutableArray array];
-    self.taggedUsers = [NSMutableArray array];
+    
+    // Tagged Users can be provided by the caller.
+    if (!self.taggedUsers) {
+        self.taggedUsers = [NSMutableArray array];
+    }
+
     self.filteredFriends = [NSMutableArray array];
     self.searching = NO;
+    
+    // Add done & cancel buttons
+    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonClicked:)];
+    [self.navigationItem setRightBarButtonItem:doneItem];
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonClicked:)];
+    [self.navigationItem setLeftBarButtonItem:cancelItem];
     
     // Download friends. Possibly cache them and download them later.
     [self getFacebookFriends];
@@ -91,7 +104,7 @@ const int kNumberOfSections = 2;
     [SVProgressHUD dismiss];
     for (NSDictionary *userDict in ((NSArray *) result)) {
         TYUser *user = [[TYUser alloc] init];
-        user.userId = [userDict objectForKey:@"id"];
+        user.userId = [[userDict objectForKey:@"uid"] stringValue];
         user.fullName = [userDict objectForKey:@"name"];
         [self.friends addObject:user];
     }
@@ -229,6 +242,18 @@ const int kNumberOfSections = 2;
         }
     }
     [tableView reloadData];
+}
+
+#pragma mark - Event Handlers
+
+-(void) doneButtonClicked:(id) sender {
+    [self.delegate taggedUsers:self.taggedUsers];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void) cancelButtonClicked:(id) sender {
+    [self.delegate tagUsersCancelled];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - Helpers

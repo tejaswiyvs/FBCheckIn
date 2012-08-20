@@ -16,6 +16,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *pageNameLbl;
 @property (nonatomic, strong) IBOutlet UILabel *pageAddressLbl;
 @property (nonatomic, strong) IBOutlet UITextView *pageDescriptionTxtView;
-
 @property (nonatomic, strong) IBOutlet UILabel *userNameLbl;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+
 @end

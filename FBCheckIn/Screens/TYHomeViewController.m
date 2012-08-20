@@ -7,7 +7,8 @@
 //
 
 #import "TYHomeViewController.h"
-#import "TYCheckInViewController.h"
+#import "TYPlacePicker.h"
+#import "TYCheckInCache.h"
 #import "TYCheckInCell.h"
 #import "TYAppDelegate.h"
 #import "SVProgressHUD.h"
@@ -42,9 +43,7 @@
         self.tabBarItem.image = [UIImage imageNamed:@"friends.png"];
         self.tabBarItem.title = @"Friends";
         self.title = @"Check-ins";
-        TYAppDelegate *appDelegate = (TYAppDelegate *) [UIApplication sharedApplication].delegate;
         self.checkIns = [NSMutableArray array];
-        appDelegate.checkIns = self.checkIns;
     }
     return self;
 }
@@ -53,31 +52,33 @@
 {
     [super viewDidLoad];
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 10.0)]];
+    [self.tableView setBackgroundColor:[UIColor clearColor]];
     self.tableView.backgroundView = nil;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
     UIBarButtonItem *checkInButton = [[UIBarButtonItem alloc] initWithTitle:@"Check-in" style:UIBarButtonItemStylePlain target:self action:@selector(checkInButtonClicked:)];
     [self.navigationItem setRightBarButtonItem:checkInButton];
-    TYFBManager *manager = [TYFBManager sharedInstance];
+
+    TYCheckInCache *cache = [TYCheckInCache sharedInstance];
+    /* TYFBManager *manager = [TYFBManager sharedInstance];
     self.facebook = manager.facebook;
     if ([self.facebook isSessionValid]) {
         [self loadCheckIns];
-    }
+    } */
     
     // Pull to refresh
     if (_refreshHeaderView == nil) {
-		
-//		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-        EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - 100.0f, self.view.frame.size.width, 100.0f)];
+		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+        NSLog(@"Height of the header view = %f", self.tableView.bounds.size.height);
 		view.delegate = self;
 		[self.tableView addSubview:view];
-		_refreshHeaderView = view;		
+		_refreshHeaderView = view;
 	}
-	
+    
 	//  update the last update date
-	[_refreshHeaderView refreshLastUpdatedDate];
+//	[_refreshHeaderView refreshLastUpdatedDate];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
 
@@ -96,7 +97,7 @@
 #pragma mark - UITableView
 
 -(void) checkInButtonClicked:(id) sender {
-    TYCheckInViewController *checkInScreen = [[TYCheckInViewController alloc] initWithNibName:@"TYCheckInViewController" bundle:nil];
+    TYPlacePicker *checkInScreen = [[TYPlacePicker alloc] initWithNibName:@"TYCheckInViewController" bundle:nil];
     UINavigationController *navigationController = [SCNavigationBar customizedNavigationController];
     navigationController.viewControllers = [NSArray arrayWithObject:checkInScreen];
     [self presentModalViewController:navigationController animated:YES];
@@ -157,19 +158,12 @@
 #pragma mark Data Source Loading / Reloading Methods
 
 - (void)reloadTableViewDataSource{
-	
-	//  should be calling your tableviews data source model to reload
-	//  put here just for demo
 	self.reloading = YES;
-	
 }
 
 - (void)doneLoadingTableViewData{
-	
-	//  model should call this when its done loading
 	self.reloading = NO;
 	[self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-	
 }
 
 
@@ -177,40 +171,28 @@
 #pragma mark UIScrollViewDelegate Methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{	
-	
 	[self.refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
-    
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-	
 	[self.refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
-	
 }
-
 
 #pragma mark -
 #pragma mark EGORefreshTableHeaderDelegate Methods
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
-	
 	[self reloadTableViewDataSource];
 	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
-	
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
-	
 	return _reloading; // should return if data source model is reloading
-	
 }
 
 - (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
-	
 	return [NSDate date]; // should return date data source was last changed
-	
 }
-
 
 #pragma mark - Facebook
 -(void) loadCheckIns {
@@ -218,7 +200,6 @@
     NSString *fql1 = @"SELECT checkin_id, author_uid, page_id, coords, timestamp FROM checkin WHERE (author_uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) OR author_uid=me()) ORDER BY timestamp DESC LIMIT 50";
     NSString *fql2 = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me FROM user WHERE uid in (SELECT author_uid FROM #query1)";
     NSString *fql3 = @"SELECT page_id, name, description, categories, pic, fan_count, website, checkins, location FROM page WHERE page_id IN (SELECT page_id FROM #query1)";
-    
     NSString* fql = [NSString stringWithFormat:
                      @"{\"query1\":\"%@\",\"query2\":\"%@\",\"query3\":\"%@\"}",fql1,fql2,fql3];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:fql forKey:@"queries"];   

@@ -12,7 +12,7 @@
 #import "UIImageView+AFNetworking.h"
 
 @interface TYCheckInDetailViewController ()
-
+-(void) loadMetaData;
 @end
 
 @implementation TYCheckInDetailViewController
@@ -22,6 +22,7 @@
 @synthesize pageNameLbl = _pageNameLbl;
 @synthesize pageDescriptionTxtView = _pageDescriptionTxtView;
 @synthesize pageAddressLbl = _pageAddressLbl;
+@synthesize tableView = _tableView;
 
 @synthesize checkIn = _checkIn;
 
@@ -37,7 +38,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Set Page Title
     [self setTitle:self.checkIn.user.userName];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    
+    // Load data from check-in object
+    self.pageNameLbl.text = self.checkIn.page.pageName;
+    self.pageAddressLbl.text = self.checkIn.page.shortAddress;
+    self.pageDescriptionTxtView.text = self.checkIn.page.pageDescription;
+    [self.pagePictureView setImageWithURL:[NSURL URLWithString:self.checkIn.page.pagePictureUrl]];
+    
+    // Setup tableView
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundView = nil;
+
+    // Load comments and likes
+    [self loadMetaData];
 }
 
 - (void)viewDidUnload
@@ -53,6 +70,10 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(void) loadMetaData {
+    // Load meta data and display when it's done. Don't block the user however.
 }
 
 @end
