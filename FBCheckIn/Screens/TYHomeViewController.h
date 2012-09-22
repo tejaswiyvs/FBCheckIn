@@ -19,7 +19,5 @@
 @property (nonatomic, assign) BOOL reloading;
 
 -(id) initWithTabBar;
-- (void)reloadTableViewDataSource;
-- (void)doneLoadingTableViewData;
 
 @end

@@ -24,7 +24,6 @@
 
 @interface TYHomeViewController ()
 -(void) checkInButtonClicked:(id) sender;
--(void) loadCheckIns;
 -(void) subscribeToNotifications;
 -(void) unsubscribeFromNotifications;
 -(void) registerObserver;
@@ -157,18 +156,10 @@
     [self.navigationController pushViewController:checkInDetail animated:YES];
 }
 
-#pragma mark -
-#pragma mark Data Source Loading / Reloading Methods
-
-- (void)reloadTableViewDataSource{
-	self.reloading = YES;
+- (void) forceRefreshCache {
+	TYCheckInCache *cache = [TYCheckInCache sharedInstance];
+    [cache forceRefresh];
 }
-
-- (void)doneLoadingTableViewData{
-	self.reloading = NO;
-	[self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-}
-
 
 #pragma mark -
 #pragma mark UIScrollViewDelegate Methods
@@ -185,42 +176,13 @@
 #pragma mark EGORefreshTableHeaderDelegate Methods
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
-	[self reloadTableViewDataSource];
-	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
+	[self forceRefreshCache];
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
 	return _reloading; // should return if data source model is reloading
 }
 
-- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
-	return [NSDate date]; // should return date data source was last changed
-}
-
-#pragma mark - Facebook
--(void) loadCheckIns {
-    [SVProgressHUD showWithStatus:@"Loading Check-ins..."];
-    NSString *fql1 = @"SELECT checkin_id, author_uid, page_id, coords, timestamp FROM checkin WHERE (author_uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) OR author_uid=me()) ORDER BY timestamp DESC LIMIT 50";
-    NSString *fql2 = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me FROM user WHERE uid in (SELECT author_uid FROM #query1)";
-    NSString *fql3 = @"SELECT page_id, name, description, categories, pic, fan_count, website, checkins, location FROM page WHERE page_id IN (SELECT page_id FROM #query1)";
-    NSString* fql = [NSString stringWithFormat:
-                     @"{\"query1\":\"%@\",\"query2\":\"%@\",\"query3\":\"%@\"}",fql1,fql2,fql3];
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:fql forKey:@"queries"];   
-
-    [self.facebook requestWithMethodName:@"fql.multiquery" andParams:params andHttpMethod:@"POST" andDelegate:self];
-}
-
--(void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    [SVProgressHUD showErrorWithStatus:@"Could not load check-ins"];
-    NSLog(@"%@", error);
-}
-
--(void)request:(FBRequest *)request didLoad:(id)result {
-    [SVProgressHUD dismiss];
-    [self.tableView reloadData];
-}
-
-#pragma mark - EGOPullToRefreshDelegate
 
 #pragma mark - Observer
 
@@ -243,15 +205,19 @@
 -(void) didReceiveNotification:(NSNotification *) notification {
     NSLog(@"Notification received: %@", [notification name]);
     if ([notification.name isEqualToString:kFBManagerLoginNotification]) {
-        [self loadCheckIns];
+        TYCheckInCache *cache = [TYCheckInCache sharedInstance];
+        [cache forceRefresh];
     }
     else if([notification.name isEqualToString:kFBManagerLogOutNotification]) {
     
     }
     else if([notification.name isEqualToString:kNotificationCacheRefreshStart]) {
+        self.reloading = YES;
         [SVProgressHUD show];
     }
     else if([notification.name isEqualToString:kNotificationCacheRefreshEnd]) {
+        self.reloading = NO;
+        [self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
         [SVProgressHUD dismiss];
     }
 }
