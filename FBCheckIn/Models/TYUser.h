@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface TYUser : NSObject
+@interface TYUser : NSObject<NSCoding>
 
 @property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) NSString *userName;

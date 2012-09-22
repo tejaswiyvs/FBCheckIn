@@ -10,8 +10,9 @@
 #import "TYUser.h"
 #import "TYPage.h"
 #import <MapKit/MapKit.h>
+#import <CoreData/CoreData.h>
 
-@interface TYCheckIn : NSObject
+@interface TYCheckIn : NSObject<NSCoding>
 
 @property (nonatomic, strong) NSNumber *checkInId;
 @property (nonatomic, strong) NSDate *checkInDate;

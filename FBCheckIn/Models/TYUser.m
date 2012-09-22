@@ -38,4 +38,30 @@
 -(NSString *) shortName {
     return [NSString stringWithFormat:@"%@ %@.", self.firstName, [self.lastName substringToIndex:1]];
 }
+
+#pragma mark - NSCoding
+
+-(void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.userId forKey:@"uid"];
+    [aCoder encodeObject:self.userName forKey:@"username"];
+    [aCoder encodeObject:self.sex forKey:@"sex"];
+    [aCoder encodeObject:self.firstName forKey:@"first_name"];
+    [aCoder encodeObject:self.lastName forKey:@"last_name"];
+    [aCoder encodeObject:self.middleName forKey:@"middle_name"];
+    [aCoder encodeObject:self.fullName forKey:@"name"];
+    [aCoder encodeObject:self.profilePictureUrl forKey:@"profile_picture_url"];
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    self.userId = [aDecoder decodeObjectForKey:@"uid"];
+    self.userName = [aDecoder decodeObjectForKey:@"username"];
+    self.sex = [aDecoder decodeObjectForKey:@"sex"];
+    self.firstName = [aDecoder decodeObjectForKey:@"first_name"];
+    self.lastName = [aDecoder decodeObjectForKey:@"last_name"];
+    self.middleName = [aDecoder decodeObjectForKey:@"middle_name"];
+    self.fullName = [aDecoder decodeObjectForKey:@"name"];
+    self.profilePictureUrl = [aDecoder decodeObjectForKey:@"profile_picture_url"];
+    return self;
+}
 @end

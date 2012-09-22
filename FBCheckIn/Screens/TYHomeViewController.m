@@ -27,12 +27,14 @@
 -(void) loadCheckIns;
 -(void) subscribeToNotifications;
 -(void) unsubscribeFromNotifications;
+-(void) registerObserver;
+-(void) unregisterObserver;
+-(void) didReceiveNotification:(NSNotification *) notification;
 @end
 
 @implementation TYHomeViewController
 
 @synthesize tableView = _tableView;
-@synthesize checkIns = _checkIns;
 @synthesize facebook = _facebook;
 @synthesize refreshHeaderView = _refreshHeaderView;
 @synthesize reloading = _reloading;
@@ -43,7 +45,6 @@
         self.tabBarItem.image = [UIImage imageNamed:@"friends.png"];
         self.tabBarItem.title = @"Friends";
         self.title = @"Check-ins";
-        self.checkIns = [NSMutableArray array];
     }
     return self;
 }
@@ -51,21 +52,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // Subscribe to cache refresh notifications.
+    [self subscribeToNotifications];
+    
+    // Register as an observer for the checkInArray of the checkIn cache. Lets us refresh the tableView.
+    [self registerObserver];
+
+    // Setup UITableView
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 10.0)]];
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     self.tableView.backgroundView = nil;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
+
+    // Setup other UI
     UIBarButtonItem *checkInButton = [[UIBarButtonItem alloc] initWithTitle:@"Check-in" style:UIBarButtonItemStylePlain target:self action:@selector(checkInButtonClicked:)];
     [self.navigationItem setRightBarButtonItem:checkInButton];
-
-    TYCheckInCache *cache = [TYCheckInCache sharedInstance];
-    /* TYFBManager *manager = [TYFBManager sharedInstance];
-    self.facebook = manager.facebook;
-    if ([self.facebook isSessionValid]) {
-        [self loadCheckIns];
-    } */
-    
-    // Pull to refresh
     if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
         NSLog(@"Height of the header view = %f", self.tableView.bounds.size.height);
@@ -73,9 +75,6 @@
 		[self.tableView addSubview:view];
 		_refreshHeaderView = view;
 	}
-    
-	//  update the last update date
-//	[_refreshHeaderView refreshLastUpdatedDate];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -86,6 +85,7 @@
 {
     [super viewDidUnload];
     [self unsubscribeFromNotifications];
+    [self unregisterObserver];
     self.tableView = nil;
 }
 
@@ -104,7 +104,8 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.checkIns count];
+    TYCheckInCache *cache = [TYCheckInCache sharedInstance];
+    return [cache.checkIns count];
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath {
@@ -113,6 +114,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *reuseId = @"TYCheckInCell";
+    TYCheckInCache *cache = [TYCheckInCache sharedInstance];
     TYCheckInCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     if (!cell) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TYCheckInCell" owner:self options:nil];
@@ -121,7 +123,7 @@
 				cell = (TYCheckInCell *) object;
 		}
     }
-    TYCheckIn *checkIn = [self.checkIns objectAtIndex:indexPath.row];
+    TYCheckIn *checkIn = [cache.checkIns objectAtIndex:indexPath.row];
     cell.name.text = checkIn.user.shortName;
     cell.checkInLocation.text = checkIn.page.pageName;
     
@@ -148,7 +150,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    TYCheckIn *checkIn = [self.checkIns objectAtIndex:indexPath.row];
+    TYCheckInCache *cache = [TYCheckInCache sharedInstance];
+    TYCheckIn *checkIn = [cache.checkIns objectAtIndex:indexPath.row];
     TYCheckInDetailViewController *checkInDetail = [[TYCheckInDetailViewController alloc] initWithNibName:@"TYCheckInDetailViewController" bundle:nil];
     checkInDetail.checkIn = checkIn;
     [self.navigationController pushViewController:checkInDetail animated:YES];
@@ -213,62 +216,60 @@
 }
 
 -(void)request:(FBRequest *)request didLoad:(id)result {
-    NSDictionary *checkinFqlDict = [(NSArray *) result objectAtIndex:0];
-    NSDictionary *userFqlDict = [(NSArray *) result objectAtIndex:1];
-    NSDictionary *pagesFqlDict = [(NSArray *) result objectAtIndex:2];
-    
-    NSArray *checkIns = [checkinFqlDict objectForKey:@"fql_result_set"];
-    NSArray *users = [userFqlDict objectForKey:@"fql_result_set"];
-    NSArray *pages = [pagesFqlDict objectForKey:@"fql_result_set"];
-    
-    NSMutableDictionary *userObjects = [NSMutableDictionary dictionary];
-    NSMutableDictionary *pageObjects = [NSMutableDictionary dictionary];
-    
-    for (NSDictionary *userDictionary in users) {
-        TYUser *user = [[TYUser alloc] initWithDictionary:userDictionary];
-        [userObjects setObject:user forKey:[NSString stringWithFormat:@"user_%@", user.userId]];
-    }
-    
-    for (NSDictionary *pageDictionary in pages) {
-        TYPage *page = [[TYPage alloc] initWithDictionary:pageDictionary];
-        [pageObjects setObject:page forKey:[NSString stringWithFormat:@"page_%@", page.pageId]];
-    }
-    
-    for (NSDictionary *checkInDictionary in checkIns) {
-        TYCheckIn *checkIn = [[TYCheckIn alloc] initWithDictionary:checkInDictionary];
-        TYUser *user = [userObjects objectForKey:[NSString stringWithFormat:@"user_%@", checkIn.user.userId]];
-        TYPage *page = [pageObjects objectForKey:[NSString stringWithFormat:@"page_%@", checkIn.page.pageId]];
-        if (user && page) {
-            checkIn.user = user;
-            checkIn.page = page;
-            [self.checkIns addObject:checkIn];
-        }
-    }
     [SVProgressHUD dismiss];
     [self.tableView reloadData];
 }
 
 #pragma mark - EGOPullToRefreshDelegate
 
+#pragma mark - Observer
+
+-(void) registerObserver {
+    TYCheckInCache *cache = [TYCheckInCache sharedInstance];
+    [cache addObserver:self forKeyPath:@"checkIns" options:0 context:NULL];
+}
+
+-(void) unregisterObserver {
+    TYCheckInCache *cache = [TYCheckInCache sharedInstance];
+    [cache removeObserver:self forKeyPath:@"checkIns"];
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    [self.tableView reloadData];
+}
 
 #pragma mark - Helpers
 
--(void) receivedLoginNotification:(NSNotification *) notification {
-    [self loadCheckIns];
-}
-
--(void) receivedLogoutNotification:(NSNotification *) notification {
-    // Don't have to do much here.
+-(void) didReceiveNotification:(NSNotification *) notification {
+    NSLog(@"Notification received: %@", [notification name]);
+    if ([notification.name isEqualToString:kFBManagerLoginNotification]) {
+        [self loadCheckIns];
+    }
+    else if([notification.name isEqualToString:kFBManagerLogOutNotification]) {
+    
+    }
+    else if([notification.name isEqualToString:kNotificationCacheRefreshStart]) {
+        [SVProgressHUD show];
+    }
+    else if([notification.name isEqualToString:kNotificationCacheRefreshEnd]) {
+        [SVProgressHUD dismiss];
+    }
 }
 
 -(void) subscribeToNotifications {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLoginNotification:) name:kFBManagerLoginNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLogoutNotification:) name:kFBManagerLogOutNotification object:nil];
+    NSLog(@"Notification constants = %@-%@-%@-%@", kFBManagerLoginNotification, kFBManagerLogOutNotification, kNotificationCacheRefreshStart, kNotificationCacheRefreshEnd);
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:kFBManagerLoginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:kFBManagerLogOutNotification object:nil];
+    // Listen to notification if check-in cache starts / ends up dating itself and display an unintrusive "working" animation.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:kNotificationCacheRefreshStart object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:kNotificationCacheRefreshEnd object:nil];
 }
 
 -(void) unsubscribeFromNotifications {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kFBManagerLoginNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kFBManagerLogOutNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationCacheRefreshEnd object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationCacheRefreshStart object:nil];
 }
 
 @end

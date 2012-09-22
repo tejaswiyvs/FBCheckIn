@@ -41,4 +41,35 @@
     return self;
 }
 
+#pragma mark - NSCoding
+
+-(void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.checkInId forKey:@"checkin_id"];
+    [aCoder encodeObject:self.checkInDate forKey:@"checkin_date"];
+    [aCoder encodeObject:self.user forKey:@"user"];
+    [aCoder encodeObject:self.taggedUsers forKey:@"taggedUsers"];
+    [aCoder encodeObject:self.page forKey:@"page"];
+    [aCoder encodeObject:self.comments forKey:@"comments"];
+    [aCoder encodeObject:self.likes forKey:@"likes"];
+    [aCoder encodeObject:[NSNumber numberWithFloat:self.location.latitude] forKey:@"latitude"];
+    [aCoder encodeObject:[NSNumber numberWithFloat:self.location.longitude] forKey:@"longitude"];
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        self.checkInId = [aDecoder decodeObjectForKey:@"checkin_id"];
+        self.checkInDate = [aDecoder decodeObjectForKey:@"checkin_date"];
+        self.user = [aDecoder decodeObjectForKey:@"user"];
+        self.taggedUsers = [aDecoder decodeObjectForKey:@"taggedUsers"];
+        self.page = [aDecoder decodeObjectForKey:@"page"];
+        self.comments = [aDecoder decodeObjectForKey:@"comments"];
+        self.likes = [aDecoder decodeObjectForKey:@"likes"];
+        float latitude = [[aDecoder decodeObjectForKey:@"latitude"] floatValue];
+        float longitude = [[aDecoder decodeObjectForKey:@"longitude"] floatValue];
+        self.location = CLLocationCoordinate2DMake(latitude, longitude);
+    }
+    return self;
+}
+
 @end

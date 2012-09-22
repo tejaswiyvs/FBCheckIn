@@ -57,4 +57,45 @@
     return [NSString stringWithFormat:@"%@, %@", self.street, self.state];
 }
 
+#pragma mark - NSCoding
+
+-(void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.pageId forKey:@"page_id"];
+    [aCoder encodeObject:self.pageName forKey:@"page_name"];
+    [aCoder encodeObject:self.pagePictureUrl forKey:@"page_picture_url"];
+    [aCoder encodeObject:self.categories forKey:@"categories"];
+    [aCoder encodeObject:self.pageDescription forKey:@"page_description"];
+    [aCoder encodeObject:[NSNumber numberWithFloat:self.location.latitude] forKey:@"latitude"];
+    [aCoder encodeObject:[NSNumber numberWithFloat:self.location.longitude] forKey:@"longitude"];
+    [aCoder encodeObject:self.city forKey:@"city"];
+    [aCoder encodeObject:self.country forKey:@"country"];
+    [aCoder encodeObject:self.state forKey:@"state"];
+    [aCoder encodeObject:self.street forKey:@"street"];
+    [aCoder encodeObject:self.zip forKey:@"zip"];
+    [aCoder encodeObject:[NSNumber numberWithInt:self.checkIns] forKey:@"checkins"];
+    [aCoder encodeObject:[NSNumber numberWithInt:self.fanCount] forKey:@"fan_count"];
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        self.pageId = [aDecoder decodeObjectForKey:@"page_id"];
+        self.pageName = [aDecoder decodeObjectForKey:@"page_name"];
+        self.pagePictureUrl = [aDecoder decodeObjectForKey:@"page_picture_url"];
+        self.categories = [aDecoder decodeObjectForKey:@"categories"];
+        self.pageDescription = [aDecoder decodeObjectForKey:@"page_description"];
+        float latitude = [[aDecoder decodeObjectForKey:@"latitude"] floatValue];
+        float longitude = [[aDecoder decodeObjectForKey:@"longitude"] floatValue];
+        self.location = CLLocationCoordinate2DMake(latitude, longitude);
+        self.city = [aDecoder decodeObjectForKey:@"city"];
+        self.country = [aDecoder decodeObjectForKey:@"country"];
+        self.state = [aDecoder decodeObjectForKey:@"state"];
+        self.street = [aDecoder decodeObjectForKey:@"street"];
+        self.zip = [aDecoder decodeObjectForKey:@"zip"];
+        self.checkIns = [[aDecoder decodeObjectForKey:@"checkins"] intValue];
+        self.fanCount = [[aDecoder decodeObjectForKey:@"fan_count"] intValue];
+    }
+    return self;
+}
+
 @end

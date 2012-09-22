@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import <CoreData/CoreData.h>
 
-@interface TYPage : NSObject
+@interface TYPage : NSObject<NSCoding>
 
 @property (nonatomic, assign) int checkIns;
 @property (nonatomic, strong) NSString *pageDescription;

@@ -114,7 +114,6 @@
 		B73F6DBD156ED938004A20E4 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DB9156ED937004A20E4 /* SVProgressHUD.bundle */; };
 		B73F6DBE156ED938004A20E4 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DBB156ED937004A20E4 /* SVProgressHUD.m */; };
 		B73F6DBF156ED938004A20E4 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6DBB156ED937004A20E4 /* SVProgressHUD.m */; };
-		B73F6DC6156EDC60004A20E4 /* libxml2.2.7.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B73F6DC5156EDC60004A20E4 /* libxml2.2.7.3.dylib */; };
 		B73F6DDF156EF38C004A20E4 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DDE156EF38C004A20E4 /* map.png */; };
 		B73F6DE0156EF38C004A20E4 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DDE156EF38C004A20E4 /* map.png */; };
 		B73F6DE2156EF3AD004A20E4 /* friends.png in Resources */ = {isa = PBXBuildFile; fileRef = B73F6DE1156EF3AD004A20E4 /* friends.png */; };
@@ -136,14 +135,15 @@
 		B7539F8E15D558F30012370C /* ego-header-view@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7539F8C15D558F30012370C /* ego-header-view@2x.png */; };
 		B7539F8F15D558F30012370C /* ego-header-view.png in Resources */ = {isa = PBXBuildFile; fileRef = B7539F8D15D558F30012370C /* ego-header-view.png */; };
 		B7539F9115D55C200012370C /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = B7539F9015D55C200012370C /* tick.png */; };
-		B7539F9415D576F00012370C /* TYFBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B7539F9315D576F00012370C /* TYFBHelper.m */; };
+		B7539F9415D576F00012370C /* TYFBFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = B7539F9315D576F00012370C /* TYFBFacade.m */; };
 		B7539F9A15D57F350012370C /* UISearchBar+CustomBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = B7539F9915D57F350012370C /* UISearchBar+CustomBackground.m */; };
 		B76FF730157178A900676F47 /* TYLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B76FF72E157178A900676F47 /* TYLogInViewController.m */; };
 		B76FF731157178A900676F47 /* TYLogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B76FF72F157178A900676F47 /* TYLogInViewController.xib */; };
+		B78AFF26160E30720073B97F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B78AFF25160E30720073B97F /* Default-568h@2x.png */; };
 		B7A06D00157F19F300169BDE /* SCNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A06CFF157F19F300169BDE /* SCNavigationBar.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B7A06D01157F19F300169BDE /* SCNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A06CFF157F19F300169BDE /* SCNavigationBar.m */; };
 		B7BDF78215D6F60A00D6FA11 /* TYFBWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BDF78115D6F60A00D6FA11 /* TYFBWrapperTests.m */; };
-		B7BDF78615D7000B00D6FA11 /* TYPageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BDF78515D7000B00D6FA11 /* TYPageCache.m */; };
+		B7D4167C15E81968007BF955 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D4167B15E81968007BF955 /* CoreData.framework */; };
 		B7E10F2A158535DC00FA9741 /* TYPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E10F29158535DC00FA9741 /* TYPageCell.m */; };
 		B7E10F2C158535F500FA9741 /* TYPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7E10F2B158535F400FA9741 /* TYPageCell.xib */; };
 		B7E10F2F15854BE300FA9741 /* TYCheckInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E10F2E15854BE300FA9741 /* TYCheckInViewController.m */; };
@@ -175,7 +175,6 @@
 		B7F4E35D157AA6EC00FE5719 /* TYCheckInDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E35A157AA6EC00FE5719 /* TYCheckInDetailViewController.xib */; };
 		B7F4E35E157AA6EC00FE5719 /* TYCheckInDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E35A157AA6EC00FE5719 /* TYCheckInDetailViewController.xib */; };
 		B7FF5EA215D0CFA1008A0300 /* TYCheckInCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FF5EA115D0CFA1008A0300 /* TYCheckInCache.m */; };
-		B7FF5EA515D0CFB8008A0300 /* TYUserCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FF5EA415D0CFB8008A0300 /* TYUserCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -301,7 +300,6 @@
 		B73F6DB9156ED937004A20E4 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SVProgressHUD.bundle; path = Libraries/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle; sourceTree = "<group>"; };
 		B73F6DBA156ED937004A20E4 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVProgressHUD.h; path = Libraries/SVProgressHUD/SVProgressHUD/SVProgressHUD.h; sourceTree = "<group>"; };
 		B73F6DBB156ED937004A20E4 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVProgressHUD.m; path = Libraries/SVProgressHUD/SVProgressHUD/SVProgressHUD.m; sourceTree = "<group>"; };
-		B73F6DC5156EDC60004A20E4 /* libxml2.2.7.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.7.3.dylib; path = usr/lib/libxml2.2.7.3.dylib; sourceTree = SDKROOT; };
 		B73F6DDE156EF38C004A20E4 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		B73F6DE1156EF3AD004A20E4 /* friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friends.png; sourceTree = "<group>"; };
 		B73F6DE4156EF87F004A20E4 /* checkin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkin@2x.png"; sourceTree = "<group>"; };
@@ -318,19 +316,19 @@
 		B7539F8C15D558F30012370C /* ego-header-view@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ego-header-view@2x.png"; sourceTree = "<group>"; };
 		B7539F8D15D558F30012370C /* ego-header-view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ego-header-view.png"; sourceTree = "<group>"; };
 		B7539F9015D55C200012370C /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tick.png; sourceTree = "<group>"; };
-		B7539F9215D576F00012370C /* TYFBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYFBHelper.h; path = Libraries/FacebookWrapper/TYFBHelper.h; sourceTree = "<group>"; };
-		B7539F9315D576F00012370C /* TYFBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYFBHelper.m; path = Libraries/FacebookWrapper/TYFBHelper.m; sourceTree = "<group>"; };
+		B7539F9215D576F00012370C /* TYFBFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYFBFacade.h; path = Libraries/FacebookWrapper/TYFBFacade.h; sourceTree = "<group>"; };
+		B7539F9315D576F00012370C /* TYFBFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYFBFacade.m; path = Libraries/FacebookWrapper/TYFBFacade.m; sourceTree = "<group>"; };
 		B7539F9815D57F350012370C /* UISearchBar+CustomBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UISearchBar+CustomBackground.h"; path = "Libraries/Categories/UISearchBar+CustomBackground.h"; sourceTree = "<group>"; };
 		B7539F9915D57F350012370C /* UISearchBar+CustomBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UISearchBar+CustomBackground.m"; path = "Libraries/Categories/UISearchBar+CustomBackground.m"; sourceTree = "<group>"; };
 		B76FF72D157178A900676F47 /* TYLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYLogInViewController.h; path = Screens/TYLogInViewController.h; sourceTree = "<group>"; };
 		B76FF72E157178A900676F47 /* TYLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYLogInViewController.m; path = Screens/TYLogInViewController.m; sourceTree = "<group>"; };
 		B76FF72F157178A900676F47 /* TYLogInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYLogInViewController.xib; path = Screens/TYLogInViewController.xib; sourceTree = "<group>"; };
+		B78AFF25160E30720073B97F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B7A06CFE157F19F300169BDE /* SCNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNavigationBar.h; sourceTree = "<group>"; };
 		B7A06CFF157F19F300169BDE /* SCNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNavigationBar.m; sourceTree = "<group>"; };
 		B7BDF78015D6F60A00D6FA11 /* TYFBWrapperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYFBWrapperTests.h; sourceTree = "<group>"; };
 		B7BDF78115D6F60A00D6FA11 /* TYFBWrapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYFBWrapperTests.m; sourceTree = "<group>"; };
-		B7BDF78415D7000B00D6FA11 /* TYPageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYPageCache.h; path = Libraries/FacebookWrapper/TYPageCache.h; sourceTree = "<group>"; };
-		B7BDF78515D7000B00D6FA11 /* TYPageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYPageCache.m; path = Libraries/FacebookWrapper/TYPageCache.m; sourceTree = "<group>"; };
+		B7D4167B15E81968007BF955 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		B7E10F28158535DC00FA9741 /* TYPageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYPageCell.h; path = Screens/UITableViewCells/TYPageCell.h; sourceTree = "<group>"; };
 		B7E10F29158535DC00FA9741 /* TYPageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYPageCell.m; path = Screens/UITableViewCells/TYPageCell.m; sourceTree = "<group>"; };
 		B7E10F2B158535F400FA9741 /* TYPageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYPageCell.xib; path = Screens/UITableViewCells/TYPageCell.xib; sourceTree = "<group>"; };
@@ -366,8 +364,6 @@
 		B7F4E35A157AA6EC00FE5719 /* TYCheckInDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYCheckInDetailViewController.xib; path = Screens/TYCheckInDetailViewController.xib; sourceTree = "<group>"; };
 		B7FF5EA015D0CFA1008A0300 /* TYCheckInCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYCheckInCache.h; path = Libraries/FacebookWrapper/TYCheckInCache.h; sourceTree = "<group>"; };
 		B7FF5EA115D0CFA1008A0300 /* TYCheckInCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYCheckInCache.m; path = Libraries/FacebookWrapper/TYCheckInCache.m; sourceTree = "<group>"; };
-		B7FF5EA315D0CFB8008A0300 /* TYUserCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYUserCache.h; path = Libraries/FacebookWrapper/TYUserCache.h; sourceTree = "<group>"; };
-		B7FF5EA415D0CFB8008A0300 /* TYUserCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYUserCache.m; path = Libraries/FacebookWrapper/TYUserCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,10 +371,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7D4167C15E81968007BF955 /* CoreData.framework in Frameworks */,
 				B736F6781582983E002A5614 /* QuartzCore.framework in Frameworks */,
 				B72D93E91571D0BA00665274 /* CoreLocation.framework in Frameworks */,
 				B72D93E21571C66500665274 /* MapKit.framework in Frameworks */,
-				B73F6DC6156EDC60004A20E4 /* libxml2.2.7.3.dylib in Frameworks */,
 				B73F6CE7156ED27F004A20E4 /* UIKit.framework in Frameworks */,
 				B73F6CE9156ED27F004A20E4 /* Foundation.framework in Frameworks */,
 				B73F6CEB156ED27F004A20E4 /* CoreGraphics.framework in Frameworks */,
@@ -443,6 +439,7 @@
 		B73F6CD7156ED27F004A20E4 = {
 			isa = PBXGroup;
 			children = (
+				B78AFF25160E30720073B97F /* Default-568h@2x.png */,
 				B705F638157C202500A1BF86 /* TODO */,
 				B73F6CEC156ED280004A20E4 /* FBCheckIn */,
 				B73F6D04156ED281004A20E4 /* FBCheckInTests */,
@@ -463,10 +460,10 @@
 		B73F6CE5156ED27F004A20E4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B7D4167B15E81968007BF955 /* CoreData.framework */,
 				B736F6771582983D002A5614 /* QuartzCore.framework */,
 				B72D93E81571D0BA00665274 /* CoreLocation.framework */,
 				B72D93E11571C66500665274 /* MapKit.framework */,
-				B73F6DC5156EDC60004A20E4 /* libxml2.2.7.3.dylib */,
 				B73F6CE6156ED27F004A20E4 /* UIKit.framework */,
 				B73F6CE8156ED27F004A20E4 /* Foundation.framework */,
 				B73F6CEA156ED27F004A20E4 /* CoreGraphics.framework */,
@@ -757,14 +754,10 @@
 			children = (
 				B705F635157BFC1A00A1BF86 /* TYFBManager.h */,
 				B705F636157BFC1A00A1BF86 /* TYFBManager.m */,
-				B7539F9215D576F00012370C /* TYFBHelper.h */,
-				B7539F9315D576F00012370C /* TYFBHelper.m */,
+				B7539F9215D576F00012370C /* TYFBFacade.h */,
+				B7539F9315D576F00012370C /* TYFBFacade.m */,
 				B7FF5EA015D0CFA1008A0300 /* TYCheckInCache.h */,
 				B7FF5EA115D0CFA1008A0300 /* TYCheckInCache.m */,
-				B7FF5EA315D0CFB8008A0300 /* TYUserCache.h */,
-				B7FF5EA415D0CFB8008A0300 /* TYUserCache.m */,
-				B7BDF78415D7000B00D6FA11 /* TYPageCache.h */,
-				B7BDF78515D7000B00D6FA11 /* TYPageCache.m */,
 			);
 			name = "Facebook Wrapper";
 			sourceTree = "<group>";
@@ -900,6 +893,7 @@
 				B7539F8E15D558F30012370C /* ego-header-view@2x.png in Resources */,
 				B7539F8F15D558F30012370C /* ego-header-view.png in Resources */,
 				B7539F9115D55C200012370C /* tick.png in Resources */,
+				B78AFF26160E30720073B97F /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1006,8 +1000,7 @@
 				B7E10F351585507800FA9741 /* TYTagFriendsViewController.m in Sources */,
 				B748B20E159C283800043F7B /* TYTagUserCell.m in Sources */,
 				B7FF5EA215D0CFA1008A0300 /* TYCheckInCache.m in Sources */,
-				B7FF5EA515D0CFB8008A0300 /* TYUserCache.m in Sources */,
-				B7539F9415D576F00012370C /* TYFBHelper.m in Sources */,
+				B7539F9415D576F00012370C /* TYFBFacade.m in Sources */,
 				B7539F9A15D57F350012370C /* UISearchBar+CustomBackground.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1054,7 +1047,6 @@
 				B7A06D01157F19F300169BDE /* SCNavigationBar.m in Sources */,
 				B736F65C15829636002A5614 /* EGORefreshTableHeaderView.m in Sources */,
 				B7BDF78215D6F60A00D6FA11 /* TYFBWrapperTests.m in Sources */,
-				B7BDF78615D7000B00D6FA11 /* TYPageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

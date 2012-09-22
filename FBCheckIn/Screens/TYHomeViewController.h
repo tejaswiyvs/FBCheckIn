@@ -18,8 +18,6 @@
 @property (nonatomic, strong) EGORefreshTableHeaderView *refreshHeaderView;
 @property (nonatomic, assign) BOOL reloading;
 
-@property (nonatomic, strong) NSMutableArray *checkIns;
-
 -(id) initWithTabBar;
 - (void)reloadTableViewDataSource;
 - (void)doneLoadingTableViewData;
