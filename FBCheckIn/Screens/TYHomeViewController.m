@@ -7,7 +7,7 @@
 //
 
 #import "TYHomeViewController.h"
-#import "TYPlacePicker.h"
+#import "TYPlacePickerViewController.h"
 #import "TYCheckInCache.h"
 #import "TYCheckInCell.h"
 #import "TYAppDelegate.h"
@@ -93,14 +93,14 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - UITableView
-
 -(void) checkInButtonClicked:(id) sender {
-    TYPlacePicker *checkInScreen = [[TYPlacePicker alloc] initWithNibName:@"TYCheckInViewController" bundle:nil];
+    TYPlacePickerViewController *checkInScreen = [[TYPlacePickerViewController alloc] initWithNibName:@"TYPlacePicker" bundle:nil];
     UINavigationController *navigationController = [SCNavigationBar customizedNavigationController];
     navigationController.viewControllers = [NSArray arrayWithObject:checkInScreen];
     [self presentModalViewController:navigationController animated:YES];
 }
+
+#pragma mark - UITableView
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     TYCheckInCache *cache = [TYCheckInCache sharedInstance];
@@ -143,6 +143,27 @@
     [cell.picture.layer setBorderWidth:3.0f];
     [cell.picture.layer setCornerRadius:3.0f];
     [cell.picture.layer setMasksToBounds:YES];
+    
+    // Set check in count.
+    if ([checkIn.comments count] > 0) {
+        [cell.commentCountLbl setText:[NSString stringWithFormat:@"%d", checkIn.comments.count]];
+        [cell.commentImgView setImage:[UIImage imageNamed:@"comment-bubble-blue.png"]];
+    }
+    else {
+        [cell.commentCountLbl setText:@"0"];
+        [cell.commentImgView setImage:[UIImage imageNamed:@"comment-bubble.png"]];
+    }
+    
+    // Set like count.
+    if ([checkIn.likes count] > 0) {
+        [cell.likeCountLbl setText:[NSString stringWithFormat:@"%d", checkIn.likes.count]];
+        [cell.likeImgView setImage:[UIImage imageNamed:@"facebook_like_blue.png"]];
+    }
+    else {
+        [cell.likeCountLbl setText:@"0"];
+        [cell.likeImgView setImage:[UIImage imageNamed:@"facebook_like.png"]];
+    }
+    
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
@@ -182,7 +203,6 @@
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
 	return _reloading; // should return if data source model is reloading
 }
-
 
 #pragma mark - Observer
 
