@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "TYPlacePicker.h"
+#import "TYPlacePickerViewController.h"
 #import "Facebook.h"
 #import "SVProgressHUD.h"
 #import "TYFBManager.h"
@@ -16,27 +16,29 @@
 #import "TYCheckInViewController.h"
 #import "UIColor+HexString.h"
 
-@interface TYPlacePicker ()
+@interface TYPlacePickerViewController ()
 -(void) cancelButtonClicked:(id) sender;
 -(void) loadNearbyPages;
 -(void) updateSearchBarBackground;
 @end
 
-@implementation TYPlacePicker
+@implementation TYPlacePickerViewController
 
 @synthesize searchDisplayController;
 @synthesize searchBar = _searchBar;
 @synthesize allItems = _allItems;
 @synthesize searchResults = _searchResults;
 @synthesize tableView = _tableView;
-@synthesize facebook = _facebook;
-@synthesize currentLocation = _currentLocation;
+@synthesize location = _location;
+@synthesize refreshHeaderView = _refreshHeaderView;
+@synthesize reloading = _reloading;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.reloading = NO;
     }
     return self;
 }
@@ -47,8 +49,6 @@
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonClicked:)];
     [self.navigationItem setLeftBarButtonItem:cancelButton];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]]];
-    TYFBManager *manager = [TYFBManager sharedInstance];
-    self.facebook = manager.facebook;
     [self loadNearbyPages];
     [self updateSearchBarBackground];
 }
@@ -93,7 +93,7 @@
     [cell.pageName setText:page.pageName];
     [cell.pageAddress setText:[page shortAddress]];
     [cell.pageImage setImageWithURL:[NSURL URLWithString:page.pagePictureUrl]];
-    [cell setPageDistanceWithCoorindate1:page.location andCoordinate2:self.currentLocation];
+    [cell setPageDistanceWithCoorindate1:page.location andCoordinate2:self.locationManager.location.coordinate];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     return cell;
 }
@@ -105,34 +105,24 @@
     [self.navigationController pushViewController:confirmationScreen animated:YES];
 }
 
-#pragma mark - Location
-
 #pragma mark - Facebook
 
 -(void) loadNearbyPages {
-    [SVProgressHUD showWithStatus:@"Please wait ..."];
-    NSString *fql = @"SELECT page_id, name, description, categories, pic, fan_count, website, checkins, location FROM page WHERE page_id IN (SELECT page_id FROM place WHERE distance(latitude, longitude, \"28.492965\", \"-81.507847\") < 1000)";
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    fql, @"query",
-                                    nil];
-    [self.facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
+    // Load location first 
+    [SVProgressHUD showWithStatus:@"Loading nearby locations..."];
+    [self updateLocation];
 }
 
--(void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    [SVProgressHUD showErrorWithStatus:@"Could not load check-ins"];
-    // TODO: Add a #if DEBUG condition.
-    NSLog(@"%@", error);
-}
-
--(void)request:(FBRequest *)request didLoad:(id)result {
-    self.allItems = [[NSMutableArray alloc] init];
-    for (NSDictionary *pageDictionary in ((NSArray *) result)) {
-        TYPage *page = [[TYPage alloc] initWithDictionary:pageDictionary];
-        [self.allItems addObject:page];
-    }
-    
+-(void)fbHelper:(TYFBFacade *)helper didCompleteWithResults:(NSMutableDictionary *)results {
+    self.allItems = [results objectForKey:@"data"];
     [SVProgressHUD dismiss];
     [self.tableView reloadData];
+}
+
+-(void)fbHelper:(TYFBFacade *)helper didFailWithError:(NSError *)err {
+    [SVProgressHUD showErrorWithStatus:@"We couldn't access your facebook account. This might be temporary, please try again later."];
+    // TODO: Add a #if DEBUG condition.
+    NSLog(@"%@", err);
 }
 
 #pragma mark - UISearchBar
@@ -141,6 +131,49 @@
     [[[self.searchBar subviews] objectAtIndex:0] setAlpha:0.0];
     self.searchBar.tintColor = [UIColor colorWithHexString:@"BFB8B0"];
     [self.searchBar setClipsToBounds:YES];
+}
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+	[self.refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	[self.refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+}
+
+#pragma mark -
+#pragma mark EGORefreshTableHeaderDelegate Methods
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
+	[self loadNearbyPages];
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
+	return _reloading; // should return if data source model is reloading
+}
+
+#pragma mark - Location Manager
+
+-(void) updateLocation {
+    self.locationManager = [[CLLocationManager alloc] init];
+    [self.locationManager setDelegate:self];
+    [self.locationManager startUpdatingLocation];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    self.locationManager = nil;
+    self.reloading = NO;
+    [SVProgressHUD showErrorWithStatus:@"Couldn't find your current location. Please try again when you have sufficient signal strength."];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    self.location = newLocation;
+    self.facade = [[TYFBFacade alloc] init];
+    self.facade.delegate = self;
+    [self.facade placesNearLocation:self.locationManager.location];
 }
 
 @end

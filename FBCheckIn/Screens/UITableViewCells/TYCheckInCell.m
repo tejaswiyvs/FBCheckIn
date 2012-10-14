@@ -15,6 +15,10 @@
 @synthesize checkInLocation = _checkInLocation;
 @synthesize timestamp = _timestamp;
 @synthesize address = _address;
+@synthesize commentCountLbl = _checkInCountLbl;
+@synthesize likeCountLbl = _likeCountLbl;
+@synthesize likeImgView = _likeImgView;
+@synthesize commentImgView = _commentImgView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

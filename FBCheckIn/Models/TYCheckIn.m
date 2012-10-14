@@ -24,7 +24,7 @@
 -(id) initWithDictionary:(NSDictionary *) checkInDictionary {
     self = [super init];
     if (self) {
-        self.checkInId = [checkInDictionary objectForKey:@"checkin_id"];
+        self.checkInId = [[checkInDictionary objectForKey:@"checkin_id"] stringValue];
         self.user = [[TYUser alloc] init];
         self.page = [[TYPage alloc] init];
         self.user.userId = [checkInDictionary objectForKey:@"author_uid"];

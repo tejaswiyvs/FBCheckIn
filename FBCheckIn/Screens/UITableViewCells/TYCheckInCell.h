@@ -16,6 +16,10 @@
 @property (nonatomic, strong) IBOutlet UIImageView *picture;
 @property (nonatomic, strong) IBOutlet UILabel *address;
 @property (nonatomic, strong) IBOutlet UILabel *timestamp;
+@property (nonatomic, strong) IBOutlet UILabel *commentCountLbl;
+@property (nonatomic, strong) IBOutlet UILabel *likeCountLbl;
+@property (nonatomic, strong) IBOutlet UIImageView *likeImgView;
+@property (nonatomic, strong) IBOutlet UIImageView *commentImgView;
 
 -(void) setTime:(NSDate *) checkInTime;
 

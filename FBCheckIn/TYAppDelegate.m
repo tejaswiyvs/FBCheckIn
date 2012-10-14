@@ -8,7 +8,7 @@
 
 #import "TYAppDelegate.h"
 #import "TYHomeViewController.h"
-#import "TYPlacePicker.h"
+#import "TYPlacePickerViewController.h"
 #import "TYMapViewController.h"
 #import "TYFBManager.h"
 #import "SCNavigationBar.h"

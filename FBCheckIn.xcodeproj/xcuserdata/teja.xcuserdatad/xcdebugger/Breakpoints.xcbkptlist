@@ -7,65 +7,13 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Libraries/FacebookWrapper/TYCheckInCache.m"
-         timestampString = "368916530.644722"
+         filePath = "FBCheckIn/Libraries/FacebookWrapper/TYFBFacade.m"
+         timestampString = "371932765.302907"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "86"
-         endingLineNumber = "86"
-         landmarkName = "-fbHelper:didCompleteWithResults:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Libraries/FacebookWrapper/TYCheckInCache.m"
-         timestampString = "368916588.419822"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "78"
-         endingLineNumber = "78"
-         landmarkName = "-loadFromFacebook"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Models/TYCheckIn.m"
-         timestampString = "368916635.596327"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "47"
-         endingLineNumber = "47"
-         landmarkName = "-encodeWithCoder:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Libraries/FacebookWrapper/TYCheckInCache.m"
-         timestampString = "368917477.933503"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
-         landmarkName = "-commit"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Models/TYCheckIn.m"
-         timestampString = "368917516.672334"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "59"
-         endingLineNumber = "59"
-         landmarkName = "-initWithCoder:"
+         startingLineNumber = "169"
+         endingLineNumber = "169"
+         landmarkName = "-commentsForCheckIn:fromArray:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

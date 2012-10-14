@@ -7,18 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Facebook.h"
 #import "TYAppDelegate.h"
 #import <CoreLocation/CoreLocation.h>
+#import "TYFBFacade.h"
+#import "EGORefreshTableHeaderView.h"
 
-@interface TYPlacePicker : UIViewController<FBRequestDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface TYPlacePickerViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, TYFBFacadeDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) IBOutlet UISearchDisplayController *searchDisplayController;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) Facebook *facebook;
-@property (nonatomic, assign) CLLocationCoordinate2D currentLocation;
-
+@property (nonatomic, strong) EGORefreshTableHeaderView *refreshHeaderView;
+@property (nonatomic, strong) TYFBFacade *facade;
+@property (nonatomic, assign) BOOL reloading;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, strong) NSMutableArray *allItems;
 @property (nonatomic, strong) NSMutableArray *searchResults;
 

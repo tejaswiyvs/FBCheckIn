@@ -1,11 +1,11 @@
 Home
 ====
  -- Load / Display checkin likes and comments as well.
- -- Cache the last list of check-ins
  -- Support paging using FB API
  
 CheckInDetail
 =============
  -- Support for commenting. We probably have to support reloading the comments. How though?
+  -- Cache the last list of check-ins
  
  

@@ -29,8 +29,8 @@ typedef enum {
 @property (nonatomic, assign) TYFBFacadeRequestType requestType;
 
 -(void) checkInsForUser:(TYUser *) user;
--(void) placesNearLatitude:(CLLocationCoordinate2D) latitude longitude:(CLLocationCoordinate2D) longitude;
--(void) placesWithSearchString:(NSString *) searchString nearLatitude:(CLLocationCoordinate2D) latitude longitude:(CLLocationCoordinate2D) longitude;
+-(void) placesNearLocation:(CLLocation *) location;
+-(void) placesWithSearchString:(NSString *) searchString nearLatitude:(CLLocationDegrees) latitude longitude:(CLLocationDegrees) longitude;
 -(void) friendsForUser:(TYUser *) user;
 
 @end

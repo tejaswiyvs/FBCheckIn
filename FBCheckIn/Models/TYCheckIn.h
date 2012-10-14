@@ -14,7 +14,7 @@
 
 @interface TYCheckIn : NSObject<NSCoding>
 
-@property (nonatomic, strong) NSNumber *checkInId;
+@property (nonatomic, strong) NSString *checkInId;
 @property (nonatomic, strong) NSDate *checkInDate;
 @property (nonatomic, strong) TYUser *user;
 @property (nonatomic, strong) NSMutableArray *taggedUsers;

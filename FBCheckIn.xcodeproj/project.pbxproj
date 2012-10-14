@@ -70,10 +70,10 @@
 		B73F6D56156ED835004A20E4 /* TYHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D53156ED835004A20E4 /* TYHomeViewController.m */; };
 		B73F6D57156ED835004A20E4 /* TYHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D54156ED835004A20E4 /* TYHomeViewController.xib */; };
 		B73F6D58156ED835004A20E4 /* TYHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D54156ED835004A20E4 /* TYHomeViewController.xib */; };
-		B73F6D5C156ED846004A20E4 /* TYPlacePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D5A156ED846004A20E4 /* TYPlacePicker.m */; };
-		B73F6D5D156ED846004A20E4 /* TYPlacePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D5A156ED846004A20E4 /* TYPlacePicker.m */; };
-		B73F6D5E156ED846004A20E4 /* TYPlacePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D5B156ED846004A20E4 /* TYPlacePicker.xib */; };
-		B73F6D5F156ED846004A20E4 /* TYPlacePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D5B156ED846004A20E4 /* TYPlacePicker.xib */; };
+		B73F6D5C156ED846004A20E4 /* TYPlacePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D5A156ED846004A20E4 /* TYPlacePickerViewController.m */; };
+		B73F6D5D156ED846004A20E4 /* TYPlacePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D5A156ED846004A20E4 /* TYPlacePickerViewController.m */; };
+		B73F6D5E156ED846004A20E4 /* TYPlacePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D5B156ED846004A20E4 /* TYPlacePickerViewController.xib */; };
+		B73F6D5F156ED846004A20E4 /* TYPlacePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D5B156ED846004A20E4 /* TYPlacePickerViewController.xib */; };
 		B73F6D81156ED86B004A20E4 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D65156ED86B004A20E4 /* Facebook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B73F6D82156ED86B004A20E4 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D65156ED86B004A20E4 /* Facebook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B73F6D83156ED86B004A20E4 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D67156ED86B004A20E4 /* FBDialog.bundle */; };
@@ -142,8 +142,22 @@
 		B78AFF26160E30720073B97F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B78AFF25160E30720073B97F /* Default-568h@2x.png */; };
 		B7A06D00157F19F300169BDE /* SCNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A06CFF157F19F300169BDE /* SCNavigationBar.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B7A06D01157F19F300169BDE /* SCNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A06CFF157F19F300169BDE /* SCNavigationBar.m */; };
+		B7BDA721162AE56200DAC8AD /* TYComment.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BDA720162AE56200DAC8AD /* TYComment.m */; };
+		B7BDA724162B03F700DAC8AD /* TYLike.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BDA723162B03F700DAC8AD /* TYLike.m */; };
+		B7BDA727162B188A00DAC8AD /* facebook_like.png in Resources */ = {isa = PBXBuildFile; fileRef = B7BDA725162B188A00DAC8AD /* facebook_like.png */; };
+		B7BDA728162B188A00DAC8AD /* facebook_like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7BDA726162B188A00DAC8AD /* facebook_like@2x.png */; };
+		B7BDA72B162B1ACF00DAC8AD /* comment-bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = B7BDA729162B1ACF00DAC8AD /* comment-bubble.png */; };
+		B7BDA72C162B1ACF00DAC8AD /* comment-bubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7BDA72A162B1ACF00DAC8AD /* comment-bubble@2x.png */; };
 		B7BDF78215D6F60A00D6FA11 /* TYFBWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BDF78115D6F60A00D6FA11 /* TYFBWrapperTests.m */; };
 		B7D4167C15E81968007BF955 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D4167B15E81968007BF955 /* CoreData.framework */; };
+		B7D85E5F162B402F00AC9AF8 /* comment-bubble-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E5B162B402F00AC9AF8 /* comment-bubble-blue.png */; };
+		B7D85E60162B402F00AC9AF8 /* comment-bubble-blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E5C162B402F00AC9AF8 /* comment-bubble-blue@2x.png */; };
+		B7D85E63162B42E000AC9AF8 /* facebook_like_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E61162B42E000AC9AF8 /* facebook_like_blue.png */; };
+		B7D85E64162B42E000AC9AF8 /* facebook_like_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E62162B42E000AC9AF8 /* facebook_like_blue@2x.png */; };
+		B7D85E67162B45F000AC9AF8 /* TYUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D85E66162B45F000AC9AF8 /* TYUserProfileViewController.m */; };
+		B7D85E69162B462500AC9AF8 /* TYUserProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E68162B462500AC9AF8 /* TYUserProfileView.xib */; };
+		B7D85E6C162B463D00AC9AF8 /* TYPlaceProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D85E6B162B463D00AC9AF8 /* TYPlaceProfileViewController.m */; };
+		B7D85E6E162B465200AC9AF8 /* TYPlaceProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E6D162B465200AC9AF8 /* TYPlaceProfileView.xib */; };
 		B7E10F2A158535DC00FA9741 /* TYPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E10F29158535DC00FA9741 /* TYPageCell.m */; };
 		B7E10F2C158535F500FA9741 /* TYPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7E10F2B158535F400FA9741 /* TYPageCell.xib */; };
 		B7E10F2F15854BE300FA9741 /* TYCheckInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E10F2E15854BE300FA9741 /* TYCheckInViewController.m */; };
@@ -256,9 +270,9 @@
 		B73F6D52156ED835004A20E4 /* TYHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYHomeViewController.h; path = Screens/TYHomeViewController.h; sourceTree = "<group>"; };
 		B73F6D53156ED835004A20E4 /* TYHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYHomeViewController.m; path = Screens/TYHomeViewController.m; sourceTree = "<group>"; };
 		B73F6D54156ED835004A20E4 /* TYHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYHomeViewController.xib; path = Screens/TYHomeViewController.xib; sourceTree = "<group>"; };
-		B73F6D59156ED846004A20E4 /* TYPlacePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYPlacePicker.h; path = Screens/TYPlacePicker.h; sourceTree = "<group>"; };
-		B73F6D5A156ED846004A20E4 /* TYPlacePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYPlacePicker.m; path = Screens/TYPlacePicker.m; sourceTree = "<group>"; };
-		B73F6D5B156ED846004A20E4 /* TYPlacePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYPlacePicker.xib; path = Screens/TYPlacePicker.xib; sourceTree = "<group>"; };
+		B73F6D59156ED846004A20E4 /* TYPlacePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYPlacePickerViewController.h; path = Screens/TYPlacePickerViewController.h; sourceTree = "<group>"; };
+		B73F6D5A156ED846004A20E4 /* TYPlacePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYPlacePickerViewController.m; path = Screens/TYPlacePickerViewController.m; sourceTree = "<group>"; };
+		B73F6D5B156ED846004A20E4 /* TYPlacePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYPlacePickerViewController.xib; path = Screens/TYPlacePickerViewController.xib; sourceTree = "<group>"; };
 		B73F6D60156ED86B004A20E4 /* facebook_ios_sdk_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = facebook_ios_sdk_Prefix.pch; path = "facebook-ios-sdk/src/facebook_ios_sdk_Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		B73F6D61156ED86B004A20E4 /* facebook-ios-sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "facebook-ios-sdk.xcodeproj"; path = "facebook-ios-sdk/src/facebook-ios-sdk.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		B73F6D64156ED86B004A20E4 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Facebook.h; path = "facebook-ios-sdk/src/Facebook.h"; sourceTree = SOURCE_ROOT; };
@@ -326,9 +340,27 @@
 		B78AFF25160E30720073B97F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B7A06CFE157F19F300169BDE /* SCNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNavigationBar.h; sourceTree = "<group>"; };
 		B7A06CFF157F19F300169BDE /* SCNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNavigationBar.m; sourceTree = "<group>"; };
+		B7BDA71F162AE56200DAC8AD /* TYComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYComment.h; sourceTree = "<group>"; };
+		B7BDA720162AE56200DAC8AD /* TYComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYComment.m; sourceTree = "<group>"; };
+		B7BDA722162B03F700DAC8AD /* TYLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYLike.h; path = Models/TYLike.h; sourceTree = "<group>"; };
+		B7BDA723162B03F700DAC8AD /* TYLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYLike.m; path = Models/TYLike.m; sourceTree = "<group>"; };
+		B7BDA725162B188A00DAC8AD /* facebook_like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = facebook_like.png; path = ../Images/facebook_like.png; sourceTree = "<group>"; };
+		B7BDA726162B188A00DAC8AD /* facebook_like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook_like@2x.png"; path = "../Images/facebook_like@2x.png"; sourceTree = "<group>"; };
+		B7BDA729162B1ACF00DAC8AD /* comment-bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment-bubble.png"; sourceTree = "<group>"; };
+		B7BDA72A162B1ACF00DAC8AD /* comment-bubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment-bubble@2x.png"; sourceTree = "<group>"; };
 		B7BDF78015D6F60A00D6FA11 /* TYFBWrapperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYFBWrapperTests.h; sourceTree = "<group>"; };
 		B7BDF78115D6F60A00D6FA11 /* TYFBWrapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYFBWrapperTests.m; sourceTree = "<group>"; };
 		B7D4167B15E81968007BF955 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		B7D85E5B162B402F00AC9AF8 /* comment-bubble-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment-bubble-blue.png"; sourceTree = "<group>"; };
+		B7D85E5C162B402F00AC9AF8 /* comment-bubble-blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment-bubble-blue@2x.png"; sourceTree = "<group>"; };
+		B7D85E61162B42E000AC9AF8 /* facebook_like_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = facebook_like_blue.png; path = Images/facebook_like_blue.png; sourceTree = SOURCE_ROOT; };
+		B7D85E62162B42E000AC9AF8 /* facebook_like_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook_like_blue@2x.png"; path = "Images/facebook_like_blue@2x.png"; sourceTree = SOURCE_ROOT; };
+		B7D85E65162B45F000AC9AF8 /* TYUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYUserProfileViewController.h; path = Screens/TYUserProfileViewController.h; sourceTree = "<group>"; };
+		B7D85E66162B45F000AC9AF8 /* TYUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYUserProfileViewController.m; path = Screens/TYUserProfileViewController.m; sourceTree = "<group>"; };
+		B7D85E68162B462500AC9AF8 /* TYUserProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TYUserProfileView.xib; sourceTree = "<group>"; };
+		B7D85E6A162B463D00AC9AF8 /* TYPlaceProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYPlaceProfileViewController.h; path = Screens/TYPlaceProfileViewController.h; sourceTree = "<group>"; };
+		B7D85E6B162B463D00AC9AF8 /* TYPlaceProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYPlaceProfileViewController.m; path = Screens/TYPlaceProfileViewController.m; sourceTree = "<group>"; };
+		B7D85E6D162B465200AC9AF8 /* TYPlaceProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TYPlaceProfileView.xib; sourceTree = "<group>"; };
 		B7E10F28158535DC00FA9741 /* TYPageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYPageCell.h; path = Screens/UITableViewCells/TYPageCell.h; sourceTree = "<group>"; };
 		B7E10F29158535DC00FA9741 /* TYPageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYPageCell.m; path = Screens/UITableViewCells/TYPageCell.m; sourceTree = "<group>"; };
 		B7E10F2B158535F400FA9741 /* TYPageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYPageCell.xib; path = Screens/UITableViewCells/TYPageCell.xib; sourceTree = "<group>"; };
@@ -414,6 +446,10 @@
 				B72D93DC1571C5AC00665274 /* TYUser.m */,
 				B72D93DE1571C5F100665274 /* TYPage.h */,
 				B72D93DF1571C5F100665274 /* TYPage.m */,
+				B7BDA71F162AE56200DAC8AD /* TYComment.h */,
+				B7BDA720162AE56200DAC8AD /* TYComment.m */,
+				B7BDA722162B03F700DAC8AD /* TYLike.h */,
+				B7BDA723162B03F700DAC8AD /* TYLike.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -489,9 +525,9 @@
 				B73F6D52156ED835004A20E4 /* TYHomeViewController.h */,
 				B73F6D53156ED835004A20E4 /* TYHomeViewController.m */,
 				B73F6D54156ED835004A20E4 /* TYHomeViewController.xib */,
-				B73F6D59156ED846004A20E4 /* TYPlacePicker.h */,
-				B73F6D5A156ED846004A20E4 /* TYPlacePicker.m */,
-				B73F6D5B156ED846004A20E4 /* TYPlacePicker.xib */,
+				B73F6D59156ED846004A20E4 /* TYPlacePickerViewController.h */,
+				B73F6D5A156ED846004A20E4 /* TYPlacePickerViewController.m */,
+				B73F6D5B156ED846004A20E4 /* TYPlacePickerViewController.xib */,
 				B7E10F2D15854BE200FA9741 /* TYCheckInViewController.h */,
 				B7E10F2E15854BE300FA9741 /* TYCheckInViewController.m */,
 				B7E10F3015854BFF00FA9741 /* TYCheckInConfirmation.xib */,
@@ -504,6 +540,12 @@
 				B73F6D9E156ED8C0004A20E4 /* TYMapViewController.h */,
 				B73F6D9F156ED8C0004A20E4 /* TYMapViewController.m */,
 				B73F6DA0156ED8C0004A20E4 /* TYMapViewController.xib */,
+				B7D85E65162B45F000AC9AF8 /* TYUserProfileViewController.h */,
+				B7D85E66162B45F000AC9AF8 /* TYUserProfileViewController.m */,
+				B7D85E68162B462500AC9AF8 /* TYUserProfileView.xib */,
+				B7D85E6A162B463D00AC9AF8 /* TYPlaceProfileViewController.h */,
+				B7D85E6B162B463D00AC9AF8 /* TYPlaceProfileViewController.m */,
+				B7D85E6D162B465200AC9AF8 /* TYPlaceProfileView.xib */,
 				B73F6DC4156ED965004A20E4 /* Resources */,
 				B73F6CED156ED280004A20E4 /* Supporting Files */,
 				B73F6DF2156F3483004A20E4 /* config.plist */,
@@ -663,6 +705,14 @@
 		B73F6DC4156ED965004A20E4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B7D85E61162B42E000AC9AF8 /* facebook_like_blue.png */,
+				B7D85E62162B42E000AC9AF8 /* facebook_like_blue@2x.png */,
+				B7D85E5B162B402F00AC9AF8 /* comment-bubble-blue.png */,
+				B7D85E5C162B402F00AC9AF8 /* comment-bubble-blue@2x.png */,
+				B7BDA729162B1ACF00DAC8AD /* comment-bubble.png */,
+				B7BDA72A162B1ACF00DAC8AD /* comment-bubble@2x.png */,
+				B7BDA725162B188A00DAC8AD /* facebook_like.png */,
+				B7BDA726162B188A00DAC8AD /* facebook_like@2x.png */,
 				B7539F9015D55C200012370C /* tick.png */,
 				B7539F8C15D558F30012370C /* ego-header-view@2x.png */,
 				B7539F8D15D558F30012370C /* ego-header-view.png */,
@@ -851,7 +901,7 @@
 			files = (
 				B73F6CF1156ED280004A20E4 /* InfoPlist.strings in Resources */,
 				B73F6D57156ED835004A20E4 /* TYHomeViewController.xib in Resources */,
-				B73F6D5E156ED846004A20E4 /* TYPlacePicker.xib in Resources */,
+				B73F6D5E156ED846004A20E4 /* TYPlacePickerViewController.xib in Resources */,
 				B73F6D83156ED86B004A20E4 /* FBDialog.bundle in Resources */,
 				B73F6DA3156ED8C0004A20E4 /* TYMapViewController.xib in Resources */,
 				B73F6DBC156ED937004A20E4 /* SVProgressHUD.bundle in Resources */,
@@ -894,6 +944,16 @@
 				B7539F8F15D558F30012370C /* ego-header-view.png in Resources */,
 				B7539F9115D55C200012370C /* tick.png in Resources */,
 				B78AFF26160E30720073B97F /* Default-568h@2x.png in Resources */,
+				B7BDA727162B188A00DAC8AD /* facebook_like.png in Resources */,
+				B7BDA728162B188A00DAC8AD /* facebook_like@2x.png in Resources */,
+				B7BDA72B162B1ACF00DAC8AD /* comment-bubble.png in Resources */,
+				B7BDA72C162B1ACF00DAC8AD /* comment-bubble@2x.png in Resources */,
+				B7D85E5F162B402F00AC9AF8 /* comment-bubble-blue.png in Resources */,
+				B7D85E60162B402F00AC9AF8 /* comment-bubble-blue@2x.png in Resources */,
+				B7D85E63162B42E000AC9AF8 /* facebook_like_blue.png in Resources */,
+				B7D85E64162B42E000AC9AF8 /* facebook_like_blue@2x.png in Resources */,
+				B7D85E69162B462500AC9AF8 /* TYUserProfileView.xib in Resources */,
+				B7D85E6E162B465200AC9AF8 /* TYPlaceProfileView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -903,7 +963,7 @@
 			files = (
 				B73F6D09156ED281004A20E4 /* InfoPlist.strings in Resources */,
 				B73F6D58156ED835004A20E4 /* TYHomeViewController.xib in Resources */,
-				B73F6D5F156ED846004A20E4 /* TYPlacePicker.xib in Resources */,
+				B73F6D5F156ED846004A20E4 /* TYPlacePickerViewController.xib in Resources */,
 				B73F6D84156ED86B004A20E4 /* FBDialog.bundle in Resources */,
 				B73F6DA4156ED8C0004A20E4 /* TYMapViewController.xib in Resources */,
 				B73F6DBD156ED938004A20E4 /* SVProgressHUD.bundle in Resources */,
@@ -954,7 +1014,7 @@
 				B73F6CF3156ED281004A20E4 /* main.m in Sources */,
 				B73F6CF7156ED281004A20E4 /* TYAppDelegate.m in Sources */,
 				B73F6D55156ED835004A20E4 /* TYHomeViewController.m in Sources */,
-				B73F6D5C156ED846004A20E4 /* TYPlacePicker.m in Sources */,
+				B73F6D5C156ED846004A20E4 /* TYPlacePickerViewController.m in Sources */,
 				B73F6D81156ED86B004A20E4 /* Facebook.m in Sources */,
 				B73F6D85156ED86B004A20E4 /* FBDialog.m in Sources */,
 				B73F6D87156ED86B004A20E4 /* FBFrictionlessRequestSettings.m in Sources */,
@@ -1002,6 +1062,10 @@
 				B7FF5EA215D0CFA1008A0300 /* TYCheckInCache.m in Sources */,
 				B7539F9415D576F00012370C /* TYFBFacade.m in Sources */,
 				B7539F9A15D57F350012370C /* UISearchBar+CustomBackground.m in Sources */,
+				B7BDA721162AE56200DAC8AD /* TYComment.m in Sources */,
+				B7BDA724162B03F700DAC8AD /* TYLike.m in Sources */,
+				B7D85E67162B45F000AC9AF8 /* TYUserProfileViewController.m in Sources */,
+				B7D85E6C162B463D00AC9AF8 /* TYPlaceProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1011,7 +1075,7 @@
 			files = (
 				B73F6D0C156ED281004A20E4 /* FBCheckInTests.m in Sources */,
 				B73F6D56156ED835004A20E4 /* TYHomeViewController.m in Sources */,
-				B73F6D5D156ED846004A20E4 /* TYPlacePicker.m in Sources */,
+				B73F6D5D156ED846004A20E4 /* TYPlacePickerViewController.m in Sources */,
 				B73F6D82156ED86B004A20E4 /* Facebook.m in Sources */,
 				B73F6D86156ED86B004A20E4 /* FBDialog.m in Sources */,
 				B73F6D88156ED86B004A20E4 /* FBFrictionlessRequestSettings.m in Sources */,

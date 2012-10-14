@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1296</int>
-		<string key="IBDocument.SystemVersion">12A269</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
-		<string key="IBDocument.AppKitVersion">1187</string>
-		<string key="IBDocument.HIToolboxVersion">624.00</string>
+		<int key="IBDocument.SystemTarget">1536</int>
+		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1498</string>
+			<string key="NS.object.0">1929</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -224,33 +224,38 @@
 							</object>
 							<object class="IBUIImageView" id="479989828">
 								<reference key="NSNextResponder" ref="333366337"/>
-								<int key="NSvFlags">-2147483356</int>
+								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{272, 94}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="333366337"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">fb-line.png</string>
+									<string key="NSResourceName">facebook_like.png</string>
 								</object>
 							</object>
 							<object class="IBUIImageView" id="215475465">
 								<reference key="NSNextResponder" ref="333366337"/>
-								<int key="NSvFlags">-2147483356</int>
-								<string key="NSFrame">{{216, 94}, {20, 20}}</string>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{224, 96}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="333366337"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="145239272"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">comment-bubble.png</string>
+								</object>
 							</object>
 							<object class="IBUILabel" id="145239272">
 								<reference key="NSNextResponder" ref="333366337"/>
-								<int key="NSvFlags">-2147483356</int>
-								<string key="NSFrame">{{250, 94}, {20, 20}}</string>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{248, 97}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="333366337"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="479989828"/>
@@ -260,21 +265,23 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<string key="IBUIText">50</string>
+								<string key="IBUIText">99</string>
 								<object class="NSColor" key="IBUITextColor" id="936347619">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
+									<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
 								</object>
 								<reference key="IBUIHighlightedColor" ref="351770759"/>
 								<int key="IBUIBaselineAdjustment">0</int>
 								<float key="IBUIMinimumFontSize">10</float>
+								<int key="IBUITextAlignment">2</int>
 								<reference key="IBUIFontDescription" ref="917155083"/>
 								<reference key="IBUIFont" ref="588140956"/>
 							</object>
 							<object class="IBUILabel" id="66367101">
 								<reference key="NSNextResponder" ref="333366337"/>
-								<int key="NSvFlags">-2147483356</int>
-								<string key="NSFrame">{{194, 94}, {20, 20}}</string>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{200, 96}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="333366337"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="215475465"/>
@@ -284,11 +291,12 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<string key="IBUIText">50</string>
+								<string key="IBUIText"/>
 								<reference key="IBUITextColor" ref="936347619"/>
 								<reference key="IBUIHighlightedColor" ref="351770759"/>
 								<int key="IBUIBaselineAdjustment">0</int>
 								<float key="IBUIMinimumFontSize">10</float>
+								<int key="IBUITextAlignment">2</int>
 								<reference key="IBUIFontDescription" ref="917155083"/>
 								<reference key="IBUIFont" ref="588140956"/>
 							</object>
@@ -360,6 +368,38 @@
 						<reference key="destination" ref="162531139"/>
 					</object>
 					<int key="connectionID">16</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">likeCountLbl</string>
+						<reference key="source" ref="537309997"/>
+						<reference key="destination" ref="145239272"/>
+					</object>
+					<int key="connectionID">26</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">commentCountLbl</string>
+						<reference key="source" ref="537309997"/>
+						<reference key="destination" ref="66367101"/>
+					</object>
+					<int key="connectionID">27</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">likeImgView</string>
+						<reference key="source" ref="537309997"/>
+						<reference key="destination" ref="479989828"/>
+					</object>
+					<int key="connectionID">28</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">commentImgView</string>
+						<reference key="source" ref="537309997"/>
+						<reference key="destination" ref="215475465"/>
+					</object>
+					<int key="connectionID">29</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -485,7 +525,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">24</int>
+			<int key="maxID">29</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -495,6 +535,10 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="address">UILabel</string>
 						<string key="checkInLocation">UILabel</string>
+						<string key="commentCountLbl">UILabel</string>
+						<string key="commentImgView">UIImageView</string>
+						<string key="likeCountLbl">UILabel</string>
+						<string key="likeImgView">UIImageView</string>
 						<string key="name">UILabel</string>
 						<string key="picture">UIImageView</string>
 						<string key="timestamp">UILabel</string>
@@ -507,6 +551,22 @@
 						<object class="IBToOneOutletInfo" key="checkInLocation">
 							<string key="name">checkInLocation</string>
 							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="commentCountLbl">
+							<string key="name">commentCountLbl</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="commentImgView">
+							<string key="name">commentImgView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="likeCountLbl">
+							<string key="name">likeCountLbl</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="likeImgView">
+							<string key="name">likeImgView</string>
+							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="name">
 							<string key="name">name</string>
@@ -532,14 +592,15 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1296" key="NS.object.0"/>
+			<real value="1536" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="fb-line.png">{14, 14}</string>
+			<string key="comment-bubble.png">{31, 28}</string>
+			<string key="facebook_like.png">{31, 28}</string>
 			<string key="table-cell-bg.png">{320, 106}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1498</string>
+		<string key="IBCocoaTouchPluginVersion">1929</string>
 	</data>
 </archive>
