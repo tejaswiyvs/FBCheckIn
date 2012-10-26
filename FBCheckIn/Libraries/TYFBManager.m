@@ -14,14 +14,26 @@
 @interface TYFBManager ()
 -(void) raiseLogInNotification;
 -(void) raiseLogOutNotification;
+-(void) appDidBecomeActive:(NSNotification *) notification;
+-(void) setupFacebook;
 @end
 
 @implementation TYFBManager
 
 NSString * const kFBManagerLoginNotification = @"fb_mgr_login";
 NSString * const kFBManagerLogOutNotification = @"fb_mgr_logout";
+NSString * const kFBManagerLoginCancelledNotification = @"fb_mgr_logout";
 
 @synthesize facebook;
+
+-(id) init {
+    self = [super init];
+    if (self) {
+        [self registerForNotifications];
+        [self setupFacebook];
+    }
+    return self;
+}
 
 +(TYFBManager *) sharedInstance {
     static TYFBManager *sharedInstance;
@@ -34,20 +46,21 @@ NSString * const kFBManagerLogOutNotification = @"fb_mgr_logout";
     return sharedInstance;
 }
 
+-(BOOL) isLoggedIn {
+    return [self.facebook isSessionValid];
+}
+
 #pragma mark - Facebook Delegate
 
--(void) setupFacebook {
-    self.facebook = [[Facebook alloc] initWithAppId:[self appId] andDelegate:self];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] 
-        && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        self.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-    }
+-(void) login {
     if (![self.facebook isSessionValid]) {
-        NSArray *permissions = [NSArray arrayWithObjects:@"user_about_me", @"friends_about_me", @"user_checkins", @"friends_checkins", @"user_status", @"friends_status", @"user_likes", @"friends_likes", @"publish_stream", nil];
+        NSArray *permissions = [NSArray arrayWithObjects:@"user_about_me", @"friends_about_me", @"user_status", @"friends_status", @"user_likes", @"friends_likes", @"publish_stream", @"user_photos", @"friends_photos", nil];
         [self.facebook authorize:permissions];
     }
+}
+
+-(void) logout {
+    [self.facebook logout];
 }
 
 - (void)fbDidLogin {
@@ -59,16 +72,10 @@ NSString * const kFBManagerLogOutNotification = @"fb_mgr_logout";
 }
 
 - (void)fbDidNotLogin:(BOOL)cancelled {
-    TYAppDelegate *appDelegate = (TYAppDelegate *) [UIApplication sharedApplication].delegate;
-    TYLogInViewController *login = [[TYLogInViewController alloc] initWithNibName:@"TYLoginViewController" bundle:nil];
-    [appDelegate.window.rootViewController presentModalViewController:login animated:YES];
-    [SVProgressHUD showErrorWithStatus:@"The login was cancelled. Please login your facebook account to use this app."];
+    [self raiseLoginCancelledNotification];
 }
 
 - (void)fbDidLogout {
-    TYAppDelegate *appDelegate = (TYAppDelegate *) [UIApplication sharedApplication].delegate;
-    TYLogInViewController *login = [[TYLogInViewController alloc] initWithNibName:@"TYLoginViewController" bundle:nil];
-    [appDelegate.window.rootViewController presentModalViewController:login animated:YES];
     [self raiseLogOutNotification];
 }
 
@@ -80,14 +87,26 @@ NSString * const kFBManagerLogOutNotification = @"fb_mgr_logout";
 
 }
 
-#pragma mark - Helpers
+#pragma mark - Notification Center
 
--(void) login {
-    [self setupFacebook];
+-(void) appDidBecomeActive:(NSNotification *) notification {
+    [self.facebook extendAccessTokenIfNeeded];
 }
 
--(void) logout {
-    [self.facebook logout];
+#pragma mark - Helpers
+
+-(void) setupFacebook {
+    self.facebook = [[Facebook alloc] initWithAppId:[self appId] andDelegate:self];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"]
+        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        self.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+}
+
+-(void) registerForNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 -(NSString *) appId {
@@ -102,5 +121,9 @@ NSString * const kFBManagerLogOutNotification = @"fb_mgr_logout";
 
 -(void) raiseLogOutNotification {
     [[NSNotificationCenter defaultCenter] postNotificationName:kFBManagerLogOutNotification object:nil];
+}
+
+-(void) raiseLoginCancelledNotification {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kFBManagerLoginCancelledNotification object:nil];
 }
 @end

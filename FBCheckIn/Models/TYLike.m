@@ -18,7 +18,7 @@
     if (self) {
         self.checkInId = [[params objectForKey:@"object_id"] stringValue];
         self.user = [[TYUser alloc] init];
-        self.user.userId = [params objectForKey:@"user_id"];
+        self.user.userId = [[params objectForKey:@"user_id"] stringValue];
     }
     return self;
 }

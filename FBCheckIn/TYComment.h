@@ -17,6 +17,7 @@
 @property (nonatomic, strong) TYUser *user;
 @property (nonatomic, assign) int likes;
 @property (nonatomic, assign) BOOL canLike;
+@property (nonatomic, assign) BOOL userLikes;
 
 -(id) initWithDictionary:(NSDictionary *) params;
 

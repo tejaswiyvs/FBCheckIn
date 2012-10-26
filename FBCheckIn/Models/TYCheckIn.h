@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TYUser.h"
 #import "TYPage.h"
+#import "TYPhoto.h"
 #import <MapKit/MapKit.h>
 #import <CoreData/CoreData.h>
 
@@ -22,7 +23,14 @@
 @property (nonatomic, strong) NSMutableArray *comments;
 @property (nonatomic, strong) NSMutableArray *likes;
 @property (nonatomic, assign) CLLocationCoordinate2D location;
+@property (nonatomic, strong) NSString *message;
+@property (nonatomic, strong) TYPhoto *photo;
 
 -(id) initWithDictionary:(NSDictionary *) checkInDictionary;
 
+-(BOOL) hasPhoto;
+-(BOOL) hasMessage;
+-(BOOL) isLikedByUser:(TYUser *) user;
+-(void) likeCheckIn:(TYUser *) user;
+-(void) unlikeCheckIn:(TYUser *) user;
 @end

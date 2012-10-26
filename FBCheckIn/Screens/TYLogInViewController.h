@@ -7,8 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TYCurrentUser.h"
+#import "TYUser.h"
+#import "Facebook.h"
+#import "TYCheckInCache.h"
+#import "TYFBManager.h"
 
 @interface TYLogInViewController : UIViewController
+
+@property (nonatomic, strong) TYCheckInCache *cache;
+@property (nonatomic, strong) TYCurrentUser *user;
 
 -(IBAction)loginButtonClicked:(id)sender;
 @end

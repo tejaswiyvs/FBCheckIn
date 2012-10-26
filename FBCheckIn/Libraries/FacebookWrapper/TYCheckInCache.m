@@ -56,9 +56,6 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.lastRefreshDate = (NSDate *) [defaults objectForKey:kSaveTimeKey];
     self.checkIns = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
-    if ([self shouldRefresh]) {
-        [self loadFromFacebook];
-    }
 }
 
 -(void) commit {

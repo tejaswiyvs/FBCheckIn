@@ -23,11 +23,12 @@
         self.checkInId = [[params objectForKey:@"object_id"] stringValue];
         self.commentId = [params objectForKey:@"post_id"];
         self.text = [params objectForKey:@"text"];
-        self.canLike = [[params objectForKey:@"canLike"] boolValue];
+        self.canLike = [[params objectForKey:@"can_like"] boolValue];
+        self.userLikes = [[params objectForKey:@"user_likes"] boolValue];
         self.likes = [[params objectForKey:@"likes"] intValue];
         self.commentId = [[params objectForKey:@"commentId"] stringValue];
         self.user = [[TYUser alloc] init];
-        self.user.userId = [params objectForKey:@"fromid"];
+        self.user.userId = [[params objectForKey:@"fromid"] stringValue];
     }
     return self;
 }

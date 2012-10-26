@@ -9,14 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "Facebook.h"
 
-NSString * const kFBManagerLoginNotification;
-NSString * const kFBManagerLogOutNotification;
+extern NSString * const kFBManagerLoginNotification;
+extern NSString * const kFBManagerLogOutNotification;
+extern NSString * const kFBManagerLoginCancelledNotification;
 
 @interface TYFBManager : NSObject<FBSessionDelegate>
 
 @property (nonatomic, strong) Facebook *facebook;
 
 +(TYFBManager *) sharedInstance;
+-(BOOL) isLoggedIn;
 -(void) login;
 -(void) logout;
 @end

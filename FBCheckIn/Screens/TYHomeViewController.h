@@ -7,16 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Facebook.h"
 #import "EGORefreshTableHeaderView.h"
 #import "TYCheckInCache.h"
+#import "TYFBFacade.h"
 
-@interface TYHomeViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, FBRequestDelegate, EGORefreshTableHeaderDelegate>
+@interface TYHomeViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, TYFBFacadeDelegate, EGORefreshTableHeaderDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) Facebook *facebook;
 @property (nonatomic, strong) EGORefreshTableHeaderView *refreshHeaderView;
+@property (nonatomic, strong) TYCheckInCache *cache;
 @property (nonatomic, assign) BOOL reloading;
+@property (nonatomic, strong) NSMutableArray *requests;
 
 -(id) initWithTabBar;
 

@@ -7,18 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
 #import "TYUITabBarController.h"
+#import "TYLogInViewController.h"
+#import "TYFBManager.h"
 
 @interface TYAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) TYFBManager *manager;
 @property (nonatomic, strong) TYUITabBarController *tabBar;
-
-@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
-- (NSURL *)applicationDocumentsDirectory;
+@property (nonatomic, strong) TYLogInViewController *loginScreen;
 
 @end

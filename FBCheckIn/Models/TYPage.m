@@ -7,6 +7,7 @@
 //
 
 #import "TYPage.h"
+#import "NSString+Common.h"
 
 @implementation TYPage
 
@@ -54,7 +55,18 @@
 }
 
 -(NSString *) shortAddress {
-    return [NSString stringWithFormat:@"%@, %@", self.street, self.state];
+    if (self.street && self.state && ![self.street isBlank] && ![self.state isBlank]) {
+        return [NSString stringWithFormat:@"%@, %@", self.street, self.state];
+    }
+    else if(self.street && ![self.street isBlank] && (self.state || [self.state isBlank])) {
+        return self.street;
+    }
+    else if(self.state && ![self.state isBlank] && (self.street || [self.street isBlank])) {
+        return self.state;
+    }
+    else {
+        return @"";
+    }
 }
 
 #pragma mark - NSCoding

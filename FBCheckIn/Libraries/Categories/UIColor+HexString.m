@@ -17,7 +17,15 @@
 
 @implementation UIColor(HexString)
 
-+ (UIColor *) colorWithHexString: (NSString *) stringToConvert
++(UIColor *) headerTextColor {
+    return [UIColor colorWithRed:(99.0f/255.0f) green:(89.0f/255.0f) blue:(99.0f/255.0f) alpha:1.0f];
+}
+
++(UIColor *) subtitleTextColor {
+    return [UIColor colorWithRed:(127.0f/255.0f) green:(127.0f/255.0f) blue:(127.0f/255.0f) alpha:1.0f];
+}
+
++(UIColor *) colorWithHexString: (NSString *) stringToConvert
 {
 	NSString *cString = [[stringToConvert stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
 	
