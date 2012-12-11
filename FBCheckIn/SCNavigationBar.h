@@ -14,5 +14,6 @@
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics;
 +(UINavigationController *)customizedNavigationController;
-
+-(void) checkInButtonClicked:(id) sender;
+-(void) hideCheckInButton;
 @end

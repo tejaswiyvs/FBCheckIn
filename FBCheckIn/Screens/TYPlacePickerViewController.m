@@ -15,6 +15,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "TYCheckInViewController.h"
 #import "UIColor+HexString.h"
+#import "SCNavigationBar.h"
 
 @interface TYPlacePickerViewController ()
 -(void) cancelButtonClicked:(id) sender;
@@ -51,6 +52,7 @@
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]]];
     [self loadNearbyPages];
     [self updateSearchBarBackground];
+    [(SCNavigationBar *) self.navigationController.navigationBar hideCheckInButton];
 }
 
 - (void)viewDidUnload

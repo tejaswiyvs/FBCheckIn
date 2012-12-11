@@ -7,6 +7,7 @@
 //
 
 #import "SCNavigationBar.h"
+#import "TYPlacePickerViewController.h"
 
 @interface SCNavigationBar ()
 @property (nonatomic, retain) UIImageView *backgroundImageView;
@@ -49,15 +50,23 @@
     [navBar setBackgroundImage:[UIImage imageNamed:@"navigation-bar-2.png"] forBarMetrics:UIBarMetricsLandscapePhone];
     
     navBar.checkInButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    navBar.checkInButton.frame = CGRectMake(navBar.frame.size.width - 65.0f, 0.0f, 65.0f, navBar.frame.size.height);
+    navBar.checkInButton.frame = CGRectMake(navBar.frame.size.width - 65.0f, 0.0f, 86.0f, navBar.frame.size.height);
+    NSLog(@"%@", NSStringFromCGRect(navBar.checkInButton.frame));
     [navBar.checkInButton setImage:[UIImage imageNamed:@"check-in-icon.png"] forState:UIControlStateNormal];
-    [navBar.checkInButton addTarget:self action:@selector(checkInButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [navBar.checkInButton addTarget:navBar action:@selector(checkInButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [navBar addSubview:navBar.checkInButton];
-//    [navBar.checkInButton setEnabled:NO];
-//    [navBar.checkInButton setHidden:YES];
-
     
     return customizedNavController;
+}
+
+-(void) checkInButtonClicked:(id) sender {
+    TYAppDelegate *appDelegate = (TYAppDelegate *) [UIApplication sharedApplication].delegate;
+    [appDelegate checkInButtonClicked:sender];
+}
+
+-(void) hideCheckInButton {
+    [self.checkInButton setEnabled:NO];
+    [self.checkInButton setHidden:YES];
 }
 
 #pragma mark - View Lifecycle

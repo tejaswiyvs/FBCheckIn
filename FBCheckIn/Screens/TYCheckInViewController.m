@@ -14,6 +14,7 @@
 #import "JSONKit.h"
 #import <QuartzCore/QuartzCore.h>
 #import "TYUser.h"
+#import "SCNavigationBar.h"
 
 @interface TYCheckInViewController ()
 -(void) doneButtonClicked:(id) sender;
@@ -52,11 +53,12 @@
 {
     [super viewDidLoad];
     
-    // Create a check-in button.
+    // Hide the existing check-in button.
+    [(SCNavigationBar *) self.navigationController.navigationBar hideCheckInButton];
+    
+    // Create a done button.
     self.checkInButton = [[UIBarButtonItem alloc] initWithTitle:@"Check-in" style:UIBarButtonItemStyleDone target:self action:@selector(checkInButtonClicked:)];
-    
     self.doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonClicked:)];
-    
     [self.navigationItem setRightBarButtonItem:self.checkInButton];
     
     // Initialize facebook.

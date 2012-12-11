@@ -84,6 +84,14 @@ NSString * const kMixpanelToken = @"";
 
 #pragma mark - Helpers
 
+-(void) checkInButtonClicked:(id)sender {
+    DebugLog(@"Checkin button clicked. Launching PlacePicker");
+    TYPlacePickerViewController *checkInScreen = [[TYPlacePickerViewController alloc] initWithNibName:@"TYPlacePickerView" bundle:nil];
+    UINavigationController *navigationController = [SCNavigationBar customizedNavigationController];
+    navigationController.viewControllers = [NSArray arrayWithObject:checkInScreen];
+    [self.tabBar presentModalViewController:navigationController animated:YES];
+}
+
 void uncaughtExceptionHandler(NSException *exception) {
     NSLog(@"CRASH: %@", exception);
     NSLog(@"Stack Trace: %@", [exception callStackSymbols]);

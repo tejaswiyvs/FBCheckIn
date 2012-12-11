@@ -19,4 +19,5 @@
 @property (nonatomic, strong) TYLogInViewController *loginScreen;
 @property (nonatomic, strong) Mixpanel *mixPanel;
 
+-(void) checkInButtonClicked:(id) sender;
 @end

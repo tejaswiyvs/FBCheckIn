@@ -28,7 +28,6 @@
 #import "TYPlaceProfileViewController.h"
 
 @interface TYHomeViewController ()
--(void) checkInButtonClicked:(id) sender;
 -(void) subscribeToNotifications;
 -(void) unsubscribeFromNotifications;
 -(void) registerObserver;
@@ -113,14 +112,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
--(void) checkInButtonClicked:(id) sender {
-    DebugLog(@"Checkin button clicked. Launching PlacePicker");
-    TYPlacePickerViewController *checkInScreen = [[TYPlacePickerViewController alloc] initWithNibName:@"TYPlacePickerView" bundle:nil];
-    UINavigationController *navigationController = [SCNavigationBar customizedNavigationController];
-    navigationController.viewControllers = [NSArray arrayWithObject:checkInScreen];
-    [self presentModalViewController:navigationController animated:YES];
 }
 
 #pragma mark - UITableView
