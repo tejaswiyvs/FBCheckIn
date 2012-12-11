@@ -12,8 +12,9 @@
 #import "Facebook.h"
 #import "TYCheckInCache.h"
 #import "TYFBManager.h"
+#import "TYBaseViewController.h"
 
-@interface TYLogInViewController : UIViewController
+@interface TYLogInViewController : TYBaseViewController
 
 @property (nonatomic, strong) TYCheckInCache *cache;
 @property (nonatomic, strong) TYCurrentUser *user;

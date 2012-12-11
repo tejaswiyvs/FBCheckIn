@@ -13,4 +13,5 @@
 +(CGRect) setHeight:(float) height forRect:(CGRect) rect;
 +(CGRect) setWidth:(float) width forRect:(CGRect) rect;
 +(void) displayAlertWithTitle:(NSString *) title message:(NSString *) message;
++(CGFloat) heightForText:(NSString *) text withFont:(UIFont *) font forWidth:(float) width;
 @end

@@ -10,6 +10,9 @@
 
 @interface SCNavigationBar : UINavigationBar
 
+@property (nonatomic, strong) UIButton *checkInButton;
+
 - (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics;
 +(UINavigationController *)customizedNavigationController;
+
 @end

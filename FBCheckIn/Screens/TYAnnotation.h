@@ -17,5 +17,5 @@
 @property (nonatomic, strong) UIImage *picture;
 
 -(id) initWithCoordinate:(CLLocationCoordinate2D) coordinate andPicture:(UIImage *) picture;
-
+-(id) initWithCoordinate:(CLLocationCoordinate2D) coordinate;
 @end

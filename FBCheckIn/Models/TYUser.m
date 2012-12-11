@@ -19,6 +19,9 @@
 @synthesize profilePicture = _profilePicture;
 @synthesize sex = _sex;
 @synthesize middleName = _middleName;
+@synthesize coverPictureUrl = _coverPictureUrl;
+@synthesize coverOffSetY = _coverOffSetY;
+@synthesize hiResProfilePictureUrl = _hiResProfilePictureUrl;
 
 -(id) initWithDictionary:(NSDictionary *) userDictionary {
     self = [super init];
@@ -30,7 +33,13 @@
         self.lastName = [userDictionary objectForKey:@"last_name"];
         self.middleName = [userDictionary objectForKey:@"middle_name"];
         self.fullName = [userDictionary objectForKey:@"name"];
-        self.profilePictureUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture", self.userName];
+        self.profilePictureUrl = [userDictionary objectForKey:@"pic"];
+        self.hiResProfilePictureUrl = [userDictionary objectForKey:@"pic_big"];
+        NSDictionary *coverDict = [userDictionary objectForKey:@"pic_cover"];
+        if (coverDict && coverDict != (id) [NSNull null]) {
+            self.coverPictureUrl = [coverDict objectForKey:@"source"];
+            self.coverOffSetY = [[coverDict objectForKey:@"offset_y"] floatValue];
+        }
     }
     return self;
 }
@@ -50,6 +59,9 @@
     [aCoder encodeObject:self.middleName forKey:@"middle_name"];
     [aCoder encodeObject:self.fullName forKey:@"name"];
     [aCoder encodeObject:self.profilePictureUrl forKey:@"profile_picture_url"];
+    [aCoder encodeObject:self.coverPictureUrl forKey:@"cover_picture_url"];
+    [aCoder encodeObject:self.hiResProfilePictureUrl forKey:@"hi_res_picture_url"];
+    [aCoder encodeObject:[NSNumber numberWithFloat:self.coverOffSetY] forKey:@"cover_offset_y"];
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
@@ -62,6 +74,9 @@
     self.middleName = [aDecoder decodeObjectForKey:@"middle_name"];
     self.fullName = [aDecoder decodeObjectForKey:@"name"];
     self.profilePictureUrl = [aDecoder decodeObjectForKey:@"profile_picture_url"];
+    self.coverPictureUrl = [aDecoder decodeObjectForKey:@"cover_picture_url"];
+    self.coverOffSetY = [[aDecoder decodeObjectForKey:@"cover_offset_y"] floatValue];
+    self.hiResProfilePictureUrl = [aDecoder decodeObjectForKey:@"hi_res_picture_url"];
     return self;
 }
 @end

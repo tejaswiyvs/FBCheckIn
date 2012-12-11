@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Facebook.h"
+#import "TYBaseViewController.h"
 
 @protocol TYTagFriendsDelegate;
-@interface TYTagFriendsViewController : UIViewController<FBRequestDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface TYTagFriendsViewController : TYBaseViewController<FBRequestDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property (nonatomic, strong) NSMutableArray *friends;
 @property (nonatomic, strong) NSMutableArray *taggedUsers;

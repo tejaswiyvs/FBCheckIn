@@ -1,11 +1,25 @@
 Home
 ====
- -- Load / Display checkin likes and comments as well.
- -- Support paging using FB API
+ -- Clicking on a picture should open user profile as well.
+
+Page
+====
+ --
+
+User
+====
+ -- Facebook cover
+ -- Profile Picture + User Full Name
+ -- Total check-ins
+ -- Where does the user hang out?
+ -- Who does the user hangout with?
+ -- Plot last 5 check-ins
  
-CheckInDetail
+Core Check In
 =============
- -- Support for commenting. We probably have to support reloading the comments. How though?
-  -- Cache the last list of check-ins
+ -- Nearby Places
+ -- Aviary integration
+ -- Checkin with picture
+
  
  

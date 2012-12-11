@@ -72,8 +72,8 @@
 		B73F6D58156ED835004A20E4 /* TYHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D54156ED835004A20E4 /* TYHomeViewController.xib */; };
 		B73F6D5C156ED846004A20E4 /* TYPlacePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D5A156ED846004A20E4 /* TYPlacePickerViewController.m */; };
 		B73F6D5D156ED846004A20E4 /* TYPlacePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D5A156ED846004A20E4 /* TYPlacePickerViewController.m */; };
-		B73F6D5E156ED846004A20E4 /* TYPlacePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D5B156ED846004A20E4 /* TYPlacePickerViewController.xib */; };
-		B73F6D5F156ED846004A20E4 /* TYPlacePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D5B156ED846004A20E4 /* TYPlacePickerViewController.xib */; };
+		B73F6D5E156ED846004A20E4 /* TYPlacePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D5B156ED846004A20E4 /* TYPlacePickerView.xib */; };
+		B73F6D5F156ED846004A20E4 /* TYPlacePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D5B156ED846004A20E4 /* TYPlacePickerView.xib */; };
 		B73F6D81156ED86B004A20E4 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D65156ED86B004A20E4 /* Facebook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B73F6D82156ED86B004A20E4 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F6D65156ED86B004A20E4 /* Facebook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B73F6D83156ED86B004A20E4 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B73F6D67156ED86B004A20E4 /* FBDialog.bundle */; };
@@ -133,12 +133,18 @@
 		B7539F9115D55C200012370C /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = B7539F9015D55C200012370C /* tick.png */; };
 		B7539F9415D576F00012370C /* TYFBFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = B7539F9315D576F00012370C /* TYFBFacade.m */; };
 		B7539F9A15D57F350012370C /* UISearchBar+CustomBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = B7539F9915D57F350012370C /* UISearchBar+CustomBackground.m */; };
+		B757687116484CE00046A555 /* UIImage+Convinience.m in Sources */ = {isa = PBXBuildFile; fileRef = B757687016484CE00046A555 /* UIImage+Convinience.m */; };
 		B76180BA1634174200B94CA7 /* TYCheckInCellStyle1.xib in Resources */ = {isa = PBXBuildFile; fileRef = B76180B91634174200B94CA7 /* TYCheckInCellStyle1.xib */; };
+		B76EE56D164702D7005A872B /* tempview.xib in Resources */ = {isa = PBXBuildFile; fileRef = B76EE56C164702D7005A872B /* tempview.xib */; };
+		B76EE57016470482005A872B /* TYWildcardGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B76EE56F16470482005A872B /* TYWildcardGestureRecognizer.m */; };
 		B76FF730157178A900676F47 /* TYLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B76FF72E157178A900676F47 /* TYLogInViewController.m */; };
+		B7713C1B164D2F16002E3E82 /* TYPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7713C1A164D2F16002E3E82 /* TYPictureViewController.m */; };
+		B7713C1D164D2F2B002E3E82 /* TYPictureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7713C1C164D2F2B002E3E82 /* TYPictureView.xib */; };
 		B788B42D16347C97000C99FC /* TYCurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = B788B42C16347C97000C99FC /* TYCurrentUser.m */; };
 		B78AFF26160E30720073B97F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B78AFF25160E30720073B97F /* Default-568h@2x.png */; };
 		B7A06D00157F19F300169BDE /* SCNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A06CFF157F19F300169BDE /* SCNavigationBar.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B7A06D01157F19F300169BDE /* SCNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A06CFF157F19F300169BDE /* SCNavigationBar.m */; };
+		B7A0D847166B02B000E2842E /* temp3.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7A0D846166B02B000E2842E /* temp3.xib */; };
 		B7BDA721162AE56200DAC8AD /* TYComment.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BDA720162AE56200DAC8AD /* TYComment.m */; };
 		B7BDA724162B03F700DAC8AD /* TYLike.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BDA723162B03F700DAC8AD /* TYLike.m */; };
 		B7BDA727162B188A00DAC8AD /* facebook_like.png in Resources */ = {isa = PBXBuildFile; fileRef = B7BDA725162B188A00DAC8AD /* facebook_like.png */; };
@@ -158,15 +164,27 @@
 		B7C369BE163ABCFE00D60FEA /* TYCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C369BB163ABCFE00D60FEA /* TYCommentViewController.m */; };
 		B7C369BF163ABCFE00D60FEA /* TYCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7C369BC163ABCFE00D60FEA /* TYCommentView.xib */; };
 		B7C369C0163ABCFE00D60FEA /* TYCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7C369BC163ABCFE00D60FEA /* TYCommentView.xib */; };
+		B7D0BF48165C25C9004C7A78 /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF47165C25C9004C7A78 /* Mixpanel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B7D0BF49165C25C9004C7A78 /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF47165C25C9004C7A78 /* Mixpanel.m */; };
+		B7D0BF50165C25CF004C7A78 /* MPCJSONDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF4B165C25CF004C7A78 /* MPCJSONDataSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B7D0BF51165C25CF004C7A78 /* MPCJSONDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF4B165C25CF004C7A78 /* MPCJSONDataSerializer.m */; };
+		B7D0BF52165C25CF004C7A78 /* MPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF4D165C25CF004C7A78 /* MPCJSONSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B7D0BF53165C25CF004C7A78 /* MPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF4D165C25CF004C7A78 /* MPCJSONSerializer.m */; };
+		B7D0BF54165C25CF004C7A78 /* MPCSerializedJSONData.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF4F165C25CF004C7A78 /* MPCSerializedJSONData.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B7D0BF55165C25CF004C7A78 /* MPCSerializedJSONData.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF4F165C25CF004C7A78 /* MPCSerializedJSONData.m */; };
+		B7D0BF58165C25D5004C7A78 /* NSData+MPBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF57165C25D5004C7A78 /* NSData+MPBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B7D0BF59165C25D5004C7A78 /* NSData+MPBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF57165C25D5004C7A78 /* NSData+MPBase64.m */; };
+		B7D0BF5B165C260A004C7A78 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D0BF5A165C260A004C7A78 /* CoreTelephony.framework */; };
+		B7D0BF5E165C2CDE004C7A78 /* TYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF5D165C2CDD004C7A78 /* TYBaseViewController.m */; };
+		B7D0BF5F165C2CDE004C7A78 /* TYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF5D165C2CDD004C7A78 /* TYBaseViewController.m */; };
 		B7D4167C15E81968007BF955 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D4167B15E81968007BF955 /* CoreData.framework */; };
 		B7D85E5F162B402F00AC9AF8 /* comment-bubble-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E5B162B402F00AC9AF8 /* comment-bubble-blue.png */; };
 		B7D85E60162B402F00AC9AF8 /* comment-bubble-blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E5C162B402F00AC9AF8 /* comment-bubble-blue@2x.png */; };
 		B7D85E63162B42E000AC9AF8 /* facebook_like_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E61162B42E000AC9AF8 /* facebook_like_blue.png */; };
 		B7D85E64162B42E000AC9AF8 /* facebook_like_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E62162B42E000AC9AF8 /* facebook_like_blue@2x.png */; };
 		B7D85E67162B45F000AC9AF8 /* TYUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D85E66162B45F000AC9AF8 /* TYUserProfileViewController.m */; };
-		B7D85E69162B462500AC9AF8 /* TYUserProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E68162B462500AC9AF8 /* TYUserProfileView.xib */; };
+		B7D85E69162B462500AC9AF8 /* temp2.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E68162B462500AC9AF8 /* temp2.xib */; };
 		B7D85E6C162B463D00AC9AF8 /* TYPlaceProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D85E6B162B463D00AC9AF8 /* TYPlaceProfileViewController.m */; };
-		B7D85E6E162B465200AC9AF8 /* TYPlaceProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E6D162B465200AC9AF8 /* TYPlaceProfileView.xib */; };
 		B7D85E70162B490100AC9AF8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D85E6F162B490100AC9AF8 /* SystemConfiguration.framework */; };
 		B7D85E88162B5F9200AC9AF8 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D85E85162B5F9200AC9AF8 /* HPGrowingTextView.m */; };
 		B7D85E89162B5F9200AC9AF8 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D85E85162B5F9200AC9AF8 /* HPGrowingTextView.m */; };
@@ -190,6 +208,10 @@
 		B7D85EA7162B653900AC9AF8 /* MessageEntryInputField@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E97162B653900AC9AF8 /* MessageEntryInputField@2x.png */; };
 		B7D85EAB162C117600AC9AF8 /* TYIndeterminateProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D85EAA162C117600AC9AF8 /* TYIndeterminateProgressBar.m */; };
 		B7D85EAC162C117600AC9AF8 /* TYIndeterminateProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D85EAA162C117600AC9AF8 /* TYIndeterminateProgressBar.m */; };
+		B7DD1E3B166F05F70042CFD8 /* check-in-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7DD1E3A166F05F70042CFD8 /* check-in-icon@2x.png */; };
+		B7DD1E3C166F05F70042CFD8 /* check-in-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7DD1E3A166F05F70042CFD8 /* check-in-icon@2x.png */; };
+		B7DD1E3E166F062E0042CFD8 /* check-in-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B7DD1E3D166F062E0042CFD8 /* check-in-icon.png */; };
+		B7DD1E3F166F062E0042CFD8 /* check-in-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B7DD1E3D166F062E0042CFD8 /* check-in-icon.png */; };
 		B7E10F2A158535DC00FA9741 /* TYPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E10F29158535DC00FA9741 /* TYPageCell.m */; };
 		B7E10F2C158535F500FA9741 /* TYPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7E10F2B158535F400FA9741 /* TYPageCell.xib */; };
 		B7E10F2F15854BE300FA9741 /* TYCheckInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E10F2E15854BE300FA9741 /* TYCheckInViewController.m */; };
@@ -303,7 +325,7 @@
 		B73F6D54156ED835004A20E4 /* TYHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYHomeViewController.xib; path = Screens/TYHomeViewController.xib; sourceTree = "<group>"; };
 		B73F6D59156ED846004A20E4 /* TYPlacePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYPlacePickerViewController.h; path = Screens/TYPlacePickerViewController.h; sourceTree = "<group>"; };
 		B73F6D5A156ED846004A20E4 /* TYPlacePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYPlacePickerViewController.m; path = Screens/TYPlacePickerViewController.m; sourceTree = "<group>"; };
-		B73F6D5B156ED846004A20E4 /* TYPlacePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYPlacePickerViewController.xib; path = Screens/TYPlacePickerViewController.xib; sourceTree = "<group>"; };
+		B73F6D5B156ED846004A20E4 /* TYPlacePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYPlacePickerView.xib; path = Screens/TYPlacePickerView.xib; sourceTree = "<group>"; };
 		B73F6D60156ED86B004A20E4 /* facebook_ios_sdk_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = facebook_ios_sdk_Prefix.pch; path = "facebook-ios-sdk/src/facebook_ios_sdk_Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		B73F6D61156ED86B004A20E4 /* facebook-ios-sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "facebook-ios-sdk.xcodeproj"; path = "facebook-ios-sdk/src/facebook-ios-sdk.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		B73F6D64156ED86B004A20E4 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Facebook.h; path = "facebook-ios-sdk/src/Facebook.h"; sourceTree = SOURCE_ROOT; };
@@ -362,14 +384,23 @@
 		B7539F9315D576F00012370C /* TYFBFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYFBFacade.m; path = Libraries/FacebookWrapper/TYFBFacade.m; sourceTree = "<group>"; };
 		B7539F9815D57F350012370C /* UISearchBar+CustomBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UISearchBar+CustomBackground.h"; path = "Libraries/Categories/UISearchBar+CustomBackground.h"; sourceTree = "<group>"; };
 		B7539F9915D57F350012370C /* UISearchBar+CustomBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UISearchBar+CustomBackground.m"; path = "Libraries/Categories/UISearchBar+CustomBackground.m"; sourceTree = "<group>"; };
+		B757686F16484CE00046A555 /* UIImage+Convinience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Convinience.h"; path = "Libraries/Categories/UIImage+Convinience.h"; sourceTree = "<group>"; };
+		B757687016484CE00046A555 /* UIImage+Convinience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Convinience.m"; path = "Libraries/Categories/UIImage+Convinience.m"; sourceTree = "<group>"; };
 		B76180B91634174200B94CA7 /* TYCheckInCellStyle1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYCheckInCellStyle1.xib; path = Screens/UITableViewCells/TYCheckInCellStyle1.xib; sourceTree = "<group>"; };
+		B76EE56C164702D7005A872B /* tempview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = tempview.xib; path = Screens/tempview.xib; sourceTree = "<group>"; };
+		B76EE56E16470482005A872B /* TYWildcardGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYWildcardGestureRecognizer.h; path = Libraries/Utils/TYWildcardGestureRecognizer.h; sourceTree = "<group>"; };
+		B76EE56F16470482005A872B /* TYWildcardGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYWildcardGestureRecognizer.m; path = Libraries/Utils/TYWildcardGestureRecognizer.m; sourceTree = "<group>"; };
 		B76FF72D157178A900676F47 /* TYLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYLogInViewController.h; path = Screens/TYLogInViewController.h; sourceTree = "<group>"; };
 		B76FF72E157178A900676F47 /* TYLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYLogInViewController.m; path = Screens/TYLogInViewController.m; sourceTree = "<group>"; };
+		B7713C19164D2F16002E3E82 /* TYPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYPictureViewController.h; path = Screens/TYPictureViewController.h; sourceTree = "<group>"; };
+		B7713C1A164D2F16002E3E82 /* TYPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYPictureViewController.m; path = Screens/TYPictureViewController.m; sourceTree = "<group>"; };
+		B7713C1C164D2F2B002E3E82 /* TYPictureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYPictureView.xib; path = Screens/TYPictureView.xib; sourceTree = "<group>"; };
 		B788B42B16347C97000C99FC /* TYCurrentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYCurrentUser.h; path = Screens/TYCurrentUser.h; sourceTree = "<group>"; };
 		B788B42C16347C97000C99FC /* TYCurrentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYCurrentUser.m; path = Screens/TYCurrentUser.m; sourceTree = "<group>"; };
 		B78AFF25160E30720073B97F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B7A06CFE157F19F300169BDE /* SCNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNavigationBar.h; sourceTree = "<group>"; };
 		B7A06CFF157F19F300169BDE /* SCNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNavigationBar.m; sourceTree = "<group>"; };
+		B7A0D846166B02B000E2842E /* temp3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = temp3.xib; sourceTree = "<group>"; };
 		B7BDA71F162AE56200DAC8AD /* TYComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYComment.h; sourceTree = "<group>"; };
 		B7BDA720162AE56200DAC8AD /* TYComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYComment.m; sourceTree = "<group>"; };
 		B7BDA722162B03F700DAC8AD /* TYLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYLike.h; path = Models/TYLike.h; sourceTree = "<group>"; };
@@ -391,6 +422,19 @@
 		B7C369BA163ABCFE00D60FEA /* TYCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYCommentViewController.h; path = Screens/TYCommentViewController.h; sourceTree = "<group>"; };
 		B7C369BB163ABCFE00D60FEA /* TYCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYCommentViewController.m; path = Screens/TYCommentViewController.m; sourceTree = "<group>"; };
 		B7C369BC163ABCFE00D60FEA /* TYCommentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYCommentView.xib; path = Screens/TYCommentView.xib; sourceTree = "<group>"; };
+		B7D0BF46165C25C9004C7A78 /* Mixpanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mixpanel.h; path = "Libraries/mixpanel-iphone/Mixpanel/Mixpanel.h"; sourceTree = "<group>"; };
+		B7D0BF47165C25C9004C7A78 /* Mixpanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mixpanel.m; path = "Libraries/mixpanel-iphone/Mixpanel/Mixpanel.m"; sourceTree = "<group>"; };
+		B7D0BF4A165C25CF004C7A78 /* MPCJSONDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPCJSONDataSerializer.h; path = "Libraries/mixpanel-iphone/Mixpanel/Library/JSON/MPCJSONDataSerializer.h"; sourceTree = "<group>"; };
+		B7D0BF4B165C25CF004C7A78 /* MPCJSONDataSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPCJSONDataSerializer.m; path = "Libraries/mixpanel-iphone/Mixpanel/Library/JSON/MPCJSONDataSerializer.m"; sourceTree = "<group>"; };
+		B7D0BF4C165C25CF004C7A78 /* MPCJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPCJSONSerializer.h; path = "Libraries/mixpanel-iphone/Mixpanel/Library/JSON/MPCJSONSerializer.h"; sourceTree = "<group>"; };
+		B7D0BF4D165C25CF004C7A78 /* MPCJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPCJSONSerializer.m; path = "Libraries/mixpanel-iphone/Mixpanel/Library/JSON/MPCJSONSerializer.m"; sourceTree = "<group>"; };
+		B7D0BF4E165C25CF004C7A78 /* MPCSerializedJSONData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPCSerializedJSONData.h; path = "Libraries/mixpanel-iphone/Mixpanel/Library/JSON/MPCSerializedJSONData.h"; sourceTree = "<group>"; };
+		B7D0BF4F165C25CF004C7A78 /* MPCSerializedJSONData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPCSerializedJSONData.m; path = "Libraries/mixpanel-iphone/Mixpanel/Library/JSON/MPCSerializedJSONData.m"; sourceTree = "<group>"; };
+		B7D0BF56165C25D5004C7A78 /* NSData+MPBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+MPBase64.h"; path = "Libraries/mixpanel-iphone/Mixpanel/Library/NSData_Base64/NSData+MPBase64.h"; sourceTree = "<group>"; };
+		B7D0BF57165C25D5004C7A78 /* NSData+MPBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+MPBase64.m"; path = "Libraries/mixpanel-iphone/Mixpanel/Library/NSData_Base64/NSData+MPBase64.m"; sourceTree = "<group>"; };
+		B7D0BF5A165C260A004C7A78 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		B7D0BF5C165C2CDD004C7A78 /* TYBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYBaseViewController.h; path = Screens/TYBaseViewController.h; sourceTree = "<group>"; };
+		B7D0BF5D165C2CDD004C7A78 /* TYBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYBaseViewController.m; path = Screens/TYBaseViewController.m; sourceTree = "<group>"; };
 		B7D4167B15E81968007BF955 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		B7D85E5B162B402F00AC9AF8 /* comment-bubble-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment-bubble-blue.png"; sourceTree = "<group>"; };
 		B7D85E5C162B402F00AC9AF8 /* comment-bubble-blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment-bubble-blue@2x.png"; sourceTree = "<group>"; };
@@ -398,10 +442,9 @@
 		B7D85E62162B42E000AC9AF8 /* facebook_like_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook_like_blue@2x.png"; path = "Images/facebook_like_blue@2x.png"; sourceTree = SOURCE_ROOT; };
 		B7D85E65162B45F000AC9AF8 /* TYUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYUserProfileViewController.h; path = Screens/TYUserProfileViewController.h; sourceTree = "<group>"; };
 		B7D85E66162B45F000AC9AF8 /* TYUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYUserProfileViewController.m; path = Screens/TYUserProfileViewController.m; sourceTree = "<group>"; };
-		B7D85E68162B462500AC9AF8 /* TYUserProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TYUserProfileView.xib; sourceTree = "<group>"; };
+		B7D85E68162B462500AC9AF8 /* temp2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = temp2.xib; sourceTree = "<group>"; };
 		B7D85E6A162B463D00AC9AF8 /* TYPlaceProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYPlaceProfileViewController.h; path = Screens/TYPlaceProfileViewController.h; sourceTree = "<group>"; };
 		B7D85E6B162B463D00AC9AF8 /* TYPlaceProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYPlaceProfileViewController.m; path = Screens/TYPlaceProfileViewController.m; sourceTree = "<group>"; };
-		B7D85E6D162B465200AC9AF8 /* TYPlaceProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TYPlaceProfileView.xib; sourceTree = "<group>"; };
 		B7D85E6F162B490100AC9AF8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B7D85E84162B5F9200AC9AF8 /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HPGrowingTextView.h; path = Libraries/GrowingTextView/class/HPGrowingTextView.h; sourceTree = "<group>"; };
 		B7D85E85162B5F9200AC9AF8 /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HPGrowingTextView.m; path = Libraries/GrowingTextView/class/HPGrowingTextView.m; sourceTree = "<group>"; };
@@ -417,6 +460,8 @@
 		B7D85E97162B653900AC9AF8 /* MessageEntryInputField@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MessageEntryInputField@2x.png"; path = "Libraries/GrowingTextView/example/MessageEntryInputField@2x.png"; sourceTree = "<group>"; };
 		B7D85EA9162C117600AC9AF8 /* TYIndeterminateProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYIndeterminateProgressBar.h; path = Libraries/TYIndeterminateProgressBar/TYIndeterminateProgressBar/TYIndeterminateProgressBar.h; sourceTree = "<group>"; };
 		B7D85EAA162C117600AC9AF8 /* TYIndeterminateProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYIndeterminateProgressBar.m; path = Libraries/TYIndeterminateProgressBar/TYIndeterminateProgressBar/TYIndeterminateProgressBar.m; sourceTree = "<group>"; };
+		B7DD1E3A166F05F70042CFD8 /* check-in-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "check-in-icon@2x.png"; path = "Images/check-in-icon@2x.png"; sourceTree = SOURCE_ROOT; };
+		B7DD1E3D166F062E0042CFD8 /* check-in-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "check-in-icon.png"; path = "Images/check-in-icon.png"; sourceTree = SOURCE_ROOT; };
 		B7E10F28158535DC00FA9741 /* TYPageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYPageCell.h; path = Screens/UITableViewCells/TYPageCell.h; sourceTree = "<group>"; };
 		B7E10F29158535DC00FA9741 /* TYPageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYPageCell.m; path = Screens/UITableViewCells/TYPageCell.m; sourceTree = "<group>"; };
 		B7E10F2B158535F400FA9741 /* TYPageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYPageCell.xib; path = Screens/UITableViewCells/TYPageCell.xib; sourceTree = "<group>"; };
@@ -459,6 +504,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7D0BF5B165C260A004C7A78 /* CoreTelephony.framework in Frameworks */,
 				B7D85E70162B490100AC9AF8 /* SystemConfiguration.framework in Frameworks */,
 				B7D4167C15E81968007BF955 /* CoreData.framework in Frameworks */,
 				B736F6781582983E002A5614 /* QuartzCore.framework in Frameworks */,
@@ -557,6 +603,7 @@
 		B73F6CE5156ED27F004A20E4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B7D0BF5A165C260A004C7A78 /* CoreTelephony.framework */,
 				B7D85E6F162B490100AC9AF8 /* SystemConfiguration.framework */,
 				B7D4167B15E81968007BF955 /* CoreData.framework */,
 				B736F6771582983D002A5614 /* QuartzCore.framework */,
@@ -581,6 +628,8 @@
 				B73F6D15156ED297004A20E4 /* FacebookSDK */,
 				B73F6CF5156ED281004A20E4 /* TYAppDelegate.h */,
 				B73F6CF6156ED281004A20E4 /* TYAppDelegate.m */,
+				B7D0BF5C165C2CDD004C7A78 /* TYBaseViewController.h */,
+				B7D0BF5D165C2CDD004C7A78 /* TYBaseViewController.m */,
 				B76FF72D157178A900676F47 /* TYLogInViewController.h */,
 				B76FF72E157178A900676F47 /* TYLogInViewController.m */,
 				B7C369AE163AA88F00D60FEA /* TYLoginView.xib */,
@@ -592,7 +641,7 @@
 				B7C369BC163ABCFE00D60FEA /* TYCommentView.xib */,
 				B73F6D59156ED846004A20E4 /* TYPlacePickerViewController.h */,
 				B73F6D5A156ED846004A20E4 /* TYPlacePickerViewController.m */,
-				B73F6D5B156ED846004A20E4 /* TYPlacePickerViewController.xib */,
+				B73F6D5B156ED846004A20E4 /* TYPlacePickerView.xib */,
 				B7E10F2D15854BE200FA9741 /* TYCheckInViewController.h */,
 				B7E10F2E15854BE300FA9741 /* TYCheckInViewController.m */,
 				B7E10F3015854BFF00FA9741 /* TYCheckInConfirmation.xib */,
@@ -607,13 +656,17 @@
 				B73F6DA0156ED8C0004A20E4 /* TYMapViewController.xib */,
 				B7D85E65162B45F000AC9AF8 /* TYUserProfileViewController.h */,
 				B7D85E66162B45F000AC9AF8 /* TYUserProfileViewController.m */,
-				B7D85E68162B462500AC9AF8 /* TYUserProfileView.xib */,
+				B7D85E68162B462500AC9AF8 /* temp2.xib */,
+				B7A0D846166B02B000E2842E /* temp3.xib */,
 				B7D85E6A162B463D00AC9AF8 /* TYPlaceProfileViewController.h */,
 				B7D85E6B162B463D00AC9AF8 /* TYPlaceProfileViewController.m */,
-				B7D85E6D162B465200AC9AF8 /* TYPlaceProfileView.xib */,
+				B76EE56C164702D7005A872B /* tempview.xib */,
 				B7C369A9163A980300D60FEA /* TYAboutViewController.h */,
 				B7C369AA163A980300D60FEA /* TYAboutViewController.m */,
 				B7C369AB163A980300D60FEA /* TYAboutView.xib */,
+				B7713C19164D2F16002E3E82 /* TYPictureViewController.h */,
+				B7713C1A164D2F16002E3E82 /* TYPictureViewController.m */,
+				B7713C1C164D2F2B002E3E82 /* TYPictureView.xib */,
 				B73F6DC4156ED965004A20E4 /* Resources */,
 				B73F6CED156ED280004A20E4 /* Supporting Files */,
 				B73F6DF2156F3483004A20E4 /* config.plist */,
@@ -706,6 +759,8 @@
 		B73F6D9C156ED8A1004A20E4 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				B7BC7EFD165C8E7D00C40686 /* LocationManager */,
+				B7D0BF43165C25AA004C7A78 /* Mixpanel */,
 				B7C22BE7163071310072B092 /* Utils */,
 				B7D85EA8162C116B00AC9AF8 /* TYIndeterminateProgressBar */,
 				B7D85E83162B5F8700AC9AF8 /* HPTextView */,
@@ -732,6 +787,8 @@
 				B73F6DAE156ED926004A20E4 /* UIColor+HexString.m */,
 				B7539F9815D57F350012370C /* UISearchBar+CustomBackground.h */,
 				B7539F9915D57F350012370C /* UISearchBar+CustomBackground.m */,
+				B757686F16484CE00046A555 /* UIImage+Convinience.h */,
+				B757687016484CE00046A555 /* UIImage+Convinience.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -776,6 +833,8 @@
 		B73F6DC4156ED965004A20E4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B7DD1E3D166F062E0042CFD8 /* check-in-icon.png */,
+				B7DD1E3A166F05F70042CFD8 /* check-in-icon@2x.png */,
 				B7C369B4163ABC2F00D60FEA /* facebook_like_green.png */,
 				B7C369B5163ABC2F00D60FEA /* facebook_like_green@2x.png */,
 				B7D85E90162B653800AC9AF8 /* MessageEntrySendButton.png */,
@@ -841,6 +900,13 @@
 			name = UITableViewCells;
 			sourceTree = "<group>";
 		};
+		B7BC7EFD165C8E7D00C40686 /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = LocationManager;
+			sourceTree = "<group>";
+		};
 		B7BDF78315D6F60D00D6FA11 /* FBWrapperTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -855,8 +921,43 @@
 			children = (
 				B7C22BE8163071440072B092 /* TYUtils.h */,
 				B7C22BE9163071440072B092 /* TYUtils.m */,
+				B76EE56E16470482005A872B /* TYWildcardGestureRecognizer.h */,
+				B76EE56F16470482005A872B /* TYWildcardGestureRecognizer.m */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		B7D0BF43165C25AA004C7A78 /* Mixpanel */ = {
+			isa = PBXGroup;
+			children = (
+				B7D0BF46165C25C9004C7A78 /* Mixpanel.h */,
+				B7D0BF47165C25C9004C7A78 /* Mixpanel.m */,
+				B7D0BF45165C25B2004C7A78 /* NSData Category */,
+				B7D0BF44165C25AF004C7A78 /* JSON */,
+			);
+			name = Mixpanel;
+			sourceTree = "<group>";
+		};
+		B7D0BF44165C25AF004C7A78 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				B7D0BF4A165C25CF004C7A78 /* MPCJSONDataSerializer.h */,
+				B7D0BF4B165C25CF004C7A78 /* MPCJSONDataSerializer.m */,
+				B7D0BF4C165C25CF004C7A78 /* MPCJSONSerializer.h */,
+				B7D0BF4D165C25CF004C7A78 /* MPCJSONSerializer.m */,
+				B7D0BF4E165C25CF004C7A78 /* MPCSerializedJSONData.h */,
+				B7D0BF4F165C25CF004C7A78 /* MPCSerializedJSONData.m */,
+			);
+			name = JSON;
+			sourceTree = "<group>";
+		};
+		B7D0BF45165C25B2004C7A78 /* NSData Category */ = {
+			isa = PBXGroup;
+			children = (
+				B7D0BF56165C25D5004C7A78 /* NSData+MPBase64.h */,
+				B7D0BF57165C25D5004C7A78 /* NSData+MPBase64.m */,
+			);
+			name = "NSData Category";
 			sourceTree = "<group>";
 		};
 		B7D85E83162B5F8700AC9AF8 /* HPTextView */ = {
@@ -1007,7 +1108,7 @@
 			files = (
 				B73F6CF1156ED280004A20E4 /* InfoPlist.strings in Resources */,
 				B73F6D57156ED835004A20E4 /* TYHomeViewController.xib in Resources */,
-				B73F6D5E156ED846004A20E4 /* TYPlacePickerViewController.xib in Resources */,
+				B73F6D5E156ED846004A20E4 /* TYPlacePickerView.xib in Resources */,
 				B73F6D83156ED86B004A20E4 /* FBDialog.bundle in Resources */,
 				B73F6DA3156ED8C0004A20E4 /* TYMapViewController.xib in Resources */,
 				B73F6DBC156ED937004A20E4 /* SVProgressHUD.bundle in Resources */,
@@ -1056,8 +1157,7 @@
 				B7D85E60162B402F00AC9AF8 /* comment-bubble-blue@2x.png in Resources */,
 				B7D85E63162B42E000AC9AF8 /* facebook_like_blue.png in Resources */,
 				B7D85E64162B42E000AC9AF8 /* facebook_like_blue@2x.png in Resources */,
-				B7D85E69162B462500AC9AF8 /* TYUserProfileView.xib in Resources */,
-				B7D85E6E162B465200AC9AF8 /* TYPlaceProfileView.xib in Resources */,
+				B7D85E69162B462500AC9AF8 /* temp2.xib in Resources */,
 				B7D85E98162B653900AC9AF8 /* MessageEntrySendButton.png in Resources */,
 				B7D85E9A162B653900AC9AF8 /* MessageEntrySendButton@2x.png in Resources */,
 				B7D85E9C162B653900AC9AF8 /* MessageEntrySendButtonPressed.png in Resources */,
@@ -1072,6 +1172,11 @@
 				B7C369B6163ABC2F00D60FEA /* facebook_like_green.png in Resources */,
 				B7C369B8163ABC2F00D60FEA /* facebook_like_green@2x.png in Resources */,
 				B7C369BF163ABCFE00D60FEA /* TYCommentView.xib in Resources */,
+				B76EE56D164702D7005A872B /* tempview.xib in Resources */,
+				B7713C1D164D2F2B002E3E82 /* TYPictureView.xib in Resources */,
+				B7A0D847166B02B000E2842E /* temp3.xib in Resources */,
+				B7DD1E3B166F05F70042CFD8 /* check-in-icon@2x.png in Resources */,
+				B7DD1E3E166F062E0042CFD8 /* check-in-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1081,7 +1186,7 @@
 			files = (
 				B73F6D09156ED281004A20E4 /* InfoPlist.strings in Resources */,
 				B73F6D58156ED835004A20E4 /* TYHomeViewController.xib in Resources */,
-				B73F6D5F156ED846004A20E4 /* TYPlacePickerViewController.xib in Resources */,
+				B73F6D5F156ED846004A20E4 /* TYPlacePickerView.xib in Resources */,
 				B73F6D84156ED86B004A20E4 /* FBDialog.bundle in Resources */,
 				B73F6DA4156ED8C0004A20E4 /* TYMapViewController.xib in Resources */,
 				B73F6DBD156ED938004A20E4 /* SVProgressHUD.bundle in Resources */,
@@ -1113,6 +1218,8 @@
 				B7C369B7163ABC2F00D60FEA /* facebook_like_green.png in Resources */,
 				B7C369B9163ABC2F00D60FEA /* facebook_like_green@2x.png in Resources */,
 				B7C369C0163ABCFE00D60FEA /* TYCommentView.xib in Resources */,
+				B7DD1E3C166F05F70042CFD8 /* check-in-icon@2x.png in Resources */,
+				B7DD1E3F166F062E0042CFD8 /* check-in-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1200,6 +1307,15 @@
 				B788B42D16347C97000C99FC /* TYCurrentUser.m in Sources */,
 				B7C369AC163A980300D60FEA /* TYAboutViewController.m in Sources */,
 				B7C369BD163ABCFE00D60FEA /* TYCommentViewController.m in Sources */,
+				B76EE57016470482005A872B /* TYWildcardGestureRecognizer.m in Sources */,
+				B757687116484CE00046A555 /* UIImage+Convinience.m in Sources */,
+				B7713C1B164D2F16002E3E82 /* TYPictureViewController.m in Sources */,
+				B7D0BF48165C25C9004C7A78 /* Mixpanel.m in Sources */,
+				B7D0BF50165C25CF004C7A78 /* MPCJSONDataSerializer.m in Sources */,
+				B7D0BF52165C25CF004C7A78 /* MPCJSONSerializer.m in Sources */,
+				B7D0BF54165C25CF004C7A78 /* MPCSerializedJSONData.m in Sources */,
+				B7D0BF58165C25D5004C7A78 /* NSData+MPBase64.m in Sources */,
+				B7D0BF5E165C2CDE004C7A78 /* TYBaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1247,6 +1363,12 @@
 				B7D85E8B162B5F9200AC9AF8 /* HPTextViewInternal.m in Sources */,
 				B7D85EAC162C117600AC9AF8 /* TYIndeterminateProgressBar.m in Sources */,
 				B7C369BE163ABCFE00D60FEA /* TYCommentViewController.m in Sources */,
+				B7D0BF49165C25C9004C7A78 /* Mixpanel.m in Sources */,
+				B7D0BF51165C25CF004C7A78 /* MPCJSONDataSerializer.m in Sources */,
+				B7D0BF53165C25CF004C7A78 /* MPCJSONSerializer.m in Sources */,
+				B7D0BF55165C25CF004C7A78 /* MPCSerializedJSONData.m in Sources */,
+				B7D0BF59165C25D5004C7A78 /* NSData+MPBase64.m in Sources */,
+				B7D0BF5F165C2CDE004C7A78 /* TYBaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1342,10 +1464,10 @@
 				GCC_PREFIX_HEADER = "FBCheckIn/FBCheckIn-Prefix.pch";
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
 				INFOPLIST_FILE = "FBCheckIn/FBCheckIn-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6D837FC8-4F81-46EE-BFCF-F2BF3E7B01FF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6D837FC8-4F81-46EE-BFCF-F2BF3E7B01FF";
+				PROVISIONING_PROFILE = "C5028664-8196-4DF9-82BD-3B4233B6558A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5028664-8196-4DF9-82BD-3B4233B6558A";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1360,10 +1482,10 @@
 				GCC_PREFIX_HEADER = "FBCheckIn/FBCheckIn-Prefix.pch";
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
 				INFOPLIST_FILE = "FBCheckIn/FBCheckIn-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6D837FC8-4F81-46EE-BFCF-F2BF3E7B01FF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6D837FC8-4F81-46EE-BFCF-F2BF3E7B01FF";
+				PROVISIONING_PROFILE = "C5028664-8196-4DF9-82BD-3B4233B6558A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5028664-8196-4DF9-82BD-3B4233B6558A";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

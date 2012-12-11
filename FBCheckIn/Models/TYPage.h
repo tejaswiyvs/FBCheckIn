@@ -28,7 +28,10 @@
 @property (nonatomic, strong) NSString *street;
 @property (nonatomic, strong) NSString *zip;
 @property (nonatomic, strong) NSString *phoneNumber;
+@property (nonatomic, assign) int numberOfFriendsCheckedIn;
 
 -(id) initWithDictionary:(NSDictionary *) pageDictionary;
 -(NSString *) shortAddress;
+-(BOOL) hasAddress;
+-(BOOL) hasPhone;
 @end

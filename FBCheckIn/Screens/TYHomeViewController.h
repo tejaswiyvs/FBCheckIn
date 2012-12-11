@@ -10,8 +10,10 @@
 #import "EGORefreshTableHeaderView.h"
 #import "TYCheckInCache.h"
 #import "TYFBFacade.h"
+#import "TYCommentViewController.h"
+#import "TYBaseViewController.h"
 
-@interface TYHomeViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, TYFBFacadeDelegate, EGORefreshTableHeaderDelegate>
+@interface TYHomeViewController : TYBaseViewController<UITableViewDelegate, UITableViewDataSource, TYFBFacadeDelegate, EGORefreshTableHeaderDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) Facebook *facebook;
@@ -19,6 +21,8 @@
 @property (nonatomic, strong) TYCheckInCache *cache;
 @property (nonatomic, assign) BOOL reloading;
 @property (nonatomic, strong) NSMutableArray *requests;
+@property (nonatomic, strong) UITapGestureRecognizer *profilePictureTapRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer *pageTapRecognizer;
 
 -(id) initWithTabBar;
 

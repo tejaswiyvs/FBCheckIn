@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "TYBaseViewController.h"
 
-@interface TYMapViewController : UIViewController<MKMapViewDelegate>
+@interface TYMapViewController : TYBaseViewController<MKMapViewDelegate>
 -(id) initWithTabBar;
 
 @property (nonatomic, strong) NSMutableArray *checkIns;

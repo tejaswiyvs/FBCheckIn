@@ -13,7 +13,6 @@
 #import "JSONKit.h"
 #import "TYCheckIn.h"
 #import "UIImageView+AFNetworking.h"
-#import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/CALayer.h>
 #import "TYFBManager.h"
 #import "TYCheckInDetailViewController.h"
@@ -25,6 +24,8 @@
 #import "NSDate+Helper.h"
 #import "TYCurrentUser.h"
 #import "TYUtils.h"
+#import "TYUserProfileViewController.h"
+#import "TYPlaceProfileViewController.h"
 
 @interface TYHomeViewController ()
 -(void) checkInButtonClicked:(id) sender;
@@ -36,6 +37,8 @@
 -(float) heightForText:(NSString *) messageText;
 -(CGFloat) heightForIndexPath:(NSIndexPath *) indexPath;
 -(void) commentButtonClicked:(id) sender;
+-(void) pageNameTapped:(UIGestureRecognizer *) sender;
+-(void) profilePictureTapped:(UIGestureRecognizer *) sender;
 @end
 
 @implementation TYHomeViewController
@@ -46,6 +49,8 @@
 @synthesize reloading = _reloading;
 @synthesize cache = _cache;
 @synthesize requests = _requests;
+@synthesize profilePictureTapRecognizer = _profilePictureTapRecognizer;
+@synthesize pageTapRecognizer = _pageTapRecognizer;
 
 -(id) initWithTabBar {
     self = [super initWithNibName:@"TYHomeViewController" bundle:nil];
@@ -60,8 +65,8 @@
 
 - (void)viewDidLoad
 {
+    DebugLog(@"HomeView Did Load. Setting up UI.");
     [super viewDidLoad];
-
     // Subscribe to cache refresh notifications.
     [self subscribeToNotifications];
     
@@ -77,7 +82,7 @@
 
     // Setup other UI
     UIBarButtonItem *checkInButton = [[UIBarButtonItem alloc] initWithTitle:@"Check-in" style:UIBarButtonItemStylePlain target:self action:@selector(checkInButtonClicked:)];
-    [self.navigationItem setRightBarButtonItem:checkInButton];
+//    [self.navigationItem setRightBarButtonItem:checkInButton];
     if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
         NSLog(@"Height of the header view = %f", self.tableView.bounds.size.height);
@@ -89,13 +94,16 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    DebugLog(@"HomeView viewDidAppear. Checking if cache is empty.")
     if (![self.cache checkIns] || [self.cache.checkIns count] == 0) {
+        DebugLog(@"Cache is empty, so force refreshing");
         [self.cache forceRefresh];
     }
 }
 
 - (void)viewDidUnload
 {
+    DebugLog(@"HomeView DidUnload. Cleaning up.");
     [super viewDidUnload];
     [self unsubscribeFromNotifications];
     [self unregisterObserver];
@@ -108,7 +116,8 @@
 }
 
 -(void) checkInButtonClicked:(id) sender {
-    TYPlacePickerViewController *checkInScreen = [[TYPlacePickerViewController alloc] initWithNibName:@"TYPlacePicker" bundle:nil];
+    DebugLog(@"Checkin button clicked. Launching PlacePicker");
+    TYPlacePickerViewController *checkInScreen = [[TYPlacePickerViewController alloc] initWithNibName:@"TYPlacePickerView" bundle:nil];
     UINavigationController *navigationController = [SCNavigationBar customizedNavigationController];
     navigationController.viewControllers = [NSArray arrayWithObject:checkInScreen];
     [self presentModalViewController:navigationController animated:YES];
@@ -138,6 +147,14 @@
     CGRect rect = CGRectMake(0.0f, 0.0f, 320.0f, height);
     [cell setFrame:rect];
     
+    // Setup tap recognizers.
+    self.profilePictureTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profilePictureTapped:)];
+    self.profilePictureTapRecognizer.numberOfTapsRequired = 1;
+    self.profilePictureTapRecognizer.cancelsTouchesInView = YES;
+    self.pageTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pageNameTapped:)];
+    self.pageTapRecognizer.numberOfTapsRequired = 1;
+    self.pageTapRecognizer.cancelsTouchesInView = YES;
+    
     UIImageView *backgroundImgView = [[UIImageView alloc] initWithFrame:rect];
     [backgroundImgView setImage:[UIImage imageNamed:@"table-cell-bg.png"]];
     [cell addSubview:backgroundImgView];
@@ -147,8 +164,12 @@
     [profilePictureImgView.layer setBorderWidth:3.0f];
     [profilePictureImgView.layer setCornerRadius:3.0f];
     [profilePictureImgView.layer setMasksToBounds:YES];
+    [profilePictureImgView setBackgroundColor:[UIColor blackColor]];
+    [profilePictureImgView setUserInteractionEnabled:YES];
+    [profilePictureImgView setContentMode:UIViewContentModeScaleAspectFill];
     [profilePictureImgView setImageWithURL:[NSURL URLWithString:checkIn.user.profilePictureUrl] placeholderImage:[UIImage imageNamed:@"user_placeholder.png"]];
     [cell addSubview:profilePictureImgView];
+    [profilePictureImgView addGestureRecognizer:self.profilePictureTapRecognizer];
     
     UILabel *fullNameLbl = [[UILabel alloc] initWithFrame:CGRectMake(84.0f, 11.0f, 208.0f, 21.0f)];
     [fullNameLbl setText:[checkIn.user shortName]];
@@ -156,6 +177,9 @@
     [fullNameLbl setFont:[UIFont boldSystemFontOfSize:17.0f]];
     [fullNameLbl setBackgroundColor:[UIColor clearColor]];
     [cell addSubview:fullNameLbl];
+    [fullNameLbl setUserInteractionEnabled:YES];
+    fullNameLbl.tag = indexPath.row;
+    [fullNameLbl addGestureRecognizer:self.profilePictureTapRecognizer];
     
     UILabel *atLabel = [[UILabel alloc] initWithFrame:CGRectMake(84.0f, 32.0f, 19.0f, 21.0f)];
     [atLabel setText:@"@"];
@@ -169,6 +193,9 @@
     [locationLbl setTextColor:[UIColor subtitleTextColor]];
     [locationLbl setBackgroundColor:[UIColor clearColor]];
     [cell addSubview:locationLbl];
+    [locationLbl setUserInteractionEnabled:YES];
+    locationLbl.tag = indexPath.row;
+    [locationLbl addGestureRecognizer:self.pageTapRecognizer];
     
     UILabel *timestampLbl = [[UILabel alloc] initWithFrame:CGRectMake(84.0f, 54.0f, 208.0f, 21.0f)];
     [timestampLbl setText:[NSDate stringForDisplayFromDate:checkIn.checkInDate prefixed:YES]];
@@ -256,7 +283,7 @@
         [likeButton setImage:[UIImage imageNamed:@"facebook_like.png"] forState:UIControlStateNormal];
     }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -280,7 +307,22 @@
 
 #pragma mark - Helpers
 
+-(void) pageNameTapped:(UIGestureRecognizer *) sender {
+    UIView *view = sender.view;
+    TYCheckIn *checkIn = [self.cache.checkIns objectAtIndex:view.tag];
+    TYPlaceProfileViewController *userProfile = [[TYPlaceProfileViewController alloc] initWithPlace:checkIn.page];
+    [self.navigationController pushViewController:userProfile animated:YES];
+}
+
+-(void) profilePictureTapped:(UIGestureRecognizer *) sender {
+    UIView *view = sender.view;
+    TYCheckIn *checkIn = [self.cache.checkIns objectAtIndex:view.tag];
+    TYUserProfileViewController *userProfile = [[TYUserProfileViewController alloc] initWithUser:checkIn.user];
+    [self.navigationController pushViewController:userProfile animated:YES];
+}
+
 -(void) likeButtonClicked:(id) sender {
+    DebugLog(@"Like Check-in Button Clicked");
     UIButton *button = (UIButton *) sender;
     NSMutableArray *checkIns = self.cache.checkIns;
     TYCheckIn *selectedCheckIn = [checkIns objectAtIndex:button.tag];
@@ -304,15 +346,23 @@
 }
 
 -(void) commentButtonClicked:(id) sender {
+    DebugLog(@"Comment Button Clicked. Launching CommentView");
+    [self.mixPanel track:@"Comment Button Clicked"];
     UIButton *button = (UIButton *) sender;
     NSMutableArray *checkIns = self.cache.checkIns;
     TYCheckIn *selectedCheckIn = [checkIns objectAtIndex:button.tag];
     TYUser *currentUser = [TYCurrentUser sharedInstance].user;
+    TYCommentViewController *commentScreen = [[TYCommentViewController alloc] initWithCheckIn:selectedCheckIn user:currentUser];
+    UINavigationController *mapsNavController = [SCNavigationBar customizedNavigationController];
+    [mapsNavController setViewControllers:[NSArray arrayWithObject:commentScreen]];
+    [self presentModalViewController:mapsNavController animated:YES];
 }
 
 -(void) forceRefreshCache {
     [self.cache forceRefresh];
 }
+
+#pragma mark - TYCommentViewControllerDelegate
 
 #pragma mark -
 #pragma mark UIScrollViewDelegate Methods

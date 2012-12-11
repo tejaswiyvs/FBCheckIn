@@ -12,4 +12,6 @@
 +(UIColor *) colorWithHexString: (NSString *) hexString;
 +(UIColor *) headerTextColor;
 +(UIColor *) subtitleTextColor;
++(UIColor *) dullWhite;
++(UIColor *) tabBarTintColor;
 @end

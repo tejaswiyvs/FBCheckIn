@@ -35,7 +35,7 @@
         NSDictionary *coordinates = [checkInDictionary objectForKey:@"coords"];
         NSNumber *latitude = [coordinates objectForKey:@"latitude"];
         NSNumber *longitude = [coordinates objectForKey:@"longitude"];
-        self.location = CLLocationCoordinate2DMake([latitude longValue], [longitude longValue]);
+        self.location = CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]);
         long checkInUnixTimestamp = [[checkInDictionary objectForKey:@"timestamp"] doubleValue];;
         if (checkInUnixTimestamp) {
             self.checkInDate = [NSDate dateWithTimeIntervalSince1970:checkInUnixTimestamp];

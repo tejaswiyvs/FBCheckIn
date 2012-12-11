@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "TYCheckIn.h"
 #import "HPGrowingTextView.h"
+#import "TYBaseViewController.h"
 
-@interface TYCheckInDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate>
+@interface TYCheckInDetailViewController : TYBaseViewController<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate>
 
 @property (nonatomic, strong) TYCheckIn *checkIn;
 @property (nonatomic, strong) IBOutlet UIImageView *pagePictureView;

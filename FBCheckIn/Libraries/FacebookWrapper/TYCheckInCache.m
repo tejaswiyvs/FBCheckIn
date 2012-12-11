@@ -46,6 +46,7 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
 }
 
 -(void) forceRefresh {
+    DebugLog(@"Force refreshing cache");
     if (!self.loading) {
         [self loadFromFacebook];
     }
@@ -73,6 +74,7 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
 
 -(void) loadFromFacebook {
     [self notifyCacheUpdateStart];
+    DebugLog(@"Cache update start Notification Posted.");
     self.loading = YES;
     self.helper = [[TYFBFacade alloc] init];
     self.helper.delegate = self;
@@ -80,6 +82,7 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
 }
 
 -(void)fbHelper:(TYFBFacade *)helper didCompleteWithResults:(NSMutableDictionary *)results {
+    DebugLog(@"Cache update did Complete : %@", results);
     [self notifyCacheUpdateComplete];
     self.loading = NO;
     self.checkIns = [results objectForKey:@"data"];

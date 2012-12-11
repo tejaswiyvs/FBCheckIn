@@ -99,6 +99,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     TYPage *selectedPage = [self.allItems objectAtIndex:indexPath.row];
     TYCheckInViewController *confirmationScreen = [[TYCheckInViewController alloc] initWithNibName:@"TYCheckInConfirmation" bundle:nil];
     confirmationScreen.currentPage = selectedPage;
@@ -173,7 +174,8 @@
     self.location = newLocation;
     self.facade = [[TYFBFacade alloc] init];
     self.facade.delegate = self;
-    [self.facade placesNearLocation:self.locationManager.location];
+    [self.facade placesNearLocation:self.locationManager.location.coordinate];
+    [self.locationManager stopUpdatingLocation];
 }
 
 @end

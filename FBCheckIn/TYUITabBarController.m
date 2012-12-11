@@ -7,6 +7,7 @@
 //
 
 #import "TYUITabBarController.h"
+#import "UIColor+HexString.h"
 
 @implementation TYUITabBarController
 
@@ -16,5 +17,6 @@
     UIImageView *bgImg = [[UIImageView alloc] initWithFrame:frame];
     [bgImg setImage:[UIImage imageNamed:@"tab-bar.png"]];
     [[self tabBar] addSubview:bgImg];
+    [self.tabBar setSelectedImageTintColor:[UIColor tabBarTintColor]];
 }
 @end

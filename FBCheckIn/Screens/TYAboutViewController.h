@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TYBaseViewController.h"
 
-@interface TYAboutViewController : UIViewController
+@interface TYAboutViewController : TYBaseViewController
 
 -(IBAction)logoutButtonClicked:(id)sender;
 @end

@@ -11,8 +11,9 @@
 #import <CoreLocation/CoreLocation.h>
 #import "TYFBFacade.h"
 #import "EGORefreshTableHeaderView.h"
+#import "TYBaseViewController.h"
 
-@interface TYPlacePickerViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, TYFBFacadeDelegate, CLLocationManagerDelegate>
+@interface TYPlacePickerViewController : TYBaseViewController<UITableViewDelegate, UITableViewDataSource, TYFBFacadeDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) IBOutlet UISearchDisplayController *searchDisplayController;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;

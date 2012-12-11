@@ -17,6 +17,14 @@
 
 @implementation UIColor(HexString)
 
++(UIColor *) tabBarTintColor {
+    return [UIColor colorWithHexString:@"BBBBBB"];
+}
+
++(UIColor *) dullWhite {
+    return [UIColor colorWithHexString:@"F8F6F3"];
+}
+
 +(UIColor *) headerTextColor {
     return [UIColor colorWithRed:(99.0f/255.0f) green:(89.0f/255.0f) blue:(99.0f/255.0f) alpha:1.0f];
 }

@@ -19,7 +19,12 @@
 @property (nonatomic, strong) NSString *fullName;
 @property (nonatomic, strong) NSString *sex;
 @property (nonatomic, strong) NSString *profilePictureUrl;
+@property (nonatomic, strong) NSString *hiResProfilePictureUrl;
 @property (nonatomic, strong) UIImage *profilePicture;
+@property (nonatomic, strong) NSString *coverPictureUrl;
+@property (nonatomic, assign) float coverOffSetY;
+@property (nonatomic, strong) NSMutableArray *top5Locations;
+@property (nonatomic, strong) NSMutableArray *top5TaggedUsers;
 
 -(NSString *) shortName;
 -(id) initWithDictionary:(NSDictionary *) userDictionary;

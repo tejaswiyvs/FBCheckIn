@@ -12,6 +12,7 @@
 #import "TYPage.h"
 #import "TYCheckIn.h"
 #import "Facebook.h"
+#import "TYComment.h"
 
 // TODO Cleanup
 
@@ -22,7 +23,13 @@ typedef enum {
     TYFBFacadeRequestTypeGetPlaces2,
     TYFBFacadeRequestTypeGetFriends,
     TYFBFacadeRequestTypeLike,
-    TYFBFacadeRequestTypeUnlike
+    TYFBFacadeRequestTypeUnlike,
+    TYFBFacadeRequestTypePostComment,
+    TYFBFacadeRequestTypeDeleteComment,
+    TYFBFacadeRequestTypeLoadPageMetaData,
+    TYFBFacadeRequestTypeLoadUserMetaData,
+    TYFBFacadeRequestTypeLoadPageData,
+    TYFBFacadeRequestTypePlacesNearLocation
 } TYFBFacadeRequestType;
 
 @protocol TYFBFacadeDelegate;
@@ -34,11 +41,15 @@ typedef enum {
 
 -(void) currentUser;
 -(void) checkInsForUser:(TYUser *) user;
--(void) placesNearLocation:(CLLocation *) location;
--(void) placesWithSearchString:(NSString *) searchString nearLatitude:(CLLocationDegrees) latitude longitude:(CLLocationDegrees) longitude;
 -(void) friendsForUser:(TYUser *) user;
 -(void) likeCheckIn:(TYCheckIn *) checkIn;
 -(void) unlikeCheckIn:(TYCheckIn *) checkIn;
+-(void) postComment:(TYComment *) comment;
+-(void) deleteComment:(TYComment *) comment;
+-(void) loadMetaDataForPage:(TYPage *) page;
+-(void) loadMetaDataForUser:(TYUser *) user;
+-(void) loadPageData:(NSString *) pageId;
+-(void) placesNearLocation:(CLLocationCoordinate2D) location;
 @end
 
 @protocol TYFBFacadeDelegate

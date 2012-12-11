@@ -27,6 +27,7 @@
 @synthesize street = _street;
 @synthesize zip = _zip;
 @synthesize phoneNumber = _phoneNumber;
+@synthesize numberOfFriendsCheckedIn = _numberOfFriendsCheckedIn;
 
 -(id) initWithDictionary:(NSDictionary *) pageDictionary {
     self = [super init];
@@ -34,7 +35,8 @@
         self.pageId = [[pageDictionary objectForKey:@"page_id"] stringValue];
         self.pageName = [pageDictionary objectForKey:@"name"];
         self.pagePictureUrl = [pageDictionary objectForKey:@"pic"];
-        NSArray *categories = [pageDictionary objectForKey:@"category"];
+        NSArray *categories = [pageDictionary objectForKey:@"categories"];
+        self.categories = [NSMutableArray array];
         for (NSDictionary *category in categories) {
             [self.categories addObject:[category objectForKey:@"name"]];
         }
@@ -42,7 +44,7 @@
         NSDictionary *locationDict = [pageDictionary objectForKey:@"location"];
         NSNumber *latitude = [locationDict objectForKey:@"latitude"];
         NSNumber *longitude = [locationDict objectForKey:@"longitude"];
-        self.location = CLLocationCoordinate2DMake([latitude longValue], [longitude longValue]);
+        self.location = CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]);
         self.city = [locationDict objectForKey:@"city"];
         self.country = [locationDict objectForKey:@"country"];
         self.state = [locationDict objectForKey:@"state"];
@@ -50,23 +52,54 @@
         self.zip = [locationDict objectForKey:@"zip"];
         self.checkIns = [[pageDictionary objectForKey:@"checkins"] intValue];
         self.fanCount = [[pageDictionary objectForKey:@"fan_count"] intValue];
+        self.phoneNumber = [pageDictionary objectForKey:@"phone"];
+        // Loaded at a later point if needed.
+        self.numberOfFriendsCheckedIn = 0;
     }
     return self;
 }
 
 -(NSString *) shortAddress {
-    if (self.street && self.state && ![self.street isBlank] && ![self.state isBlank]) {
-        return [NSString stringWithFormat:@"%@, %@", self.street, self.state];
+    // Street & State Present
+    NSString *shortAddress = @"";
+    if (self.street && ![self.street isBlank]) {
+        shortAddress = [shortAddress stringByAppendingString:self.street];
     }
-    else if(self.street && ![self.street isBlank] && (self.state || [self.state isBlank])) {
-        return self.street;
+    
+    if(self.city && ![self.city isBlank]) {
+        if (![shortAddress isBlank]) {
+            shortAddress = [shortAddress stringByAppendingString:@", "];
+        }
+        shortAddress = [shortAddress stringByAppendingString:self.city];
     }
-    else if(self.state && ![self.state isBlank] && (self.street || [self.street isBlank])) {
-        return self.state;
+    
+    if(self.state && ![self.state isBlank]) {
+        if (![shortAddress isBlank]) {
+            shortAddress = [shortAddress stringByAppendingString:@", "];
+        }
+        shortAddress = [shortAddress stringByAppendingString:self.state];
     }
-    else {
-        return @"";
+    
+    if(self.country && ![self.country isBlank]) {
+        if (![shortAddress isBlank]) {
+            shortAddress = [shortAddress stringByAppendingString:@", "];
+        }
+        shortAddress = [shortAddress stringByAppendingString:self.country];
     }
+    
+    return shortAddress;
+}
+
+-(BOOL) hasAddress {
+    return ![[self shortAddress] isBlank];
+}
+
+-(BOOL) hasPhone {
+    return !(!_phoneNumber || [self.phoneNumber isBlank]);
+}
+
+-(NSString *) phoneNumber {
+    return _phoneNumber ? _phoneNumber : @"NA";
 }
 
 #pragma mark - NSCoding

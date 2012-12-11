@@ -10,11 +10,24 @@
 #import "TYFBFacade.h"
 #import "TYCheckIn.h"
 #import "TYUser.h"
+#import "HPGrowingTextView.h"
+#import "TYFBFacade.h"
+#import "TYBaseViewController.h"
 
-@interface TYCommentViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface TYCommentViewController : TYBaseViewController<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate, TYFBFacadeDelegate>
 
 @property (nonatomic, strong) TYCheckIn *checkIn;
 @property (nonatomic, strong) TYUser *user;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+
+@property (nonatomic, strong) UIView *containerView;
+@property (nonatomic, strong) HPGrowingTextView *textView;
+@property (nonatomic, strong) NSMutableArray *requests;
+
+-(void) resignTextView;
 
 -(id) initWithCheckIn:(TYCheckIn *) checkIn user:(TYUser *) user;
+@end
+
+@protocol TYCommentViewControllerDelegate
 @end

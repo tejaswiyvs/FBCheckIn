@@ -15,6 +15,14 @@
 @synthesize coordinate = _coordinate;
 @synthesize picture = _picture;
 
+-(id) initWithCoordinate:(CLLocationCoordinate2D) coordinate {
+    self = [super init];
+    if (self) {
+        self.coordinate = coordinate;
+    }
+    return self;
+}
+
 -(id) initWithCoordinate:(CLLocationCoordinate2D) coordinate andPicture:(UIImage *) picture {
     self = [super init];
     if (self) {

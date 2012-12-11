@@ -10,9 +10,10 @@
 #import "TYPage.h"
 #import "Facebook.h"
 #import "TYTagFriendsViewController.h"
+#import "TYBaseViewController.h"
 
 @protocol TYTagFriendsDelegate;
-@interface TYCheckInViewController : UIViewController<FBRequestDelegate, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, TYTagFriendsDelegate>
+@interface TYCheckInViewController : TYBaseViewController<FBRequestDelegate, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, TYTagFriendsDelegate>
 
 @property (nonatomic, strong) IBOutlet UIButton *userImgBtn;
 @property (nonatomic, strong) IBOutlet UIImageView *placeImgView;

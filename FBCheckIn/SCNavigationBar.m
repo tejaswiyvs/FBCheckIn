@@ -19,6 +19,7 @@
 
 @synthesize backgroundImages = _backgroundImages;
 @synthesize backgroundImageView = _backgroundImageView;
+@synthesize checkInButton = _checkInButton;
 
 +(UINavigationController *)customizedNavigationController
 {
@@ -46,6 +47,15 @@
     // [navBar setTintColor:[UIColor colorWithRed:0.39 green:0.72 blue:0.62 alpha:1.0]];
     [navBar setBackgroundImage:[UIImage imageNamed:@"navigation-bar-2.png"] forBarMetrics:UIBarMetricsDefault];
     [navBar setBackgroundImage:[UIImage imageNamed:@"navigation-bar-2.png"] forBarMetrics:UIBarMetricsLandscapePhone];
+    
+    navBar.checkInButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    navBar.checkInButton.frame = CGRectMake(navBar.frame.size.width - 65.0f, 0.0f, 65.0f, navBar.frame.size.height);
+    [navBar.checkInButton setImage:[UIImage imageNamed:@"check-in-icon.png"] forState:UIControlStateNormal];
+    [navBar.checkInButton addTarget:self action:@selector(checkInButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [navBar addSubview:navBar.checkInButton];
+//    [navBar.checkInButton setEnabled:NO];
+//    [navBar.checkInButton setHidden:YES];
+
     
     return customizedNavController;
 }

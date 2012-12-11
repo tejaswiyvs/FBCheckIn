@@ -6,6 +6,7 @@
 //
 
 #import "TYUtils.h"
+#import "NSString+Common.h"
 
 //Constants
 #define SECOND 1
@@ -30,6 +31,14 @@
 +(void) displayAlertWithTitle:(NSString *) title message:(NSString *) message {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     [alert show];
+}
+
++(CGFloat) heightForText:(NSString *) text withFont:(UIFont *) font forWidth:(float) width {
+    if (!text || [text isBlank]) {
+        return 0.0f;
+    }
+    CGSize size = [text sizeWithFont:font forWidth:width lineBreakMode:NSLineBreakByWordWrapping];
+    return size.height;
 }
 
 @end
