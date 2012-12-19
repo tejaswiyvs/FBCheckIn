@@ -17,6 +17,10 @@
 
 @implementation UIColor(HexString)
 
++(UIColor *) dullRed {
+    return [UIColor colorWithHexString:@"E95147"];
+}
+
 +(UIColor *) tintedBlack {
     return [UIColor colorWithHexString:@"1E1C1B"];
 }
@@ -30,7 +34,7 @@
 }
 
 +(UIColor *) dullWhite {
-    return [UIColor colorWithHexString:@"F8F6F3"];
+    return [UIColor colorWithHexString:@"F6F3F2"];
 }
 
 +(UIColor *) headerTextColor {

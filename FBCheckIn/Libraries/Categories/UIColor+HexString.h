@@ -14,6 +14,7 @@
 +(UIColor *) subtitleTextColor;
 +(UIColor *) bgColor;
 +(UIColor *) dullWhite;
++(UIColor *) dullRed;
 +(UIColor *) tintedBlack;
 +(UIColor *) tabBarTintColor;
 @end

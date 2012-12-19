@@ -119,6 +119,7 @@ const int kNumberOfRows = 3;
 #pragma mark - TYFBFacade
 
 -(void) loadAdditionalMetaData {
+    [TYIndeterminateProgressBar showInView:self.view backgroundColor:[UIColor dullWhite] indicatorColor:[UIColor dullRed] borderColor:[UIColor darkGrayColor]];
     self.metaDataRequest = [[TYFBFacade alloc] init];
     self.metaDataRequest.delegate = self;
     [self.metaDataRequest loadMetaDataForPage:self.place];
@@ -130,9 +131,11 @@ const int kNumberOfRows = 3;
         self.place.numberOfFriendsCheckedIn = [count intValue];
     }
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:kRowIndexStats inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [TYIndeterminateProgressBar hideFromView:self.view];
 }
 
 -(void)fbHelper:(TYFBFacade *)helper didFailWithError:(NSError *)err {
+    [TYIndeterminateProgressBar hideFromView:self.view];
     DebugLog(@"%@", err);
 }
 

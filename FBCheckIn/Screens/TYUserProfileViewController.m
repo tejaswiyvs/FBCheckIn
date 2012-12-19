@@ -21,6 +21,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "TYPlaceProfileViewController.h"
 #import "TYCurrentUser.h"
+#import "TYIndeterminateProgressBar.h"
 
 @interface TYUserProfileViewController ()
 -(UIView *) makeHeaderView;
@@ -82,6 +83,7 @@ const int kRequestTagLast3CheckIns = 1;
 
 -(void) loadUserMetaData {
     DebugLog(@"Loading User Meta Data");
+    [TYIndeterminateProgressBar showInView:self.view backgroundColor:[UIColor dullWhite] indicatorColor:[UIColor dullRed] borderColor:[UIColor darkGrayColor]];
     self.userCheckInsRequest = [[TYFBFacade alloc] init];
     self.userCheckInsRequest.delegate = self;
     [self.userCheckInsRequest loadMetaDataForUser:self.user];
