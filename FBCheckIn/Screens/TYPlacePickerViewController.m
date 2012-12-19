@@ -16,6 +16,7 @@
 #import "TYCheckInViewController.h"
 #import "UIColor+HexString.h"
 #import "SCNavigationBar.h"
+#import "UIBarButtonItem+Convinience.h"
 
 @interface TYPlacePickerViewController ()
 -(void) cancelButtonClicked:(id) sender;
@@ -47,12 +48,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonClicked:)];
+//    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonClicked:)];
+    UIBarButtonItem *cancelButton = [UIBarButtonItem barItemWithImage:[UIImage imageNamed:@"red-button.png"] target:self action:@selector(cancelButtonClicked:) title:@"Cancel"];
+    [self.tableView setBackgroundColor:[UIColor clearColor]];
     [self.navigationItem setLeftBarButtonItem:cancelButton];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]]];
+    [self.view setBackgroundColor:[UIColor colorWithHexString:@"E9E4E1"]];
     [self loadNearbyPages];
     [self updateSearchBarBackground];
     [(SCNavigationBar *) self.navigationController.navigationBar hideCheckInButton];
+    self.view.backgroundColor = [UIColor bgColor];
+    self.tableView.backgroundView = nil;
 }
 
 - (void)viewDidUnload
@@ -112,7 +117,7 @@
 
 -(void) loadNearbyPages {
     // Load location first 
-    [SVProgressHUD showWithStatus:@"Loading nearby locations..."];
+    [SVProgressHUD showWithStatus:@"Loading nearby locations..." maskType:SVProgressHUDMaskTypeClear];
     [self updateLocation];
 }
 
@@ -125,7 +130,7 @@
 -(void)fbHelper:(TYFBFacade *)helper didFailWithError:(NSError *)err {
     [SVProgressHUD showErrorWithStatus:@"We couldn't access your facebook account. This might be temporary, please try again later."];
     // TODO: Add a #if DEBUG condition.
-    NSLog(@"%@", err);
+    DebugLog(@"%@", err);
 }
 
 #pragma mark - UISearchBar

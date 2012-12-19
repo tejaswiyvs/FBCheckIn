@@ -1,3 +1,10 @@
+12/15/2012
+===========
+ - Bugfix the TYIndeterminateProgressBar
+ - Change the like and the comment icons to look like this: http://www.mobile-patterns.com/picture/toast_timeline.png?pictureId=16828811&asThumbnail=true
+ - Create a good splash page. Login should animate the logo out of the way and present a login button. Create a login UI.
+
+
 Home
 ====
  -- Clicking on a picture should open user profile as well.

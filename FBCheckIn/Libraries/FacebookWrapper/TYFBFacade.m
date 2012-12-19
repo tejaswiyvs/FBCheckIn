@@ -15,8 +15,6 @@
 #import "NSString+Common.h"
 
 @interface TYFBFacade ()
--(void) usersWithUserIds:(NSMutableArray *) userIds;
--(void) placesWithPlaceId:(NSMutableArray *) places;
 -(void) parseUnlikeResult:(id) result;
 -(NSMutableArray *) checkInsForPageId:(NSString *) pageId fromCheckins:(NSMutableArray *) checkIns;
 @end
@@ -26,11 +24,13 @@
 @synthesize requestType = _requestType;
 @synthesize delegate = _delegate;
 @synthesize tag = _tag;
+@synthesize status = _status;
 
 -(id) init {
     self = [super init];
     if (self) {
         self.tag = -1;
+        self.status = TYFBFacadeStatusUnknown;
     }
     return self;
 }
@@ -150,13 +150,65 @@
     [facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
 
+-(void) checkInAtPage:(TYPage *) page message:(NSString *) message taggedUsers:(NSMutableArray *) taggedUsers {
+    self.requestType = TYFBFacadeRequestTypeCheckIn;
+    Facebook *facebook = [TYFBManager sharedInstance].facebook;
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    if (message && ![message isEqualToString:@""]) {
+        [params setObject:message forKey:@"message"];
+    }
+    if (taggedUsers && [taggedUsers count] != 0) {
+        NSString *tagsString = @"";
+        for (TYUser *user in taggedUsers) {
+            tagsString = [tagsString stringByAppendingString:user.userId];
+            tagsString = [tagsString stringByAppendingString:@","];
+        }
+        // Snip the trailing comma
+        if ([tagsString length] > 0) {
+            tagsString = [tagsString substringToIndex:([tagsString length] - 1)];
+        }
+        
+        [params setObject:tagsString forKey:@"tags"];
+    }
+    [params setObject:page.pageId forKey:@"place"];
+    NSString *coordinatesString = [NSString stringWithFormat:@"{\"latitude\" : \"%f\", \"longitude\" : \"%f\"}", page.location.latitude, page.location.longitude];
+    [params setObject:coordinatesString forKey:@"coordinates"];
+    [facebook requestWithGraphPath:@"me/feed" andParams:params andHttpMethod:@"POST" andDelegate:self];
+}
+
+-(void) postPhoto:(UIImage *) image withMessage:(NSString *) message {
+    self.requestType = TYFBFacadeRequestTypePostPhoto;
+    Facebook *facebook = [TYFBManager sharedInstance].facebook;
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:UIImageJPEGRepresentation(image, 10) forKey:@"data"];
+    if (message && ![message isBlank]) {
+        [params setObject:message forKey:@"message"];
+    }
+    [facebook requestWithGraphPath:@"/me/photos" andParams:params andHttpMethod:@"POST" andDelegate:self];
+}
+
+-(void) tagUsers:(NSMutableArray *) users forObjectId:(NSString *) objectId {
+    self.requestType = TYFBFacadeRequestTypePostTags;
+    if (!users || !objectId || [objectId isBlank]) {
+        [self.delegate fbHelper:self didFailWithError:nil];
+        return;
+    }
+    
+}
+
+-(void) postPage:(TYPage *) page forObjectId:(NSString *) objectId {
+    self.requestType = TYFBFacadeRequestTypePostPageInfo;
+}
+
 #pragma mark - FBRequestDelegate
 
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error {
     [self.delegate fbHelper:self didFailWithError:error];
+    self.status = TYFBFacadeStatusErrored;
 }
 
 -(void)request:(FBRequest *)request didLoad:(id)result {
+    self.status = TYFBFacadeStatusCompleted;
     switch (self.requestType) {
         case TYFBFacadeRequestTypeCurrentUser:
             [self parseCurrentUserResponse:result];
@@ -195,6 +247,18 @@
         case TYFBFacadeRequestTypePlacesNearLocation:
             [self parsePlacesNearLocationResponse:result];
             break;
+        case TYFBFacadeRequestTypeCheckIn:
+            [self parsePostCheckInResponse:result];
+            break;
+        case TYFBFacadeRequestTypePostPageInfo:
+            [self parseAddPageInfoResponse:result];
+            break;
+        case TYFBFacadeRequestTypePostPhoto:
+            [self parsePostPhotoResponse:result];
+            break;
+        case TYFBFacadeRequestTypePostTags:
+            [self parseTagUsersResponse:result];
+            break;
         default:
             [self.delegate fbHelper:self didCompleteWithResults:[NSMutableDictionary dictionaryWithObjectsAndKeys:result, @"data", nil]];
             break;
@@ -202,6 +266,36 @@
 }
 
 #pragma mark - Parsers
+
+-(void) parsePostCheckInResponse:(id) result {
+    NSDictionary *resultDict = (NSDictionary *) result;
+    NSString *checkInId = [resultDict objectForKey:@"id"];
+    if (checkInId && ![checkInId isBlank]) {
+        [self.delegate fbHelper:self didCompleteWithResults:[NSMutableDictionary dictionaryWithObjectsAndKeys:checkInId, @"data", nil]];
+    }
+    else {
+        [self.delegate fbHelper:self didFailWithError:nil];
+    }
+}
+
+-(void) parsePostPhotoResponse:(id) result {
+    NSDictionary *resultDict = (NSDictionary *) result;
+    NSString *photoId = [resultDict objectForKey:@"id"];
+    if (photoId && ![photoId isBlank]) {
+        [self.delegate fbHelper:self didCompleteWithResults:[NSMutableDictionary dictionaryWithObjectsAndKeys:photoId, @"data", nil]];
+    }
+    else {
+        [self.delegate fbHelper:self didFailWithError:nil];
+    }
+}
+
+-(void) parseTagUsersResponse:(id) result {
+    DebugLog(@"%@", result);
+}
+
+-(void) parseAddPageInfoResponse:(id) result {
+    DebugLog(@"%@", result);
+}
 
 -(void) parsePlacesNearLocationResponse:(id) result {
     NSArray *resultArray = (NSArray *) result;
@@ -324,7 +418,7 @@
 -(void) parseCheckins:(id) result {
     
     if (!result || [result count] < 6) {
-        NSLog(@"%@", result);
+        DebugLog(@"%@", result);
         [self.delegate fbHelper:self didFailWithError:nil];
         return;
     }
@@ -436,7 +530,7 @@
         BOOL flag = YES;
         for (TYCheckIn *checkIn2 in checkIns) {
             if (checkIn2 != checkIn && [checkIn2.page.pageId isEqualToString:checkIn.page.pageId] && [checkIn.user.userId isEqualToString:checkIn2.user.userId] && fabs(([checkIn2.checkInDate timeIntervalSince1970] - [checkIn.checkInDate timeIntervalSince1970])) < 25 * 60 * 60 * 1000) {
-                NSLog(@"Should not add checkIn");
+//                DebugLog(@"Should not add checkIn");
                 flag = NO;
             }
         }

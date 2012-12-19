@@ -21,6 +21,8 @@
 
 @synthesize user = _user;
 @synthesize cache = _cache;
+@synthesize logoImgView = _logoImgView;
+@synthesize loginButton = _loginButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,6 +42,11 @@
     [super viewDidLoad];
 }
 
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self animateLogo];
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -56,6 +63,16 @@
     DebugLog(@"Login button clicked");
     [[TYFBManager sharedInstance] login];
     [self.mixPanel track:@"Facebook Login Clicked"];
+}
+
+-(void) animateLogo {
+    [UIView animateWithDuration:1.5 animations:^{
+        [self.logoImgView setFrame:CGRectMake(self.logoImgView.frame.origin.x,
+                                              self.logoImgView.frame.origin.y - 40,
+                                              self.logoImgView.frame.size.width,
+                                              self.logoImgView.frame.size.height)];
+        self.loginButton.alpha = 1.0f;
+    }];
 }
 
 -(void) registerForNotifications {

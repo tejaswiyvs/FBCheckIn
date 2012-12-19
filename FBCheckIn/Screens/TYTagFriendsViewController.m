@@ -13,6 +13,8 @@
 #import "TYUser.h"
 #import "TYTagUserCell.h"
 #import "NSString+Common.h"
+#import "UIBarButtonItem+Convinience.h"
+#import "UIColor+HexString.h"
 
 @interface TYTagFriendsViewController ()
 -(void) getFacebookFriends;
@@ -61,10 +63,15 @@ const int kNumberOfSections = 2;
     self.filteredFriends = [NSMutableArray array];
     self.searching = NO;
     
+    self.view.backgroundColor = [UIColor bgColor];
+    self.tableView.backgroundView = nil;
+    [self updateSearchBarBackground];
+    
     // Add done & cancel buttons
-    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonClicked:)];
+    UIBarButtonItem *doneItem = [UIBarButtonItem barItemWithImage:[UIImage imageNamed:@"red-button.png"] target:self action:@selector(doneButtonClicked:) title:@"Done"];
     [self.navigationItem setRightBarButtonItem:doneItem];
-    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonClicked:)];
+    
+    UIBarButtonItem *cancelItem = [UIBarButtonItem barItemWithImage:[UIImage imageNamed:@"black-button.png"] target:self action:@selector(cancelButtonClicked:) title:@"Cancel"];
     [self.navigationItem setLeftBarButtonItem:cancelItem];
     
     // Download friends. Possibly cache them and download them later.
@@ -96,7 +103,7 @@ const int kNumberOfSections = 2;
 }
 
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    NSLog(@"Error: %@", error);
+    DebugLog(@"Error: %@", error);
     [SVProgressHUD showWithStatus:@"Failed."];
 }
 
@@ -112,6 +119,12 @@ const int kNumberOfSections = 2;
 }
 
 #pragma mark - Search Bar
+
+-(void) updateSearchBarBackground {
+    [[[self.searchBar subviews] objectAtIndex:0] setAlpha:0.0];
+    self.searchBar.tintColor = [UIColor bgColor];
+    [self.searchBar setClipsToBounds:YES];
+}
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.searching = YES;

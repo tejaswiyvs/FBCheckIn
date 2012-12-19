@@ -11,7 +11,6 @@
 #import "TYBaseViewController.h"
 
 @interface TYMapViewController : TYBaseViewController<MKMapViewDelegate>
--(id) initWithTabBar;
 
 @property (nonatomic, strong) NSMutableArray *checkIns;
 @property (nonatomic, strong) IBOutlet MKMapView *mapView;

@@ -7,6 +7,7 @@
 //
 
 #import "TYPageCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface TYPageCell ()
 -(NSString *) distanceBetweenCoordinate:(CLLocationCoordinate2D) location1 andCoordinate:(CLLocationCoordinate2D) location2;
@@ -28,6 +29,14 @@
         // Initialization code
     }
     return self;
+}
+
+-(void)awakeFromNib {
+    [self.pageImage.layer setBorderColor:[[UIColor darkGrayColor] CGColor]];
+    [self.pageImage.layer setBorderWidth:3.0f];
+    [self.pageImage.layer setCornerRadius:3.0f];
+    [self.pageImage.layer setMasksToBounds:YES];
+    self.pageImage.contentMode = UIViewContentModeScaleAspectFill;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

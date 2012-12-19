@@ -7,6 +7,7 @@
 //
 
 #import "UIImage+Convinience.h"
+#import "UIColor+HexString.h"
 
 @implementation UIImage (Convinience)
 

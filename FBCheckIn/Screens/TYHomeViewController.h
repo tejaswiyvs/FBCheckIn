@@ -24,6 +24,4 @@
 @property (nonatomic, strong) UITapGestureRecognizer *profilePictureTapRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer *pageTapRecognizer;
 
--(id) initWithTabBar;
-
 @end

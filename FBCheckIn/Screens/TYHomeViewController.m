@@ -33,7 +33,7 @@
 -(void) registerObserver;
 -(void) unregisterObserver;
 -(void) didReceiveNotification:(NSNotification *) notification;
--(float) heightForText:(NSString *) messageText;
+-(float) heightForText:(NSString *) messageText withFont:(UIFont *) font;
 -(CGFloat) heightForIndexPath:(NSIndexPath *) indexPath;
 -(void) commentButtonClicked:(id) sender;
 -(void) pageNameTapped:(UIGestureRecognizer *) sender;
@@ -51,11 +51,9 @@
 @synthesize profilePictureTapRecognizer = _profilePictureTapRecognizer;
 @synthesize pageTapRecognizer = _pageTapRecognizer;
 
--(id) initWithTabBar {
+-(id) init {
     self = [super initWithNibName:@"TYHomeViewController" bundle:nil];
-    if(self) {
-        self.tabBarItem.image = [UIImage imageNamed:@"friends.png"];
-        self.tabBarItem.title = @"Friends";
+    if (self) {
         self.title = @"Check-ins";
         self.cache = [TYCheckInCache sharedInstance];
     }
@@ -74,17 +72,15 @@
 
     // Setup UITableView
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 10.0)]];
-    [self.tableView setBackgroundColor:[UIColor clearColor]];
     self.tableView.backgroundView = nil;
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
-    self.tableView.separatorColor = [UIColor grayColor];
+    [self.tableView setBackgroundColor:[UIColor clearColor]];
+    self.view.backgroundColor = [UIColor bgColor];
+    self.tableView.separatorColor = [UIColor subtitleTextColor];
 
     // Setup other UI
-    UIBarButtonItem *checkInButton = [[UIBarButtonItem alloc] initWithTitle:@"Check-in" style:UIBarButtonItemStylePlain target:self action:@selector(checkInButtonClicked:)];
-//    [self.navigationItem setRightBarButtonItem:checkInButton];
     if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-        NSLog(@"Height of the header view = %f", self.tableView.bounds.size.height);
+        DebugLog(@"Height of the header view = %f", self.tableView.bounds.size.height);
 		view.delegate = self;
 		[self.tableView addSubview:view];
 		_refreshHeaderView = view;
@@ -121,7 +117,7 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath {
-    return [self heightForIndexPath:indexPath];
+    return [self heightForIndexPath:indexPath] + 1.0f;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -135,7 +131,7 @@
     }
     
     float height = [self heightForIndexPath:indexPath];
-    CGRect rect = CGRectMake(0.0f, 0.0f, 320.0f, height);
+    CGRect rect = CGRectMake(10.0f, 0.0f, 300.0f, height);
     [cell setFrame:rect];
     
     // Setup tap recognizers.
@@ -150,7 +146,7 @@
     [backgroundImgView setImage:[UIImage imageNamed:@"table-cell-bg.png"]];
     [cell addSubview:backgroundImgView];
     
-    UIImageView *profilePictureImgView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0f, 11.0f, 64.0f, 64.0f)];
+    UIImageView *profilePictureImgView = [[UIImageView alloc] initWithFrame:CGRectMake(20.0f, 11.0f, 64.0f, 64.0f)];
     [profilePictureImgView.layer setBorderColor:[[UIColor darkGrayColor] CGColor]];
     [profilePictureImgView.layer setBorderWidth:3.0f];
     [profilePictureImgView.layer setCornerRadius:3.0f];
@@ -162,7 +158,7 @@
     [cell addSubview:profilePictureImgView];
     [profilePictureImgView addGestureRecognizer:self.profilePictureTapRecognizer];
     
-    UILabel *fullNameLbl = [[UILabel alloc] initWithFrame:CGRectMake(84.0f, 11.0f, 208.0f, 21.0f)];
+    UILabel *fullNameLbl = [[UILabel alloc] initWithFrame:CGRectMake(94.0f, 11.0f, 208.0f, 21.0f)];
     [fullNameLbl setText:[checkIn.user shortName]];
     [fullNameLbl setTextColor:[UIColor headerTextColor]];
     [fullNameLbl setFont:[UIFont boldSystemFontOfSize:17.0f]];
@@ -172,14 +168,14 @@
     fullNameLbl.tag = indexPath.row;
     [fullNameLbl addGestureRecognizer:self.profilePictureTapRecognizer];
     
-    UILabel *atLabel = [[UILabel alloc] initWithFrame:CGRectMake(84.0f, 32.0f, 19.0f, 21.0f)];
+    UILabel *atLabel = [[UILabel alloc] initWithFrame:CGRectMake(94.0f, 32.0f, 19.0f, 21.0f)];
     [atLabel setText:@"@"];
     [atLabel setTextColor:[UIColor subtitleTextColor]];
     [atLabel setFont:[UIFont boldSystemFontOfSize:17.0f]];
     [atLabel setBackgroundColor:[UIColor clearColor]];
     [cell addSubview:atLabel];
     
-    UILabel *locationLbl = [[UILabel alloc] initWithFrame:CGRectMake(104.0f, 32.0f, 188.0f, 21.0f)];
+    UILabel *locationLbl = [[UILabel alloc] initWithFrame:CGRectMake(114.0f, 32.0f, 188.0f, 21.0f)];
     [locationLbl setText:checkIn.page.pageName];
     [locationLbl setTextColor:[UIColor subtitleTextColor]];
     [locationLbl setBackgroundColor:[UIColor clearColor]];
@@ -188,43 +184,48 @@
     locationLbl.tag = indexPath.row;
     [locationLbl addGestureRecognizer:self.pageTapRecognizer];
     
-    UILabel *timestampLbl = [[UILabel alloc] initWithFrame:CGRectMake(84.0f, 54.0f, 208.0f, 21.0f)];
+    UILabel *timestampLbl = [[UILabel alloc] initWithFrame:CGRectMake(94.0f, 54.0f, 208.0f, 21.0f)];
     [timestampLbl setText:[NSDate stringForDisplayFromDate:checkIn.checkInDate prefixed:YES]];
     [timestampLbl setTextColor:[UIColor subtitleTextColor]];
     [timestampLbl setBackgroundColor:[UIColor clearColor]];
     [cell addSubview:timestampLbl];
     
-    UIImageView *separatorImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 82.0f, 320.0f, 4.0f)];
-    [separatorImgView setImage:[UIImage imageNamed:@"separator.png"]];
-    [cell addSubview:separatorImgView];
-
-    float y = 94.0f;
+    float y = 90.0f;
 
     if ([checkIn hasMessage]) {
-        int checkInMessageHeight = [self heightForText:checkIn.message];
-        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, y, 300.0f, checkInMessageHeight)];
+        UIFont *messageFont = [UIFont systemFontOfSize:16.0f];
+        float checkInMessageHeight = [self heightForText:checkIn.message withFont:messageFont];
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, y, 280.0f, checkInMessageHeight)];
         [messageLabel setTextColor:[UIColor headerTextColor]];
-        [messageLabel setFont:[UIFont boldSystemFontOfSize:16.0f]];
+        [messageLabel setFont:messageFont];
         [messageLabel setLineBreakMode:NSLineBreakByWordWrapping];
         [messageLabel setText:checkIn.message];
         [messageLabel setBackgroundColor:[UIColor clearColor]];
+        [messageLabel setNumberOfLines:0];
         [cell addSubview:messageLabel];
         y = y + checkInMessageHeight + 5.0f; // 5 px padding
     }
     
     if ([checkIn hasPhoto]) {
-        UIImageView *checkInPictureImgView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0f, y, 300.0f, 200.0f)];
+        UIImageView *checkInPictureImgView = [[UIImageView alloc] initWithFrame:CGRectMake(20.0f, y, 280.0f, 200.0f)];
         [checkInPictureImgView setImageWithURL:[NSURL URLWithString:checkIn.photo.src]];
         [checkInPictureImgView.layer setBorderColor:[[UIColor darkGrayColor] CGColor]];
         [checkInPictureImgView.layer setBorderWidth:3.0f];
         [checkInPictureImgView.layer setCornerRadius:3.0f];
         [checkInPictureImgView.layer setMasksToBounds:YES];
-        checkInPictureImgView.contentMode = UIViewContentModeScaleAspectFit;
+        checkInPictureImgView.contentMode = UIViewContentModeScaleAspectFill;
         [checkInPictureImgView setBackgroundColor:[UIColor darkGrayColor]];
         [cell addSubview:checkInPictureImgView];
+        y = y + 200.0f + 5.0f;
     }
     
-    UILabel *commentCountLbl = [[UILabel alloc] initWithFrame:CGRectMake(204.0f, height - 31.0f, 20.0f, 20.0f)];
+    UIImageView *separatorImgView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0f, y, 300.0f, 3.0f)];
+    [separatorImgView setImage:[UIImage imageNamed:@"separator.png"]];
+    [cell addSubview:separatorImgView];
+    
+    y = y + 4.0f + 5.0f;
+    
+    UILabel *commentCountLbl = [[UILabel alloc] initWithFrame:CGRectMake(204.0f, y, 20.0f, 20.0f)];
     [commentCountLbl setText:[NSString stringWithFormat:@"%d", [checkIn.comments count]]];
     [commentCountLbl setTextAlignment:UITextAlignmentCenter];
     [commentCountLbl setTextColor:[UIColor subtitleTextColor]];
@@ -232,7 +233,7 @@
     [commentCountLbl setBackgroundColor:[UIColor clearColor]];
     [cell addSubview:commentCountLbl];
     
-    UILabel *likeCountLbl = [[UILabel alloc] initWithFrame:CGRectMake(256.0f, height - 31.0f, 20.0f, 20.0f)];
+    UILabel *likeCountLbl = [[UILabel alloc] initWithFrame:CGRectMake(256.0f, y, 20.0f, 20.0f)];
     [likeCountLbl setText:[NSString stringWithFormat:@"%d", [checkIn.likes count]]];
     [likeCountLbl setTextAlignment:UITextAlignmentCenter];
     [likeCountLbl setTextColor:[UIColor subtitleTextColor]];
@@ -241,7 +242,7 @@
     [cell addSubview:likeCountLbl];
     
     UIButton *commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [commentButton setFrame:CGRectMake(228.0f, height - 31.0f, 20.0f, 20.0f)];
+    [commentButton setFrame:CGRectMake(228.0f, y, 20.0f, 20.0f)];
     commentButton.tag = indexPath.row;
     [commentButton addTarget:self action:@selector(commentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [cell addSubview:commentButton];
@@ -257,7 +258,7 @@
     }
 
     UIButton *likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [likeButton setFrame:CGRectMake(280.0f, height - 33.0f, 20.0f, 20.0f)];
+    [likeButton setFrame:CGRectMake(280.0f, y - 2, 20.0f, 20.0f)];
     likeButton.tag = indexPath.row;
     [likeButton addTarget:self action:@selector(likeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [cell addSubview:likeButton];
@@ -394,7 +395,7 @@
 #pragma mark - Helpers
 
 -(void) didReceiveNotification:(NSNotification *) notification {
-    NSLog(@"Notification received: %@", [notification name]);
+    DebugLog(@"Notification received: %@", [notification name]);
     if ([notification.name isEqualToString:kFBManagerLoginNotification]) {
         [self.cache forceRefresh];
     }
@@ -413,7 +414,7 @@
 }
 
 -(void) subscribeToNotifications {
-    NSLog(@"Notification constants = %@-%@-%@-%@", kFBManagerLoginNotification, kFBManagerLogOutNotification, kNotificationCacheRefreshStart, kNotificationCacheRefreshEnd);
+    DebugLog(@"Notification constants = %@-%@-%@-%@", kFBManagerLoginNotification, kFBManagerLogOutNotification, kNotificationCacheRefreshStart, kNotificationCacheRefreshEnd);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:kFBManagerLoginNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:kFBManagerLogOutNotification object:nil];
     // Listen to notification if check-in cache starts / ends up dating itself and display an unintrusive "working" animation.
@@ -429,11 +430,14 @@
 }
 
 // Refactor?
--(float) heightForText:(NSString *) messageText {
+-(float) heightForText:(NSString *) messageText withFont:(UIFont *) font {
     if (!messageText || [messageText isBlank]) {
         return 0.0f;
     }
-    CGSize size = [messageText sizeWithFont:[UIFont systemFontOfSize:12.0f] forWidth:272.0f lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize constraintSize;
+    constraintSize.width = 260.0f;
+    constraintSize.height = MAXFLOAT;
+    CGSize size = [messageText sizeWithFont:font constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
     return size.height;
 }
 
@@ -444,7 +448,8 @@
         height = height + 200.0f + 5.0f;
     }
     if ([checkIn hasMessage]) {
-        height = height + [self heightForText:checkIn.message] + 5.0f;
+        UIFont *font = [UIFont boldSystemFontOfSize:16.0f];
+        height = height + [self heightForText:checkIn.message withFont:font] + 5.0f;
     }
     return height;
 }

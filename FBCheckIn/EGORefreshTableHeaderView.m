@@ -45,7 +45,7 @@
 		
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ego-header-view.png"]];
-        NSLog(@"%@", NSStringFromCGRect(frame));
+        DebugLog(@"%@", NSStringFromCGRect(frame));
 
 		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 100.0f, self.frame.size.width, 20.0f)];
 		

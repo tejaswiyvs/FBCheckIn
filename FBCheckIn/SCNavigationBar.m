@@ -46,13 +46,12 @@
     // Modify the navigation bar to have a background image.
     SCNavigationBar *navBar = (SCNavigationBar *)[customizedNavController navigationBar];
     // [navBar setTintColor:[UIColor colorWithRed:0.39 green:0.72 blue:0.62 alpha:1.0]];
-    [navBar setBackgroundImage:[UIImage imageNamed:@"navigation-bar-2.png"] forBarMetrics:UIBarMetricsDefault];
-    [navBar setBackgroundImage:[UIImage imageNamed:@"navigation-bar-2.png"] forBarMetrics:UIBarMetricsLandscapePhone];
+    [navBar setBackgroundImage:[UIImage imageNamed:@"nav-bar.png"] forBarMetrics:UIBarMetricsDefault];
     
     navBar.checkInButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    navBar.checkInButton.frame = CGRectMake(navBar.frame.size.width - 65.0f, 0.0f, 86.0f, navBar.frame.size.height);
-    NSLog(@"%@", NSStringFromCGRect(navBar.checkInButton.frame));
-    [navBar.checkInButton setImage:[UIImage imageNamed:@"check-in-icon.png"] forState:UIControlStateNormal];
+    navBar.checkInButton.frame = CGRectMake(navBar.frame.size.width - 45.0f, 5.0f, 42.0f, 32.0f);
+    DebugLog(@"%@", NSStringFromCGRect(navBar.checkInButton.frame));
+    [navBar.checkInButton setBackgroundImage:[UIImage imageNamed:@"check-in-icon.png"] forState:UIControlStateNormal];
     [navBar.checkInButton addTarget:navBar action:@selector(checkInButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [navBar addSubview:navBar.checkInButton];
     
@@ -62,6 +61,9 @@
 -(void) checkInButtonClicked:(id) sender {
     TYAppDelegate *appDelegate = (TYAppDelegate *) [UIApplication sharedApplication].delegate;
     [appDelegate checkInButtonClicked:sender];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    TYUser *currentUser = [TYCurrentUser sharedInstance].user;
+    [mixpanel track:@"CheckInClicked" properties:[NSDictionary dictionaryWithObjectsAndKeys:currentUser.userId, @"userId", currentUser.sex, @"sex", nil]];
 }
 
 -(void) hideCheckInButton {

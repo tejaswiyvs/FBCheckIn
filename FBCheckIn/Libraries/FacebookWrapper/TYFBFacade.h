@@ -29,8 +29,18 @@ typedef enum {
     TYFBFacadeRequestTypeLoadPageMetaData,
     TYFBFacadeRequestTypeLoadUserMetaData,
     TYFBFacadeRequestTypeLoadPageData,
-    TYFBFacadeRequestTypePlacesNearLocation
+    TYFBFacadeRequestTypePlacesNearLocation,
+    TYFBFacadeRequestTypeCheckIn,
+    TYFBFacadeRequestTypePostPhoto,
+    TYFBFacadeRequestTypePostTags,
+    TYFBFacadeRequestTypePostPageInfo
 } TYFBFacadeRequestType;
+
+typedef enum {
+    TYFBFacadeStatusUnknown,
+    TYFBFacadeStatusCompleted,
+    TYFBFacadeStatusErrored
+} TYFBFacadeStatus;
 
 @protocol TYFBFacadeDelegate;
 @interface TYFBFacade : NSObject<FBRequestDelegate>
@@ -38,10 +48,10 @@ typedef enum {
 @property (nonatomic, assign) int tag;
 @property (nonatomic, assign) id<TYFBFacadeDelegate> delegate;
 @property (nonatomic, assign) TYFBFacadeRequestType requestType;
+@property (nonatomic, assign) TYFBFacadeStatus status;
 
 -(void) currentUser;
 -(void) checkInsForUser:(TYUser *) user;
--(void) friendsForUser:(TYUser *) user;
 -(void) likeCheckIn:(TYCheckIn *) checkIn;
 -(void) unlikeCheckIn:(TYCheckIn *) checkIn;
 -(void) postComment:(TYComment *) comment;
@@ -50,6 +60,10 @@ typedef enum {
 -(void) loadMetaDataForUser:(TYUser *) user;
 -(void) loadPageData:(NSString *) pageId;
 -(void) placesNearLocation:(CLLocationCoordinate2D) location;
+-(void) checkInAtPage:(TYPage *) page message:(NSString *) message taggedUsers:(NSMutableArray *) taggedUsers;
+-(void) postPhoto:(UIImage *) image withMessage:(NSString *) message;
+-(void) tagUsers:(NSMutableArray *) users forObjectId:(NSString *) objectId;
+-(void) postPage:(TYPage *) page forObjectId:(NSString *) objectId;
 @end
 
 @protocol TYFBFacadeDelegate

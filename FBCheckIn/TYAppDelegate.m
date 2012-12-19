@@ -14,20 +14,21 @@
 #import "SCNavigationBar.h"
 #import "TYUITabBarController.h"
 #import "TYCurrentUser.h"
+#import "UINavigationController+MFSideMenu.h"
+#import "MFSideMenu.h"
+#import "SideMenuViewController.h"
 
 @interface TYAppDelegate ()
--(void) makeTabBar;
 @end
 
 @implementation TYAppDelegate
 
 @synthesize window = _window;
-@synthesize tabBar = _tabBar;
 @synthesize loginScreen = _loginScreen;
 @synthesize manager = _manager;
 @synthesize mixPanel = _mixPanel;
 
-NSString * const kMixpanelToken = @"";
+NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -35,14 +36,13 @@ NSString * const kMixpanelToken = @"";
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.manager = [TYFBManager sharedInstance];
-    [self makeTabBar];
-    self.window.rootViewController = self.tabBar;
+    self.window.rootViewController = [self sideMenu].navigationController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     if (![self.manager isLoggedIn]) {
         DebugLog(@"Session not valid. Presenting login screen.");
         self.loginScreen = [[TYLogInViewController alloc] initWithNibName:@"TYLoginView" bundle:nil];
-        [self.tabBar presentModalViewController:self.loginScreen animated:YES];
+        [self.window.rootViewController presentModalViewController:self.loginScreen animated:NO];
     }
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 
@@ -89,31 +89,43 @@ NSString * const kMixpanelToken = @"";
     TYPlacePickerViewController *checkInScreen = [[TYPlacePickerViewController alloc] initWithNibName:@"TYPlacePickerView" bundle:nil];
     UINavigationController *navigationController = [SCNavigationBar customizedNavigationController];
     navigationController.viewControllers = [NSArray arrayWithObject:checkInScreen];
-    [self.tabBar presentModalViewController:navigationController animated:YES];
+    [self.window.rootViewController presentModalViewController:navigationController animated:YES];
 }
 
 void uncaughtExceptionHandler(NSException *exception) {
-    NSLog(@"CRASH: %@", exception);
-    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+    DebugLog(@"CRASH: %@", exception);
+    DebugLog(@"Stack Trace: %@", [exception callStackSymbols]);
 }
 
--(void) makeTabBar {
-    DebugLog(@"Creating UITabBarController with Home, Map Views");
-    self.tabBar = [[TYUITabBarController alloc] init];
-    NSMutableArray *localControllers = [NSMutableArray array];
+#pragma mark - SideMenu
 
-    TYHomeViewController *homeScreen = [[TYHomeViewController alloc] initWithTabBar];
-    UINavigationController *homeNavController = [SCNavigationBar customizedNavigationController];
-    [homeNavController setViewControllers:[NSArray arrayWithObject:homeScreen]];
-    [localControllers addObject:homeNavController];
+- (UINavigationController *)navigationController {
+    UINavigationController *navigationController = [SCNavigationBar customizedNavigationController];
+    navigationController.viewControllers = [NSArray arrayWithObject:[self homeController]];
+    return navigationController;
+}
+
+- (MFSideMenu *)sideMenu {
+    SideMenuViewController *sideMenuController = [[SideMenuViewController alloc] init];
+    UINavigationController *navigationController = [self navigationController];
     
-    TYMapViewController *mapsScreen = [[TYMapViewController alloc] initWithTabBar];
-    UINavigationController *mapsNavController = [SCNavigationBar customizedNavigationController];
-    [mapsNavController setViewControllers:[NSArray arrayWithObject:mapsScreen]];
-    [localControllers addObject:mapsNavController];
+    MFSideMenuOptions options = MFSideMenuOptionMenuButtonEnabled|MFSideMenuOptionBackButtonEnabled
+    |MFSideMenuOptionShadowEnabled;
+    MFSideMenuPanMode panMode = MFSideMenuPanModeNavigationBar|MFSideMenuPanModeNavigationController;
     
-    self.tabBar.viewControllers = localControllers;
-    DebugLog(@"Setup complete");
+    MFSideMenu *sideMenu = [MFSideMenu menuWithNavigationController:navigationController
+                                                 sideMenuController:sideMenuController
+                                                           location:MFSideMenuLocationLeft
+                                                            options:options
+                                                            panMode:panMode];
+    
+    sideMenuController.sideMenu = sideMenu;
+    
+    return sideMenu;
+}
+
+-(UIViewController *) homeController {
+    return [[TYHomeViewController alloc] init];
 }
 
 @end

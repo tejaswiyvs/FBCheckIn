@@ -15,6 +15,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "TYUtils.h"
 #import "TYIndeterminateProgressBar.h"
+#import "TYCurrentUser.h"
 
 @interface TYPlaceProfileViewController ()
 -(UIView *) makeHeaderView;
@@ -70,6 +71,11 @@ const int kNumberOfRows = 3;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
     self.tableView.separatorColor = [UIColor subtitleTextColor];
     [self loadAdditionalMetaData];
+    
+    // Analytics
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    TYUser *currentUser = [TYCurrentUser sharedInstance].user;
+    [mixpanel track:@"PageProfileViewed" properties:[NSDictionary dictionaryWithObjectsAndKeys:currentUser.userId, @"userId", currentUser.sex, @"sex", self.place.pageId, @"pageId", nil]];
 }
 
 -(void) viewDidUnload {
@@ -127,7 +133,7 @@ const int kNumberOfRows = 3;
 }
 
 -(void)fbHelper:(TYFBFacade *)helper didFailWithError:(NSError *)err {
-    NSLog(@"%@", err);
+    DebugLog(@"%@", err);
 }
 
 #pragma mark - Event Handlers

@@ -22,11 +22,9 @@
 @synthesize checkIns = _checkIns;
 @synthesize mapView = _mapView;
 
--(id) initWithTabBar {
+-(id) init {
     self = [super initWithNibName:@"TYMapViewController" bundle:nil];
-    if(self) {
-        self.tabBarItem.image = [UIImage imageNamed:@"map.png"];
-        self.tabBarItem.title = @"Map";
+    if (self) {
         self.title = @"Find my friends";
     }
     return self;

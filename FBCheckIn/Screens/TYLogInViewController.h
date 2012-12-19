@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) TYCheckInCache *cache;
 @property (nonatomic, strong) TYCurrentUser *user;
+@property (nonatomic, strong) IBOutlet UIImageView *logoImgView;
+@property (nonatomic, strong) IBOutlet UIButton *loginButton;
 
 -(IBAction)loginButtonClicked:(id)sender;
 @end

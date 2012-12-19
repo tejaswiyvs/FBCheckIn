@@ -15,7 +15,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) TYFBManager *manager;
-@property (nonatomic, strong) TYUITabBarController *tabBar;
 @property (nonatomic, strong) TYLogInViewController *loginScreen;
 @property (nonatomic, strong) Mixpanel *mixPanel;
 

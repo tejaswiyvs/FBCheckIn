@@ -20,6 +20,7 @@
 #import "UIImageView+AFNetworking.h"
 #import <QuartzCore/QuartzCore.h>
 #import "TYPlaceProfileViewController.h"
+#import "TYCurrentUser.h"
 
 @interface TYUserProfileViewController ()
 -(UIView *) makeHeaderView;
@@ -52,7 +53,7 @@ const int kRequestTagLast3CheckIns = 1;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 455.0f) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 460.0f) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -61,10 +62,15 @@ const int kRequestTagLast3CheckIns = 1;
     [self.view addSubview:self.tableView];
     self.tableView.backgroundView = nil;;
     self.tableView.backgroundColor = [UIColor clearColor];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    self.view.backgroundColor = [UIColor bgColor];
     self.tableView.separatorColor = [UIColor subtitleTextColor];
     [self.tableView setTableFooterView:[self makeFooterView]];
     [self loadUserMetaData];
+    
+    // Analytics
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    TYUser *currentUser = [TYCurrentUser sharedInstance].user;
+    [mixpanel track:@"UserProfileViewed" properties:[NSDictionary dictionaryWithObjectsAndKeys:currentUser.userId, @"userId", currentUser.sex, @"sex", self.user.userId, @"viewedUserId", nil]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,6 +81,7 @@ const int kRequestTagLast3CheckIns = 1;
 #pragma mark - TYFBFacade
 
 -(void) loadUserMetaData {
+    DebugLog(@"Loading User Meta Data");
     self.userCheckInsRequest = [[TYFBFacade alloc] init];
     self.userCheckInsRequest.delegate = self;
     [self.userCheckInsRequest loadMetaDataForUser:self.user];
@@ -336,7 +343,7 @@ const int kRequestTagLast3CheckIns = 1;
                                          }
                                          failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                              dispatch_async(dispatch_get_main_queue(), ^(void){
-                                                 NSLog(@"Error loading user's cover photo : %@", error);
+                                                 DebugLog(@"Error loading user's cover photo : %@", error);
                                              });
                                          }
          ];
@@ -400,8 +407,8 @@ const int kRequestTagLast3CheckIns = 1;
     double deltaLong = abs(maxLong - minLong);
     
     //set minimal delta
-    if (deltaLat < 5) {deltaLat = 5;}
-    if (deltaLong < 5) {deltaLong = 5;}
+    if (deltaLat < 2) {deltaLat = 2;}
+    if (deltaLong < 2) {deltaLong = 2;}
     
     //create new region and set map
     CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(centerLat, centerLong);

@@ -17,6 +17,14 @@
 
 @implementation UIColor(HexString)
 
++(UIColor *) tintedBlack {
+    return [UIColor colorWithHexString:@"1E1C1B"];
+}
+
++(UIColor *) bgColor {
+    return [UIColor colorWithHexString:@"EAE5E1"];
+}
+
 +(UIColor *) tabBarTintColor {
     return [UIColor colorWithHexString:@"BBBBBB"];
 }
@@ -26,11 +34,12 @@
 }
 
 +(UIColor *) headerTextColor {
-    return [UIColor colorWithRed:(99.0f/255.0f) green:(89.0f/255.0f) blue:(99.0f/255.0f) alpha:1.0f];
+    return [UIColor colorWithHexString:@"3B3432"];
 }
 
 +(UIColor *) subtitleTextColor {
-    return [UIColor colorWithRed:(127.0f/255.0f) green:(127.0f/255.0f) blue:(127.0f/255.0f) alpha:1.0f];
+//    return [UIColor colorWithRed:(127.0f/255.0f) green:(127.0f/255.0f) blue:(127.0f/255.0f) alpha:1.0f];
+    return [UIColor colorWithHexString:@"736560"];
 }
 
 +(UIColor *) colorWithHexString: (NSString *) stringToConvert

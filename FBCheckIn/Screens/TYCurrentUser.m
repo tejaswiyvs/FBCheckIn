@@ -9,6 +9,7 @@
 #import "TYCurrentUser.h"
 #import "TYFBManager.h"
 #import "TYUtils.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface TYCurrentUser ()
 
@@ -90,7 +91,7 @@ static NSString * const kCacheFileName = @"current_user";
 }
 
 -(void) fbHelper:(TYFBFacade *)helper didFailWithError:(NSError *)err {
-    NSLog(@"%@", err);
+    DebugLog(@"%@", err);
     [self postFailureNotification];
 }
 
