@@ -45,6 +45,7 @@
 @synthesize postPhotoRequest = _postPhotoRequest;
 @synthesize postTagsRequest = _postTagsRequest;
 @synthesize postPageInfoRequest = _postPageInfoRequest;
+@synthesize tagFriendsBtn = _tagFriendsBtn;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -233,6 +234,15 @@
 
 #pragma mark - Helpers
 
+-(void) refreshTagUsersButton {
+    if ([self hasTags]) {
+        [self.tagFriendsBtn setBackgroundImage:[UIImage imageNamed:@"tag_friends_green.png"] forState:UIControlStateNormal];
+    }
+    else {
+        [self.tagFriendsBtn setBackgroundImage:[UIImage imageNamed:@"tag_friends.png"] forState:UIControlStateNormal];
+    }
+}
+
 -(void) dismiss {
     [SVProgressHUD dismiss];
     [self dismissModalViewControllerAnimated:YES];
@@ -252,13 +262,15 @@
 
 -(void) taggedUsers:(NSArray *) users {
     self.taggedUsers = [NSMutableArray arrayWithArray:users];
+    [self refreshTagUsersButton];
 }
 
 -(void) tagUsersCancelled {
+    [self refreshTagUsersButton];
 }
 
 -(BOOL) hasTags {
-    return [self.taggedUsers count] > 0;
+    return self.taggedUsers && [self.taggedUsers count] > 0;
 }
 
 -(BOOL) hasPicture {

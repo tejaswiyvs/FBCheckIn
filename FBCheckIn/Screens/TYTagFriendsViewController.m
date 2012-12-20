@@ -8,16 +8,15 @@
 
 #import "TYTagFriendsViewController.h"
 #import "TYFBManager.h"
-#import "SVProgressHUD.h"
 #import "UIImageView+AFNetworking.h"
 #import "TYUser.h"
 #import "TYTagUserCell.h"
 #import "NSString+Common.h"
 #import "UIBarButtonItem+Convinience.h"
 #import "UIColor+HexString.h"
+#import "TYIndeterminateProgressBar.h"
 
 @interface TYTagFriendsViewController ()
--(void) getFacebookFriends;
 -(BOOL) userBelongsToTaggedUsers:(TYUser *) user;
 -(void) doneButtonClicked:(id) sender;
 -(void) cancelButtonClicked:(id) sender;
@@ -27,15 +26,14 @@
 
 @synthesize friends = _friends;
 @synthesize filteredFriends = _filteredFriends;
-@synthesize loadFriendsRequest = _loadFriendsRequest;
 @synthesize taggedUsers = _taggedUsers;
 @synthesize tableView = _tableView;
 @synthesize searching = _searching;
 @synthesize searchBar = _searchBar;
+@synthesize cancelItem = _cancelItem;
+@synthesize clearTagsItem = _clearTagsItem;
 
-const int kSectionTaggedUsers = 0;
 const int kSectionFriends = 1;
-const int kNumberOfSections = 2;
 
 #pragma mark - View lifecycle
 
@@ -71,51 +69,29 @@ const int kNumberOfSections = 2;
     UIBarButtonItem *doneItem = [UIBarButtonItem barItemWithImage:[UIImage imageNamed:@"red-button.png"] target:self action:@selector(doneButtonClicked:) title:@"Done"];
     [self.navigationItem setRightBarButtonItem:doneItem];
     
-    UIBarButtonItem *cancelItem = [UIBarButtonItem barItemWithImage:[UIImage imageNamed:@"black-button.png"] target:self action:@selector(cancelButtonClicked:) title:@"Cancel"];
-    [self.navigationItem setLeftBarButtonItem:cancelItem];
+    self.cancelItem = [UIBarButtonItem barItemWithImage:[UIImage imageNamed:@"black-button.png"] target:self action:@selector(cancelButtonClicked:) title:@"Cancel"];
+    self.clearTagsItem = [UIBarButtonItem barItemWithImage:[UIImage imageNamed:@"black-button.png"] target:self action:@selector(clearTagsButtonClicked:) title:@"Clear"];
     
-    // Download friends. Possibly cache them and download them later.
-    [self getFacebookFriends];
+    [self refreshLeftBarButtonItem];
+    self.friends = [TYFriendCache sharedInstance].cachedFriends;
+    
+    // Incase the cache is still empty for some reason, add self as observer and trigger a refresh
+    if (!self.friends || [self.friends count] == 0) {
+        [self registerForNotifications];
+        [[TYFriendCache sharedInstance] forceRefresh];
+        [TYIndeterminateProgressBar showInView:self.view backgroundColor:[UIColor dullWhite] indicatorColor:[UIColor dullRed] borderColor:[UIColor darkGrayColor]];
+    }
+    [self.tableView reloadData];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    [self.loadFriendsRequest setDelegate:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-#pragma mark - Facebook
-
--(void) getFacebookFriends {
-    [SVProgressHUD showWithStatus:@"Loading ..."];
-    TYFBManager *manager = [TYFBManager sharedInstance];
-    Facebook *facebook = [manager facebook];
-    NSString *fql = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1=me())";
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    fql, @"query",
-                                    nil];
-    [facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
-}
-
--(void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    DebugLog(@"Error: %@", error);
-    [SVProgressHUD showWithStatus:@"Failed."];
-}
-
--(void)request:(FBRequest *)request didLoad:(id)result {
-    [SVProgressHUD dismiss];
-    for (NSDictionary *userDict in ((NSArray *) result)) {
-        TYUser *user = [[TYUser alloc] init];
-        user.userId = [[userDict objectForKey:@"uid"] stringValue];
-        user.fullName = [userDict objectForKey:@"name"];
-        [self.friends addObject:user];
-    }
-    [self.tableView reloadData];
 }
 
 #pragma mark - Search Bar
@@ -168,31 +144,12 @@ const int kNumberOfSections = 2;
 
 #pragma mark - UITableViewDelegate
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == kSectionTaggedUsers) {
-        return @"Tagged Users";
-    }
-    else if(section == kSectionFriends) {
-        return @"Friends";
-    }
-    return @"";
-}
-
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return kNumberOfSections;
+    return 1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == kSectionTaggedUsers) {
-        return [self.taggedUsers count];
-    }
-    else if(section == kSectionFriends && self.searching) {
-        return [self.filteredFriends count];
-    }
-    else if(section == kSectionFriends && !self.searching) {
-        return [self.friends count];
-    }
-    return 0;
+    return self.searching ? [self.filteredFriends count] : [self.friends count];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -211,18 +168,13 @@ const int kNumberOfSections = 2;
     }
     
     TYUser *user = nil;
-    if (indexPath.section == kSectionFriends) {
+    if (!self.searching) {
         user = [self.friends objectAtIndex:indexPath.row];
     }
-    else if(indexPath.section == kSectionTaggedUsers && !self.searching) {
-        user = [self.taggedUsers objectAtIndex:indexPath.row];
-    }
-    else if(indexPath.section == kSectionTaggedUsers && self.searching) {
+    else {
         user = [self.filteredFriends objectAtIndex:indexPath.row];
     }
     
-    [cell.imageView setImageWithURL:[NSURL URLWithString:user.profilePictureUrl] 
-                   placeholderImage:nil];
     [cell.fullName setText:[user fullName]];
     [cell.checkMark setHidden:![self userBelongsToTaggedUsers:user]];
     [cell.profilePicture setImageWithURL:[NSURL URLWithString:user.profilePictureUrl]];
@@ -232,11 +184,7 @@ const int kNumberOfSections = 2;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == kSectionTaggedUsers) {
-        TYUser *taggedUser = [self.taggedUsers objectAtIndex:indexPath.row];
-        [self.taggedUsers removeObject:taggedUser];
-    }
-    else if(indexPath.section == kSectionFriends && !self.searching) {
+    if(!self.searching) {
         TYUser *user = [self.friends objectAtIndex:indexPath.row];
         if ([self userBelongsToTaggedUsers:user]) {
             [self.taggedUsers removeObject:user];
@@ -245,7 +193,7 @@ const int kNumberOfSections = 2;
             [self.taggedUsers addObject:user];
         }
     }
-    else if(indexPath.section == kSectionFriends && self.searching) {
+    else {
         TYUser *user = [self.filteredFriends objectAtIndex:indexPath.row];
         if ([self userBelongsToTaggedUsers:user]) {
             [self.taggedUsers removeObject:user];
@@ -254,7 +202,9 @@ const int kNumberOfSections = 2;
             [self.taggedUsers addObject:user];
         }
     }
-    [tableView reloadData];
+    
+    [self refreshLeftBarButtonItem];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Event Handlers
@@ -269,6 +219,38 @@ const int kNumberOfSections = 2;
     [self dismissModalViewControllerAnimated:YES];
 }
 
+-(void) clearTagsButtonClicked:(id) sender {
+    self.taggedUsers = [NSMutableArray array];
+    [self.tableView reloadData];
+    [self refreshLeftBarButtonItem];
+}
+
+-(void) refreshLeftBarButtonItem {
+    if (self.taggedUsers && self.taggedUsers.count != 0) {
+        [self.navigationItem setLeftBarButtonItem:self.clearTagsItem];
+    }
+    else {
+        [self.navigationItem setLeftBarButtonItem:self.cancelItem];
+    }
+}
+
+#pragma mark - FriendCache
+
+-(void) friendCacheRefreshed:(NSNotification *) notification {
+    [self unregisterFromNotifications];
+    [TYIndeterminateProgressBar hideFromView:self.view];
+    self.friends = [TYFriendCache sharedInstance].cachedFriends;
+    [self.tableView reloadData];
+}
+
+-(void) friendCacheRefreshErrored:(NSNotification *) notification {
+    [self unregisterFromNotifications];
+    [TYIndeterminateProgressBar hideFromView:self.view];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention" message:@"There was a problem loading your friends list. Please try again later." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alert show];
+    [TYIndeterminateProgressBar hideFromView:self.view];
+}
+
 #pragma mark - Helpers
 
 -(BOOL) userBelongsToTaggedUsers:(TYUser *) user {
@@ -278,6 +260,15 @@ const int kNumberOfSections = 2;
         }
     }
     return NO;
+}
+
+-(void) registerForNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendCacheRefreshed:) name:kFriendCacheUpdateComplete object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendCacheRefreshErrored:) name:kFriendCacheUpdateComplete object:nil];
+}
+
+-(void) unregisterFromNotifications {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

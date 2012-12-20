@@ -23,6 +23,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *placeName;
 @property (nonatomic, strong) IBOutlet UILabel *placeAddress;
 @property (nonatomic, strong) IBOutlet UITextView *statusText;
+@property (nonatomic, strong) IBOutlet UIButton *tagFriendsBtn;
 @property (nonatomic, strong) UIImage *placeImg;
 @property (nonatomic, strong) UIImage *checkInImage;
 @property (nonatomic, strong) AFPhotoEditorController *aviaryController;

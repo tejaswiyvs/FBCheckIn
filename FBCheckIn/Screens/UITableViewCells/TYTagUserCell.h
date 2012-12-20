@@ -14,4 +14,5 @@
 @property (nonatomic, strong) IBOutlet UIImageView *profilePicture;
 @property (nonatomic, strong) IBOutlet UIImageView *checkMark;
 
+-(void) setProfilePictureWithURL:(NSString *) imageUrl;
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "TYTagUserCell.h"
+#import <QuartzCore/QuartzCore.h>
+#import "UIImageView+AFNetworking.h"
 
 @implementation TYTagUserCell
 
@@ -14,20 +16,16 @@
 @synthesize profilePicture = _profilePicture;
 @synthesize checkMark = _checkMark;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+-(void) awakeFromNib {
+    [self.profilePicture.layer setBorderColor:[[UIColor darkGrayColor] CGColor]];
+    [self.profilePicture.layer setBorderWidth:3.0f];
+    [self.profilePicture.layer setCornerRadius:3.0f];
+    [self.profilePicture.layer setMasksToBounds:YES];
+    [self.profilePicture setContentMode:UIViewContentModeScaleAspectFill];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+-(void) setProfilePictureWithURL:(NSString *) imageUrl {
+    [self.profilePicture setImageWithURL:[NSURL URLWithString:imageUrl]];
 }
 
 @end
