@@ -7,7 +7,6 @@
 //
 
 #import "TYSearchFriendsViewController.h"
-#import "SVProgressHUD.h"
 #import "TYFBManager.h"
 #import "TYUser.h"
 #import "TYCurrentUser.h"
@@ -16,6 +15,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "TYUserProfileViewController.h"
 #import "UIColor+HexString.h"
+#import "TYIndeterminateProgressBar.h"
 
 @interface TYSearchFriendsViewController ()
 
@@ -40,47 +40,25 @@
     self.searching = NO;
     self.tableView.backgroundView = nil;
     self.view.backgroundColor = [UIColor bgColor];
+    [self updateSearchBarBackground];
+    self.friends = [TYFriendCache sharedInstance].cachedFriends;
     
-    [self getFacebookFriends];
+    // Incase the cache is still empty for some reason, add self as observer and trigger a refresh
+    if (!self.friends || [self.friends count] == 0) {
+        [self registerForNotifications];
+        [[TYFriendCache sharedInstance] forceRefresh];
+        [TYIndeterminateProgressBar showInView:self.view backgroundColor:[UIColor dullWhite] indicatorColor:[UIColor dullRed] borderColor:[UIColor darkGrayColor]];
+    }
 }
 
 -(void) viewDidUnload {
-    [self.loadFriendsRequest setDelegate:nil];
+    [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Facebook
-
--(void) getFacebookFriends {
-    [SVProgressHUD showWithStatus:@"Loading ..."];
-    TYFBManager *manager = [TYFBManager sharedInstance];
-    Facebook *facebook = [manager facebook];
-    NSString *fql = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1=me())";
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    fql, @"query",
-                                    nil];
-    [facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
-}
-
--(void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    DebugLog(@"Error: %@", error);
-    [SVProgressHUD showWithStatus:@"Failed."];
-}
-
--(void)request:(FBRequest *)request didLoad:(id)result {
-    [SVProgressHUD dismiss];
-    for (NSDictionary *userDict in ((NSArray *) result)) {
-        TYUser *user = [[TYUser alloc] init];
-        user.userId = [[userDict objectForKey:@"uid"] stringValue];
-        user.fullName = [userDict objectForKey:@"name"];
-        [self.friends addObject:user];
-    }
-    [self.tableView reloadData];
 }
 
 #pragma mark - Search Bar
@@ -184,6 +162,23 @@
     [self.navigationController pushViewController:userProfile animated:YES];
 }
 
+#pragma mark - FriendCache
+
+-(void) friendCacheRefreshed:(NSNotification *) notification {
+    [self unregisterFromNotifications];
+    [TYIndeterminateProgressBar hideFromView:self.view];
+    self.friends = [TYFriendCache sharedInstance].cachedFriends;
+    [self.tableView reloadData];
+}
+
+-(void) friendCacheRefreshErrored:(NSNotification *) notification {
+    [self unregisterFromNotifications];
+    [TYIndeterminateProgressBar hideFromView:self.view];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention" message:@"There was a problem loading your friends list. Please try again later." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alert show];
+    [TYIndeterminateProgressBar hideFromView:self.view];
+}
+
 #pragma mark - Helpers
 
 -(void) updateSearchBarBackground {
@@ -192,5 +187,13 @@
     [self.searchBar setClipsToBounds:YES];
 }
 
+-(void) registerForNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendCacheRefreshed:) name:kFriendCacheUpdateComplete object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendCacheRefreshErrored:) name:kFriendCacheUpdateComplete object:nil];
+}
+
+-(void) unregisterFromNotifications {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

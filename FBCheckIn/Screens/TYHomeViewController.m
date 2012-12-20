@@ -404,7 +404,7 @@
     }
     else if([notification.name isEqualToString:kNotificationCacheRefreshStart]) {
         self.reloading = YES;
-        [TYIndeterminateProgressBar showInView:self.view];
+        [TYIndeterminateProgressBar showInView:self.view backgroundColor:[UIColor dullWhite] indicatorColor:[UIColor dullRed] borderColor:[UIColor darkGrayColor]];
     }
     else if([notification.name isEqualToString:kNotificationCacheRefreshEnd]) {
         self.reloading = NO;

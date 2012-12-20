@@ -64,6 +64,7 @@ typedef enum {
 -(void) postPhoto:(UIImage *) image withMessage:(NSString *) message;
 -(void) tagUsers:(NSMutableArray *) users forObjectId:(NSString *) objectId;
 -(void) postPage:(TYPage *) page forObjectId:(NSString *) objectId;
+-(void) friendsForUser:(TYUser *) user;
 @end
 
 @protocol TYFBFacadeDelegate

@@ -13,10 +13,12 @@
 #import "TYCheckInCache.h"
 #import "TYFBManager.h"
 #import "TYBaseViewController.h"
+#import "TYFriendCache.h"
 
 @interface TYLogInViewController : TYBaseViewController
 
 @property (nonatomic, strong) TYCheckInCache *cache;
+@property (nonatomic, strong) TYFriendCache *friendCache;
 @property (nonatomic, strong) TYCurrentUser *user;
 @property (nonatomic, strong) IBOutlet UIImageView *logoImgView;
 @property (nonatomic, strong) IBOutlet UIButton *loginButton;

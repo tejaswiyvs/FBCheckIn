@@ -140,6 +140,7 @@
 		B748B1E9159ACB8700043F7B /* add-photo-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = B748B1E8159ACB8700043F7B /* add-photo-placeholder.png */; };
 		B748B20E159C283800043F7B /* TYTagUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B748B20D159C283800043F7B /* TYTagUserCell.m */; };
 		B748B210159C285700043F7B /* TYTagUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B748B20F159C285700043F7B /* TYTagUserCell.xib */; };
+		B75124291682325800063BED /* TYFriendCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B75124281682325800063BED /* TYFriendCache.m */; };
 		B752EA26167EAE2D0018AA92 /* back-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B752EA25167EAE2D0018AA92 /* back-button@2x.png */; };
 		B752EA27167EAE2D0018AA92 /* back-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B752EA25167EAE2D0018AA92 /* back-button@2x.png */; };
 		B752EA29167ED6130018AA92 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B752EA28167ED6130018AA92 /* arrow@2x.png */; };
@@ -428,6 +429,8 @@
 		B748B20C159C283800043F7B /* TYTagUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYTagUserCell.h; path = Screens/UITableViewCells/TYTagUserCell.h; sourceTree = "<group>"; };
 		B748B20D159C283800043F7B /* TYTagUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYTagUserCell.m; path = Screens/UITableViewCells/TYTagUserCell.m; sourceTree = "<group>"; };
 		B748B20F159C285700043F7B /* TYTagUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYTagUserCell.xib; path = Screens/UITableViewCells/TYTagUserCell.xib; sourceTree = "<group>"; };
+		B75124271682325800063BED /* TYFriendCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYFriendCache.h; path = Libraries/FacebookWrapper/TYFriendCache.h; sourceTree = "<group>"; };
+		B75124281682325800063BED /* TYFriendCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYFriendCache.m; path = Libraries/FacebookWrapper/TYFriendCache.m; sourceTree = "<group>"; };
 		B752EA25167EAE2D0018AA92 /* back-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back-button@2x.png"; path = "Images/new/back-button@2x.png"; sourceTree = SOURCE_ROOT; };
 		B752EA28167ED6130018AA92 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow@2x.png"; path = "Images/new/arrow@2x.png"; sourceTree = SOURCE_ROOT; };
 		B7539F8C15D558F30012370C /* ego-header-view@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ego-header-view@2x.png"; sourceTree = "<group>"; };
@@ -1165,6 +1168,8 @@
 				B7539F9315D576F00012370C /* TYFBFacade.m */,
 				B7FF5EA015D0CFA1008A0300 /* TYCheckInCache.h */,
 				B7FF5EA115D0CFA1008A0300 /* TYCheckInCache.m */,
+				B75124271682325800063BED /* TYFriendCache.h */,
+				B75124281682325800063BED /* TYFriendCache.m */,
 			);
 			name = "Facebook Wrapper";
 			sourceTree = "<group>";
@@ -1493,6 +1498,7 @@
 				B75E7126167D64AC000B0F2C /* SideMenuViewController.m in Sources */,
 				B75E712A167D6D6A000B0F2C /* TYSearchFriendsViewController.m in Sources */,
 				B721B1E9167F8E85004A1341 /* TYFriendCell.m in Sources */,
+				B75124291682325800063BED /* TYFriendCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

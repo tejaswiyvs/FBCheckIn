@@ -17,6 +17,7 @@
 #import "UINavigationController+MFSideMenu.h"
 #import "MFSideMenu.h"
 #import "SideMenuViewController.h"
+#import "TYFriendCache.h"
 
 @interface TYAppDelegate ()
 @end
@@ -49,6 +50,7 @@ NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
     // Override point for customization after application launch.
     self.mixPanel = [Mixpanel sharedInstanceWithToken:kMixpanelToken];
     [self.mixPanel track:@"App Launched"];
+    [[TYFriendCache sharedInstance] forceRefresh];
     return YES;
 }
 

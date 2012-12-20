@@ -1,8 +1,7 @@
 TODO
 ====
-
- - Bugfix the TYIndeterminateProgressBar
  - Tag Friends bugfix.
  - Bug fix check-in screen.
  - Clicking on a picture should open user profile as well.
  - Cleanup project.
+ - Search bar cancel button gradient in TYSearchFriendViewController.

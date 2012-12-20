@@ -200,6 +200,15 @@
     self.requestType = TYFBFacadeRequestTypePostPageInfo;
 }
 
+-(void) friendsForUser:(TYUser *) user {
+    self.requestType = TYFBFacadeRequestTypeGetFriends;
+    Facebook *facebook = [TYFBManager sharedInstance].facebook;
+    // Get friends
+    NSString *fql = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover, pic_big FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1=me()) OR uid=me()";
+    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:fql, @"query", nil];
+    [facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
+}
+
 #pragma mark - FBRequestDelegate
 
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error {
@@ -217,6 +226,7 @@
             [self parseCheckins:result];
             break;
         case TYFBFacadeRequestTypeGetFriends:
+            [self parseFriends:result];
             break;
         case TYFBFacadeRequestTypeGetPlaces1:
             [self parsePlaces:result];
@@ -266,6 +276,17 @@
 }
 
 #pragma mark - Parsers
+
+-(void) parseFriends:(id) result {
+    NSLog(@"%@", result);
+    NSArray *resultArray = (NSArray *) result;
+    NSMutableArray *friends = [NSMutableArray array];
+    for (NSDictionary *userDict in resultArray) {
+        TYUser *user = [[TYUser alloc] initWithDictionary:userDict];
+        [friends addObject:user];
+    }
+    [self.delegate fbHelper:self didCompleteWithResults:[NSMutableDictionary dictionaryWithObjectsAndKeys:friends, @"data", nil]];
+}
 
 -(void) parsePostCheckInResponse:(id) result {
     NSDictionary *resultDict = (NSDictionary *) result;

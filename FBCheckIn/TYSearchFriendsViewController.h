@@ -7,13 +7,12 @@
 //
 
 #import "TYBaseViewController.h"
-#import "Facebook.h"
+#import "TYFriendCache.h"
 
-@interface TYSearchFriendsViewController : TYBaseViewController<FBRequestDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface TYSearchFriendsViewController : TYBaseViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property (nonatomic, strong) NSMutableArray *friends;
 @property (nonatomic, strong) NSMutableArray *filteredFriends;
-@property (nonatomic, strong) FBRequest *loadFriendsRequest;
 @property (nonatomic, assign) BOOL searching;
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;

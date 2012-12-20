@@ -23,6 +23,7 @@
 @synthesize cache = _cache;
 @synthesize logoImgView = _logoImgView;
 @synthesize loginButton = _loginButton;
+@synthesize friendCache = _friendCache;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +32,7 @@
         DebugLog(@"Init LoginViewController. Setting up user, cache, registering for notifications.");
         self.user = [TYCurrentUser sharedInstance];
         self.cache = [TYCheckInCache sharedInstance];
+        self.friendCache = [TYFriendCache sharedInstance];
         [self registerForNotifications];
         DebugLog(@"Done.");
     }
@@ -50,8 +52,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -86,6 +86,8 @@
     DebugLog(@"Succesfully loaded user details. Logged in : Username: %@, UserId: %@", self.user.user.userName, self.user.user.userId);
     [SVProgressHUD dismiss];
     [self dismissModalViewControllerAnimated:YES];
+    DebugLog(@"Loading user's friends asynchronously");
+    [self.friendCache forceRefresh];
 }
 
 -(void) currentUserDidError:(NSNotification *) notification {
