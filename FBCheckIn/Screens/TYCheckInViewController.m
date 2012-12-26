@@ -84,12 +84,6 @@
     [self.statusText.layer setMasksToBounds:YES];    
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
 -(IBAction)checkInButtonClicked:(id)sender {
     [SVProgressHUD showWithStatus:@"Checking in..."];
     

@@ -21,5 +21,5 @@ extern NSString * const kCurrentUserDidErrorNotification;
 
 +(TYCurrentUser *) sharedInstance;
 -(void) loadCurrentUser;
-
+-(void) clearCache;
 @end

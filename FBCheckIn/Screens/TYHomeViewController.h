@@ -23,5 +23,6 @@
 @property (nonatomic, strong) NSMutableArray *requests;
 @property (nonatomic, strong) UITapGestureRecognizer *profilePictureTapRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer *pageTapRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer *checkInPhotoTagRecognizer;
 
 @end

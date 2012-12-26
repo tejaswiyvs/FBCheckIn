@@ -60,7 +60,7 @@
     self.tableView.backgroundView = nil;
 }
 
-- (void)viewDidUnload
+- (void) dealloc
 {
     [super viewDidUnload];
     self.searchBar = nil;

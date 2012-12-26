@@ -22,5 +22,6 @@ NSString * const kNotificationCacheRefreshEnd;
 
 +(TYCheckInCache *) sharedInstance;
 -(void) forceRefresh;
+-(void) clearCache;
 
 @end

@@ -18,7 +18,6 @@
 #import "TYCheckInDetailViewController.h"
 #import "TYAppDelegate.h"
 #import "SCNavigationBar.h"
-#import "TYIndeterminateProgressBar.h"
 #import "NSString+Common.h"
 #import "UIColor+HexString.h"
 #import "NSDate+Helper.h"
@@ -50,6 +49,7 @@
 @synthesize requests = _requests;
 @synthesize profilePictureTapRecognizer = _profilePictureTapRecognizer;
 @synthesize pageTapRecognizer = _pageTapRecognizer;
+@synthesize checkInPhotoTagRecognizer = _checkInPhotoTagRecognizer;
 
 -(id) init {
     self = [super initWithNibName:@"TYHomeViewController" bundle:nil];
@@ -85,6 +85,18 @@
 		[self.tableView addSubview:view];
 		_refreshHeaderView = view;
 	}
+    
+    self.profilePictureTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profilePictureTapped:)];
+    self.profilePictureTapRecognizer.numberOfTapsRequired = 1;
+    self.profilePictureTapRecognizer.cancelsTouchesInView = YES;
+
+    self.checkInPhotoTagRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(checkInPhotoTapped:)];
+    self.checkInPhotoTagRecognizer.numberOfTapsRequired = 1;
+    self.checkInPhotoTagRecognizer.cancelsTouchesInView = YES;
+    
+    self.pageTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pageNameTapped:)];
+    self.pageTapRecognizer.numberOfTapsRequired = 1;
+    self.pageTapRecognizer.cancelsTouchesInView = YES;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -96,10 +108,8 @@
     }
 }
 
-- (void)viewDidUnload
-{
-    DebugLog(@"HomeView DidUnload. Cleaning up.");
-    [super viewDidUnload];
+-(void) dealloc {
+    DebugLog(@"HomeView dealloc");
     [self unsubscribeFromNotifications];
     [self unregisterObserver];
     self.tableView = nil;
@@ -133,14 +143,6 @@
     float height = [self heightForIndexPath:indexPath];
     CGRect rect = CGRectMake(10.0f, 0.0f, 300.0f, height);
     [cell setFrame:rect];
-    
-    // Setup tap recognizers.
-    self.profilePictureTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profilePictureTapped:)];
-    self.profilePictureTapRecognizer.numberOfTapsRequired = 1;
-    self.profilePictureTapRecognizer.cancelsTouchesInView = YES;
-    self.pageTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pageNameTapped:)];
-    self.pageTapRecognizer.numberOfTapsRequired = 1;
-    self.pageTapRecognizer.cancelsTouchesInView = YES;
     
     UIImageView *backgroundImgView = [[UIImageView alloc] initWithFrame:rect];
     [backgroundImgView setImage:[UIImage imageNamed:@"table-cell-bg.png"]];
@@ -404,12 +406,12 @@
     }
     else if([notification.name isEqualToString:kNotificationCacheRefreshStart]) {
         self.reloading = YES;
-        [TYIndeterminateProgressBar showInView:self.view backgroundColor:[UIColor dullWhite] indicatorColor:[UIColor dullRed] borderColor:[UIColor darkGrayColor]];
+//        [TYIndeterminateProgressBar showInView:self.view backgroundColor:[UIColor dullWhite] indicatorColor:[UIColor dullRed] borderColor:[UIColor darkGrayColor]];
     }
     else if([notification.name isEqualToString:kNotificationCacheRefreshEnd]) {
         self.reloading = NO;
         [self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-        [TYIndeterminateProgressBar hideFromView:self.view];
+//        [TYIndeterminateProgressBar hideFromView:self.view];
     }
 }
 

@@ -18,6 +18,7 @@
 #import "MFSideMenu.h"
 #import "SideMenuViewController.h"
 #import "TYFriendCache.h"
+#import "TYSettingsViewController.h"
 
 @interface TYAppDelegate ()
 @end
@@ -28,6 +29,9 @@
 @synthesize loginScreen = _loginScreen;
 @synthesize manager = _manager;
 @synthesize mixPanel = _mixPanel;
+@synthesize checkInCache = _checkInCache;
+@synthesize friendCache = _friendCache;
+@synthesize currentUser = _currentUser;
 
 NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
 
@@ -50,7 +54,13 @@ NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
     // Override point for customization after application launch.
     self.mixPanel = [Mixpanel sharedInstanceWithToken:kMixpanelToken];
     [self.mixPanel track:@"App Launched"];
-    [[TYFriendCache sharedInstance] forceRefresh];
+    
+    // Force refresh friends on app launch
+    self.friendCache = [TYFriendCache sharedInstance];
+    [self.friendCache forceRefresh];
+    self.checkInCache = [TYCheckInCache sharedInstance];
+    [self registerForNotifications];
+    self.currentUser = [TYCurrentUser sharedInstance];
     return YES;
 }
 
@@ -77,6 +87,7 @@ NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     DebugLog(@"Application will terminate");
+    [self unregisterFromNotifications];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
@@ -84,6 +95,25 @@ NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
     return [self.manager.facebook handleOpenURL:url];
 }
 
+#pragma mark - NSNotification
+
+-(void) registerForNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutNotificationReceived:) name:kLogoutNotification object:nil];
+}
+
+-(void) unregisterFromNotifications {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void) logoutNotificationReceived:(NSNotification *) notification {
+    DebugLog(@"Logging Out..");
+    [self.checkInCache clearCache];
+    [self.friendCache clearCache];
+    [self.currentUser clearCache];
+    [self.manager logout];
+    self.loginScreen = [[TYLogInViewController alloc] initWithNibName:@"TYLoginView" bundle:nil];
+    [self.window.rootViewController presentModalViewController:self.loginScreen animated:NO];
+}
 #pragma mark - Helpers
 
 -(void) checkInButtonClicked:(id)sender {

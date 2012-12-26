@@ -16,7 +16,6 @@
 -(void) loadFromCache;
 -(void) commitToCache;
 -(void) loadCurrentUser;
--(void) clearCache;
 -(void) postSuccessNotification;
 -(void) postFailureNotification;
 -(NSString *) applicationDocumentsDirectory;
@@ -74,6 +73,7 @@ static NSString * const kCacheFileName = @"current_user";
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
     }
+    self.user = nil;
 }
 
 #pragma mark - Delegate
@@ -84,8 +84,8 @@ static NSString * const kCacheFileName = @"current_user";
         [self postFailureNotification];
         return;
     }
-    self.user = user;
     [self clearCache];
+    self.user = user;
     [self commitToCache];
     [self postSuccessNotification];
 }

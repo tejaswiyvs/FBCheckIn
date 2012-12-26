@@ -11,6 +11,7 @@
 #import "TYFBManager.h"
 #import "SVProgressHUD.h"
 #import "TYUtils.h"
+#import "TYSettingsViewController.h"
 
 @interface TYLogInViewController ()
 -(void) facebookDidLogin:(NSNotification *) notification;
@@ -20,7 +21,6 @@
 @implementation TYLogInViewController
 
 @synthesize user = _user;
-@synthesize cache = _cache;
 @synthesize logoImgView = _logoImgView;
 @synthesize loginButton = _loginButton;
 @synthesize friendCache = _friendCache;
@@ -31,7 +31,6 @@
     if (self) {
         DebugLog(@"Init LoginViewController. Setting up user, cache, registering for notifications.");
         self.user = [TYCurrentUser sharedInstance];
-        self.cache = [TYCheckInCache sharedInstance];
         self.friendCache = [TYFriendCache sharedInstance];
         [self registerForNotifications];
         DebugLog(@"Done.");
@@ -49,9 +48,9 @@
     [self animateLogo];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
+
+- (void) dealloc {
+    [self unregisterFromNotifications];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -80,6 +79,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(facebookLoginWasCancelled:) name:kFBManagerLoginCancelledNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentUserDidLoad:) name:kCurrentUserDidLoadNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentUserDidError:) name:kCurrentUserDidErrorNotification object:nil];
+}
+
+-(void) unregisterFromNotifications {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void) currentUserDidLoad:(NSNotification *) notification {

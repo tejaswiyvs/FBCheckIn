@@ -78,8 +78,7 @@ const int kNumberOfRows = 3;
     [mixpanel track:@"PageProfileViewed" properties:[NSDictionary dictionaryWithObjectsAndKeys:currentUser.userId, @"userId", currentUser.sex, @"sex", self.place.pageId, @"pageId", nil]];
 }
 
--(void) viewDidUnload {
-    [super viewDidUnload];
+-(void) dealloc {
     if (self.metaDataRequest) {
         self.metaDataRequest.delegate = nil;
     }

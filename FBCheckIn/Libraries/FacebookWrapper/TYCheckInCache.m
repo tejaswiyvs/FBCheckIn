@@ -9,6 +9,7 @@
 #import "TYCheckInCache.h"
 #import "TYCheckIn.h"
 #import "TYFBFacade.h"
+#import "TYSettingsViewController.h"
 
 @interface TYCheckInCache ()
 -(NSString *) applicationDocumentsDirectory;
@@ -50,6 +51,12 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
     if (!self.loading) {
         [self loadFromFacebook];
     }
+}
+
+-(void) clearCache {
+    self.checkIns = [NSMutableArray array];
+    [[NSFileManager defaultManager] removeItemAtPath:[[self applicationDocumentsDirectory] stringByAppendingPathComponent:kSaveFileName] error:nil];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSaveTimeKey];
 }
 
 -(void) loadFromDisk {

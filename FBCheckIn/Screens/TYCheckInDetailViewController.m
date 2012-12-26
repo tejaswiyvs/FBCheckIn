@@ -85,9 +85,8 @@
     [self loadMetaData];
 }
 
-- (void)viewDidUnload
+- (void) dealloc
 {
-    [super viewDidUnload];
     self.pagePictureView = nil;
     self.pageNameLbl = nil;
     self.pageAddressLbl = nil;

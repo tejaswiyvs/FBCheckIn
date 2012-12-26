@@ -18,10 +18,12 @@ extern NSString * const kFriendCacheUpdateFailed;
 @property (nonatomic, assign) long lastUpdated;
 @property (nonatomic, strong) TYFBFacade *facade;
 @property (nonatomic, assign) BOOL refreshing;
+@property (nonatomic, strong) NSDate *lastRefreshDate;
 
 +(TYFriendCache *) sharedInstance;
 -(void) forceRefresh;
 -(BOOL) isEmpty;
 -(NSMutableArray *) cachedFriends;
+-(void) clearCache;
 
 @end

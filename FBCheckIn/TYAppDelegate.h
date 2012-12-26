@@ -10,6 +10,8 @@
 #import "TYUITabBarController.h"
 #import "TYLogInViewController.h"
 #import "TYFBManager.h"
+#import "TYCheckInCache.h"
+#import "TYFriendCache.h"
 
 @interface TYAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -17,6 +19,9 @@
 @property (nonatomic, strong) TYFBManager *manager;
 @property (nonatomic, strong) TYLogInViewController *loginScreen;
 @property (nonatomic, strong) Mixpanel *mixPanel;
+@property (nonatomic, strong) TYCheckInCache *checkInCache;
+@property (nonatomic, strong) TYFriendCache *friendCache;
+@property (nonatomic, strong) TYCurrentUser *currentUser;
 
 -(void) checkInButtonClicked:(id) sender;
 @end

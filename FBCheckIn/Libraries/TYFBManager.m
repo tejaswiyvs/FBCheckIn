@@ -57,10 +57,35 @@ NSString * const kFBManagerLoginCancelledNotification = @"fb_mgr_logout";
         NSArray *permissions = [NSArray arrayWithObjects:@"user_about_me", @"friends_about_me", @"user_status", @"friends_status", @"user_likes", @"friends_likes", @"publish_stream", @"user_photos", @"friends_photos", nil];
         [self.facebook authorize:permissions];
     }
+    else {
+        [self raiseLogInNotification];
+    }
 }
 
 -(void) logout {
+    // Remove data stored in NSUserDefaults
+    [self removeDefaults];
+    
+    // Call logout on Facebook
     [self.facebook logout];
+    // Manually deleting cookies from Mobile Safari. Workaround because just calling [self.facebook logout] doesn't seem to work. See: http://stackoverflow.com/questions/6068205/calling-logout-function-of-facebook-ios-sdk-is-not-clearing-user-credentials
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in [storage cookies])
+    {
+        NSString* domainName = [cookie domain];
+        NSRange domainRange = [domainName rangeOfString:@"facebook"];
+        if(domainRange.length > 0)
+        {
+            [storage deleteCookie:cookie];
+        }
+    }
+}
+
+-(void) removeDefaults {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"FBAccessTokenKey"];
+    [defaults removeObjectForKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
 }
 
 - (void)fbDidLogin {

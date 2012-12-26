@@ -276,6 +276,13 @@
 		B7E4204F1572E4A800105F8B /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E4203C1572E4A800105F8B /* UIImageView+AFNetworking.m */; };
 		B7E420501572E4A800105F8B /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E4203C1572E4A800105F8B /* UIImageView+AFNetworking.m */; };
 		B7EF3F2A162ECB9A00B1FC9D /* TYPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EF3F29162ECB9A00B1FC9D /* TYPhoto.m */; };
+		B7F18BD11684BA2900186323 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7F18BD01684BA2900186323 /* settings@2x.png */; };
+		B7F18BD21684BA2900186323 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7F18BD01684BA2900186323 /* settings@2x.png */; };
+		B7F18BD61684BA7800186323 /* TYSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F18BD41684BA7800186323 /* TYSettingsViewController.m */; };
+		B7F18BD71684BA7800186323 /* TYSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F18BD41684BA7800186323 /* TYSettingsViewController.m */; };
+		B7F18BD91684BA7800186323 /* TYSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F18BD51684BA7800186323 /* TYSettingsView.xib */; };
+		B7F18BE71684D0D500186323 /* TYSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F18BE51684D0D500186323 /* TYSettingsView.xib */; };
+		B7F18BE81684D32B00186323 /* TYSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F18BD51684BA7800186323 /* TYSettingsView.xib */; };
 		B7F4E35B157AA6EC00FE5719 /* TYCheckInDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F4E359157AA6EC00FE5719 /* TYCheckInDetailViewController.m */; };
 		B7F4E35C157AA6EC00FE5719 /* TYCheckInDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F4E359157AA6EC00FE5719 /* TYCheckInDetailViewController.m */; };
 		B7F4E35D157AA6EC00FE5719 /* TYCheckInDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E35A157AA6EC00FE5719 /* TYCheckInDetailViewController.xib */; };
@@ -565,6 +572,11 @@
 		B7E4203C1572E4A800105F8B /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "Libraries/AFNetworking/AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		B7EF3F28162ECB9A00B1FC9D /* TYPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYPhoto.h; path = Models/TYPhoto.h; sourceTree = "<group>"; };
 		B7EF3F29162ECB9A00B1FC9D /* TYPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYPhoto.m; path = Models/TYPhoto.m; sourceTree = "<group>"; };
+		B7F18BD01684BA2900186323 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "Images/new/settings@2x.png"; sourceTree = SOURCE_ROOT; };
+		B7F18BD31684BA7800186323 /* TYSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYSettingsViewController.h; path = Screens/TYSettingsViewController.h; sourceTree = "<group>"; };
+		B7F18BD41684BA7800186323 /* TYSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYSettingsViewController.m; path = Screens/TYSettingsViewController.m; sourceTree = "<group>"; };
+		B7F18BD51684BA7800186323 /* TYSettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYSettingsView.xib; path = Screens/TYSettingsView.xib; sourceTree = "<group>"; };
+		B7F18BE51684D0D500186323 /* TYSettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYSettingsView.xib; path = Screens/TYSettingsView.xib; sourceTree = "<group>"; };
 		B7F4E358157AA6EC00FE5719 /* TYCheckInDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYCheckInDetailViewController.h; path = Screens/TYCheckInDetailViewController.h; sourceTree = "<group>"; };
 		B7F4E359157AA6EC00FE5719 /* TYCheckInDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYCheckInDetailViewController.m; path = Screens/TYCheckInDetailViewController.m; sourceTree = "<group>"; };
 		B7F4E35A157AA6EC00FE5719 /* TYCheckInDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYCheckInDetailViewController.xib; path = Screens/TYCheckInDetailViewController.xib; sourceTree = "<group>"; };
@@ -785,6 +797,9 @@
 				B75E7128167D6D69000B0F2C /* TYSearchFriendsViewController.h */,
 				B75E7129167D6D6A000B0F2C /* TYSearchFriendsViewController.m */,
 				B75E712C167D6D82000B0F2C /* TYSearchFriendsView.xib */,
+				B7F18BD31684BA7800186323 /* TYSettingsViewController.h */,
+				B7F18BD41684BA7800186323 /* TYSettingsViewController.m */,
+				B7F18BE51684D0D500186323 /* TYSettingsView.xib */,
 				B73F6DC4156ED965004A20E4 /* Resources */,
 				B73F6CED156ED280004A20E4 /* Supporting Files */,
 				B73F6DF2156F3483004A20E4 /* config.plist */,
@@ -1011,7 +1026,9 @@
 		B75E70FB167D20A4000B0F2C /* New */ = {
 			isa = PBXGroup;
 			children = (
+				B7F18BD01684BA2900186323 /* settings@2x.png */,
 				B7414D0C1680322C00380704 /* black-button@2x.png */,
+				B7F18BD51684BA7800186323 /* TYSettingsView.xib */,
 				B7414D0916802E7100380704 /* check-in@2x.png */,
 				B7414D0616802B7300380704 /* camera@2x.png */,
 				B7414D03168023EF00380704 /* check-in-bubble@2x.png */,
@@ -1261,6 +1278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7F18BE81684D32B00186323 /* TYSettingsView.xib in Resources */,
 				B73F6CF1156ED280004A20E4 /* InfoPlist.strings in Resources */,
 				B73F6D57156ED835004A20E4 /* TYHomeViewController.xib in Resources */,
 				B73F6D5E156ED846004A20E4 /* TYPlacePickerView.xib in Resources */,
@@ -1339,6 +1357,7 @@
 				B7414D0716802B7300380704 /* camera@2x.png in Resources */,
 				B7414D0A16802E7100380704 /* check-in@2x.png in Resources */,
 				B7414D0D1680322C00380704 /* black-button@2x.png in Resources */,
+				B7F18BD11684BA2900186323 /* settings@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1396,6 +1415,9 @@
 				B7414D0816802B7300380704 /* camera@2x.png in Resources */,
 				B7414D0B16802E7100380704 /* check-in@2x.png in Resources */,
 				B7414D0E1680322C00380704 /* black-button@2x.png in Resources */,
+				B7F18BD21684BA2900186323 /* settings@2x.png in Resources */,
+				B7F18BD91684BA7800186323 /* TYSettingsView.xib in Resources */,
+				B7F18BE71684D0D500186323 /* TYSettingsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1499,6 +1521,7 @@
 				B75E712A167D6D6A000B0F2C /* TYSearchFriendsViewController.m in Sources */,
 				B721B1E9167F8E85004A1341 /* TYFriendCell.m in Sources */,
 				B75124291682325800063BED /* TYFriendCache.m in Sources */,
+				B7F18BD61684BA7800186323 /* TYSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1556,6 +1579,7 @@
 				B75E7123167D63E0000B0F2C /* UINavigationController+MFSideMenu.m in Sources */,
 				B75E7127167D64AC000B0F2C /* SideMenuViewController.m in Sources */,
 				B75E712B167D6D6A000B0F2C /* TYSearchFriendsViewController.m in Sources */,
+				B7F18BD71684BA7800186323 /* TYSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1661,8 +1685,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C5028664-8196-4DF9-82BD-3B4233B6558A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5028664-8196-4DF9-82BD-3B4233B6558A";
+				PROVISIONING_PROFILE = "644915C0-B056-46B9-A2F2-E69A9E95E7AB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "644915C0-B056-46B9-A2F2-E69A9E95E7AB";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1687,8 +1711,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C5028664-8196-4DF9-82BD-3B4233B6558A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5028664-8196-4DF9-82BD-3B4233B6558A";
+				PROVISIONING_PROFILE = "644915C0-B056-46B9-A2F2-E69A9E95E7AB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "644915C0-B056-46B9-A2F2-E69A9E95E7AB";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

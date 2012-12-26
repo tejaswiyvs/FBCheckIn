@@ -40,9 +40,8 @@
     [self.mapView setDelegate:self];
 }
 
-- (void)viewDidUnload
+- (void) dealloc
 {
-    [super viewDidUnload];
     self.mapView = nil;
 }
 

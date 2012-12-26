@@ -84,7 +84,7 @@ const int kSectionFriends = 1;
     [self.tableView reloadData];
 }
 
-- (void)viewDidUnload
+- (void) dealloc
 {
     [super viewDidUnload];
 }

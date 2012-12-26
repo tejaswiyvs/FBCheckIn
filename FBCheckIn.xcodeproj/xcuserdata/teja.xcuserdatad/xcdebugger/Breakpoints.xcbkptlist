@@ -7,13 +7,52 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/TYSearchFriendsViewController.m"
-         timestampString = "377663478.510096"
+         filePath = "FBCheckIn/Screens/TYLogInViewController.m"
+         timestampString = "378232649.168115"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "97"
-         endingLineNumber = "97"
-         landmarkName = "-searchBar:textDidChange:"
+         startingLineNumber = "89"
+         endingLineNumber = "89"
+         landmarkName = "-currentUserDidLoad:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FBCheckIn/Screens/TYCurrentUser.m"
+         timestampString = "378232677.786615"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "64"
+         endingLineNumber = "64"
+         landmarkName = "-loadCurrentUser"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FBCheckIn/Screens/TYCurrentUser.m"
+         timestampString = "378232691.412235"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "82"
+         endingLineNumber = "82"
+         landmarkName = "-fbHelper:didCompleteWithResults:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FBCheckIn/Libraries/MFSideMenu/MFSideMenuDemo/SideMenuViewController.m"
+         timestampString = "378232969.355021"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "127"
+         endingLineNumber = "127"
+         landmarkName = "-userDidLoad:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
