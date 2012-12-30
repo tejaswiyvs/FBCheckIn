@@ -6,7 +6,7 @@
 //
 //
 
-#import "TYFBFacade.h"
+#import "TYFBRequest.h"
 #import "TYCheckInCache.h"
 #import "TYFBManager.h"
 #import "TYComment.h"
@@ -14,12 +14,12 @@
 #import "TYPhoto.h"
 #import "NSString+Common.h"
 
-@interface TYFBFacade ()
+@interface TYFBRequest ()
 -(void) parseUnlikeResult:(id) result;
 -(NSMutableArray *) checkInsForPageId:(NSString *) pageId fromCheckins:(NSMutableArray *) checkIns;
 @end
 
-@implementation TYFBFacade
+@implementation TYFBRequest
 
 @synthesize requestType = _requestType;
 @synthesize delegate = _delegate;
@@ -64,24 +64,27 @@
     NSString *fql1 = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover, pic_big FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1=me()) OR uid=me()";
     
     // Get checkins FROM location_post and checkin. Both sources because sometimes location_post gets spammed with a ton of photos.
-    NSString *fql2 = @"SELECT message, id, app_id, author_uid, timestamp, tagged_uids, page_id, page_type, coords, type FROM location_post WHERE author_uid IN (SELECT uid FROM #query1) ORDER BY timestamp DESC LIMIT 500";
+    NSString *fql2 = @"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, page_id, coords FROM checkin WHERE author_uid IN (SELECT uid FROM #query1) ORDER BY timestamp DESC LIMIT 50";
+    
+    // Get checkins FROM location_post
+    NSString *fql3 = @"SELECT message, id, app_id, author_uid, timestamp, tagged_uids, page_id, page_type, coords, type FROM location_post WHERE author_uid IN (SELECT uid FROM #query1) AND type='photo' ORDER BY timestamp DESC LIMIT 50";
     
     // Get page details for all the check-ins
-    NSString *fql3 = @"SELECT page_id, name, description, categories, phone, pic, fan_count, website, checkins, location FROM page WHERE page_id IN (SELECT page_id FROM #query2)";
+    NSString *fql4 = @"SELECT page_id, name, description, categories, phone, pic, fan_count, website, checkins, location FROM page WHERE page_id IN (SELECT page_id FROM #query2) OR page_id IN (SELECT page_id FROM #query3)";
     
     // Get likes
-    NSString *fql4 = @"SELECT object_id, post_id, user_id, object_type FROM like WHERE object_id IN (SELECT id FROM #query2)";
+    NSString *fql5 = @"SELECT object_id, post_id, user_id, object_type FROM like WHERE object_id IN (SELECT checkin_id FROM #query2) OR object_id IN (SELECT id FROM #query3)";
     
     // Get comments
-    NSString *fql5 = @"SELECT object_id, post_id, fromid, time, text, likes, can_like, user_likes, text_tags FROM comment WHERE object_id IN (SELECT id FROM #query2)";
+    NSString *fql6 = @"SELECT object_id, post_id, fromid, time, text, likes, can_like, user_likes, text_tags FROM comment WHERE object_id IN (SELECT checkin_id FROM #query2) OR object_id IN (SELECT id FROM #query3)";
     
     // Get photo info if the check-in is of type photo
-    NSString *fql6 = @"SELECT object_id, src_big, src_big_width, src_big_height, link FROM photo WHERE object_id IN (SELECT id FROM #query2 WHERE type='photo')";
+    NSString *fql7 = @"SELECT object_id, src_big, src_big_width, src_big_height, link FROM photo WHERE object_id IN (SELECT id FROM #query3)";
     
     // Gets the users associated with comments and likes.
-    NSString *fql7 = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover, pic_big FROM user WHERE (uid IN (SELECT user_id FROM #query4)) OR (uid IN (SELECT fromid FROM #query5))";
+    NSString *fql8 = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover, pic_big FROM user WHERE uid IN (SELECT user_id FROM #query5) OR uid IN (SELECT fromid FROM #query6)";
     
-    NSString *fql = [NSString stringWithFormat:@"{\"query1\":\"%@\",\"query2\":\"%@\",\"query3\":\"%@\",\"query4\":\"%@\",\"query5\":\"%@\", \"query6\":\"%@\", \"query7\":\"%@\"}", fql1, fql2, fql3, fql4, fql5, fql6, fql7];
+    NSString *fql = [NSString stringWithFormat:@"{\"query1\":\"%@\",\"query2\":\"%@\",\"query3\":\"%@\",\"query4\":\"%@\",\"query5\":\"%@\", \"query6\":\"%@\", \"query7\":\"%@\", \"query8\":\"%@\"}", fql1, fql2, fql3, fql4, fql5, fql6, fql7, fql8];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:fql forKey:@"queries"];
     [facebook requestWithMethodName:@"fql.multiquery" andParams:params andHttpMethod:@"POST" andDelegate:self];
@@ -95,7 +98,7 @@
     
     self.requestType = TYFBFacadeRequestTypeLoadPageMetaData;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
-    NSString *fql = [NSString stringWithFormat:@"SELECT id, author_uid FROM location_post WHERE page_id = %@ AND author_uid IN (SELECT uid2 FROM friend WHERE uid1=me())", page.pageId];
+    NSString *fql = [NSString stringWithFormat:@"SELECT id, author_uid, type FROM location_post WHERE page_id = %@ AND author_uid IN (SELECT uid2 FROM friend WHERE uid1=me())", page.pageId];
     NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                     fql, @"query",
                                     nil];
@@ -111,11 +114,15 @@
     self.requestType = TYFBFacadeRequestTypeLoadUserMetaData;
     
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
-    NSString *fql = [NSString stringWithFormat:@"SELECT id, author_uid, page_id, timestamp FROM location_post WHERE author_uid = %@", user.userId];
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    fql, @"query",
-                                    nil];
-    [facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
+    // Get checkins from Checkin
+    NSString *fql1 = [NSString stringWithFormat:@"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, page_id, coords FROM checkin WHERE author_uid = '%@' ORDER BY timestamp DESC LIMIT 50", user.userId];
+    
+    // Get checkins FROM location_post
+    NSString *fql2 = [NSString stringWithFormat:@"SELECT message, id, app_id, author_uid, timestamp, tagged_uids, page_id, page_type, coords, type FROM location_post WHERE author_uid = '%@' AND type='photo' ORDER BY timestamp DESC LIMIT 50", user.userId];
+    
+    NSString *fql = [NSString stringWithFormat:@"{\"query1\":\"%@\",\"query2\":\"%@\"}", fql1, fql2];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:fql forKey:@"queries"];
+    [facebook requestWithMethodName:@"fql.multiquery" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
 
 -(void) postComment:(TYComment *) comment {
@@ -278,7 +285,6 @@
 #pragma mark - Parsers
 
 -(void) parseFriends:(id) result {
-    NSLog(@"%@", result);
     NSArray *resultArray = (NSArray *) result;
     NSMutableArray *friends = [NSMutableArray array];
     for (NSDictionary *userDict in resultArray) {
@@ -345,8 +351,25 @@
 
 -(void) parseUserMetaDataResult:(id) result {
     NSArray *resultArray = (NSArray *) result;
+    
+    if ([resultArray count] != 2) {
+        [self.delegate fbHelper:self didFailWithError:nil];
+        return;
+    }
+    
+    NSDictionary *checkIn1Dict = [resultArray objectAtIndex:0];
+    NSDictionary *checkIn2Dict = [resultArray objectAtIndex:1];
+    
+    NSArray *checkIn1Array = [checkIn1Dict objectForKey:@"fql_result_set"];
+    NSArray *checkIn2Array = [checkIn2Dict objectForKey:@"fql_result_set"];
+    
     NSMutableArray *checkInArray = [NSMutableArray array];
-    for (NSDictionary *resultDict in resultArray) {
+    
+    for (NSDictionary *resultDict in checkIn1Array) {
+        TYCheckIn *checkIn = [[TYCheckIn alloc] initWithDictionary:resultDict];
+        [checkInArray addObject:checkIn];
+    }
+    for (NSDictionary *resultDict in checkIn2Array) {
         TYCheckIn *checkIn = [[TYCheckIn alloc] initWithDictionary:resultDict];
         [checkInArray addObject:checkIn];
     }
@@ -438,22 +461,32 @@
 
 -(void) parseCheckins:(id) result {
     
-    if (!result || [result count] < 6) {
+    if (!result || [result count] != 8) {
         DebugLog(@"%@", result);
         [self.delegate fbHelper:self didFailWithError:nil];
         return;
     }
     
     NSMutableArray *checkIns = [NSMutableArray array];
-    NSDictionary *checkinFqlDict = [(NSArray *) result objectAtIndex:1];
+    // Friends
     NSDictionary *userFqlDict = [(NSArray *) result objectAtIndex:0];
-    NSDictionary *pagesFqlDict = [(NSArray *) result objectAtIndex:2];
-    NSDictionary *likesFqlDict = [(NSArray *) result objectAtIndex:3];
-    NSDictionary *commentsFqlDict = [(NSArray *) result objectAtIndex:4];
-    NSDictionary *photosFqlDict = [(NSArray *) result objectAtIndex:5];
-    NSDictionary *commentsAndLikesUsersFqlDict = [(NSArray *) result objectAtIndex:6];
+    // SELECT * FROM checkin
+    NSDictionary *checkinFqlDict = [(NSArray *) result objectAtIndex:1];
+    // SELECT * FROM location_post
+    NSDictionary *photoCheckInsFqlDict = [(NSArray *) result objectAtIndex:2];
+    // All the pages referenced by the two checkInDicts
+    NSDictionary *pagesFqlDict = [(NSArray *) result objectAtIndex:3];
+    // All the likes referenced by the two checkInDicts
+    NSDictionary *likesFqlDict = [(NSArray *) result objectAtIndex:4];
+    // All the comments referenced by the two checkInDicts
+    NSDictionary *commentsFqlDict = [(NSArray *) result objectAtIndex:5];
+    // All the photo objects
+    NSDictionary *photosFqlDict = [(NSArray *) result objectAtIndex:6];
+    // All the users referenced by the two checkInDicts
+    NSDictionary *commentsAndLikesUsersFqlDict = [(NSArray *) result objectAtIndex:7];
     
     NSArray *checkInDicts = [checkinFqlDict objectForKey:@"fql_result_set"];
+    NSArray *photoCheckInDicts = [photoCheckInsFqlDict objectForKey:@"fql_result_set"];
     NSArray *userDicts = [userFqlDict objectForKey:@"fql_result_set"];
     NSArray *pageDicts = [pagesFqlDict objectForKey:@"fql_result_set"];
     NSArray *likesDicts = [likesFqlDict objectForKey:@"fql_result_set"];
@@ -509,17 +542,32 @@
         TYCheckIn *checkIn = [[TYCheckIn alloc] initWithDictionary:checkInDictionary];
         TYUser *user = [userObjects objectForKey:[NSString stringWithFormat:@"user_%@", checkIn.user.userId]];
         TYPage *page = [pageObjects objectForKey:[NSString stringWithFormat:@"page_%@", checkIn.page.pageId]];
-        TYPhoto *photo = [photoObjects objectForKey:[NSString stringWithFormat:@"photo_%@", checkIn.checkInId]];
+        checkIn.comments = [self commentsForCheckIn:checkIn.checkInId fromArray:commentObjects];
+        checkIn.likes = [self likesForCheckIn:checkIn.checkInId fromArray:likeObjects];
+        checkIn.type = @"checkin";
         if (user && page) {
             checkIn.user = user;
             checkIn.page = page;
             [checkIns addObject:checkIn];
         }
+    }
+    
+    for (NSDictionary *checkInDictionary in photoCheckInDicts) {
+        TYCheckIn *checkIn = [[TYCheckIn alloc] initWithDictionary:checkInDictionary];
+        TYUser *user = [userObjects objectForKey:[NSString stringWithFormat:@"user_%@", checkIn.user.userId]];
+        TYPage *page = [pageObjects objectForKey:[NSString stringWithFormat:@"page_%@", checkIn.page.pageId]];
+        TYPhoto *photo = [photoObjects objectForKey:[NSString stringWithFormat:@"photo_%@", checkIn.checkInId]];
         checkIn.photo = photo;
         checkIn.comments = [self commentsForCheckIn:checkIn.checkInId fromArray:commentObjects];
         checkIn.likes = [self likesForCheckIn:checkIn.checkInId fromArray:likeObjects];
+        if (user && page) {
+            checkIn.user = user;
+            checkIn.page = page;
+            checkIn.type = @"photo";
+            [checkIns addObject:checkIn];
+        }
     }
-    
+
     checkIns = [self filteredCheckInsFromCheckIns:checkIns];
     [self.delegate fbHelper:self didCompleteWithResults:[NSMutableDictionary dictionaryWithObjectsAndKeys:checkIns, @"data", nil]];
 }
@@ -550,7 +598,11 @@
         // We do this by comparing if the same user checked in at the same place multiple times.
         BOOL flag = YES;
         for (TYCheckIn *checkIn2 in checkIns) {
-            if (checkIn2 != checkIn && [checkIn2.page.pageId isEqualToString:checkIn.page.pageId] && [checkIn.user.userId isEqualToString:checkIn2.user.userId] && fabs(([checkIn2.checkInDate timeIntervalSince1970] - [checkIn.checkInDate timeIntervalSince1970])) < 25 * 60 * 60 * 1000) {
+            NSTimeInterval difference = [checkIn2.checkInDate timeIntervalSinceDate:checkIn.checkInDate];
+            if (difference < 0) {
+                difference = difference * -1;
+            }
+            if (checkIn2 != checkIn && [checkIn2.page.pageId isEqualToString:checkIn.page.pageId] && [checkIn.user.userId isEqualToString:checkIn2.user.userId] && difference < 24 * 60 * 60 * 1000) {
 //                DebugLog(@"Should not add checkIn");
                 flag = NO;
             }

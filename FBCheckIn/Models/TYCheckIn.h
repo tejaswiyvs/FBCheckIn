@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NSMutableArray *likes;
 @property (nonatomic, assign) CLLocationCoordinate2D location;
 @property (nonatomic, strong) NSString *message;
+@property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) TYPhoto *photo;
 
 -(id) initWithDictionary:(NSDictionary *) checkInDictionary;

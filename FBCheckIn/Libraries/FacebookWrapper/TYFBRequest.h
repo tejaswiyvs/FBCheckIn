@@ -43,7 +43,7 @@ typedef enum {
 } TYFBFacadeStatus;
 
 @protocol TYFBFacadeDelegate;
-@interface TYFBFacade : NSObject<FBRequestDelegate>
+@interface TYFBRequest : NSObject<FBRequestDelegate>
 
 @property (nonatomic, assign) int tag;
 @property (nonatomic, assign) id<TYFBFacadeDelegate> delegate;
@@ -69,6 +69,6 @@ typedef enum {
 
 @protocol TYFBFacadeDelegate
 @required
--(void) fbHelper:(TYFBFacade *) helper didCompleteWithResults:(NSMutableDictionary *) results;
--(void) fbHelper:(TYFBFacade *) helper didFailWithError:(NSError *) err;
+-(void) fbHelper:(TYFBRequest *) helper didCompleteWithResults:(NSMutableDictionary *) results;
+-(void) fbHelper:(TYFBRequest *) helper didFailWithError:(NSError *) err;
 @end

@@ -173,7 +173,7 @@ static float kDefaultPadding = 5.0f;
         self.checkIn.comments = [NSMutableArray array];
     }
     [self.checkIn.comments addObject:comment];
-    TYFBFacade *request = [[TYFBFacade alloc] init];
+    TYFBRequest *request = [[TYFBRequest alloc] init];
     [self.requests addObject:request];
     [request postComment:comment];
 }
@@ -182,12 +182,12 @@ static float kDefaultPadding = 5.0f;
 
 }
 
--(void) fbHelper:(TYFBFacade *)helper didCompleteWithResults:(NSMutableDictionary *)results {
+-(void) fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
     DebugLog(@"Comment posted to facebook succesfully");
     [self.requests removeObject:helper];
 }
 
--(void) fbHelper:(TYFBFacade *)helper didFailWithError:(NSError *)err {
+-(void) fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
     DebugLog(@"Comment post to facebook failed");
 }
 

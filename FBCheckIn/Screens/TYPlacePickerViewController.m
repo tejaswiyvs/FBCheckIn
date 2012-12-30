@@ -34,6 +34,7 @@
 @synthesize location = _location;
 @synthesize refreshHeaderView = _refreshHeaderView;
 @synthesize reloading = _reloading;
+@synthesize request = _request;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -121,13 +122,13 @@
     [self updateLocation];
 }
 
--(void)fbHelper:(TYFBFacade *)helper didCompleteWithResults:(NSMutableDictionary *)results {
+-(void)fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
     self.allItems = [results objectForKey:@"data"];
     [SVProgressHUD dismiss];
     [self.tableView reloadData];
 }
 
--(void)fbHelper:(TYFBFacade *)helper didFailWithError:(NSError *)err {
+-(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
     [SVProgressHUD showErrorWithStatus:@"We couldn't access your facebook account. This might be temporary, please try again later."];
     // TODO: Add a #if DEBUG condition.
     DebugLog(@"%@", err);
@@ -179,9 +180,9 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     self.location = newLocation;
-    self.facade = [[TYFBFacade alloc] init];
-    self.facade.delegate = self;
-    [self.facade placesNearLocation:self.locationManager.location.coordinate];
+    self.request = [[TYFBRequest alloc] init];
+    self.request.delegate = self;
+    [self.request placesNearLocation:self.locationManager.location.coordinate];
     [self.locationManager stopUpdatingLocation];
 }
 

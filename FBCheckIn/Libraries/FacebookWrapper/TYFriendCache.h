@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TYFBFacade.h"
+#import "TYFBRequest.h"
 
 extern NSString * const kFriendCacheUpdateComplete;
 extern NSString * const kFriendCacheUpdateFailed;
@@ -16,7 +16,7 @@ extern NSString * const kFriendCacheUpdateFailed;
 
 @property (nonatomic, strong) NSMutableArray *friends;
 @property (nonatomic, assign) long lastUpdated;
-@property (nonatomic, strong) TYFBFacade *facade;
+@property (nonatomic, strong) TYFBRequest *request;
 @property (nonatomic, assign) BOOL refreshing;
 @property (nonatomic, strong) NSDate *lastRefreshDate;
 

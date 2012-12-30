@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Facebook.h"
-#import "TYFBFacade.h"
+#import "TYFBRequest.h"
 
 NSString * const kNotificationCacheRefreshStart;
 NSString * const kNotificationCacheRefreshEnd;
@@ -17,7 +17,8 @@ NSString * const kNotificationCacheRefreshEnd;
 
 @property (nonatomic, retain) NSDate *lastRefreshDate;
 @property (nonatomic, strong) NSMutableArray *checkIns;
-@property (nonatomic, strong) TYFBFacade *helper;
+@property (nonatomic, strong) TYFBRequest *checkInsRequest;
+@property (nonatomic, strong) TYFBRequest *photoCheckInsRequest;
 @property (nonatomic, assign) BOOL loading;
 
 +(TYCheckInCache *) sharedInstance;

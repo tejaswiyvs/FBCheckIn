@@ -8,7 +8,7 @@
 
 #import "TYCheckInCache.h"
 #import "TYCheckIn.h"
-#import "TYFBFacade.h"
+#import "TYFBRequest.h"
 #import "TYSettingsViewController.h"
 
 @interface TYCheckInCache ()
@@ -25,7 +25,7 @@
 
 @synthesize checkIns = _checkIns;
 @synthesize lastRefreshDate = _lastRefreshDate;
-@synthesize helper = _helper;
+@synthesize checkInsRequest = _helper;
 
 static NSString * const kSaveFileName = @"check_in_cache";
 static NSString * const kSaveTimeKey = @"check_in_cache_last_updated";
@@ -41,6 +41,7 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
     dispatch_once(&onceToken, ^{
         cache = [[TYCheckInCache alloc] init];
         cache.loading = NO;
+        cache.checkIns = [NSMutableArray array];
         [cache loadFromDisk];
     });
     return cache;
@@ -83,26 +84,39 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
     [self notifyCacheUpdateStart];
     DebugLog(@"Cache update start Notification Posted.");
     self.loading = YES;
-    self.helper = [[TYFBFacade alloc] init];
-    self.helper.delegate = self;
-    [self.helper checkInsForUser:nil];
+    self.checkInsRequest = [[TYFBRequest alloc] init];
+    self.checkInsRequest.delegate = self;
+    [self.checkInsRequest checkInsForUser:nil];    
 }
 
--(void)fbHelper:(TYFBFacade *)helper didCompleteWithResults:(NSMutableDictionary *)results {
-    DebugLog(@"Cache update did Complete : %@", results);
-    [self notifyCacheUpdateComplete];
+-(void)fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
+    DebugLog(@"Cache update did Complete %@", self.checkIns);
+    self.checkIns = [self sortedCheckIns:[results objectForKey:@"data"]];
     self.loading = NO;
-    self.checkIns = [results objectForKey:@"data"];
     [self commit];
+    [self notifyCacheUpdateComplete];
 }
 
--(void)fbHelper:(TYFBFacade *)helper didFailWithError:(NSError *)err {
+-(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
     [self notifyCacheUpdateComplete];
-    self.loading = NO;
-    // Schedule another refresh for later?
 }
 
 #pragma mark - Helpers
+
+-(NSMutableArray *) sortedCheckIns:(NSMutableArray *) checkIns {
+    [checkIns sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        if ([((TYCheckIn *) obj1).checkInDate compare:((TYCheckIn *) obj2).checkInDate] == NSOrderedDescending) {
+            return NSOrderedAscending;
+        }
+        else if ([((TYCheckIn *) obj1).checkInDate compare:((TYCheckIn *) obj2).checkInDate] == NSOrderedAscending) {
+            return NSOrderedDescending;
+        }
+        else {
+            return NSOrderedSame;
+        }
+    }];
+    return checkIns;
+}
 
 -(NSString *) applicationDocumentsDirectory
 {

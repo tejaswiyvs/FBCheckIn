@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "EGORefreshTableHeaderView.h"
 #import "TYCheckInCache.h"
-#import "TYFBFacade.h"
+#import "TYFBRequest.h"
 #import "TYCommentViewController.h"
 #import "TYBaseViewController.h"
 
@@ -21,8 +21,5 @@
 @property (nonatomic, strong) TYCheckInCache *cache;
 @property (nonatomic, assign) BOOL reloading;
 @property (nonatomic, strong) NSMutableArray *requests;
-@property (nonatomic, strong) UITapGestureRecognizer *profilePictureTapRecognizer;
-@property (nonatomic, strong) UITapGestureRecognizer *pageTapRecognizer;
-@property (nonatomic, strong) UITapGestureRecognizer *checkInPhotoTagRecognizer;
 
 @end

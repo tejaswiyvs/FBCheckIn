@@ -92,12 +92,12 @@
     [mixpanel track:@"CheckInCompleted" properties:[NSDictionary dictionaryWithObjectsAndKeys:currentUser.userId, @"userId", currentUser.sex, @"sex", self.currentPage.pageId, @"pageId", [NSNumber numberWithBool:[self hasTags]], "hasTags", [NSNumber numberWithBool:[self hasPicture]], @"hasPhoto", self.aviaryUsed, @"aviaryUsed", nil]];
 
     if (self.checkInImage) {
-        self.postPhotoRequest = [[TYFBFacade alloc] init];
+        self.postPhotoRequest = [[TYFBRequest alloc] init];
         self.postPhotoRequest.delegate = self;
         [self.postPhotoRequest postPhoto:self.checkInImage withMessage:self.statusText.text];
     }
     else {
-        self.postCheckInRequest = [[TYFBFacade alloc] init];
+        self.postCheckInRequest = [[TYFBRequest alloc] init];
         self.postCheckInRequest.delegate = self;
         [self.postCheckInRequest checkInAtPage:self.currentPage message:self.statusText.text taggedUsers:self.taggedUsers];
     }
@@ -173,7 +173,7 @@
 
 #pragma mark - Facebook
 
--(void)fbHelper:(TYFBFacade *)helper didFailWithError:(NSError *)err {
+-(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
     if (helper == self.postCheckInRequest) {
         [SVProgressHUD showErrorWithStatus:@"Could not check-in. Please try again."];
     }
@@ -191,7 +191,7 @@
     }
 }
 
--(void)fbHelper:(TYFBFacade *)helper didCompleteWithResults:(NSMutableDictionary *)results {
+-(void)fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
     if (helper == self.postCheckInRequest) {
         [self dismiss];
     }
@@ -215,13 +215,13 @@
 }
 
 -(void) addTagsForPhotoId:(NSString *) photoId {
-    self.postTagsRequest = [[TYFBFacade alloc] init];
+    self.postTagsRequest = [[TYFBRequest alloc] init];
     self.postTagsRequest.delegate = self;
     [self.postTagsRequest tagUsers:self.taggedUsers forObjectId:photoId];
 }
 
 -(void) addPageForPhotoId:(NSString *) photoId {
-    self.postPageInfoRequest = [[TYFBFacade alloc] init];
+    self.postPageInfoRequest = [[TYFBRequest alloc] init];
     self.postPageInfoRequest.delegate = self;
     [self.postPageInfoRequest postPage:self.currentPage forObjectId:photoId];
 }

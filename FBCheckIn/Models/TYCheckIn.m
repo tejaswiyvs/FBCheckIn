@@ -10,6 +10,7 @@
 #import "TYUser.h"
 #import "TYPage.h"
 #import "TYLike.h"
+#import "NSString+Common.h"
 
 @implementation TYCheckIn
 
@@ -23,11 +24,20 @@
 @synthesize location = _location;
 @synthesize message = _message;
 @synthesize photo = _photo;
+@synthesize type = _type;
 
 -(id) initWithDictionary:(NSDictionary *) checkInDictionary {
     self = [super init];
     if (self) {
-        self.checkInId = [[checkInDictionary objectForKey:@"id"] stringValue];
+        // id can come from location_post or checkin tables. Rest of the fields are common.
+        NSString *id1 = [[checkInDictionary objectForKey:@"id"] stringValue];
+        NSString *id2 = [[checkInDictionary objectForKey:@"checkin_id"] stringValue];
+        if (id1 && ![id1 isBlank]) {
+            self.checkInId = id1;
+        }
+        else if(id2 && ![id2 isBlank]) {
+            self.checkInId = id2;
+        }
         self.user = [[TYUser alloc] init];
         self.page = [[TYPage alloc] init];
         self.user.userId = [[checkInDictionary objectForKey:@"author_uid"] stringValue];
@@ -41,6 +51,7 @@
             self.checkInDate = [NSDate dateWithTimeIntervalSince1970:checkInUnixTimestamp];
         }
         self.message = [checkInDictionary objectForKey:@"message"];
+        self.type = [checkInDictionary objectForKey:@"type"];
         self.taggedUsers = [NSMutableArray array];
         for (NSString *taggedUserId in [checkInDictionary objectForKey:@"tagged_uids"]) {
             TYUser *user = [[TYUser alloc] init];
@@ -65,6 +76,7 @@
     [aCoder encodeObject:[NSNumber numberWithFloat:self.location.longitude] forKey:@"longitude"];
     [aCoder encodeObject:self.message forKey:@"message"];
     [aCoder encodeObject:self.photo forKey:@"photo"];
+    [aCoder encodeObject:self.type forKey:@"type"];
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
@@ -82,6 +94,7 @@
         self.location = CLLocationCoordinate2DMake(latitude, longitude);
         self.message = [aDecoder decodeObjectForKey:@"message"];
         self.photo = [aDecoder decodeObjectForKey:@"photo"];
+        self.type = [aDecoder decodeObjectForKey:@"type"];
     }
     return self;
 }

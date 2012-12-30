@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TYFBFacade.h"
+#import "TYFBRequest.h"
 #import "TYCheckIn.h"
 #import "TYUser.h"
 #import "HPGrowingTextView.h"
-#import "TYFBFacade.h"
+#import "TYFBRequest.h"
 #import "TYBaseViewController.h"
 
 @interface TYCommentViewController : TYBaseViewController<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate, TYFBFacadeDelegate>

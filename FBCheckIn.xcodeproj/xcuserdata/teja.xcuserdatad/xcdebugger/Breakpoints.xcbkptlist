@@ -7,52 +7,26 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Screens/TYLogInViewController.m"
-         timestampString = "378232649.168115"
+         filePath = "FBCheckIn/Libraries/FacebookWrapper/TYFBRequest.m"
+         timestampString = "378594907.23277"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "89"
-         endingLineNumber = "89"
-         landmarkName = "-currentUserDidLoad:"
+         startingLineNumber = "356"
+         endingLineNumber = "356"
+         landmarkName = "-parseUserMetaDataResult:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Screens/TYCurrentUser.m"
-         timestampString = "378232677.786615"
+         filePath = "FBCheckIn/Libraries/FacebookWrapper/TYFBRequest.m"
+         timestampString = "378594690.885812"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
-         landmarkName = "-loadCurrentUser"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Screens/TYCurrentUser.m"
-         timestampString = "378232691.412235"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "82"
-         endingLineNumber = "82"
-         landmarkName = "-fbHelper:didCompleteWithResults:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Libraries/MFSideMenu/MFSideMenuDemo/SideMenuViewController.m"
-         timestampString = "378232969.355021"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "127"
-         endingLineNumber = "127"
-         landmarkName = "-userDidLoad:"
+         startingLineNumber = "222"
+         endingLineNumber = "222"
+         landmarkName = "-request:didFailWithError:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

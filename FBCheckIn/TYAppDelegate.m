@@ -99,6 +99,7 @@ NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
 
 -(void) registerForNotifications {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutNotificationReceived:) name:kLogoutNotification object:nil];
+    [[self sideMenu].navigationController popToRootViewControllerAnimated:NO];
 }
 
 -(void) unregisterFromNotifications {

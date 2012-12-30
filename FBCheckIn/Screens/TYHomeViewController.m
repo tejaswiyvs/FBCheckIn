@@ -25,6 +25,7 @@
 #import "TYUtils.h"
 #import "TYUserProfileViewController.h"
 #import "TYPlaceProfileViewController.h"
+#import "TYIndeterminateProgressBar.h"
 
 @interface TYHomeViewController ()
 -(void) subscribeToNotifications;
@@ -47,9 +48,6 @@
 @synthesize reloading = _reloading;
 @synthesize cache = _cache;
 @synthesize requests = _requests;
-@synthesize profilePictureTapRecognizer = _profilePictureTapRecognizer;
-@synthesize pageTapRecognizer = _pageTapRecognizer;
-@synthesize checkInPhotoTagRecognizer = _checkInPhotoTagRecognizer;
 
 -(id) init {
     self = [super initWithNibName:@"TYHomeViewController" bundle:nil];
@@ -84,19 +82,7 @@
 		view.delegate = self;
 		[self.tableView addSubview:view];
 		_refreshHeaderView = view;
-	}
-    
-    self.profilePictureTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profilePictureTapped:)];
-    self.profilePictureTapRecognizer.numberOfTapsRequired = 1;
-    self.profilePictureTapRecognizer.cancelsTouchesInView = YES;
-
-    self.checkInPhotoTagRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(checkInPhotoTapped:)];
-    self.checkInPhotoTagRecognizer.numberOfTapsRequired = 1;
-    self.checkInPhotoTagRecognizer.cancelsTouchesInView = YES;
-    
-    self.pageTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pageNameTapped:)];
-    self.pageTapRecognizer.numberOfTapsRequired = 1;
-    self.pageTapRecognizer.cancelsTouchesInView = YES;
+	}        
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -144,6 +130,27 @@
     CGRect rect = CGRectMake(10.0f, 0.0f, 300.0f, height);
     [cell setFrame:rect];
     
+    UITapGestureRecognizer *profilePictureTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profilePictureTapped:)];
+    [profilePictureTapRecognizer setNumberOfTouchesRequired:1];
+    [profilePictureTapRecognizer setNumberOfTapsRequired:1];
+    profilePictureTapRecognizer.cancelsTouchesInView = YES;
+    
+    UITapGestureRecognizer *userNameTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profilePictureTapped:)];
+    [userNameTapRecognizer setNumberOfTouchesRequired:1];
+    [userNameTapRecognizer setNumberOfTapsRequired:1];
+    userNameTapRecognizer.cancelsTouchesInView = YES;
+    
+    UITapGestureRecognizer *checkInPhotoTagRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(checkInPhotoTapped:)];
+    checkInPhotoTagRecognizer.numberOfTouchesRequired = 1;
+    checkInPhotoTagRecognizer.numberOfTapsRequired = 1;
+    checkInPhotoTagRecognizer.cancelsTouchesInView = YES;
+    
+    UITapGestureRecognizer *pageTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pageNameTapped:)];
+    pageTapRecognizer.numberOfTouchesRequired = 1;
+    pageTapRecognizer.numberOfTapsRequired = 1;
+    pageTapRecognizer.cancelsTouchesInView = YES;
+
+    
     UIImageView *backgroundImgView = [[UIImageView alloc] initWithFrame:rect];
     [backgroundImgView setImage:[UIImage imageNamed:@"table-cell-bg.png"]];
     [cell addSubview:backgroundImgView];
@@ -158,7 +165,7 @@
     [profilePictureImgView setContentMode:UIViewContentModeScaleAspectFill];
     [profilePictureImgView setImageWithURL:[NSURL URLWithString:checkIn.user.profilePictureUrl] placeholderImage:[UIImage imageNamed:@"user_placeholder.png"]];
     [cell addSubview:profilePictureImgView];
-    [profilePictureImgView addGestureRecognizer:self.profilePictureTapRecognizer];
+    [profilePictureImgView addGestureRecognizer:profilePictureTapRecognizer];
     
     UILabel *fullNameLbl = [[UILabel alloc] initWithFrame:CGRectMake(94.0f, 11.0f, 208.0f, 21.0f)];
     [fullNameLbl setText:[checkIn.user shortName]];
@@ -168,7 +175,7 @@
     [cell addSubview:fullNameLbl];
     [fullNameLbl setUserInteractionEnabled:YES];
     fullNameLbl.tag = indexPath.row;
-    [fullNameLbl addGestureRecognizer:self.profilePictureTapRecognizer];
+    [fullNameLbl addGestureRecognizer:userNameTapRecognizer];
     
     UILabel *atLabel = [[UILabel alloc] initWithFrame:CGRectMake(94.0f, 32.0f, 19.0f, 21.0f)];
     [atLabel setText:@"@"];
@@ -184,7 +191,7 @@
     [cell addSubview:locationLbl];
     [locationLbl setUserInteractionEnabled:YES];
     locationLbl.tag = indexPath.row;
-    [locationLbl addGestureRecognizer:self.pageTapRecognizer];
+    [locationLbl addGestureRecognizer:pageTapRecognizer];
     
     UILabel *timestampLbl = [[UILabel alloc] initWithFrame:CGRectMake(94.0f, 54.0f, 208.0f, 21.0f)];
     [timestampLbl setText:[NSDate stringForDisplayFromDate:checkIn.checkInDate prefixed:YES]];
@@ -278,17 +285,18 @@
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
 
 #pragma mark - FBFacadeDelegate
 
--(void) fbHelper:(TYFBFacade *)helper didCompleteWithResults:(NSMutableDictionary *)results {
+-(void) fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
     [self.requests removeObject:helper];
     return;
 }
 
--(void) fbHelper:(TYFBFacade *)helper didFailWithError:(NSError *)err {
+-(void) fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
     [self.requests removeObject:helper];
     if (helper.tag >= 0) {
         NSMutableArray *checkIns = self.cache.checkIns;
@@ -321,21 +329,21 @@
     NSMutableArray *checkIns = self.cache.checkIns;
     TYCheckIn *selectedCheckIn = [checkIns objectAtIndex:button.tag];
     TYUser *currentUser = [TYCurrentUser sharedInstance].user;
-    TYFBFacade *facade = [[TYFBFacade alloc] init];
-    facade.tag = button.tag;
-    facade.delegate = self;
+    TYFBRequest *request = [[TYFBRequest alloc] init];
+    request.tag = button.tag;
+    request.delegate = self;
     if ([selectedCheckIn isLikedByUser:currentUser]) {
         [selectedCheckIn unlikeCheckIn:currentUser];
-        [facade unlikeCheckIn:selectedCheckIn];
+        [request unlikeCheckIn:selectedCheckIn];
     }
     else {
         [selectedCheckIn likeCheckIn:currentUser];
-        [facade likeCheckIn:selectedCheckIn];
+        [request likeCheckIn:selectedCheckIn];
     }
     if (!self.requests) {
         self.requests = [NSMutableArray array];
     }
-    [self.requests addObject:facade];
+    [self.requests addObject:request];
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:button.tag inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
@@ -406,12 +414,12 @@
     }
     else if([notification.name isEqualToString:kNotificationCacheRefreshStart]) {
         self.reloading = YES;
-//        [TYIndeterminateProgressBar showInView:self.view backgroundColor:[UIColor dullWhite] indicatorColor:[UIColor dullRed] borderColor:[UIColor darkGrayColor]];
+        [TYIndeterminateProgressBar showInView:self.view backgroundColor:[UIColor dullWhite] indicatorColor:[UIColor dullRed] borderColor:[UIColor darkGrayColor]];
     }
     else if([notification.name isEqualToString:kNotificationCacheRefreshEnd]) {
         self.reloading = NO;
         [self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-//        [TYIndeterminateProgressBar hideFromView:self.view];
+        [TYIndeterminateProgressBar hideFromView:self.view];
     }
 }
 

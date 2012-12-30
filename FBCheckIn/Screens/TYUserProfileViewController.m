@@ -61,6 +61,7 @@ const int kRequestTagLast3CheckIns = 1;
     [self setTitle:@"User"];
     [self.tableView setTableHeaderView:[self makeHeaderView]];
     [self.view addSubview:self.tableView];
+    self.tableView.opaque = NO;
     self.tableView.backgroundView = nil;;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.view.backgroundColor = [UIColor bgColor];
@@ -84,7 +85,7 @@ const int kRequestTagLast3CheckIns = 1;
 -(void) loadUserMetaData {
     DebugLog(@"Loading User Meta Data");
     [TYIndeterminateProgressBar showInView:self.view backgroundColor:[UIColor dullWhite] indicatorColor:[UIColor dullRed] borderColor:[UIColor darkGrayColor]];
-    self.userCheckInsRequest = [[TYFBFacade alloc] init];
+    self.userCheckInsRequest = [[TYFBRequest alloc] init];
     self.userCheckInsRequest.delegate = self;
     [self.userCheckInsRequest loadMetaDataForUser:self.user];
 }
@@ -95,7 +96,7 @@ const int kRequestTagLast3CheckIns = 1;
     }
     for (NSString *pageId in pageIds) {
         if (![pageId isBlank]) {
-            TYFBFacade *pageMetaDataRequest = [[TYFBFacade alloc] init];
+            TYFBRequest *pageMetaDataRequest = [[TYFBRequest alloc] init];
             pageMetaDataRequest.delegate = self;
             pageMetaDataRequest.tag = tag;
             [self.pageMetaDataRequests addObject:pageMetaDataRequest];
@@ -104,7 +105,7 @@ const int kRequestTagLast3CheckIns = 1;
     }
 }
 
--(void)fbHelper:(TYFBFacade *)helper didCompleteWithResults:(NSMutableDictionary *)results {
+-(void)fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
     if (helper == self.userCheckInsRequest) {
         NSMutableArray *checkIns = [results objectForKey:@"data"];
         if (!checkIns || [checkIns count] == 0) {
@@ -150,7 +151,7 @@ const int kRequestTagLast3CheckIns = 1;
     }
 }
 
--(void)fbHelper:(TYFBFacade *)helper didFailWithError:(NSError *)err {
+-(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
     if (helper == self.userCheckInsRequest) {
         
     }
@@ -167,7 +168,7 @@ const int kRequestTagLast3CheckIns = 1;
 #pragma mark - UITableView
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100.0f;
+    return 101.0f;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -205,7 +206,7 @@ const int kRequestTagLast3CheckIns = 1;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kReuseId];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kReuseId];
-        cell.frame = CGRectMake(0.0f, 0.0f, 300.0f, 100.0f);
+        cell.frame = CGRectMake(0.0f, 0.0f, 300.0f, 120.0f);
         cell.backgroundColor = [UIColor clearColor];
     }
     

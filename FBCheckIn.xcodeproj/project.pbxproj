@@ -147,7 +147,7 @@
 		B752EA2A167ED6130018AA92 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B752EA28167ED6130018AA92 /* arrow@2x.png */; };
 		B7539F8E15D558F30012370C /* ego-header-view@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7539F8C15D558F30012370C /* ego-header-view@2x.png */; };
 		B7539F9115D55C200012370C /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = B7539F9015D55C200012370C /* tick.png */; };
-		B7539F9415D576F00012370C /* TYFBFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = B7539F9315D576F00012370C /* TYFBFacade.m */; };
+		B7539F9415D576F00012370C /* TYFBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B7539F9315D576F00012370C /* TYFBRequest.m */; };
 		B7539F9A15D57F350012370C /* UISearchBar+CustomBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = B7539F9915D57F350012370C /* UISearchBar+CustomBackground.m */; };
 		B757687116484CE00046A555 /* UIImage+Convinience.m in Sources */ = {isa = PBXBuildFile; fileRef = B757687016484CE00046A555 /* UIImage+Convinience.m */; };
 		B75E70FF167D2116000B0F2C /* nav-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B75E70FD167D2116000B0F2C /* nav-bar@2x.png */; };
@@ -281,7 +281,6 @@
 		B7F18BD61684BA7800186323 /* TYSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F18BD41684BA7800186323 /* TYSettingsViewController.m */; };
 		B7F18BD71684BA7800186323 /* TYSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F18BD41684BA7800186323 /* TYSettingsViewController.m */; };
 		B7F18BD91684BA7800186323 /* TYSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F18BD51684BA7800186323 /* TYSettingsView.xib */; };
-		B7F18BE71684D0D500186323 /* TYSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F18BE51684D0D500186323 /* TYSettingsView.xib */; };
 		B7F18BE81684D32B00186323 /* TYSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F18BD51684BA7800186323 /* TYSettingsView.xib */; };
 		B7F4E35B157AA6EC00FE5719 /* TYCheckInDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F4E359157AA6EC00FE5719 /* TYCheckInDetailViewController.m */; };
 		B7F4E35C157AA6EC00FE5719 /* TYCheckInDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F4E359157AA6EC00FE5719 /* TYCheckInDetailViewController.m */; };
@@ -442,8 +441,8 @@
 		B752EA28167ED6130018AA92 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow@2x.png"; path = "Images/new/arrow@2x.png"; sourceTree = SOURCE_ROOT; };
 		B7539F8C15D558F30012370C /* ego-header-view@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ego-header-view@2x.png"; sourceTree = "<group>"; };
 		B7539F9015D55C200012370C /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tick.png; sourceTree = "<group>"; };
-		B7539F9215D576F00012370C /* TYFBFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYFBFacade.h; path = Libraries/FacebookWrapper/TYFBFacade.h; sourceTree = "<group>"; };
-		B7539F9315D576F00012370C /* TYFBFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYFBFacade.m; path = Libraries/FacebookWrapper/TYFBFacade.m; sourceTree = "<group>"; };
+		B7539F9215D576F00012370C /* TYFBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYFBRequest.h; path = Libraries/FacebookWrapper/TYFBRequest.h; sourceTree = "<group>"; };
+		B7539F9315D576F00012370C /* TYFBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYFBRequest.m; path = Libraries/FacebookWrapper/TYFBRequest.m; sourceTree = "<group>"; };
 		B7539F9815D57F350012370C /* UISearchBar+CustomBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UISearchBar+CustomBackground.h"; path = "Libraries/Categories/UISearchBar+CustomBackground.h"; sourceTree = "<group>"; };
 		B7539F9915D57F350012370C /* UISearchBar+CustomBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UISearchBar+CustomBackground.m"; path = "Libraries/Categories/UISearchBar+CustomBackground.m"; sourceTree = "<group>"; };
 		B757686F16484CE00046A555 /* UIImage+Convinience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Convinience.h"; path = "Libraries/Categories/UIImage+Convinience.h"; sourceTree = "<group>"; };
@@ -1181,8 +1180,8 @@
 			children = (
 				B705F635157BFC1A00A1BF86 /* TYFBManager.h */,
 				B705F636157BFC1A00A1BF86 /* TYFBManager.m */,
-				B7539F9215D576F00012370C /* TYFBFacade.h */,
-				B7539F9315D576F00012370C /* TYFBFacade.m */,
+				B7539F9215D576F00012370C /* TYFBRequest.h */,
+				B7539F9315D576F00012370C /* TYFBRequest.m */,
 				B7FF5EA015D0CFA1008A0300 /* TYCheckInCache.h */,
 				B7FF5EA115D0CFA1008A0300 /* TYCheckInCache.m */,
 				B75124271682325800063BED /* TYFriendCache.h */,
@@ -1237,7 +1236,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PP;
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = B73F6CDC156ED27F004A20E4 /* Build configuration list for PBXProject "FBCheckIn" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1417,7 +1416,6 @@
 				B7414D0E1680322C00380704 /* black-button@2x.png in Resources */,
 				B7F18BD21684BA2900186323 /* settings@2x.png in Resources */,
 				B7F18BD91684BA7800186323 /* TYSettingsView.xib in Resources */,
-				B7F18BE71684D0D500186323 /* TYSettingsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1491,7 +1489,7 @@
 				B7E10F351585507800FA9741 /* TYTagFriendsViewController.m in Sources */,
 				B748B20E159C283800043F7B /* TYTagUserCell.m in Sources */,
 				B7FF5EA215D0CFA1008A0300 /* TYCheckInCache.m in Sources */,
-				B7539F9415D576F00012370C /* TYFBFacade.m in Sources */,
+				B7539F9415D576F00012370C /* TYFBRequest.m in Sources */,
 				B7539F9A15D57F350012370C /* UISearchBar+CustomBackground.m in Sources */,
 				B7BDA721162AE56200DAC8AD /* TYComment.m in Sources */,
 				B7BDA724162B03F700DAC8AD /* TYLike.m in Sources */,

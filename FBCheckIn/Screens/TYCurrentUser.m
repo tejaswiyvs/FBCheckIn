@@ -29,7 +29,7 @@ NSString * const kCurrentUserDidErrorNotification = @"current_user_did_error";
 
 @synthesize user = _user;
 @synthesize refreshing = _refreshing;
-@synthesize facade = _facade;
+@synthesize request = _facade;
 
 static NSString * const kCacheFileName = @"current_user";
 
@@ -63,9 +63,9 @@ static NSString * const kCacheFileName = @"current_user";
 -(void) loadCurrentUser {
     self.refreshing = YES;
     [self loadFromCache];
-    self.facade = [[TYFBFacade alloc] init];
-    self.facade.delegate = self;
-    [self.facade currentUser];
+    self.request = [[TYFBRequest alloc] init];
+    self.request.delegate = self;
+    [self.request currentUser];
 }
 
 -(void) clearCache {
@@ -78,7 +78,7 @@ static NSString * const kCacheFileName = @"current_user";
 
 #pragma mark - Delegate
 
--(void) fbHelper:(TYFBFacade *)helper didCompleteWithResults:(NSMutableDictionary *)results {
+-(void) fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
     TYUser *user = (TYUser *) [results objectForKey:@"data"];
     if (!user) {
         [self postFailureNotification];
@@ -90,7 +90,7 @@ static NSString * const kCacheFileName = @"current_user";
     [self postSuccessNotification];
 }
 
--(void) fbHelper:(TYFBFacade *)helper didFailWithError:(NSError *)err {
+-(void) fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
     DebugLog(@"%@", err);
     [self postFailureNotification];
 }

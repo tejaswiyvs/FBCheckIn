@@ -12,7 +12,7 @@
 #import "TYTagFriendsViewController.h"
 #import "TYBaseViewController.h"
 #import "AFPhotoEditorController.h"
-#import "TYFBFacade.h"
+#import "TYFBRequest.h"
 
 @protocol TYTagFriendsDelegate;
 @interface TYCheckInViewController : TYBaseViewController<TYFBFacadeDelegate, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, TYTagFriendsDelegate, AFPhotoEditorControllerDelegate>
@@ -34,10 +34,10 @@
 @property (nonatomic, assign) BOOL txtFieldUp;
 @property (nonatomic, assign) BOOL aviaryUsed;
 
-@property (nonatomic, strong) TYFBFacade *postCheckInRequest;
-@property (nonatomic, strong) TYFBFacade *postPhotoRequest;
-@property (nonatomic, strong) TYFBFacade *postTagsRequest;
-@property (nonatomic, strong) TYFBFacade *postPageInfoRequest;
+@property (nonatomic, strong) TYFBRequest *postCheckInRequest;
+@property (nonatomic, strong) TYFBRequest *postPhotoRequest;
+@property (nonatomic, strong) TYFBRequest *postTagsRequest;
+@property (nonatomic, strong) TYFBRequest *postPageInfoRequest;
 
 
 -(IBAction)checkInButtonClicked:(id)sender;

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TYAppDelegate.h"
 #import <CoreLocation/CoreLocation.h>
-#import "TYFBFacade.h"
+#import "TYFBRequest.h"
 #import "EGORefreshTableHeaderView.h"
 #import "TYBaseViewController.h"
 
@@ -19,7 +19,7 @@
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) EGORefreshTableHeaderView *refreshHeaderView;
-@property (nonatomic, strong) TYFBFacade *facade;
+@property (nonatomic, strong) TYFBRequest *request;
 @property (nonatomic, assign) BOOL reloading;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *location;

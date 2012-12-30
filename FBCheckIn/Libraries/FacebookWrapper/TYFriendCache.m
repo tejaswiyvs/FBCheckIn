@@ -19,7 +19,7 @@ NSString * const kFriendCacheUpdateFailed = @"friendCacheUpdateFailed";
 
 @synthesize friends = _friends;
 @synthesize lastUpdated = _lastUpdated;
-@synthesize facade = _facade;
+@synthesize request = _request;
 @synthesize refreshing = _refreshing;
 @synthesize lastRefreshDate = _lastRefreshDate;
 
@@ -45,10 +45,10 @@ static long const kAutoRefreshInterval = 12 * 3600; // >60 minutes since last re
 -(void) forceRefresh {
     if (!self.refreshing) {
         self.refreshing = YES;
-        self.facade = [[TYFBFacade alloc] init];
-        self.facade.delegate = self;
+        self.request = [[TYFBRequest alloc] init];
+        self.request.delegate = self;
         TYCurrentUser *user = [TYCurrentUser sharedInstance];
-        [self.facade friendsForUser:user.user];
+        [self.request friendsForUser:user.user];
     }    
 }
 
@@ -67,11 +67,11 @@ static long const kAutoRefreshInterval = 12 * 3600; // >60 minutes since last re
     return (!self.friends || [self.friends count] == 0);
 }
 
--(void)fbHelper:(TYFBFacade *)helper didFailWithError:(NSError *)err {
+-(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kFriendCacheUpdateFailed object:nil]];
 }
 
--(void)fbHelper:(TYFBFacade *)helper didCompleteWithResults:(NSMutableDictionary *)results {
+-(void)fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
     self.friends = [results objectForKey:@"data"];
     [self.friends sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         TYUser *user1 = (TYUser *) obj1;

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TYUser.h"
-#import "TYFBFacade.h"
+#import "TYFBRequest.h"
 
 extern NSString * const kCurrentUserDidLoadNotification;
 extern NSString * const kCurrentUserDidErrorNotification;
@@ -17,7 +17,7 @@ extern NSString * const kCurrentUserDidErrorNotification;
 
 @property (nonatomic, strong) TYUser *user;
 @property (nonatomic, assign) BOOL refreshing;
-@property (nonatomic, strong) TYFBFacade *facade;
+@property (nonatomic, strong) TYFBRequest *request;
 
 +(TYCurrentUser *) sharedInstance;
 -(void) loadCurrentUser;
