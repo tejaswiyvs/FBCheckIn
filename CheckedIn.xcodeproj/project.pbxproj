@@ -189,6 +189,10 @@
 		B78AFF26160E30720073B97F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B78AFF25160E30720073B97F /* Default-568h@2x.png */; };
 		B7A06D00157F19F300169BDE /* SCNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A06CFF157F19F300169BDE /* SCNavigationBar.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B7A06D01157F19F300169BDE /* SCNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A06CFF157F19F300169BDE /* SCNavigationBar.m */; };
+		B7BAC52716938F8D00B4F364 /* TYExploreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BAC52616938F8D00B4F364 /* TYExploreCell.m */; };
+		B7BAC52916938FA000B4F364 /* TYExploreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7BAC52816938FA000B4F364 /* TYExploreCell.xib */; };
+		B7BAC55E1695C01700B4F364 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BAC55D1695C01700B4F364 /* Constants.m */; };
+		B7BAC56A1696026300B4F364 /* TYOffer.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BAC5691696026300B4F364 /* TYOffer.m */; };
 		B7BDA721162AE56200DAC8AD /* TYComment.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BDA720162AE56200DAC8AD /* TYComment.m */; };
 		B7BDA724162B03F700DAC8AD /* TYLike.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BDA723162B03F700DAC8AD /* TYLike.m */; };
 		B7BDA727162B188A00DAC8AD /* facebook_like.png in Resources */ = {isa = PBXBuildFile; fileRef = B7BDA725162B188A00DAC8AD /* facebook_like.png */; };
@@ -208,6 +212,14 @@
 		B7C369BE163ABCFE00D60FEA /* TYCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C369BB163ABCFE00D60FEA /* TYCommentViewController.m */; };
 		B7C369BF163ABCFE00D60FEA /* TYCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7C369BC163ABCFE00D60FEA /* TYCommentView.xib */; };
 		B7C369C0163ABCFE00D60FEA /* TYCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7C369BC163ABCFE00D60FEA /* TYCommentView.xib */; };
+		B7D0753E16910EBE00D7E873 /* blue_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D0753D16910EBE00D7E873 /* blue_button@2x.png */; };
+		B7D0753F16910EBE00D7E873 /* blue_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D0753D16910EBE00D7E873 /* blue_button@2x.png */; };
+		B7D0772616921FBA00D7E873 /* TYExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0772416921FB900D7E873 /* TYExploreViewController.m */; };
+		B7D0772716921FBA00D7E873 /* TYExploreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7D0772516921FBA00D7E873 /* TYExploreView.xib */; };
+		B7D0772B1692211100D7E873 /* TYExploreDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D077291692211000D7E873 /* TYExploreDetailViewController.m */; };
+		B7D0772C1692211100D7E873 /* TYExploreDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7D0772A1692211000D7E873 /* TYExploreDetailView.xib */; };
+		B7D0772E1692221200D7E873 /* friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D0772D1692221200D7E873 /* friends@2x.png */; };
+		B7D0772F1692221200D7E873 /* friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D0772D1692221200D7E873 /* friends@2x.png */; };
 		B7D0BF48165C25C9004C7A78 /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF47165C25C9004C7A78 /* Mixpanel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B7D0BF49165C25C9004C7A78 /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF47165C25C9004C7A78 /* Mixpanel.m */; };
 		B7D0BF50165C25CF004C7A78 /* MPCJSONDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF4B165C25CF004C7A78 /* MPCJSONDataSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -221,6 +233,7 @@
 		B7D0BF5B165C260A004C7A78 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D0BF5A165C260A004C7A78 /* CoreTelephony.framework */; };
 		B7D0BF5E165C2CDE004C7A78 /* TYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF5D165C2CDD004C7A78 /* TYBaseViewController.m */; };
 		B7D0BF5F165C2CDE004C7A78 /* TYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D0BF5D165C2CDD004C7A78 /* TYBaseViewController.m */; };
+		B7D24CD116A43F1E009062B0 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D24CD016A43F1E009062B0 /* icon@2x.png */; };
 		B7D4167C15E81968007BF955 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D4167B15E81968007BF955 /* CoreData.framework */; };
 		B7D85E5F162B402F00AC9AF8 /* comment-bubble-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E5B162B402F00AC9AF8 /* comment-bubble-blue.png */; };
 		B7D85E60162B402F00AC9AF8 /* comment-bubble-blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D85E5C162B402F00AC9AF8 /* comment-bubble-blue@2x.png */; };
@@ -361,19 +374,19 @@
 		B736F664158297E4002A5614 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
 		B736F6771582983D002A5614 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B736F67D1582DBFB002A5614 /* fb-line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-line.png"; sourceTree = "<group>"; };
-		B73F6CE2156ED27F004A20E4 /* Facebook Check In.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Facebook Check In.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B73F6CE2156ED27F004A20E4 /* CheckedIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheckedIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B73F6CE6156ED27F004A20E4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B73F6CE8156ED27F004A20E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B73F6CEA156ED27F004A20E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		B73F6CEE156ED280004A20E4 /* FBCheckIn-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FBCheckIn-Info.plist"; sourceTree = "<group>"; };
+		B73F6CEE156ED280004A20E4 /* CheckedIn-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CheckedIn-Info.plist"; sourceTree = "<group>"; };
 		B73F6CF0156ED280004A20E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B73F6CF2156ED281004A20E4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B73F6CF4156ED281004A20E4 /* FBCheckIn-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FBCheckIn-Prefix.pch"; sourceTree = "<group>"; };
+		B73F6CF4156ED281004A20E4 /* CheckedIn-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CheckedIn-Prefix.pch"; sourceTree = "<group>"; };
 		B73F6CF5156ED281004A20E4 /* TYAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYAppDelegate.h; sourceTree = "<group>"; };
 		B73F6CF6156ED281004A20E4 /* TYAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYAppDelegate.m; sourceTree = "<group>"; };
-		B73F6CFD156ED281004A20E4 /* FBCheckInTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FBCheckInTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B73F6CFD156ED281004A20E4 /* CheckedInTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckedInTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B73F6CFE156ED281004A20E4 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		B73F6D06156ED281004A20E4 /* FBCheckInTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FBCheckInTests-Info.plist"; sourceTree = "<group>"; };
+		B73F6D06156ED281004A20E4 /* CheckedInTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CheckedInTests-Info.plist"; sourceTree = "<group>"; };
 		B73F6D08156ED281004A20E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B73F6D0A156ED281004A20E4 /* FBCheckInTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBCheckInTests.h; sourceTree = "<group>"; };
 		B73F6D0B156ED281004A20E4 /* FBCheckInTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBCheckInTests.m; sourceTree = "<group>"; };
@@ -483,6 +496,13 @@
 		B78AFF25160E30720073B97F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B7A06CFE157F19F300169BDE /* SCNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNavigationBar.h; sourceTree = "<group>"; };
 		B7A06CFF157F19F300169BDE /* SCNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNavigationBar.m; sourceTree = "<group>"; };
+		B7BAC52516938F8D00B4F364 /* TYExploreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYExploreCell.h; sourceTree = "<group>"; };
+		B7BAC52616938F8D00B4F364 /* TYExploreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYExploreCell.m; sourceTree = "<group>"; };
+		B7BAC52816938FA000B4F364 /* TYExploreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TYExploreCell.xib; sourceTree = "<group>"; };
+		B7BAC55C1695C01700B4F364 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		B7BAC55D1695C01700B4F364 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		B7BAC5681696026300B4F364 /* TYOffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYOffer.h; path = Models/TYOffer.h; sourceTree = "<group>"; };
+		B7BAC5691696026300B4F364 /* TYOffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYOffer.m; path = Models/TYOffer.m; sourceTree = "<group>"; };
 		B7BDA71F162AE56200DAC8AD /* TYComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYComment.h; sourceTree = "<group>"; };
 		B7BDA720162AE56200DAC8AD /* TYComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYComment.m; sourceTree = "<group>"; };
 		B7BDA722162B03F700DAC8AD /* TYLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYLike.h; path = Models/TYLike.h; sourceTree = "<group>"; };
@@ -504,6 +524,14 @@
 		B7C369BA163ABCFE00D60FEA /* TYCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYCommentViewController.h; path = Screens/TYCommentViewController.h; sourceTree = "<group>"; };
 		B7C369BB163ABCFE00D60FEA /* TYCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYCommentViewController.m; path = Screens/TYCommentViewController.m; sourceTree = "<group>"; };
 		B7C369BC163ABCFE00D60FEA /* TYCommentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYCommentView.xib; path = Screens/TYCommentView.xib; sourceTree = "<group>"; };
+		B7D0753D16910EBE00D7E873 /* blue_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blue_button@2x.png"; path = "Images/blue_button@2x.png"; sourceTree = SOURCE_ROOT; };
+		B7D0772316921FB900D7E873 /* TYExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYExploreViewController.h; path = Screens/TYExploreViewController.h; sourceTree = "<group>"; };
+		B7D0772416921FB900D7E873 /* TYExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYExploreViewController.m; path = Screens/TYExploreViewController.m; sourceTree = "<group>"; };
+		B7D0772516921FBA00D7E873 /* TYExploreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYExploreView.xib; path = Screens/TYExploreView.xib; sourceTree = "<group>"; };
+		B7D077281692211000D7E873 /* TYExploreDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYExploreDetailViewController.h; path = Screens/TYExploreDetailViewController.h; sourceTree = "<group>"; };
+		B7D077291692211000D7E873 /* TYExploreDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYExploreDetailViewController.m; path = Screens/TYExploreDetailViewController.m; sourceTree = "<group>"; };
+		B7D0772A1692211000D7E873 /* TYExploreDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYExploreDetailView.xib; path = Screens/TYExploreDetailView.xib; sourceTree = "<group>"; };
+		B7D0772D1692221200D7E873 /* friends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "friends@2x.png"; path = "Images/friends@2x.png"; sourceTree = SOURCE_ROOT; };
 		B7D0BF46165C25C9004C7A78 /* Mixpanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mixpanel.h; path = "Libraries/mixpanel-iphone/Mixpanel/Mixpanel.h"; sourceTree = "<group>"; };
 		B7D0BF47165C25C9004C7A78 /* Mixpanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mixpanel.m; path = "Libraries/mixpanel-iphone/Mixpanel/Mixpanel.m"; sourceTree = "<group>"; };
 		B7D0BF4A165C25CF004C7A78 /* MPCJSONDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPCJSONDataSerializer.h; path = "Libraries/mixpanel-iphone/Mixpanel/Library/JSON/MPCJSONDataSerializer.h"; sourceTree = "<group>"; };
@@ -517,6 +545,7 @@
 		B7D0BF5A165C260A004C7A78 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		B7D0BF5C165C2CDD004C7A78 /* TYBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYBaseViewController.h; path = Screens/TYBaseViewController.h; sourceTree = "<group>"; };
 		B7D0BF5D165C2CDD004C7A78 /* TYBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYBaseViewController.m; path = Screens/TYBaseViewController.m; sourceTree = "<group>"; };
+		B7D24CD016A43F1E009062B0 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		B7D4167B15E81968007BF955 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		B7D85E5B162B402F00AC9AF8 /* comment-bubble-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment-bubble-blue.png"; sourceTree = "<group>"; };
 		B7D85E5C162B402F00AC9AF8 /* comment-bubble-blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment-bubble-blue@2x.png"; sourceTree = "<group>"; };
@@ -680,6 +709,8 @@
 				B7EF3F29162ECB9A00B1FC9D /* TYPhoto.m */,
 				B788B42B16347C97000C99FC /* TYCurrentUser.h */,
 				B788B42C16347C97000C99FC /* TYCurrentUser.m */,
+				B7BAC5681696026300B4F364 /* TYOffer.h */,
+				B7BAC5691696026300B4F364 /* TYOffer.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -705,6 +736,7 @@
 		B73F6CD7156ED27F004A20E4 = {
 			isa = PBXGroup;
 			children = (
+				B7D24CD016A43F1E009062B0 /* icon@2x.png */,
 				B78AFF25160E30720073B97F /* Default-568h@2x.png */,
 				B705F638157C202500A1BF86 /* TODO */,
 				B73F6CEC156ED280004A20E4 /* FBCheckIn */,
@@ -717,8 +749,8 @@
 		B73F6CE3156ED27F004A20E4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B73F6CE2156ED27F004A20E4 /* Facebook Check In.app */,
-				B73F6CFD156ED281004A20E4 /* FBCheckInTests.octest */,
+				B73F6CE2156ED27F004A20E4 /* CheckedIn.app */,
+				B73F6CFD156ED281004A20E4 /* CheckedInTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -749,6 +781,7 @@
 		B73F6CEC156ED280004A20E4 /* FBCheckIn */ = {
 			isa = PBXGroup;
 			children = (
+				B7BAC55B1695C00700B4F364 /* Constants */,
 				B7FF5E9F15D0CF4B008A0300 /* Facebook Wrapper */,
 				B705F63E157C4DD600A1BF86 /* Map Annotation */,
 				B72D93D71571C58100665274 /* Model */,
@@ -799,6 +832,12 @@
 				B7F18BD31684BA7800186323 /* TYSettingsViewController.h */,
 				B7F18BD41684BA7800186323 /* TYSettingsViewController.m */,
 				B7F18BE51684D0D500186323 /* TYSettingsView.xib */,
+				B7D0772316921FB900D7E873 /* TYExploreViewController.h */,
+				B7D0772416921FB900D7E873 /* TYExploreViewController.m */,
+				B7D0772516921FBA00D7E873 /* TYExploreView.xib */,
+				B7D077281692211000D7E873 /* TYExploreDetailViewController.h */,
+				B7D077291692211000D7E873 /* TYExploreDetailViewController.m */,
+				B7D0772A1692211000D7E873 /* TYExploreDetailView.xib */,
 				B73F6DC4156ED965004A20E4 /* Resources */,
 				B73F6CED156ED280004A20E4 /* Supporting Files */,
 				B73F6DF2156F3483004A20E4 /* config.plist */,
@@ -809,10 +848,10 @@
 		B73F6CED156ED280004A20E4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B73F6CEE156ED280004A20E4 /* FBCheckIn-Info.plist */,
+				B73F6CEE156ED280004A20E4 /* CheckedIn-Info.plist */,
 				B73F6CEF156ED280004A20E4 /* InfoPlist.strings */,
 				B73F6CF2156ED281004A20E4 /* main.m */,
-				B73F6CF4156ED281004A20E4 /* FBCheckIn-Prefix.pch */,
+				B73F6CF4156ED281004A20E4 /* CheckedIn-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -831,7 +870,7 @@
 		B73F6D05156ED281004A20E4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B73F6D06156ED281004A20E4 /* FBCheckInTests-Info.plist */,
+				B73F6D06156ED281004A20E4 /* CheckedInTests-Info.plist */,
 				B73F6D07156ED281004A20E4 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -1018,6 +1057,9 @@
 				B721B1E7167F8E85004A1341 /* TYFriendCell.h */,
 				B721B1E8167F8E85004A1341 /* TYFriendCell.m */,
 				B721B1EA167F8E91004A1341 /* TYFriendCell.xib */,
+				B7BAC52516938F8D00B4F364 /* TYExploreCell.h */,
+				B7BAC52616938F8D00B4F364 /* TYExploreCell.m */,
+				B7BAC52816938FA000B4F364 /* TYExploreCell.xib */,
 			);
 			name = UITableViewCells;
 			sourceTree = "<group>";
@@ -1025,6 +1067,8 @@
 		B75E70FB167D20A4000B0F2C /* New */ = {
 			isa = PBXGroup;
 			children = (
+				B7D0772D1692221200D7E873 /* friends@2x.png */,
+				B7D0753D16910EBE00D7E873 /* blue_button@2x.png */,
 				B7F18BD01684BA2900186323 /* settings@2x.png */,
 				B7414D0C1680322C00380704 /* black-button@2x.png */,
 				B7F18BD51684BA7800186323 /* TYSettingsView.xib */,
@@ -1067,6 +1111,15 @@
 				B765DFB1167D7C3A007B70D4 /* SideMenu.xib */,
 			);
 			name = MFSideMenu;
+			sourceTree = "<group>";
+		};
+		B7BAC55B1695C00700B4F364 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				B7BAC55C1695C01700B4F364 /* Constants.h */,
+				B7BAC55D1695C01700B4F364 /* Constants.m */,
+			);
+			name = Constants;
 			sourceTree = "<group>";
 		};
 		B7BC7EFD165C8E7D00C40686 /* LocationManager */ = {
@@ -1193,9 +1246,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B73F6CE1156ED27F004A20E4 /* Facebook Check In */ = {
+		B73F6CE1156ED27F004A20E4 /* CheckedIn */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B73F6D0F156ED281004A20E4 /* Build configuration list for PBXNativeTarget "Facebook Check In" */;
+			buildConfigurationList = B73F6D0F156ED281004A20E4 /* Build configuration list for PBXNativeTarget "CheckedIn" */;
 			buildPhases = (
 				B73F6CDE156ED27F004A20E4 /* Sources */,
 				B73F6CDF156ED27F004A20E4 /* Frameworks */,
@@ -1205,14 +1258,14 @@
 			);
 			dependencies = (
 			);
-			name = "Facebook Check In";
+			name = CheckedIn;
 			productName = FBCheckIn;
-			productReference = B73F6CE2156ED27F004A20E4 /* Facebook Check In.app */;
+			productReference = B73F6CE2156ED27F004A20E4 /* CheckedIn.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B73F6CFC156ED281004A20E4 /* FBCheckInTests */ = {
+		B73F6CFC156ED281004A20E4 /* CheckedInTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B73F6D12156ED281004A20E4 /* Build configuration list for PBXNativeTarget "FBCheckInTests" */;
+			buildConfigurationList = B73F6D12156ED281004A20E4 /* Build configuration list for PBXNativeTarget "CheckedInTests" */;
 			buildPhases = (
 				B73F6CF8156ED281004A20E4 /* Sources */,
 				B73F6CF9156ED281004A20E4 /* Frameworks */,
@@ -1224,9 +1277,9 @@
 			dependencies = (
 				B73F6D03156ED281004A20E4 /* PBXTargetDependency */,
 			);
-			name = FBCheckInTests;
+			name = CheckedInTests;
 			productName = FBCheckInTests;
-			productReference = B73F6CFD156ED281004A20E4 /* FBCheckInTests.octest */;
+			productReference = B73F6CFD156ED281004A20E4 /* CheckedInTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -1238,7 +1291,7 @@
 				CLASSPREFIX = PP;
 				LastUpgradeCheck = 0450;
 			};
-			buildConfigurationList = B73F6CDC156ED27F004A20E4 /* Build configuration list for PBXProject "FBCheckIn" */;
+			buildConfigurationList = B73F6CDC156ED27F004A20E4 /* Build configuration list for PBXProject "CheckedIn" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1256,8 +1309,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				B73F6CE1156ED27F004A20E4 /* Facebook Check In */,
-				B73F6CFC156ED281004A20E4 /* FBCheckInTests */,
+				B73F6CE1156ED27F004A20E4 /* CheckedIn */,
+				B73F6CFC156ED281004A20E4 /* CheckedInTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1357,6 +1410,12 @@
 				B7414D0A16802E7100380704 /* check-in@2x.png in Resources */,
 				B7414D0D1680322C00380704 /* black-button@2x.png in Resources */,
 				B7F18BD11684BA2900186323 /* settings@2x.png in Resources */,
+				B7D0753E16910EBE00D7E873 /* blue_button@2x.png in Resources */,
+				B7D0772716921FBA00D7E873 /* TYExploreView.xib in Resources */,
+				B7D0772C1692211100D7E873 /* TYExploreDetailView.xib in Resources */,
+				B7D0772E1692221200D7E873 /* friends@2x.png in Resources */,
+				B7BAC52916938FA000B4F364 /* TYExploreCell.xib in Resources */,
+				B7D24CD116A43F1E009062B0 /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1416,6 +1475,8 @@
 				B7414D0E1680322C00380704 /* black-button@2x.png in Resources */,
 				B7F18BD21684BA2900186323 /* settings@2x.png in Resources */,
 				B7F18BD91684BA7800186323 /* TYSettingsView.xib in Resources */,
+				B7D0753F16910EBE00D7E873 /* blue_button@2x.png in Resources */,
+				B7D0772F1692221200D7E873 /* friends@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1520,6 +1581,11 @@
 				B721B1E9167F8E85004A1341 /* TYFriendCell.m in Sources */,
 				B75124291682325800063BED /* TYFriendCache.m in Sources */,
 				B7F18BD61684BA7800186323 /* TYSettingsViewController.m in Sources */,
+				B7D0772616921FBA00D7E873 /* TYExploreViewController.m in Sources */,
+				B7D0772B1692211100D7E873 /* TYExploreDetailViewController.m in Sources */,
+				B7BAC52716938F8D00B4F364 /* TYExploreCell.m in Sources */,
+				B7BAC55E1695C01700B4F364 /* Constants.m in Sources */,
+				B7BAC56A1696026300B4F364 /* TYOffer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1586,7 +1652,7 @@
 /* Begin PBXTargetDependency section */
 		B73F6D03156ED281004A20E4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B73F6CE1156ED27F004A20E4 /* Facebook Check In */;
+			target = B73F6CE1156ED27F004A20E4 /* CheckedIn */;
 			targetProxy = B73F6D02156ED281004A20E4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1667,12 +1733,12 @@
 		B73F6D10156ED281004A20E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tejaswi Yerukalapudi (6AGEQ2EXD6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tejaswi Yerukalapudi (6AGEQ2EXD6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tejaswi Yerukalapudi (RDKM9UC3U5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tejaswi Yerukalapudi (RDKM9UC3U5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FBCheckIn/FBCheckIn-Prefix.pch";
+				GCC_PREFIX_HEADER = "FBCheckIn/CheckedIn-Prefix.pch";
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
-				INFOPLIST_FILE = "FBCheckIn/FBCheckIn-Info.plist";
+				INFOPLIST_FILE = "FBCheckIn/CheckedIn-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1683,8 +1749,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "644915C0-B056-46B9-A2F2-E69A9E95E7AB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "644915C0-B056-46B9-A2F2-E69A9E95E7AB";
+				PROVISIONING_PROFILE = "D15D63CA-A4DD-4B1A-9436-EB3215725A53";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D15D63CA-A4DD-4B1A-9436-EB3215725A53";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1693,12 +1759,12 @@
 		B73F6D11156ED281004A20E4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tejaswi Yerukalapudi (6AGEQ2EXD6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tejaswi Yerukalapudi (6AGEQ2EXD6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tejaswi Yerukalapudi (RDKM9UC3U5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tejaswi Yerukalapudi (RDKM9UC3U5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FBCheckIn/FBCheckIn-Prefix.pch";
+				GCC_PREFIX_HEADER = "FBCheckIn/CheckedIn-Prefix.pch";
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
-				INFOPLIST_FILE = "FBCheckIn/FBCheckIn-Info.plist";
+				INFOPLIST_FILE = "FBCheckIn/CheckedIn-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1709,8 +1775,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "644915C0-B056-46B9-A2F2-E69A9E95E7AB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "644915C0-B056-46B9-A2F2-E69A9E95E7AB";
+				PROVISIONING_PROFILE = "D15D63CA-A4DD-4B1A-9436-EB3215725A53";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D15D63CA-A4DD-4B1A-9436-EB3215725A53";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1726,8 +1792,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FBCheckIn/FBCheckIn-Prefix.pch";
-				INFOPLIST_FILE = "FBCheckInTests/FBCheckInTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "FBCheckInTests/CheckedInTests-Info.plist";
+				PRODUCT_NAME = CheckedInTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1743,8 +1809,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FBCheckIn/FBCheckIn-Prefix.pch";
-				INFOPLIST_FILE = "FBCheckInTests/FBCheckInTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "FBCheckInTests/CheckedInTests-Info.plist";
+				PRODUCT_NAME = CheckedInTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1753,7 +1819,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B73F6CDC156ED27F004A20E4 /* Build configuration list for PBXProject "FBCheckIn" */ = {
+		B73F6CDC156ED27F004A20E4 /* Build configuration list for PBXProject "CheckedIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B73F6D0D156ED281004A20E4 /* Debug */,
@@ -1762,7 +1828,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B73F6D0F156ED281004A20E4 /* Build configuration list for PBXNativeTarget "Facebook Check In" */ = {
+		B73F6D0F156ED281004A20E4 /* Build configuration list for PBXNativeTarget "CheckedIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B73F6D10156ED281004A20E4 /* Debug */,
@@ -1771,7 +1837,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B73F6D12156ED281004A20E4 /* Build configuration list for PBXNativeTarget "FBCheckInTests" */ = {
+		B73F6D12156ED281004A20E4 /* Build configuration list for PBXNativeTarget "CheckedInTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B73F6D13156ED281004A20E4 /* Debug */,

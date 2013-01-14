@@ -60,7 +60,7 @@ const int kNumberOfRows = 3;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 480.0f) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 480.0f) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self setTitle:self.place.pageName];
@@ -68,7 +68,7 @@ const int kNumberOfRows = 3;
     [self.view addSubview:self.tableView];
     self.tableView.backgroundView = nil;;
     self.tableView.backgroundColor = [UIColor clearColor];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    self.view.backgroundColor = [UIColor bgColor];
     self.tableView.separatorColor = [UIColor subtitleTextColor];
     [self loadAdditionalMetaData];
     
@@ -80,7 +80,7 @@ const int kNumberOfRows = 3;
 
 -(void) dealloc {
     if (self.metaDataRequest) {
-        self.metaDataRequest.delegate = nil;
+        [self.metaDataRequest cancel];
     }
 }
 
@@ -192,9 +192,9 @@ const int kNumberOfRows = 3;
 -(UITableViewCell *) makeInfoCell {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     [cell setFrame:CGRectMake(0.0f, 0.0f, 320.0f, kRowHeightInfo)];
-    [cell setBackgroundColor:[UIColor clearColor]];
+    [cell setBackgroundColor:[UIColor dullWhite]];
     
-    UIImageView *profilePictureImgView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 50.0f, 50.0f)];
+    UIImageView *profilePictureImgView = [[UIImageView alloc] initWithFrame:CGRectMake(12.0f, 10.0f, 50.0f, 50.0f)];
     [profilePictureImgView setImageWithURL:[NSURL URLWithString:self.place.pagePictureUrl]];
     [profilePictureImgView.layer setBorderColor:[[UIColor darkGrayColor] CGColor]];
     [profilePictureImgView.layer setBorderWidth:3.0f];
@@ -223,7 +223,7 @@ const int kNumberOfRows = 3;
 -(UITableViewCell *) makeContactCell {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     [cell setFrame:CGRectMake(0.0f, 0.0f, 320.0f, kRowHeightContact)];
-    [cell setBackgroundColor:[UIColor clearColor]];
+    [cell setBackgroundColor:[UIColor dullWhite]];
     
     if ([self.place hasAddress] || [self.place hasPhone]) {
         UILabel *addressLbl = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 3.0f, 280.0f, 34.0f)];
@@ -241,19 +241,21 @@ const int kNumberOfRows = 3;
         [phoneNumberLbl setBackgroundColor:[UIColor clearColor]];
         [cell addSubview:phoneNumberLbl];
         
-        UIButton *callButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        UIButton *callButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [callButton setFrame:CGRectMake(86.0f, 71.0f, 70.0f, 35.0f)];
+        [callButton setBackgroundImage:[UIImage imageNamed:@"blue_button.png"] forState:UIControlStateNormal];
         [callButton setTitle:@"Call" forState:UIControlStateNormal];
         [callButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
         [callButton setEnabled:YES];
         [callButton addTarget:self action:@selector(callButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [cell addSubview:callButton];
         
-        UIButton *directionsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        UIButton *directionsButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [directionsButton setFrame:CGRectMake(164.0f, 71.0f, 70.0f, 35.0f)];
+        [directionsButton setBackgroundImage:[UIImage imageNamed:@"blue_button.png"] forState:UIControlStateNormal];
         [directionsButton setTitle:@"Directions" forState:UIControlStateNormal];
         [directionsButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
-        [callButton addTarget:self action:@selector(directionsButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [directionsButton addTarget:self action:@selector(directionsButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [cell addSubview:directionsButton];
     }
     else {
@@ -273,7 +275,7 @@ const int kNumberOfRows = 3;
 -(UITableViewCell *) makeMetaDataCell {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     [cell setFrame:CGRectMake(0.0f, 0.0f, 320.0f, kRowHeightMetaData)];
-    [cell setBackgroundColor:[UIColor clearColor]];
+    [cell setBackgroundColor:[UIColor dullWhite]];
     
     [cell addSubview:[self infoViewWithFrame:CGRectMake(20.0f, 11.0f, 88.0f, 77.0f)
                                     mainText:[NSString stringWithFormat:@"%d", self.place.numberOfFriendsCheckedIn]
@@ -291,7 +293,7 @@ const int kNumberOfRows = 3;
 
 -(UIView *) infoViewWithFrame:(CGRect) frame mainText:(NSString *) mainTxt subText:(NSString *) subTxt {
     UIView *view = [[UIView alloc] initWithFrame:frame];
-    [view setBackgroundColor:[UIColor dullWhite]];
+    [view setBackgroundColor:[UIColor colorWithHexString:@"FFFBFA"]];
     [view.layer setCornerRadius:3.0f];
     [view.layer setBorderColor:[[UIColor subtitleTextColor] CGColor]];
     [view.layer setBorderWidth:1.0f];

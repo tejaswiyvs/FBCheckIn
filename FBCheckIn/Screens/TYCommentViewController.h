@@ -14,7 +14,7 @@
 #import "TYFBRequest.h"
 #import "TYBaseViewController.h"
 
-@interface TYCommentViewController : TYBaseViewController<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate, TYFBFacadeDelegate>
+@interface TYCommentViewController : TYBaseViewController<UITableViewDataSource, UITableViewDelegate, HPGrowingTextViewDelegate, TYFBRequestDelegate>
 
 @property (nonatomic, strong) TYCheckIn *checkIn;
 @property (nonatomic, strong) TYUser *user;

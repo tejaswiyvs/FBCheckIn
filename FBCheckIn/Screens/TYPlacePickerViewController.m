@@ -35,6 +35,7 @@
 @synthesize refreshHeaderView = _refreshHeaderView;
 @synthesize reloading = _reloading;
 @synthesize request = _request;
+@synthesize pageDataRequest = _pageDataRequest;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,7 +50,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonClicked:)];
     UIBarButtonItem *cancelButton = [UIBarButtonItem barItemWithImage:[UIImage imageNamed:@"red-button.png"] target:self action:@selector(cancelButtonClicked:) title:@"Cancel"];
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     [self.navigationItem setLeftBarButtonItem:cancelButton];
@@ -122,10 +122,28 @@
     [self updateLocation];
 }
 
+-(void) loadPages {
+    self.request = [[TYFBRequest alloc] init];
+    self.request.delegate = self;
+    [self.request placesNearLocation:self.locationManager.location.coordinate];
+}
+
+-(void) loadPageData {
+    self.pageDataRequest = [[TYFBRequest alloc] init];
+    self.pageDataRequest.delegate = self;
+    [self.pageDataRequest loadPageData:self.allItems];
+}
+
 -(void)fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
-    self.allItems = [results objectForKey:@"data"];
-    [SVProgressHUD dismiss];
-    [self.tableView reloadData];
+    if (helper == self.request) {
+        self.allItems = [results objectForKey:@"data"];
+        [self loadPageData];
+    }
+    else {
+        self.allItems = [results objectForKey:@"data"];
+        [SVProgressHUD dismiss];
+        [self.tableView reloadData];
+    }
 }
 
 -(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
@@ -180,10 +198,8 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     self.location = newLocation;
-    self.request = [[TYFBRequest alloc] init];
-    self.request.delegate = self;
-    [self.request placesNearLocation:self.locationManager.location.coordinate];
     [self.locationManager stopUpdatingLocation];
+    [self loadPages];
 }
 
 @end

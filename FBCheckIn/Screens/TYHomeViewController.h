@@ -13,7 +13,7 @@
 #import "TYCommentViewController.h"
 #import "TYBaseViewController.h"
 
-@interface TYHomeViewController : TYBaseViewController<UITableViewDelegate, UITableViewDataSource, TYFBFacadeDelegate, EGORefreshTableHeaderDelegate>
+@interface TYHomeViewController : TYBaseViewController<UITableViewDelegate, UITableViewDataSource, TYFBRequestDelegate, EGORefreshTableHeaderDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) Facebook *facebook;

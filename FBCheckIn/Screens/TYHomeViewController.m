@@ -140,10 +140,10 @@
     [userNameTapRecognizer setNumberOfTapsRequired:1];
     userNameTapRecognizer.cancelsTouchesInView = YES;
     
-    UITapGestureRecognizer *checkInPhotoTagRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(checkInPhotoTapped:)];
-    checkInPhotoTagRecognizer.numberOfTouchesRequired = 1;
-    checkInPhotoTagRecognizer.numberOfTapsRequired = 1;
-    checkInPhotoTagRecognizer.cancelsTouchesInView = YES;
+    UITapGestureRecognizer *checkInPhotoTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(checkInPhotoTapped:)];
+    checkInPhotoTapRecognizer.numberOfTouchesRequired = 1;
+    checkInPhotoTapRecognizer.numberOfTapsRequired = 1;
+    checkInPhotoTapRecognizer.cancelsTouchesInView = YES;
     
     UITapGestureRecognizer *pageTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pageNameTapped:)];
     pageTapRecognizer.numberOfTouchesRequired = 1;
@@ -223,6 +223,7 @@
         [checkInPictureImgView.layer setCornerRadius:3.0f];
         [checkInPictureImgView.layer setMasksToBounds:YES];
         checkInPictureImgView.contentMode = UIViewContentModeScaleAspectFill;
+        [checkInPictureImgView addGestureRecognizer:checkInPhotoTapRecognizer];
         [checkInPictureImgView setBackgroundColor:[UIColor darkGrayColor]];
         [cell addSubview:checkInPictureImgView];
         y = y + 200.0f + 5.0f;

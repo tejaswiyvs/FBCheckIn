@@ -68,6 +68,17 @@
     searchBar.showsCancelButton = YES;
     searchBar.autocorrectionType = UITextAutocapitalizationTypeNone;
     [self.filteredFriends removeAllObjects];
+    
+    // Loop through, find matching friends and populate search results.
+    for(TYUser *user in self.friends)
+    {
+        NSRange range = [user.fullName rangeOfString:searchBar.text options:NSCaseInsensitiveSearch];
+        if(range.location != NSNotFound)
+        {
+            [self.filteredFriends addObject:user];
+        }
+    }
+    [self.tableView reloadData];
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {

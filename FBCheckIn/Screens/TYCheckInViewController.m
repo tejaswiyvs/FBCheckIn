@@ -24,7 +24,6 @@
 -(void) doneButtonClicked:(id) sender;
 -(void) updateCheckInImage:(UIImage *) checkInImage;
 -(void) dismiss;
--(void) addPageForPhotoId:(NSString *) photoId;
 @end
 
 @implementation TYCheckInViewController
@@ -43,8 +42,6 @@
 @synthesize aviaryUsed = _aviaryUsed;
 @synthesize postCheckInRequest = _postCheckInRequest;
 @synthesize postPhotoRequest = _postPhotoRequest;
-@synthesize postTagsRequest = _postTagsRequest;
-@synthesize postPageInfoRequest = _postPageInfoRequest;
 @synthesize tagFriendsBtn = _tagFriendsBtn;
 
 
@@ -86,20 +83,14 @@
 
 -(IBAction)checkInButtonClicked:(id)sender {
     [SVProgressHUD showWithStatus:@"Checking in..."];
-    
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     TYUser *currentUser = [TYCurrentUser sharedInstance].user;
-    [mixpanel track:@"CheckInCompleted" properties:[NSDictionary dictionaryWithObjectsAndKeys:currentUser.userId, @"userId", currentUser.sex, @"sex", self.currentPage.pageId, @"pageId", [NSNumber numberWithBool:[self hasTags]], "hasTags", [NSNumber numberWithBool:[self hasPicture]], @"hasPhoto", self.aviaryUsed, @"aviaryUsed", nil]];
-
+    [mixpanel track:@"CheckInCompleted" properties:[NSDictionary dictionaryWithObjectsAndKeys:currentUser.userId, @"userId", currentUser.sex, @"sex", self.currentPage.pageId, @"pageId", [self hasPicture], @"hasPhoto", [self hasTags], @"hasTags", self.aviaryUsed, @"aviaryUsed", nil]];
     if (self.checkInImage) {
-        self.postPhotoRequest = [[TYFBRequest alloc] init];
-        self.postPhotoRequest.delegate = self;
-        [self.postPhotoRequest postPhoto:self.checkInImage withMessage:self.statusText.text];
+        [self postPhoto];
     }
     else {
-        self.postCheckInRequest = [[TYFBRequest alloc] init];
-        self.postCheckInRequest.delegate = self;
-        [self.postCheckInRequest checkInAtPage:self.currentPage message:self.statusText.text taggedUsers:self.taggedUsers];
+        [self postCheckInWithPhotoId:@""];
     }
 }
 
@@ -115,6 +106,7 @@
 -(void) cancelButtonClicked:(id) sender {
     [self dismissModalViewControllerAnimated:YES];
 }
+
 #pragma mark - Text Field Stuff
 
 -(IBAction)backgroundTap:(id)sender {
@@ -173,57 +165,35 @@
 
 #pragma mark - Facebook
 
+-(void) postPhoto {
+    self.postPhotoRequest = [[TYFBRequest alloc] init];
+    self.postPhotoRequest.delegate = self;
+    [self.postPhotoRequest postPhoto:self.checkInImage];
+}
+
+-(void) postCheckInWithPhotoId:(NSString *) photoId {
+    self.postCheckInRequest = [[TYFBRequest alloc] init];
+    self.postCheckInRequest.delegate = self;
+    [self.postCheckInRequest checkInAtPage:self.currentPage message:self.statusText.text taggedUsers:self.taggedUsers withPhotoId:photoId];
+}
+
 -(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
-    if (helper == self.postCheckInRequest) {
+    if (helper == self.postPhotoRequest) {
+        [SVProgressHUD showErrorWithStatus:@"Could not check-in. Please try again"];
+    }
+    else if (helper == self.postCheckInRequest) {
         [SVProgressHUD showErrorWithStatus:@"Could not check-in. Please try again."];
-    }
-    else if (helper == self.postPhotoRequest) {
-        [SVProgressHUD showErrorWithStatus:@"Could not check-in. Please try again"];
-    }
-    else if(helper == self.postTagsRequest) {
-        [SVProgressHUD showSuccessWithStatus:@"Checked in, but could not tag your friends with this check-in"];
-        if ([self.postPageInfoRequest status] == TYFBFacadeStatusCompleted) {
-            [self dismiss];
-        }
-    }
-    else if(helper == self.postPageInfoRequest) {
-        [SVProgressHUD showErrorWithStatus:@"Could not check-in. Please try again"];
     }
 }
 
 -(void)fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
-    if (helper == self.postCheckInRequest) {
+    if(helper == self.postPhotoRequest) {
+        NSString *photoId = [results objectForKey:@"data"];
+        [self postCheckInWithPhotoId:photoId];
+    }
+    else if (helper == self.postCheckInRequest) {
         [self dismiss];
     }
-    else if(helper == self.postPhotoRequest) {
-        NSString *photoId = [results objectForKey:@"data"];
-        if (self.taggedUsers && [self.taggedUsers count] > 0) {
-            [self addTagsForPhotoId:photoId];
-        }
-        [self addPageForPhotoId:photoId];
-    }
-    else if(helper == self.postTagsRequest) {
-        if (self.postPageInfoRequest.status == TYFBFacadeStatusCompleted) {
-            [self dismiss];
-        }
-    }
-    else if(helper == self.postPageInfoRequest) {
-        if (self.postTagsRequest && self.postTagsRequest.status == TYFBFacadeStatusCompleted) {
-            [self dismiss];
-        }
-    }
-}
-
--(void) addTagsForPhotoId:(NSString *) photoId {
-    self.postTagsRequest = [[TYFBRequest alloc] init];
-    self.postTagsRequest.delegate = self;
-    [self.postTagsRequest tagUsers:self.taggedUsers forObjectId:photoId];
-}
-
--(void) addPageForPhotoId:(NSString *) photoId {
-    self.postPageInfoRequest = [[TYFBRequest alloc] init];
-    self.postPageInfoRequest.delegate = self;
-    [self.postPageInfoRequest postPage:self.currentPage forObjectId:photoId];
 }
 
 #pragma mark - Helpers

@@ -13,7 +13,7 @@
 extern NSString * const kCurrentUserDidLoadNotification;
 extern NSString * const kCurrentUserDidErrorNotification;
 
-@interface TYCurrentUser : NSObject<TYFBFacadeDelegate>
+@interface TYCurrentUser : NSObject<TYFBRequestDelegate>
 
 @property (nonatomic, strong) TYUser *user;
 @property (nonatomic, assign) BOOL refreshing;

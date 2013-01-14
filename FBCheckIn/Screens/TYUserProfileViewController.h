@@ -11,7 +11,7 @@
 #import "TYFBRequest.h"
 #import "TYBaseViewController.h"
 
-@interface TYUserProfileViewController : TYBaseViewController<UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, TYFBFacadeDelegate>
+@interface TYUserProfileViewController : TYBaseViewController<UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, TYFBRequestDelegate>
 
 @property (nonatomic, strong) TYUser *user;
 @property (nonatomic, strong) UITableView *tableView;

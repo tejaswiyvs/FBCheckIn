@@ -12,7 +12,7 @@
 extern NSString * const kFriendCacheUpdateComplete;
 extern NSString * const kFriendCacheUpdateFailed;
 
-@interface TYFriendCache : NSObject<TYFBFacadeDelegate>
+@interface TYFriendCache : NSObject<TYFBRequestDelegate>
 
 @property (nonatomic, strong) NSMutableArray *friends;
 @property (nonatomic, assign) long lastUpdated;

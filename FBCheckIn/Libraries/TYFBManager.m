@@ -54,7 +54,7 @@ NSString * const kFBManagerLoginCancelledNotification = @"fb_mgr_logout";
 
 -(void) login {
     if (![self.facebook isSessionValid]) {
-        NSArray *permissions = [NSArray arrayWithObjects:@"user_about_me", @"friends_about_me", @"user_status", @"friends_status", @"user_likes", @"friends_likes", @"publish_stream", @"user_photos", @"friends_photos", nil];
+        NSArray *permissions = [NSArray arrayWithObjects:@"user_about_me", @"friends_about_me", @"user_status", @"friends_status", @"user_likes", @"friends_likes", @"publish_stream", @"user_photos", @"friends_photos", @"publish_checkins", nil];
         [self.facebook authorize:permissions];
     }
     else {

@@ -13,13 +13,14 @@
 #import "EGORefreshTableHeaderView.h"
 #import "TYBaseViewController.h"
 
-@interface TYPlacePickerViewController : TYBaseViewController<UITableViewDelegate, UITableViewDataSource, TYFBFacadeDelegate, CLLocationManagerDelegate>
+@interface TYPlacePickerViewController : TYBaseViewController<UITableViewDelegate, UITableViewDataSource, TYFBRequestDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) IBOutlet UISearchDisplayController *searchDisplayController;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) EGORefreshTableHeaderView *refreshHeaderView;
 @property (nonatomic, strong) TYFBRequest *request;
+@property (nonatomic, strong) TYFBRequest *pageDataRequest;
 @property (nonatomic, assign) BOOL reloading;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *location;

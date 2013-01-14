@@ -13,7 +13,7 @@
 NSString * const kNotificationCacheRefreshStart;
 NSString * const kNotificationCacheRefreshEnd;
 
-@interface TYCheckInCache : NSObject<TYFBFacadeDelegate>
+@interface TYCheckInCache : NSObject<TYFBRequestDelegate>
 
 @property (nonatomic, retain) NSDate *lastRefreshDate;
 @property (nonatomic, strong) NSMutableArray *checkIns;

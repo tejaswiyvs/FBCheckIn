@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B73F6CE1156ED27F004A20E4"
                BuildableName = "Facebook Check In.app"
-               BlueprintName = "Facebook Check In"
-               ReferencedContainer = "container:FBCheckIn.xcodeproj">
+               BlueprintName = "CheckedIn"
+               ReferencedContainer = "container:CheckedIn.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B73F6CFC156ED281004A20E4"
                BuildableName = "FBCheckInTests.octest"
-               BlueprintName = "FBCheckInTests"
-               ReferencedContainer = "container:FBCheckIn.xcodeproj">
+               BlueprintName = "CheckedInTests"
+               ReferencedContainer = "container:CheckedIn.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,8 +44,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B73F6CE1156ED27F004A20E4"
             BuildableName = "Facebook Check In.app"
-            BlueprintName = "Facebook Check In"
-            ReferencedContainer = "container:FBCheckIn.xcodeproj">
+            BlueprintName = "CheckedIn"
+            ReferencedContainer = "container:CheckedIn.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -63,8 +63,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B73F6CE1156ED27F004A20E4"
             BuildableName = "Facebook Check In.app"
-            BlueprintName = "Facebook Check In"
-            ReferencedContainer = "container:FBCheckIn.xcodeproj">
+            BlueprintName = "CheckedIn"
+            ReferencedContainer = "container:CheckedIn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -91,8 +91,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B73F6CE1156ED27F004A20E4"
             BuildableName = "Facebook Check In.app"
-            BlueprintName = "Facebook Check In"
-            ReferencedContainer = "container:FBCheckIn.xcodeproj">
+            BlueprintName = "CheckedIn"
+            ReferencedContainer = "container:CheckedIn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

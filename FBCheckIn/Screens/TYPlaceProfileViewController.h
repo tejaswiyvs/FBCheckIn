@@ -12,7 +12,7 @@
 #import "TYFBRequest.h"
 #import "TYBaseViewController.h"
 
-@interface TYPlaceProfileViewController : TYBaseViewController<UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, UIAlertViewDelegate, TYFBFacadeDelegate>
+@interface TYPlaceProfileViewController : TYBaseViewController<UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, UIAlertViewDelegate, TYFBRequestDelegate>
 
 @property (nonatomic, strong) TYPage *place;
 @property (nonatomic, strong) UITableView *tableView;

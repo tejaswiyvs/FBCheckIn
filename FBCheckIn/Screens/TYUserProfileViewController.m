@@ -22,6 +22,7 @@
 #import "TYPlaceProfileViewController.h"
 #import "TYCurrentUser.h"
 #import "TYIndeterminateProgressBar.h"
+#import "UIImage+Convinience.h"
 
 @interface TYUserProfileViewController ()
 -(UIView *) makeHeaderView;
@@ -54,7 +55,7 @@ const int kRequestTagLast3CheckIns = 1;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 460.0f) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -80,6 +81,14 @@ const int kRequestTagLast3CheckIns = 1;
     [super didReceiveMemoryWarning];
 }
 
+- (void)dealloc
+{
+    for (TYFBRequest *request in self.pageMetaDataRequests) {
+        [request cancel];
+    }
+    [self.userCheckInsRequest cancel];
+}
+
 #pragma mark - TYFBFacade
 
 -(void) loadUserMetaData {
@@ -100,7 +109,9 @@ const int kRequestTagLast3CheckIns = 1;
             pageMetaDataRequest.delegate = self;
             pageMetaDataRequest.tag = tag;
             [self.pageMetaDataRequests addObject:pageMetaDataRequest];
-            [pageMetaDataRequest loadPageData:pageId];
+            TYPage *page = [[TYPage alloc] init];
+            page.pageId = pageId;
+            [pageMetaDataRequest loadPageData:[NSMutableArray arrayWithObject:page]];
         }
     }
 }
@@ -108,6 +119,7 @@ const int kRequestTagLast3CheckIns = 1;
 -(void)fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
     if (helper == self.userCheckInsRequest) {
         NSMutableArray *checkIns = [results objectForKey:@"data"];
+        checkIns = [self sortedCheckIns:checkIns];
         if (!checkIns || [checkIns count] == 0) {
             [TYIndeterminateProgressBar hideFromView:self.view];
             return;
@@ -136,17 +148,20 @@ const int kRequestTagLast3CheckIns = 1;
         if (!self.last3CheckIns) {
             self.last3CheckIns = [NSMutableArray array];
         }
-        TYPage *page = [results objectForKey:@"data"];
-        if (page && helper.tag == kRequestTagTop5Pages) {
-            [self.topVisitedPlaces addObject:page];
-        }
-        else if(page && helper.tag == kRequestTagLast3CheckIns) {
-            [self.last3CheckIns addObject:page];
-        }
-        if ([self.pageMetaDataRequests count] == 0) {
-            [TYIndeterminateProgressBar hideFromView:self.view];
-            [self.tableView reloadData];
-            [self reloadPins];
+        NSMutableArray *resultsArr = [results objectForKey:@"data"];
+        if (resultsArr && [resultsArr count] == 1) {
+            TYPage *page = [resultsArr objectAtIndex:0];
+            if (page && helper.tag == kRequestTagTop5Pages) {
+                [self.topVisitedPlaces addObject:page];
+            }
+            else if(page && helper.tag == kRequestTagLast3CheckIns) {
+                [self.last3CheckIns addObject:page];
+            }
+            if ([self.pageMetaDataRequests count] == 0) {
+                [TYIndeterminateProgressBar hideFromView:self.view];
+                [self.tableView reloadData];
+                [self reloadPins];
+            }
         }
     }
 }
@@ -271,6 +286,21 @@ const int kRequestTagLast3CheckIns = 1;
 }
 
 #pragma mark - Helpers
+
+-(NSMutableArray *) sortedCheckIns:(NSMutableArray *) checkIns {
+    [checkIns sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        if ([((TYCheckIn *) obj1).checkInDate compare:((TYCheckIn *) obj2).checkInDate] == NSOrderedDescending) {
+            return NSOrderedAscending;
+        }
+        else if ([((TYCheckIn *) obj1).checkInDate compare:((TYCheckIn *) obj2).checkInDate] == NSOrderedAscending) {
+            return NSOrderedDescending;
+        }
+        else {
+            return NSOrderedSame;
+        }
+    }];
+    return checkIns;
+}
 
 -(UIView *) makeFooterView {
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 200.0f)];

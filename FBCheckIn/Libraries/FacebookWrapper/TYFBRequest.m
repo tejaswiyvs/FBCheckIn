@@ -25,19 +25,25 @@
 @synthesize delegate = _delegate;
 @synthesize tag = _tag;
 @synthesize status = _status;
+@synthesize request = _request;
 
 -(id) init {
     self = [super init];
     if (self) {
         self.tag = -1;
-        self.status = TYFBFacadeStatusUnknown;
+        self.status = TYFBRequestStatusUnknown;
     }
     return self;
 }
-    
+
+-(void) cancel {
+    self.status = TYFBRequestStatusErrored;
+    self.delegate = nil;
+    self.request.delegate = nil;
+}
 
 -(void) currentUser {
-    self.requestType = TYFBFacadeRequestTypeCurrentUser;
+    self.requestType = TYFBRequestTypeCurrentUser;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
     NSString *fql = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover FROM user WHERE uid=me()";
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:fql forKey:@"query"];
@@ -45,19 +51,19 @@
 }
 
 -(void) likeCheckIn:(TYCheckIn *) checkIn {
-    self.requestType = TYFBFacadeRequestTypeLike;
+    self.requestType = TYFBRequestTypeLike;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
-    [facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/likes", checkIn.checkInId] andParams:[NSMutableDictionary dictionary] andHttpMethod:@"POST" andDelegate:self];
+    self.request = [facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/likes", checkIn.checkInId] andParams:[NSMutableDictionary dictionary] andHttpMethod:@"POST" andDelegate:self];
 }
 
 -(void) unlikeCheckIn:(TYCheckIn *) checkIn {
-    self.requestType = TYFBFacadeRequestTypeUnlike;
+    self.requestType = TYFBRequestTypeUnlike;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
-    [facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/likes", checkIn.checkInId] andParams:[NSMutableDictionary dictionary] andHttpMethod:@"DELETE" andDelegate:self];
+    self.request = [facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/likes", checkIn.checkInId] andParams:[NSMutableDictionary dictionary] andHttpMethod:@"DELETE" andDelegate:self];
 }
 
 -(void) checkInsForUser:(TYUser *) user {
-    self.requestType = TYFBFacadeRequestTypeGetCheckins;
+    self.requestType = TYFBRequestTypeGetCheckins;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
 
     // Get friends
@@ -70,7 +76,7 @@
     NSString *fql3 = @"SELECT message, id, app_id, author_uid, timestamp, tagged_uids, page_id, page_type, coords, type FROM location_post WHERE author_uid IN (SELECT uid FROM #query1) AND type='photo' ORDER BY timestamp DESC LIMIT 50";
     
     // Get page details for all the check-ins
-    NSString *fql4 = @"SELECT page_id, name, description, categories, phone, pic, fan_count, website, checkins, location FROM page WHERE page_id IN (SELECT page_id FROM #query2) OR page_id IN (SELECT page_id FROM #query3)";
+    NSString *fql4 = @"SELECT page_id, name, description, categories, phone, pic, fan_count, website, checkins, location, pic_cover FROM page WHERE page_id IN (SELECT page_id FROM #query2) OR page_id IN (SELECT page_id FROM #query3)";
     
     // Get likes
     NSString *fql5 = @"SELECT object_id, post_id, user_id, object_type FROM like WHERE object_id IN (SELECT checkin_id FROM #query2) OR object_id IN (SELECT id FROM #query3)";
@@ -87,7 +93,7 @@
     NSString *fql = [NSString stringWithFormat:@"{\"query1\":\"%@\",\"query2\":\"%@\",\"query3\":\"%@\",\"query4\":\"%@\",\"query5\":\"%@\", \"query6\":\"%@\", \"query7\":\"%@\", \"query8\":\"%@\"}", fql1, fql2, fql3, fql4, fql5, fql6, fql7, fql8];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:fql forKey:@"queries"];
-    [facebook requestWithMethodName:@"fql.multiquery" andParams:params andHttpMethod:@"POST" andDelegate:self];
+    self.request = [facebook requestWithMethodName:@"fql.multiquery" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
 
 -(void) loadMetaDataForPage:(TYPage *) page {
@@ -96,13 +102,13 @@
         return;
     }
     
-    self.requestType = TYFBFacadeRequestTypeLoadPageMetaData;
+    self.requestType = TYFBRequestTypeLoadPageMetaData;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
     NSString *fql = [NSString stringWithFormat:@"SELECT id, author_uid, type FROM location_post WHERE page_id = %@ AND author_uid IN (SELECT uid2 FROM friend WHERE uid1=me())", page.pageId];
     NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                     fql, @"query",
                                     nil];
-    [facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
+    self.request = [facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
 
 -(void) loadMetaDataForUser:(TYUser *) user {
@@ -111,7 +117,7 @@
         return;
     }
     
-    self.requestType = TYFBFacadeRequestTypeLoadUserMetaData;
+    self.requestType = TYFBRequestTypeLoadUserMetaData;
     
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
     // Get checkins from Checkin
@@ -122,43 +128,55 @@
     
     NSString *fql = [NSString stringWithFormat:@"{\"query1\":\"%@\",\"query2\":\"%@\"}", fql1, fql2];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:fql forKey:@"queries"];
-    [facebook requestWithMethodName:@"fql.multiquery" andParams:params andHttpMethod:@"POST" andDelegate:self];
+    self.request = [facebook requestWithMethodName:@"fql.multiquery" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
 
 -(void) postComment:(TYComment *) comment {
-    self.requestType = TYFBFacadeRequestTypePostComment;
+    self.requestType = TYFBRequestTypePostComment;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
-    [facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/comments", comment.checkInId] andParams:[NSMutableDictionary dictionary] andHttpMethod:@"POST" andDelegate:self];
+    self.request = [facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/comments", comment.checkInId] andParams:[NSMutableDictionary dictionary] andHttpMethod:@"POST" andDelegate:self];
 }
 
 -(void) deleteComment:(TYComment *) comment {
-    self.requestType = TYFBFacadeRequestTypeDeleteComment;
+    self.requestType = TYFBRequestTypeDeleteComment;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
-    [facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/comments", comment.checkInId] andParams:[NSMutableDictionary dictionary] andHttpMethod:@"DELETE" andDelegate:self];
+    self.request = [facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/comments", comment.checkInId] andParams:[NSMutableDictionary dictionary] andHttpMethod:@"DELETE" andDelegate:self];
 }
 
--(void) loadPageData:(NSString *) pageId {
-    self.requestType = TYFBFacadeRequestTypeLoadPageData;
+-(void) loadPageData:(NSMutableArray *) pages {
+    self.requestType = TYFBRequestTypeLoadPageData;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
-    NSString *fql = [NSString stringWithFormat:@"SELECT page_id, name, description, categories, phone, pic, fan_count, website, checkins, location FROM page WHERE page_id = %@", pageId];
+    NSMutableString *query = [[NSMutableString alloc] init];
+    int i = 0;
+    [query appendString:@"{"];
+    for (TYPage *page in pages) {
+        // "query1" : "SELECT .. FROM page WHERE page_id = $id
+        [query appendFormat:@"\"query%d\" : \"SELECT page_id, name, description, categories, phone, pic, fan_count, website, checkins, location, pic_cover FROM page WHERE page_id = '%@'\",", i, page.pageId];
+        i++;
+    }
+    if (query.length > 1) {
+        query = [[query substringToIndex:([query length] - 1)] mutableCopy];
+    }
+    [query appendString:@"}"];
     NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    fql, @"query",
+                                    [NSString stringWithString:query], @"queries",
                                     nil];
-    [facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
+    self.request = [facebook requestWithMethodName:@"fql.multiquery" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
 
 -(void) placesNearLocation:(CLLocationCoordinate2D) location {
-    self.requestType = TYFBFacadeRequestTypePlacesNearLocation;
+    self.requestType = TYFBRequestTypePlacesNearLocation;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
-    NSString *fql = [NSString stringWithFormat:@"SELECT page_id, name, description, categories, pic, fan_count, website, checkins, location FROM page WHERE page_id IN (SELECT page_id FROM place WHERE distance(latitude, longitude, \"%.5f\", \"%.5f\") < 1000)", location.latitude, location.longitude];
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    fql, @"query",
-                                    nil];
-    [facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:@"place" forKey:@"type"];
+    [params setObject:@"100" forKey:@"limit"];
+    [params setObject:[NSString stringWithFormat:@"%lf,%lf", location.latitude, location.longitude] forKey:@"center"];
+    [params setObject:@"id" forKey:@"fields"];
+    self.request = [facebook requestWithGraphPath:@"search" andParams:params andDelegate:self];
 }
 
--(void) checkInAtPage:(TYPage *) page message:(NSString *) message taggedUsers:(NSMutableArray *) taggedUsers {
-    self.requestType = TYFBFacadeRequestTypeCheckIn;
+-(void) checkInAtPage:(TYPage *) page message:(NSString *) message taggedUsers:(NSMutableArray *) taggedUsers withPhotoId:(NSString *) photoId {
+    self.requestType = TYFBRequestTypeCheckIn;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     if (message && ![message isEqualToString:@""]) {
@@ -178,103 +196,79 @@
         [params setObject:tagsString forKey:@"tags"];
     }
     [params setObject:page.pageId forKey:@"place"];
+    if (photoId && ![photoId isBlank]) {
+        [params setObject:photoId forKey:@"object_attachment"];
+    }
     NSString *coordinatesString = [NSString stringWithFormat:@"{\"latitude\" : \"%f\", \"longitude\" : \"%f\"}", page.location.latitude, page.location.longitude];
     [params setObject:coordinatesString forKey:@"coordinates"];
-    [facebook requestWithGraphPath:@"me/feed" andParams:params andHttpMethod:@"POST" andDelegate:self];
+    self.request = [facebook requestWithGraphPath:@"me/checkins" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
 
--(void) postPhoto:(UIImage *) image withMessage:(NSString *) message {
-    self.requestType = TYFBFacadeRequestTypePostPhoto;
+-(void) postPhoto:(UIImage *) image {
+    self.requestType = TYFBRequestTypePostPhoto;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:UIImageJPEGRepresentation(image, 10) forKey:@"data"];
-    if (message && ![message isBlank]) {
-        [params setObject:message forKey:@"message"];
-    }
-    [facebook requestWithGraphPath:@"/me/photos" andParams:params andHttpMethod:@"POST" andDelegate:self];
-}
-
--(void) tagUsers:(NSMutableArray *) users forObjectId:(NSString *) objectId {
-    self.requestType = TYFBFacadeRequestTypePostTags;
-    if (!users || !objectId || [objectId isBlank]) {
-        [self.delegate fbHelper:self didFailWithError:nil];
-        return;
-    }
-    
-}
-
--(void) postPage:(TYPage *) page forObjectId:(NSString *) objectId {
-    self.requestType = TYFBFacadeRequestTypePostPageInfo;
+    self.request = [facebook requestWithGraphPath:@"/me/photos" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
 
 -(void) friendsForUser:(TYUser *) user {
-    self.requestType = TYFBFacadeRequestTypeGetFriends;
+    self.requestType = TYFBRequestTypeGetFriends;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
     // Get friends
     NSString *fql = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover, pic_big FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1=me()) OR uid=me()";
     NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:fql, @"query", nil];
-    [facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
+    self.request = [facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
 
 #pragma mark - FBRequestDelegate
 
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error {
     [self.delegate fbHelper:self didFailWithError:error];
-    self.status = TYFBFacadeStatusErrored;
+    self.status = TYFBRequestStatusErrored;
 }
 
 -(void)request:(FBRequest *)request didLoad:(id)result {
-    self.status = TYFBFacadeStatusCompleted;
+    self.status = TYFBRequestStatusCompleted;
     switch (self.requestType) {
-        case TYFBFacadeRequestTypeCurrentUser:
+        case TYFBRequestTypeCurrentUser:
             [self parseCurrentUserResponse:result];
             break;
-        case TYFBFacadeRequestTypeGetCheckins:
+        case TYFBRequestTypeGetCheckins:
             [self parseCheckins:result];
             break;
-        case TYFBFacadeRequestTypeGetFriends:
+        case TYFBRequestTypeGetFriends:
             [self parseFriends:result];
             break;
-        case TYFBFacadeRequestTypeGetPlaces1:
-            [self parsePlaces:result];
-            break;
-        case TYFBFacadeRequestTypeGetPlaces2:
-            break;
-        case TYFBFacadeRequestTypeLike:
+        case TYFBRequestTypeLike:
             [self parseLikeResult:result];
             break;
-        case TYFBFacadeRequestTypeUnlike:
+        case TYFBRequestTypeUnlike:
             [self parseUnlikeResult:result];
             break;
-        case TYFBFacadeRequestTypePostComment:
+        case TYFBRequestTypePostComment:
             [self parsePostCommentResult:result];
             break;
-        case TYFBFacadeRequestTypeDeleteComment:
+        case TYFBRequestTypeDeleteComment:
             [self parseDeleteCommentResult:result];
             break;
-        case TYFBFacadeRequestTypeLoadPageMetaData:
+        case TYFBRequestTypeLoadPageMetaData:
             [self parseMetaDataResult:result];
             break;
-        case TYFBFacadeRequestTypeLoadUserMetaData:
+        case TYFBRequestTypeLoadUserMetaData:
             [self parseUserMetaDataResult:result];
             break;
-        case TYFBFacadeRequestTypeLoadPageData:
+        case TYFBRequestTypeLoadPageData:
             [self parsePageDataResult:result];
             break;
-        case TYFBFacadeRequestTypePlacesNearLocation:
+        case TYFBRequestTypePlacesNearLocation:
             [self parsePlacesNearLocationResponse:result];
             break;
-        case TYFBFacadeRequestTypeCheckIn:
+        case TYFBRequestTypeCheckIn:
             [self parsePostCheckInResponse:result];
             break;
-        case TYFBFacadeRequestTypePostPageInfo:
-            [self parseAddPageInfoResponse:result];
-            break;
-        case TYFBFacadeRequestTypePostPhoto:
+        case TYFBRequestTypePostPhoto:
             [self parsePostPhotoResponse:result];
-            break;
-        case TYFBFacadeRequestTypePostTags:
-            [self parseTagUsersResponse:result];
             break;
         default:
             [self.delegate fbHelper:self didCompleteWithResults:[NSMutableDictionary dictionaryWithObjectsAndKeys:result, @"data", nil]];
@@ -316,20 +310,14 @@
     }
 }
 
--(void) parseTagUsersResponse:(id) result {
-    DebugLog(@"%@", result);
-}
-
--(void) parseAddPageInfoResponse:(id) result {
-    DebugLog(@"%@", result);
-}
-
 -(void) parsePlacesNearLocationResponse:(id) result {
-    NSArray *resultArray = (NSArray *) result;
+    NSArray *resultArray = [(NSDictionary *) result objectForKey:@"data"];
     NSMutableArray *pages = [NSMutableArray array];
     for (NSDictionary *pageDict in resultArray) {
-        TYPage *page = [[TYPage alloc] initWithDictionary:pageDict];
-        if (page) {
+        TYPage *page = [[TYPage alloc] init];
+        NSString *pageId = [pageDict objectForKey:@"id"];
+        if (pageId && ![pageId isBlank]) {
+            page.pageId = pageId;
             [pages addObject:page];
         }
     }
@@ -338,15 +326,16 @@
 
 -(void) parsePageDataResult:(id) result {
     NSArray *resultArray = (NSArray *) result;
-    if ([resultArray count] == 1) {
-        NSDictionary *pageDict = [resultArray objectAtIndex:0];
-        TYPage *page = [[TYPage alloc] initWithDictionary:pageDict];
-        if (page) {
-            [self.delegate fbHelper:self didCompleteWithResults:[NSMutableDictionary dictionaryWithObjectsAndKeys:page, @"data", nil]];
-            return;
+    NSMutableArray *pages = [NSMutableArray array];
+    for (NSDictionary *resultDictionary in resultArray) {
+        NSArray *tempArr = [resultDictionary objectForKey:@"fql_result_set"];
+        if (tempArr && [tempArr count] > 0) {
+            NSDictionary *pageDict = [[resultDictionary objectForKey:@"fql_result_set"] objectAtIndex:0];
+            TYPage *page = [[TYPage alloc] initWithDictionary:pageDict];
+            [pages addObject:page];
         }
     }
-    [self.delegate fbHelper:self didCompleteWithResults:nil];
+    [self.delegate fbHelper:self didCompleteWithResults:[NSMutableDictionary dictionaryWithObject:pages forKey:@"data"]];
 }
 
 -(void) parseUserMetaDataResult:(id) result {
@@ -371,6 +360,7 @@
     }
     for (NSDictionary *resultDict in checkIn2Array) {
         TYCheckIn *checkIn = [[TYCheckIn alloc] initWithDictionary:resultDict];
+        checkIn.photo = [[TYPhoto alloc] init];
         [checkInArray addObject:checkIn];
     }
     

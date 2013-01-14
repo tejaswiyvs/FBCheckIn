@@ -28,6 +28,10 @@
 @synthesize zip = _zip;
 @synthesize phoneNumber = _phoneNumber;
 @synthesize numberOfFriendsCheckedIn = _numberOfFriendsCheckedIn;
+@synthesize offers = _offers;
+@synthesize coverPictureUrl = _coverPictureUrl;
+@synthesize coverOffSetY = _coverOffSetY;
+@synthesize pagePictureUrls = _pagePictureUrls;
 
 -(id) initWithDictionary:(NSDictionary *) pageDictionary {
     self = [super init];
@@ -55,6 +59,11 @@
         self.phoneNumber = [pageDictionary objectForKey:@"phone"];
         // Loaded at a later point if needed.
         self.numberOfFriendsCheckedIn = 0;
+        NSDictionary *coverDict = [pageDictionary objectForKey:@"pic_cover"];
+        if (coverDict && coverDict != (id) [NSNull null]) {
+            self.coverPictureUrl = [coverDict objectForKey:@"source"];
+            self.coverOffSetY = [[coverDict objectForKey:@"offset_y"] floatValue];
+        }
     }
     return self;
 }
@@ -119,6 +128,10 @@
     [aCoder encodeObject:self.zip forKey:@"zip"];
     [aCoder encodeObject:[NSNumber numberWithInt:self.checkIns] forKey:@"checkins"];
     [aCoder encodeObject:[NSNumber numberWithInt:self.fanCount] forKey:@"fan_count"];
+    [aCoder encodeObject:self.offers forKey:@"offers"];
+    [aCoder encodeObject:self.coverPictureUrl forKey:@"coverPictureUrl"];
+    [aCoder encodeObject:[NSNumber numberWithFloat:self.coverOffSetY] forKey:@"coverOffSetY"];
+    [aCoder encodeObject:self.pagePictureUrls forKey:@"pagePictureUrls"];
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
@@ -139,6 +152,10 @@
         self.zip = [aDecoder decodeObjectForKey:@"zip"];
         self.checkIns = [[aDecoder decodeObjectForKey:@"checkins"] intValue];
         self.fanCount = [[aDecoder decodeObjectForKey:@"fan_count"] intValue];
+        self.offers = [aDecoder decodeObjectForKey:@"offers"];
+        self.coverPictureUrl = [aDecoder decodeObjectForKey:@"coverPictureUrl"];
+        self.coverOffSetY = [[aDecoder decodeObjectForKey:@"coverOffSetY"] floatValue];
+        self.pagePictureUrls = [aDecoder decodeObjectForKey:@"pagePictureUrls"];
     }
     return self;
 }

@@ -17,39 +17,37 @@
 // TODO Cleanup
 
 typedef enum {
-    TYFBFacadeRequestTypeCurrentUser,
-    TYFBFacadeRequestTypeGetCheckins,
-    TYFBFacadeRequestTypeGetPlaces1,
-    TYFBFacadeRequestTypeGetPlaces2,
-    TYFBFacadeRequestTypeGetFriends,
-    TYFBFacadeRequestTypeLike,
-    TYFBFacadeRequestTypeUnlike,
-    TYFBFacadeRequestTypePostComment,
-    TYFBFacadeRequestTypeDeleteComment,
-    TYFBFacadeRequestTypeLoadPageMetaData,
-    TYFBFacadeRequestTypeLoadUserMetaData,
-    TYFBFacadeRequestTypeLoadPageData,
-    TYFBFacadeRequestTypePlacesNearLocation,
-    TYFBFacadeRequestTypeCheckIn,
-    TYFBFacadeRequestTypePostPhoto,
-    TYFBFacadeRequestTypePostTags,
-    TYFBFacadeRequestTypePostPageInfo
-} TYFBFacadeRequestType;
+    TYFBRequestTypeCurrentUser,
+    TYFBRequestTypeGetCheckins,
+    TYFBRequestTypeGetFriends,
+    TYFBRequestTypeLike,
+    TYFBRequestTypeUnlike,
+    TYFBRequestTypePostComment,
+    TYFBRequestTypeDeleteComment,
+    TYFBRequestTypeLoadPageMetaData,
+    TYFBRequestTypeLoadUserMetaData,
+    TYFBRequestTypeLoadPageData,
+    TYFBRequestTypePlacesNearLocation,
+    TYFBRequestTypeCheckIn,
+    TYFBRequestTypePostPhoto
+} TYFBRequestType;
 
 typedef enum {
-    TYFBFacadeStatusUnknown,
-    TYFBFacadeStatusCompleted,
-    TYFBFacadeStatusErrored
-} TYFBFacadeStatus;
+    TYFBRequestStatusUnknown,
+    TYFBRequestStatusCompleted,
+    TYFBRequestStatusErrored
+} TYFBRequestStatus;
 
-@protocol TYFBFacadeDelegate;
+@protocol TYFBRequestDelegate;
 @interface TYFBRequest : NSObject<FBRequestDelegate>
 
 @property (nonatomic, assign) int tag;
-@property (nonatomic, assign) id<TYFBFacadeDelegate> delegate;
-@property (nonatomic, assign) TYFBFacadeRequestType requestType;
-@property (nonatomic, assign) TYFBFacadeStatus status;
+@property (nonatomic, assign) id<TYFBRequestDelegate> delegate;
+@property (nonatomic, assign) TYFBRequestType requestType;
+@property (nonatomic, assign) TYFBRequestStatus status;
+@property (nonatomic, strong) FBRequest *request;
 
+-(void) cancel;
 -(void) currentUser;
 -(void) checkInsForUser:(TYUser *) user;
 -(void) likeCheckIn:(TYCheckIn *) checkIn;
@@ -58,16 +56,14 @@ typedef enum {
 -(void) deleteComment:(TYComment *) comment;
 -(void) loadMetaDataForPage:(TYPage *) page;
 -(void) loadMetaDataForUser:(TYUser *) user;
--(void) loadPageData:(NSString *) pageId;
+-(void) loadPageData:(NSMutableArray *) pages;
 -(void) placesNearLocation:(CLLocationCoordinate2D) location;
--(void) checkInAtPage:(TYPage *) page message:(NSString *) message taggedUsers:(NSMutableArray *) taggedUsers;
--(void) postPhoto:(UIImage *) image withMessage:(NSString *) message;
--(void) tagUsers:(NSMutableArray *) users forObjectId:(NSString *) objectId;
--(void) postPage:(TYPage *) page forObjectId:(NSString *) objectId;
+-(void) checkInAtPage:(TYPage *) page message:(NSString *) message taggedUsers:(NSMutableArray *) taggedUsers withPhotoId:(NSString *) photoId;
+-(void) postPhoto:(UIImage *) image;
 -(void) friendsForUser:(TYUser *) user;
 @end
 
-@protocol TYFBFacadeDelegate
+@protocol TYFBRequestDelegate
 @required
 -(void) fbHelper:(TYFBRequest *) helper didCompleteWithResults:(NSMutableDictionary *) results;
 -(void) fbHelper:(TYFBRequest *) helper didFailWithError:(NSError *) err;

@@ -33,11 +33,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Get only one check-in / user.
+    [self loadCheckIns];
+    [self.mapView setDelegate:self];
+    
+    // Add annotations.
     for (TYCheckIn *checkIn in self.checkIns) {
         TYAnnotation *annotation = [[TYAnnotation alloc] initWithCoordinate:checkIn.location andPicture:checkIn.user.profilePicture];
         [self.mapView addAnnotation:annotation];
     }
-    [self.mapView setDelegate:self];
 }
 
 - (void) dealloc
@@ -63,6 +68,32 @@
     pin.animatesDrop = NO;
     pin.image = [TYAnnotationUtil pinImageForImage:((TYAnnotation *) annotation).picture];
     return pin;
+}
+
+#pragma mark - Helpers
+
+-(void) loadCheckIns {
+    self.checkIns = [TYCheckInCache sharedInstance].checkIns;
+    NSMutableArray *checkInArr = [NSMutableArray array];
+    for (TYCheckIn *checkIn in self.checkIns) {
+        if (![self checkInArray:checkInArr containsUser:checkIn.user]) {
+            [checkInArr addObject:checkIn];
+        }
+    }
+    self.checkIns = checkInArr;
+}
+
+-(BOOL) checkInArray:(NSMutableArray *) checkIns containsUser:(TYUser *) user {
+    if (!user) {
+        return YES;
+    }
+    
+    for (TYCheckIn *checkIn2 in checkIns) {
+        if ([checkIn2.user.userId isEqualToString:user.userId]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 @end

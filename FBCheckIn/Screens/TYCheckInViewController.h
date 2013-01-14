@@ -15,7 +15,7 @@
 #import "TYFBRequest.h"
 
 @protocol TYTagFriendsDelegate;
-@interface TYCheckInViewController : TYBaseViewController<TYFBFacadeDelegate, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, TYTagFriendsDelegate, AFPhotoEditorControllerDelegate>
+@interface TYCheckInViewController : TYBaseViewController<TYFBRequestDelegate, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, TYTagFriendsDelegate, AFPhotoEditorControllerDelegate>
 
 // UI
 @property (nonatomic, strong) IBOutlet UIButton *userImgBtn;
@@ -36,8 +36,6 @@
 
 @property (nonatomic, strong) TYFBRequest *postCheckInRequest;
 @property (nonatomic, strong) TYFBRequest *postPhotoRequest;
-@property (nonatomic, strong) TYFBRequest *postTagsRequest;
-@property (nonatomic, strong) TYFBRequest *postPageInfoRequest;
 
 
 -(IBAction)checkInButtonClicked:(id)sender;
