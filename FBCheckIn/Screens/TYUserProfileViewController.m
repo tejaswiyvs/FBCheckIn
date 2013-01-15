@@ -168,6 +168,7 @@ const int kRequestTagLast3CheckIns = 1;
 }
 
 -(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
+    [TYIndeterminateProgressBar hideFromView:self.view];
     if (helper == self.userCheckInsRequest) {
         
     }

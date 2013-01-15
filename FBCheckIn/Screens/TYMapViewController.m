@@ -35,10 +35,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self.mapView setDelegate:self];
+}
+
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     // Get only one check-in / user.
     [self loadCheckIns];
-    [self.mapView setDelegate:self];
     
     // Add annotations.
     for (TYCheckIn *checkIn in self.checkIns) {

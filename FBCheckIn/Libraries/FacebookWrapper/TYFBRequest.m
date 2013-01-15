@@ -70,10 +70,10 @@
     NSString *fql1 = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover, pic_big FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1=me()) OR uid=me()";
     
     // Get checkins FROM location_post and checkin. Both sources because sometimes location_post gets spammed with a ton of photos.
-    NSString *fql2 = @"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, page_id, coords FROM checkin WHERE author_uid IN (SELECT uid FROM #query1) ORDER BY timestamp DESC LIMIT 50";
+    NSString *fql2 = @"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, page_id, coords FROM checkin WHERE author_uid IN (SELECT uid FROM #query1) ORDER BY timestamp DESC LIMIT 20";
     
     // Get checkins FROM location_post
-    NSString *fql3 = @"SELECT message, id, app_id, author_uid, timestamp, tagged_uids, page_id, page_type, coords, type FROM location_post WHERE author_uid IN (SELECT uid FROM #query1) AND type='photo' AND page_id != 'null' ORDER BY timestamp DESC LIMIT 50";
+    NSString *fql3 = @"SELECT message, id, app_id, author_uid, timestamp, tagged_uids, page_id, page_type, coords, type FROM location_post WHERE author_uid IN (SELECT uid FROM #query1) AND type='photo' AND page_id != 'null' ORDER BY timestamp DESC LIMIT 20";
     
     // Get page details for all the check-ins
     NSString *fql4 = @"SELECT page_id, name, description, categories, phone, pic, fan_count, website, checkins, location, pic_cover FROM page WHERE page_id IN (SELECT page_id FROM #query2) OR page_id IN (SELECT page_id FROM #query3)";

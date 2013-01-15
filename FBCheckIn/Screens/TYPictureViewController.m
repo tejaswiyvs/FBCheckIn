@@ -66,7 +66,8 @@
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
     recognizer.numberOfTapsRequired = 1;
     recognizer.numberOfTouchesRequired = 1;
-    [self.view addGestureRecognizer:recognizer];
+    [self.pictureImgView setUserInteractionEnabled:YES];
+    [self.pictureImgView addGestureRecognizer:recognizer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,9 +99,9 @@
 }
 
 -(void) presentDoneButton {
+    [self.dismissItem setEnabled:YES];
     [UIView animateWithDuration:0.5f animations:^{
         [self.dismissItem setAlpha:0.8f];
-        [self.dismissItem setEnabled:YES];
     }];
 }
 

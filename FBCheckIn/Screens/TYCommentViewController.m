@@ -13,6 +13,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIColor+HexString.h"
 #import "NSString+Common.h"
+#import "UIBarButtonItem+Convinience.h"
 
 @interface TYCommentViewController ()
 -(float) heightForComment:(TYComment *) comment;
@@ -65,13 +66,15 @@ static float kDefaultPadding = 5.0f;
     DebugLog(@"CommentView viewDidLoad. Setting up UI.");
     [super viewDidLoad];
     [self.tableView reloadData];
+    self.tableView.tableFooterView = [[UIView alloc] init];
     
     // Create a "Done" button to dismiss the modal view.
-    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Dismiss" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonClicked:)];
+    UIBarButtonItem *doneItem = [UIBarButtonItem barItemWithImage:[UIImage imageNamed:@"red-button.png"] target:self action:@selector(doneButtonClicked:) title:@"Dismiss"];
     [self.navigationItem setRightBarButtonItem:doneItem];
     [self setTitle:@"Comments"];
     self.tableView.backgroundView = nil;
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.view.backgroundColor = [UIColor bgColor];
     
     // HPGrowingTextView Setup
     [self makeTextView];

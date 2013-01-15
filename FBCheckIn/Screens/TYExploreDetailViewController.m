@@ -48,6 +48,14 @@
     self.title = self.filter;
 }
 
+-(void)dealloc {
+    [self.request cancel];
+    [self.pageDataRequest cancel];
+    if ([SVProgressHUD isVisible]) {
+        [SVProgressHUD showErrorWithStatus:@"Dismissed"];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
