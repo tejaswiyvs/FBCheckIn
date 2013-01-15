@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B73F6CE1156ED27F004A20E4"
-               BuildableName = "Facebook Check In.app"
+               BuildableName = "CheckedIn.app"
                BlueprintName = "CheckedIn"
                ReferencedContainer = "container:CheckedIn.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B73F6CFC156ED281004A20E4"
-               BuildableName = "FBCheckInTests.octest"
+               BuildableName = "CheckedInTests.octest"
                BlueprintName = "CheckedInTests"
                ReferencedContainer = "container:CheckedIn.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B73F6CE1156ED27F004A20E4"
-            BuildableName = "Facebook Check In.app"
+            BuildableName = "CheckedIn.app"
             BlueprintName = "CheckedIn"
             ReferencedContainer = "container:CheckedIn.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B73F6CE1156ED27F004A20E4"
-            BuildableName = "Facebook Check In.app"
+            BuildableName = "CheckedIn.app"
             BlueprintName = "CheckedIn"
             ReferencedContainer = "container:CheckedIn.xcodeproj">
          </BuildableReference>
@@ -90,7 +90,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B73F6CE1156ED27F004A20E4"
-            BuildableName = "Facebook Check In.app"
+            BuildableName = "CheckedIn.app"
             BlueprintName = "CheckedIn"
             ReferencedContainer = "container:CheckedIn.xcodeproj">
          </BuildableReference>

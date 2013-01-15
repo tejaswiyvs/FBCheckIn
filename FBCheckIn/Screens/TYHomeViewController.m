@@ -26,6 +26,7 @@
 #import "TYUserProfileViewController.h"
 #import "TYPlaceProfileViewController.h"
 #import "TYIndeterminateProgressBar.h"
+#import "TYPictureViewController.h"
 
 @interface TYHomeViewController ()
 -(void) subscribeToNotifications;
@@ -69,11 +70,11 @@
     [self registerObserver];
 
     // Setup UITableView
-    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 10.0)]];
     self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     self.view.backgroundColor = [UIColor bgColor];
     self.tableView.separatorColor = [UIColor subtitleTextColor];
+    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 10.0)]];
 
     // Setup other UI
     if (_refreshHeaderView == nil) {
@@ -125,6 +126,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kReuseId];
     }
+    cell.clipsToBounds = YES;
     
     float height = [self heightForIndexPath:indexPath];
     CGRect rect = CGRectMake(10.0f, 0.0f, 300.0f, height);
@@ -223,8 +225,10 @@
         [checkInPictureImgView.layer setCornerRadius:3.0f];
         [checkInPictureImgView.layer setMasksToBounds:YES];
         checkInPictureImgView.contentMode = UIViewContentModeScaleAspectFill;
+        [checkInPictureImgView setUserInteractionEnabled:YES];
         [checkInPictureImgView addGestureRecognizer:checkInPhotoTapRecognizer];
         [checkInPictureImgView setBackgroundColor:[UIColor darkGrayColor]];
+        checkInPictureImgView.tag = indexPath.row;
         [cell addSubview:checkInPictureImgView];
         y = y + 200.0f + 5.0f;
     }
@@ -309,6 +313,14 @@
 }
 
 #pragma mark - Helpers
+
+-(void) checkInPhotoTapped:(UIGestureRecognizer *) sender {
+    UIView *view = sender.view;
+    TYCheckIn *checkIn = [self.cache.checkIns objectAtIndex:view.tag];
+    TYPictureViewController *pictureController = [[TYPictureViewController alloc] initWithImageUrl:checkIn.photo.src hiResUrl:nil];
+    pictureController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentModalViewController:pictureController animated:YES];
+}
 
 -(void) pageNameTapped:(UIGestureRecognizer *) sender {
     UIView *view = sender.view;

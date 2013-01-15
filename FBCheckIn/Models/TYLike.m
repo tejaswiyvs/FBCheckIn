@@ -7,6 +7,7 @@
 //
 
 #import "TYLike.h"
+#import "TYUtils.h"
 
 @implementation TYLike
 
@@ -16,9 +17,9 @@
 -(id) initWithDictionary:(NSDictionary *) params {
     self = [super init];
     if (self) {
-        self.checkInId = [[params objectForKey:@"object_id"] stringValue];
+        self.checkInId = [[TYUtils nullSafeObjectFromDictionary:params withKey:@"object_id"] stringValue];
         self.user = [[TYUser alloc] init];
-        self.user.userId = [[params objectForKey:@"user_id"] stringValue];
+        self.user.userId = [[TYUtils nullSafeObjectFromDictionary:params withKey:@"user_id"] stringValue];
     }
     return self;
 }

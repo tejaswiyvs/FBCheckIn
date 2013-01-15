@@ -10,6 +10,7 @@
 
 @interface TYUtils : NSObject
 
++(id) nullSafeObjectFromDictionary:(NSDictionary *) dictionary withKey:(NSString *) key;
 +(CGRect) setHeight:(float) height forRect:(CGRect) rect;
 +(CGRect) setWidth:(float) width forRect:(CGRect) rect;
 +(void) displayAlertWithTitle:(NSString *) title message:(NSString *) message;

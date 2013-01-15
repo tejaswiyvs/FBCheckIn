@@ -20,6 +20,14 @@
 
 @implementation TYUtils
 
++(id) nullSafeObjectFromDictionary:(NSDictionary *) dictionary withKey:(NSString *) key {
+    id value = [dictionary objectForKey:key];
+    if ([value isKindOfClass:[NSNull class]]) {
+        return nil;
+    }
+    return value;
+}
+
 +(CGRect) setHeight:(float) height forRect:(CGRect) rect {
     return CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, height);
 }

@@ -7,6 +7,7 @@
 //
 
 #import "TYComment.h"
+#import "TYUtils.h"
 
 @implementation TYComment
 
@@ -20,15 +21,15 @@
 -(id) initWithDictionary:(NSDictionary *) params {
     self = [super init];
     if (self) {
-        self.checkInId = [[params objectForKey:@"object_id"] stringValue];
-        self.commentId = [params objectForKey:@"post_id"];
-        self.text = [params objectForKey:@"text"];
-        self.canLike = [[params objectForKey:@"can_like"] boolValue];
-        self.userLikes = [[params objectForKey:@"user_likes"] boolValue];
-        self.likes = [[params objectForKey:@"likes"] intValue];
-        self.commentId = [[params objectForKey:@"commentId"] stringValue];
+        self.checkInId = [[TYUtils nullSafeObjectFromDictionary:params withKey:@"object_id"] stringValue];
+        self.commentId = [TYUtils nullSafeObjectFromDictionary:params withKey:@"post_id"];
+        self.text = [TYUtils nullSafeObjectFromDictionary:params withKey:@"text"];
+        self.canLike = [[TYUtils nullSafeObjectFromDictionary:params withKey:@"can_like"] boolValue];
+        self.userLikes = [[TYUtils nullSafeObjectFromDictionary:params withKey:@"user_likes"] boolValue];
+        self.likes = [[TYUtils nullSafeObjectFromDictionary:params withKey:@"likes"] intValue];
+        self.commentId = [[TYUtils nullSafeObjectFromDictionary:params withKey:@"comment_id"] stringValue];
         self.user = [[TYUser alloc] init];
-        self.user.userId = [[params objectForKey:@"fromid"] stringValue];
+        self.user.userId = [[TYUtils nullSafeObjectFromDictionary:params withKey:@"fromid"] stringValue];
     }
     return self;
 }

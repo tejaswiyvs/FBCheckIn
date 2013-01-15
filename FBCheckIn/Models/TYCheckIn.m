@@ -11,6 +11,7 @@
 #import "TYPage.h"
 #import "TYLike.h"
 #import "NSString+Common.h"
+#import "TYUtils.h"
 
 @implementation TYCheckIn
 
@@ -30,8 +31,8 @@
     self = [super init];
     if (self) {
         // id can come from location_post or checkin tables. Rest of the fields are common.
-        NSString *id1 = [[checkInDictionary objectForKey:@"id"] stringValue];
-        NSString *id2 = [[checkInDictionary objectForKey:@"checkin_id"] stringValue];
+        NSString *id1 = [[TYUtils nullSafeObjectFromDictionary:checkInDictionary withKey:@"id"] stringValue];
+        NSString *id2 = [[TYUtils nullSafeObjectFromDictionary:checkInDictionary withKey:@"checkin_id"] stringValue];
         if (id1 && ![id1 isBlank]) {
             self.checkInId = id1;
         }
@@ -40,20 +41,20 @@
         }
         self.user = [[TYUser alloc] init];
         self.page = [[TYPage alloc] init];
-        self.user.userId = [[checkInDictionary objectForKey:@"author_uid"] stringValue];
-        self.page.pageId = [[checkInDictionary objectForKey:@"page_id"] stringValue];
-        NSDictionary *coordinates = [checkInDictionary objectForKey:@"coords"];
+        self.user.userId = [[TYUtils nullSafeObjectFromDictionary:checkInDictionary withKey:@"author_uid"] stringValue];
+        self.page.pageId = [[TYUtils nullSafeObjectFromDictionary:checkInDictionary withKey:@"page_id"] stringValue];
+        NSDictionary *coordinates = [TYUtils nullSafeObjectFromDictionary:checkInDictionary withKey:@"coords"];
         NSNumber *latitude = [coordinates objectForKey:@"latitude"];
         NSNumber *longitude = [coordinates objectForKey:@"longitude"];
         self.location = CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]);
-        long checkInUnixTimestamp = [[checkInDictionary objectForKey:@"timestamp"] doubleValue];;
+        long checkInUnixTimestamp = [[TYUtils nullSafeObjectFromDictionary:checkInDictionary withKey:@"timestamp"] doubleValue];;
         if (checkInUnixTimestamp) {
             self.checkInDate = [NSDate dateWithTimeIntervalSince1970:checkInUnixTimestamp];
         }
-        self.message = [checkInDictionary objectForKey:@"message"];
-        self.type = [checkInDictionary objectForKey:@"type"];
+        self.message = [TYUtils nullSafeObjectFromDictionary:checkInDictionary withKey:@"message"];
+        self.type = [TYUtils nullSafeObjectFromDictionary:checkInDictionary withKey:@"type"];
         self.taggedUsers = [NSMutableArray array];
-        for (NSString *taggedUserId in [checkInDictionary objectForKey:@"tagged_uids"]) {
+        for (NSString *taggedUserId in [TYUtils nullSafeObjectFromDictionary:checkInDictionary withKey:@"tagged_uids"]) {
             TYUser *user = [[TYUser alloc] init];
             user.userId = taggedUserId;
             [self.taggedUsers addObject:user];

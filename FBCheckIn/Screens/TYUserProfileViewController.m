@@ -23,6 +23,7 @@
 #import "TYCurrentUser.h"
 #import "TYIndeterminateProgressBar.h"
 #import "UIImage+Convinience.h"
+#import "SCNavigationBar.h"
 
 @interface TYUserProfileViewController ()
 -(UIView *) makeHeaderView;
@@ -55,7 +56,7 @@ const int kRequestTagLast3CheckIns = 1;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 505.0f) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -221,7 +222,7 @@ const int kRequestTagLast3CheckIns = 1;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kReuseId];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kReuseId];
-        cell.frame = CGRectMake(0.0f, 0.0f, 300.0f, 120.0f);
+        cell.frame = CGRectMake(3.0f, 0.0f, 300.0f, 120.0f);
         cell.backgroundColor = [UIColor clearColor];
     }
     

@@ -7,6 +7,7 @@
 //
 
 #import "TYUser.h"
+#import "TYUtils.h"
 
 @implementation TYUser
 
@@ -26,20 +27,18 @@
 -(id) initWithDictionary:(NSDictionary *) userDictionary {
     self = [super init];
     if (self) {
-        self.userId = [[userDictionary objectForKey:@"uid"] stringValue];
-        self.userName = [userDictionary objectForKey:@"username"];
-        self.sex = [userDictionary objectForKey:@"sex"];
-        self.firstName = [userDictionary objectForKey:@"first_name"];
-        self.lastName = [userDictionary objectForKey:@"last_name"];
-        self.middleName = [userDictionary objectForKey:@"middle_name"];
-        self.fullName = [userDictionary objectForKey:@"name"];
-        self.profilePictureUrl = [userDictionary objectForKey:@"pic"];
-        self.hiResProfilePictureUrl = [userDictionary objectForKey:@"pic_big"];
-        NSDictionary *coverDict = [userDictionary objectForKey:@"pic_cover"];
-        if (coverDict && coverDict != (id) [NSNull null]) {
-            self.coverPictureUrl = [coverDict objectForKey:@"source"];
-            self.coverOffSetY = [[coverDict objectForKey:@"offset_y"] floatValue];
-        }
+        self.userId = [[TYUtils nullSafeObjectFromDictionary:userDictionary withKey:@"uid"] stringValue];
+        self.userName = [TYUtils nullSafeObjectFromDictionary:userDictionary withKey:@"username"];
+        self.sex = [TYUtils nullSafeObjectFromDictionary:userDictionary withKey:@"sex"];
+        self.firstName = [TYUtils nullSafeObjectFromDictionary:userDictionary withKey:@"first_name"];
+        self.lastName = [TYUtils nullSafeObjectFromDictionary:userDictionary withKey:@"last_name"];
+        self.middleName = [TYUtils nullSafeObjectFromDictionary:userDictionary withKey:@"middle_name"];
+        self.fullName = [TYUtils nullSafeObjectFromDictionary:userDictionary withKey:@"name"];
+        self.profilePictureUrl = [TYUtils nullSafeObjectFromDictionary:userDictionary withKey:@"pic"];
+        self.hiResProfilePictureUrl = [TYUtils nullSafeObjectFromDictionary:userDictionary withKey:@"pic_big"];
+        NSDictionary *coverDict = [TYUtils nullSafeObjectFromDictionary:userDictionary withKey:@"pic_cover"];
+        self.coverPictureUrl = [coverDict objectForKey:@"source"];
+        self.coverOffSetY = [[coverDict objectForKey:@"offset_y"] floatValue];
     }
     return self;
 }

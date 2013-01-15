@@ -8,14 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import "TYUser.h"
 
 @interface TYAnnotation : NSObject<MKAnnotation>
 
 @property (copy, nonatomic) NSString *title;
 @property (copy, nonatomic) NSString *subtitle;
 @property (assign, nonatomic) CLLocationCoordinate2D coordinate;
-@property (nonatomic, strong) UIImage *picture;
+@property (nonatomic, strong) NSString *pictureUrl;
+@property (nonatomic, strong) TYUser *user;
 
--(id) initWithCoordinate:(CLLocationCoordinate2D) coordinate andPicture:(UIImage *) picture;
 -(id) initWithCoordinate:(CLLocationCoordinate2D) coordinate;
 @end

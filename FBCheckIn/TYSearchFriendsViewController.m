@@ -39,6 +39,7 @@
     self.filteredFriends = [NSMutableArray array];
     self.searching = NO;
     self.tableView.backgroundView = nil;
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.view.backgroundColor = [UIColor bgColor];
     [self updateSearchBarBackground];
     self.friends = [TYFriendCache sharedInstance].cachedFriends;

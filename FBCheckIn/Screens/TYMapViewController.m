@@ -12,6 +12,8 @@
 #import "TYCheckIn.h"
 #import "TYAnnotationUtil.h"
 #import "TYCheckInCache.h"
+#import "MKAnnotationView+WebCache.h"
+#import "TYUserProfileViewController.h"
 
 @interface TYMapViewController ()
 
@@ -40,7 +42,9 @@
     
     // Add annotations.
     for (TYCheckIn *checkIn in self.checkIns) {
-        TYAnnotation *annotation = [[TYAnnotation alloc] initWithCoordinate:checkIn.location andPicture:checkIn.user.profilePicture];
+        TYAnnotation *annotation = [[TYAnnotation alloc] initWithCoordinate:checkIn.location];
+        annotation.pictureUrl = checkIn.user.profilePictureUrl;
+        annotation.user = checkIn.user;
         [self.mapView addAnnotation:annotation];
     }
 }
@@ -66,8 +70,16 @@
         pin.annotation = annotation;
     }
     pin.animatesDrop = NO;
-    pin.image = [TYAnnotationUtil pinImageForImage:((TYAnnotation *) annotation).picture];
+    [pin setImageWithURL:[NSURL URLWithString:((TYAnnotation *) annotation).pictureUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        pin.image = [TYAnnotationUtil pinImageForImage:image];
+    }];
     return pin;
+}
+
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    TYUser *selectedUser = ((TYAnnotation *) view.annotation).user;
+    TYUserProfileViewController *nextScreen = [[TYUserProfileViewController alloc] initWithUser:selectedUser];
+    [self.navigationController pushViewController:nextScreen animated:YES];
 }
 
 #pragma mark - Helpers

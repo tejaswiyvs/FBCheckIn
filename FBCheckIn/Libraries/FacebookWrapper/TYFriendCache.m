@@ -68,10 +68,12 @@ static long const kAutoRefreshInterval = 12 * 3600; // >60 minutes since last re
 }
 
 -(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
+    self.refreshing = NO;
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kFriendCacheUpdateFailed object:nil]];
 }
 
 -(void)fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
+    self.refreshing = NO;
     self.friends = [results objectForKey:@"data"];
     [self.friends sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         TYUser *user1 = (TYUser *) obj1;

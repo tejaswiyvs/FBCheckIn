@@ -33,11 +33,13 @@
 {
     [super viewDidLoad];
     [SVProgressHUD show];
+    [self hideDoneButton];
     __unsafe_unretained TYPictureViewController *weakSelf = self;
     if (self.hiResImageUrl) {
         [self.pictureImgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.hiResImageUrl]] placeholderImage:nil
             success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                 [SVProgressHUD dismiss];
+                [weakSelf scheduleTimer];
             }
             failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                 [SVProgressHUD dismiss];
@@ -49,6 +51,7 @@
         [self.pictureImgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.imageUrl]] placeholderImage:nil
           success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
               [SVProgressHUD dismiss];
+              [weakSelf scheduleTimer];
           }
           failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
               [SVProgressHUD dismiss];
@@ -60,11 +63,23 @@
         [TYUtils displayAlertWithTitle:@"Oops!" message:@"Something went wrong while loading this picture. Please try again"];
         [self dismissScreen];
     }
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
+    recognizer.numberOfTapsRequired = 1;
+    recognizer.numberOfTouchesRequired = 1;
+    [self.view addGestureRecognizer:recognizer];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+-(void) scheduleTimer {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(timerExpired:) userInfo:nil repeats:NO];
+}
+
+-(void) timerExpired:(id) sender {
+    [self presentDoneButton];
 }
 
 -(IBAction)dismissButtonClicked:(id)sender {
@@ -73,5 +88,24 @@
 
 -(void) dismissScreen {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void) backgroundTapped:(UITapGestureRecognizer *) recognizer {
+    if (self.timer && [self.timer isValid]) {
+        [self.timer invalidate];
+    }
+    [self presentDoneButton];
+}
+
+-(void) presentDoneButton {
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.dismissItem setAlpha:0.8f];
+        [self.dismissItem setEnabled:YES];
+    }];
+}
+
+-(void) hideDoneButton {
+    [self.dismissItem setAlpha:0.0f];
+    [self.dismissItem setEnabled:NO];
 }
 @end

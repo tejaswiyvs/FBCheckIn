@@ -7,6 +7,7 @@
 //
 
 #import "TYPhoto.h"
+#import "TYUtils.h"
 
 @implementation TYPhoto
 
@@ -18,10 +19,10 @@
 -(id) initWithDictionary:(NSDictionary *) params {
     self = [super init];
     if (self) {
-        self.objectId = [[params objectForKey:@"object_id"] stringValue];
-        self.src = [params objectForKey:@"src_big"];
-        self.srcWidth = [[params objectForKey:@"src_big_width"] intValue];
-        self.srcHeight = [[params objectForKey:@"src_big_height"] intValue];
+        self.objectId = [[TYUtils nullSafeObjectFromDictionary:params withKey:@"object_id"] stringValue];
+        self.src = [TYUtils nullSafeObjectFromDictionary:params withKey:@"src_big"];
+        self.srcWidth = [[TYUtils nullSafeObjectFromDictionary:params withKey:@"src_big_width"] intValue];
+        self.srcHeight = [[TYUtils nullSafeObjectFromDictionary:params withKey:@"src_big_height"] intValue];
     }
     return self;
 }

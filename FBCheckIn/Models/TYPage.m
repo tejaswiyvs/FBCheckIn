@@ -8,6 +8,7 @@
 
 #import "TYPage.h"
 #import "NSString+Common.h"
+#import "TYUtils.h"
 
 @implementation TYPage
 
@@ -36,16 +37,16 @@
 -(id) initWithDictionary:(NSDictionary *) pageDictionary {
     self = [super init];
     if (self) {
-        self.pageId = [[pageDictionary objectForKey:@"page_id"] stringValue];
-        self.pageName = [pageDictionary objectForKey:@"name"];
-        self.pagePictureUrl = [pageDictionary objectForKey:@"pic"];
-        NSArray *categories = [pageDictionary objectForKey:@"categories"];
+        self.pageId = [[TYUtils nullSafeObjectFromDictionary:pageDictionary withKey:@"page_id"] stringValue];
+        self.pageName = [TYUtils nullSafeObjectFromDictionary:pageDictionary withKey:@"name"];
+        self.pagePictureUrl = [TYUtils nullSafeObjectFromDictionary:pageDictionary withKey:@"pic"];
+        NSArray *categories = [TYUtils nullSafeObjectFromDictionary:pageDictionary withKey:@"categories"];
         self.categories = [NSMutableArray array];
         for (NSDictionary *category in categories) {
             [self.categories addObject:[category objectForKey:@"name"]];
         }
-        self.pageDescription = [pageDictionary objectForKey:@"description"];
-        NSDictionary *locationDict = [pageDictionary objectForKey:@"location"];
+        self.pageDescription = [TYUtils nullSafeObjectFromDictionary:pageDictionary withKey:@"description"];
+        NSDictionary *locationDict = [TYUtils nullSafeObjectFromDictionary:pageDictionary withKey:@"location"];
         NSNumber *latitude = [locationDict objectForKey:@"latitude"];
         NSNumber *longitude = [locationDict objectForKey:@"longitude"];
         self.location = CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]);
@@ -54,16 +55,14 @@
         self.state = [locationDict objectForKey:@"state"];
         self.street = [locationDict objectForKey:@"street"];
         self.zip = [locationDict objectForKey:@"zip"];
-        self.checkIns = [[pageDictionary objectForKey:@"checkins"] intValue];
-        self.fanCount = [[pageDictionary objectForKey:@"fan_count"] intValue];
-        self.phoneNumber = [pageDictionary objectForKey:@"phone"];
+        self.checkIns = [[TYUtils nullSafeObjectFromDictionary:pageDictionary withKey:@"checkins"] intValue];
+        self.fanCount = [[TYUtils nullSafeObjectFromDictionary:pageDictionary withKey:@"fan_count"] intValue];
+        self.phoneNumber = [TYUtils nullSafeObjectFromDictionary:pageDictionary withKey:@"phone"];
         // Loaded at a later point if needed.
         self.numberOfFriendsCheckedIn = 0;
-        NSDictionary *coverDict = [pageDictionary objectForKey:@"pic_cover"];
-        if (coverDict && coverDict != (id) [NSNull null]) {
-            self.coverPictureUrl = [coverDict objectForKey:@"source"];
-            self.coverOffSetY = [[coverDict objectForKey:@"offset_y"] floatValue];
-        }
+        NSDictionary *coverDict = [TYUtils nullSafeObjectFromDictionary:pageDictionary withKey:@"pic_cover"];
+        self.coverPictureUrl = [coverDict objectForKey:@"source"];
+        self.coverOffSetY = [[coverDict objectForKey:@"offset_y"] floatValue];
     }
     return self;
 }
