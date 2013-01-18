@@ -49,7 +49,7 @@ typedef enum {
 
 -(void) cancel;
 -(void) currentUser;
--(void) checkInsForUser:(TYUser *) user;
+-(void) checkInsForUser:(TYUser *) user since:(NSDate *) date;
 -(void) likeCheckIn:(TYCheckIn *) checkIn;
 -(void) unlikeCheckIn:(TYCheckIn *) checkIn;
 -(void) postComment:(TYComment *) comment;

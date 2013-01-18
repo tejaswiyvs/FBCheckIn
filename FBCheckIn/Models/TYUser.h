@@ -25,6 +25,8 @@
 @property (nonatomic, assign) float coverOffSetY;
 @property (nonatomic, strong) NSMutableArray *top5Locations;
 @property (nonatomic, strong) NSMutableArray *top5TaggedUsers;
+@property (nonatomic, strong) NSString *city;
+@property (nonatomic, strong) NSString *state;
 
 -(NSString *) shortName;
 -(id) initWithDictionary:(NSDictionary *) userDictionary;

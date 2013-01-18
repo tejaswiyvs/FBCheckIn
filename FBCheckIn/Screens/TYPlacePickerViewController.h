@@ -22,6 +22,7 @@
 @property (nonatomic, strong) TYFBRequest *request;
 @property (nonatomic, strong) TYFBRequest *pageDataRequest;
 @property (nonatomic, assign) BOOL reloading;
+@property (nonatomic, assign) BOOL searching;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, strong) NSMutableArray *allItems;

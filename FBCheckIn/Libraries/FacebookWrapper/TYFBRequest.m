@@ -45,7 +45,7 @@
 -(void) currentUser {
     self.requestType = TYFBRequestTypeCurrentUser;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
-    NSString *fql = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover FROM user WHERE uid=me()";
+    NSString *fql = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover, current_location FROM user WHERE uid=me()";
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:fql forKey:@"query"];
     [facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
@@ -62,18 +62,30 @@
     self.request = [facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/likes", checkIn.checkInId] andParams:[NSMutableDictionary dictionary] andHttpMethod:@"DELETE" andDelegate:self];
 }
 
--(void) checkInsForUser:(TYUser *) user {
+-(void) checkInsForUser:(TYUser *) user since:(NSDate *) date {
     self.requestType = TYFBRequestTypeGetCheckins;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
-
+    long since = [date timeIntervalSince1970];
     // Get friends
-    NSString *fql1 = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover, pic_big FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1=me()) OR uid=me()";
+    NSString *fql1 = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover, pic_big, current_location FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1=me()) OR uid=me()";
     
     // Get checkins FROM location_post and checkin. Both sources because sometimes location_post gets spammed with a ton of photos.
-    NSString *fql2 = @"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, page_id, coords FROM checkin WHERE author_uid IN (SELECT uid FROM #query1) ORDER BY timestamp DESC LIMIT 20";
+    NSString *fql2 = @"";
+    if (date) {
+        fql2 = [NSString stringWithFormat:@"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, page_id, coords FROM checkin WHERE author_uid IN (SELECT uid FROM #query1) AND timestamp > %ld ORDER BY timestamp DESC LIMIT 20", since];
+    }
+    else {
+        fql2 = @"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, page_id, coords FROM checkin WHERE author_uid IN (SELECT uid FROM #query1) ORDER BY timestamp DESC LIMIT 50";
+    }
     
     // Get checkins FROM location_post
-    NSString *fql3 = @"SELECT message, id, app_id, author_uid, timestamp, tagged_uids, page_id, page_type, coords, type FROM location_post WHERE author_uid IN (SELECT uid FROM #query1) AND type='photo' AND page_id != 'null' ORDER BY timestamp DESC LIMIT 20";
+    NSString *fql3 = @"";
+    if (date) {
+        fql3 = [NSString stringWithFormat:@"SELECT message, id, app_id, author_uid, timestamp, tagged_uids, page_id, page_type, coords, type FROM location_post WHERE author_uid IN (SELECT uid FROM #query1) AND type='photo' AND page_id != 'null' AND timestamp > %ld ORDER BY timestamp DESC LIMIT 20", since];
+    }
+    else {
+        fql3 = @"SELECT message, id, app_id, author_uid, timestamp, tagged_uids, page_id, page_type, coords, type FROM location_post WHERE author_uid IN (SELECT uid FROM #query1) AND type='photo' AND page_id != 'null' ORDER BY timestamp DESC LIMIT 50";
+    }
     
     // Get page details for all the check-ins
     NSString *fql4 = @"SELECT page_id, name, description, categories, phone, pic, fan_count, website, checkins, location, pic_cover FROM page WHERE page_id IN (SELECT page_id FROM #query2) OR page_id IN (SELECT page_id FROM #query3)";
@@ -88,7 +100,7 @@
     NSString *fql7 = @"SELECT object_id, src_big, src_big_width, src_big_height, link FROM photo WHERE object_id IN (SELECT id FROM #query3)";
     
     // Gets the users associated with comments and likes.
-    NSString *fql8 = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover, pic_big FROM user WHERE uid IN (SELECT user_id FROM #query5) OR uid IN (SELECT fromid FROM #query6)";
+    NSString *fql8 = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover, pic_big, current_location FROM user WHERE uid IN (SELECT user_id FROM #query5) OR uid IN (SELECT fromid FROM #query6)";
     
     NSString *fql = [NSString stringWithFormat:@"{\"query1\":\"%@\",\"query2\":\"%@\",\"query3\":\"%@\",\"query4\":\"%@\",\"query5\":\"%@\", \"query6\":\"%@\", \"query7\":\"%@\", \"query8\":\"%@\"}", fql1, fql2, fql3, fql4, fql5, fql6, fql7, fql8];
     
@@ -104,7 +116,7 @@
     
     self.requestType = TYFBRequestTypeLoadPageMetaData;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
-    NSString *fql = [NSString stringWithFormat:@"SELECT id, author_uid, type FROM location_post WHERE page_id = %@ AND author_uid IN (SELECT uid2 FROM friend WHERE uid1=me() AND page_id != 'null')", page.pageId];
+    NSString *fql = [NSString stringWithFormat:@"SELECT id, author_uid, type FROM location_post WHERE page_id = %@ AND page_id != 'null' AND author_uid IN (SELECT uid2 FROM friend WHERE uid1=me())", page.pageId];
     NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                     fql, @"query",
                                     nil];
@@ -216,7 +228,7 @@
     self.requestType = TYFBRequestTypeGetFriends;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
     // Get friends
-    NSString *fql = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover, pic_big FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1=me()) OR uid=me()";
+    NSString *fql = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover, pic_big, current_location FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1=me()) OR uid=me()";
     NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:fql, @"query", nil];
     self.request = [facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }

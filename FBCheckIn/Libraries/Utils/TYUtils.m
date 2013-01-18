@@ -42,10 +42,9 @@
 }
 
 +(CGFloat) heightForText:(NSString *) text withFont:(UIFont *) font forWidth:(float) width {
-    if (!text || [text isBlank]) {
-        return 0.0f;
-    }
-    CGSize size = [text sizeWithFont:font forWidth:width lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize size = [text sizeWithFont:font
+                   constrainedToSize:CGSizeMake(width, MAXFLOAT)
+                       lineBreakMode:UILineBreakModeWordWrap];
     return size.height;
 }
 

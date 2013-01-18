@@ -14,6 +14,8 @@
 #import "UIColor+HexString.h"
 #import "NSString+Common.h"
 #import "UIBarButtonItem+Convinience.h"
+#import "TYUserProfileViewController.h"
+#import "SCNavigationBar.h"
 
 @interface TYCommentViewController ()
 -(float) heightForComment:(TYComment *) comment;
@@ -25,7 +27,6 @@
 @implementation TYCommentViewController
 
 static float kDefaultFontSize = 17.0f;
-static float kDefaultPadding = 5.0f;
 
 @synthesize checkIn = _checkIn;
 @synthesize user = _user;
@@ -33,6 +34,7 @@ static float kDefaultPadding = 5.0f;
 @synthesize containerView = _containerView;
 @synthesize textView = _textView;
 @synthesize requests = _requests;
+@synthesize queuedComments = _queuedComments;
 
 -(id) initWithCheckIn:(TYCheckIn *) checkIn user:(TYUser *) user {
     self = [super initWithNibName:@"TYCommentView" bundle:nil];
@@ -75,6 +77,7 @@ static float kDefaultPadding = 5.0f;
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.view.backgroundColor = [UIColor bgColor];
+    [(SCNavigationBar *) self.navigationController.navigationBar hideCheckInButton];
     
     // HPGrowingTextView Setup
     [self makeTextView];
@@ -92,6 +95,12 @@ static float kDefaultPadding = 5.0f;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) dealloc {
+    for (TYFBRequest *request in self.requests) {
+        [request cancel];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,6 +134,10 @@ static float kDefaultPadding = 5.0f;
     [backgroundImgView setImage:[UIImage imageNamed:@"table-cell-bg.png"]];
     [cell addSubview:backgroundImgView];
     
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profilePictureTapped:)];
+    [recognizer setNumberOfTapsRequired:1];
+    [recognizer setNumberOfTouchesRequired:1];
+    recognizer.cancelsTouchesInView = YES;
     
     // Configure the UI.
     UIImageView *profilePictureImgView = [[UIImageView alloc] initWithFrame:CGRectMake(9.0f, 8.0f, 57.0f, 57.0f)];
@@ -133,6 +146,9 @@ static float kDefaultPadding = 5.0f;
     [profilePictureImgView.layer setBorderWidth:3.0f];
     [profilePictureImgView.layer setCornerRadius:3.0f];
     [profilePictureImgView.layer setMasksToBounds:YES];
+    [profilePictureImgView setUserInteractionEnabled:YES];
+    [profilePictureImgView addGestureRecognizer:recognizer];
+    profilePictureImgView.tag = indexPath.row;
     [cell addSubview:profilePictureImgView];
 
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(74.0f, 8.0f, 226.0f, 21.0f)];
@@ -143,11 +159,13 @@ static float kDefaultPadding = 5.0f;
     [cell addSubview:nameLabel];
 
     float textHeight = [TYUtils heightForText:comment.text withFont:[UIFont systemFontOfSize:kDefaultFontSize] forWidth:226.0f];
-    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(74.0f, 37.0f, 226.0f, textHeight)];
+    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(74.0f, 33.0f, 226.0f, textHeight)];
+    [textLabel setFont:[UIFont systemFontOfSize:kDefaultFontSize]];
     [textLabel setText:comment.text];
     [textLabel setTextColor:[UIColor subtitleTextColor]];
-    [textLabel setFont:[UIFont systemFontOfSize:kDefaultFontSize]];
     [textLabel setBackgroundColor:[UIColor clearColor]];
+    [textLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    [textLabel setNumberOfLines:0];
     [cell addSubview:textLabel];
     
     return cell;
@@ -155,10 +173,17 @@ static float kDefaultPadding = 5.0f;
 
 -(float) heightForComment:(TYComment *) comment {
     float textHeight = [TYUtils heightForText:comment.text withFont:[UIFont systemFontOfSize:kDefaultFontSize] forWidth:226.0f];
-    return (textHeight < 75.0f) ? 75.0f : (textHeight + 2 * kDefaultPadding);
+    return (textHeight + 38.0f < 75.0f) ? 75.0f : (textHeight + 38.0f);
 }
 
 #pragma mark - Event Handlers
+
+-(void) profilePictureTapped:(UITapGestureRecognizer *) recognizer {
+    UIView *view = recognizer.view;
+    TYComment *comment = [self.checkIn.comments objectAtIndex:view.tag];
+    TYUserProfileViewController *userProfile = [[TYUserProfileViewController alloc] initWithUser:comment.user];
+    [self.navigationController pushViewController:userProfile animated:YES];
+}
 
 -(void) doneButtonClicked:(id) sender {
     DebugLog(@"Dismissed CommentView");
@@ -179,6 +204,7 @@ static float kDefaultPadding = 5.0f;
     TYFBRequest *request = [[TYFBRequest alloc] init];
     [self.requests addObject:request];
     [request postComment:comment];
+    [self.tableView reloadData];
 }
 
 -(void) forceRefresh {
@@ -192,6 +218,7 @@ static float kDefaultPadding = 5.0f;
 
 -(void) fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
     DebugLog(@"Comment post to facebook failed");
+    [self.requests removeObject:helper];
 }
 
 #pragma mark - HPTextView

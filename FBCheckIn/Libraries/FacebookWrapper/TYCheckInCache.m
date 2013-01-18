@@ -86,18 +86,26 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
     self.loading = YES;
     self.checkInsRequest = [[TYFBRequest alloc] init];
     self.checkInsRequest.delegate = self;
-    [self.checkInsRequest checkInsForUser:nil];    
+    if (!self.checkIns || [self.checkIns count] == 0) {
+        [self.checkInsRequest checkInsForUser:nil since:nil];
+    }
+    else {
+        [self.checkInsRequest checkInsForUser:nil since:self.lastRefreshDate];
+    }
+
 }
 
 -(void)fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
     DebugLog(@"Cache update did Complete %@", self.checkIns);
-    self.checkIns = [self sortedCheckIns:[results objectForKey:@"data"]];
+    NSArray *updatedCheckIns = [self sortedCheckIns:[results objectForKey:@"data"]];
+    self.checkIns = [self checkInsByAppendingResults:updatedCheckIns toCheckIns:self.checkIns];
     self.loading = NO;
     [self commit];
     [self notifyCacheUpdateComplete];
 }
 
 -(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
+    self.loading = NO;
     [self notifyCacheUpdateComplete];
 }
 
@@ -136,6 +144,22 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
 
 -(void) notifyCacheUpdateComplete {
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kNotificationCacheRefreshEnd object:nil]];
+}
+
+-(NSMutableArray *) checkInsByAppendingResults:(NSArray *) results toCheckIns:(NSMutableArray *) checkIns {
+    if (!checkIns) {
+        checkIns = [NSMutableArray array];
+    }
+    NSMutableArray *tempArr = [NSMutableArray array];
+    [tempArr addObjectsFromArray:results];
+    [tempArr addObjectsFromArray:checkIns];
+    
+    // If length of the check-in array is > 50, we remove the oldest check-ins.
+    if (tempArr.count > 50) {
+        tempArr = [[tempArr subarrayWithRange:NSMakeRange(0, 50)] mutableCopy];
+    }
+
+    return tempArr;
 }
 
 @end

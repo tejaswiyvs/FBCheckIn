@@ -68,7 +68,7 @@
     DebugLog(@"Loading nearby places");
     self.request = [[TYFBRequest alloc] init];
     self.request.delegate = self;
-    [self.request placesNearLocation:self.locationManager.location.coordinate];
+    [self.request placesNearLocation:self.location.coordinate];
 }
 
 -(void) loadPageData:(NSMutableArray *) pages {
@@ -111,6 +111,7 @@
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     DebugLog(@"Updating location failed.");
+    [self.locationManager stopUpdatingLocation];
     self.locationManager = nil;
     self.reloading = NO;
     [SVProgressHUD showErrorWithStatus:@"Couldn't find your current location. Please try again when you have sufficient signal strength."];
@@ -119,6 +120,7 @@
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     self.location = newLocation;
     [self.locationManager stopUpdatingLocation];
+    self.locationManager = nil;
     [self loadPlaces];
 }
 

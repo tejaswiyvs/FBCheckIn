@@ -326,12 +326,14 @@ const int kRequestTagLast3CheckIns = 1;
     NSMutableDictionary *countDictionary = [[NSMutableDictionary alloc] init];
     
     for (TYCheckIn *checkIn in checkIns) {
-        if (![countDictionary objectForKey:checkIn.page.pageId]) {
-            [countDictionary setObject:[NSNumber numberWithInt:1] forKey:checkIn.page.pageId];
-        }
-        else {
-            int count = [[countDictionary objectForKey:checkIn.page.pageId] intValue];
-            [countDictionary setObject:[NSNumber numberWithInt:++count] forKey:checkIn.page.pageId];
+        if ([self localCheckIn:checkIn]) {
+            if (![countDictionary objectForKey:checkIn.page.pageId]) {
+                [countDictionary setObject:[NSNumber numberWithInt:1] forKey:checkIn.page.pageId];
+            }
+            else {
+                int count = [[countDictionary objectForKey:checkIn.page.pageId] intValue];
+                [countDictionary setObject:[NSNumber numberWithInt:++count] forKey:checkIn.page.pageId];
+            }
         }
     }
     
@@ -454,6 +456,16 @@ const int kRequestTagLast3CheckIns = 1;
 
 -(BOOL) isValidRegion:(MKCoordinateRegion) region {
     return !(region.center.latitude == -999.0f);
+}
+
+-(BOOL) localCheckIn:(TYCheckIn *) checkIn {
+    if (!self.user.city || [self.user.city isBlank]) {
+        return YES;
+    }
+    else if ([[self.user.city lowercaseString] isEqualToString:[checkIn.page.city lowercaseString]]) {
+        return YES;
+    }
+    return NO;
 }
 
 @end

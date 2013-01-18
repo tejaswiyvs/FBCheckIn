@@ -92,6 +92,7 @@
     if (![self.cache checkIns] || [self.cache.checkIns count] == 0) {
         DebugLog(@"Cache is empty, so force refreshing");
         [self.cache forceRefresh];
+        [TYIndeterminateProgressBar showInView:self.view backgroundColor:[UIColor dullWhite] indicatorColor:[UIColor dullRed] borderColor:[UIColor darkGrayColor]];
     }
 }
 

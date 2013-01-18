@@ -23,6 +23,8 @@
 @synthesize coverPictureUrl = _coverPictureUrl;
 @synthesize coverOffSetY = _coverOffSetY;
 @synthesize hiResProfilePictureUrl = _hiResProfilePictureUrl;
+@synthesize city = _city;
+@synthesize state = _state;
 
 -(id) initWithDictionary:(NSDictionary *) userDictionary {
     self = [super init];
@@ -39,6 +41,9 @@
         NSDictionary *coverDict = [TYUtils nullSafeObjectFromDictionary:userDictionary withKey:@"pic_cover"];
         self.coverPictureUrl = [coverDict objectForKey:@"source"];
         self.coverOffSetY = [[coverDict objectForKey:@"offset_y"] floatValue];
+        NSDictionary *homeTownLocationDict = [TYUtils nullSafeObjectFromDictionary:userDictionary withKey:@"current_address"];
+        self.city = [homeTownLocationDict objectForKey:@"city"];
+        self.state = [homeTownLocationDict objectForKey:@"state"];
     }
     return self;
 }
@@ -61,6 +66,8 @@
     [aCoder encodeObject:self.coverPictureUrl forKey:@"cover_picture_url"];
     [aCoder encodeObject:self.hiResProfilePictureUrl forKey:@"hi_res_picture_url"];
     [aCoder encodeObject:[NSNumber numberWithFloat:self.coverOffSetY] forKey:@"cover_offset_y"];
+    [aCoder encodeObject:self.city forKey:@"city"];
+    [aCoder encodeObject:self.state forKey:@"state"];
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
@@ -76,6 +83,8 @@
     self.coverPictureUrl = [aDecoder decodeObjectForKey:@"cover_picture_url"];
     self.coverOffSetY = [[aDecoder decodeObjectForKey:@"cover_offset_y"] floatValue];
     self.hiResProfilePictureUrl = [aDecoder decodeObjectForKey:@"hi_res_picture_url"];
+    self.city = [aDecoder decodeObjectForKey:@"city"];
+    self.state = [aDecoder decodeObjectForKey:@"state"];
     return self;
 }
 @end

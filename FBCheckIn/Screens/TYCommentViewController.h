@@ -23,6 +23,7 @@
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) HPGrowingTextView *textView;
 @property (nonatomic, strong) NSMutableArray *requests;
+@property (nonatomic, strong) NSMutableArray *queuedComments;
 
 -(void) resignTextView;
 

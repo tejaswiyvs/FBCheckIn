@@ -17,6 +17,7 @@
 #import "UIColor+HexString.h"
 #import "SCNavigationBar.h"
 #import "UIBarButtonItem+Convinience.h"
+#import "NSString+Common.h"
 
 @interface TYPlacePickerViewController ()
 -(void) cancelButtonClicked:(id) sender;
@@ -36,6 +37,7 @@
 @synthesize reloading = _reloading;
 @synthesize request = _request;
 @synthesize pageDataRequest = _pageDataRequest;
+@synthesize searching = _searching;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,6 +58,7 @@
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"E9E4E1"]];
     [self loadNearbyPages];
     [self updateSearchBarBackground];
+    self.searchResults = [NSMutableArray array];
     [(SCNavigationBar *) self.navigationController.navigationBar hideCheckInButton];
     self.view.backgroundColor = [UIColor bgColor];
     self.tableView.backgroundView = nil;
@@ -84,7 +87,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.allItems count];
+    return self.searching ? [self.searchResults count] : [self.allItems count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -97,11 +100,17 @@
 				cell = (TYPageCell *) object;
 		}
     }
-    TYPage *page = [self.allItems objectAtIndex:indexPath.row];
+    TYPage *page;
+    if (self.searching) {
+        page = [self.searchResults objectAtIndex:indexPath.row];
+    }
+    else {
+        page = [self.allItems objectAtIndex:indexPath.row];
+    }
     [cell.pageName setText:page.pageName];
     [cell.pageAddress setText:[page shortAddress]];
     [cell.pageImage setImageWithURL:[NSURL URLWithString:page.pagePictureUrl]];
-    [cell setPageDistanceWithCoorindate1:page.location andCoordinate2:self.locationManager.location.coordinate];
+    [cell setPageDistanceWithCoorindate1:page.location andCoordinate2:self.location.coordinate];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     return cell;
 }
@@ -125,7 +134,7 @@
 -(void) loadPages {
     self.request = [[TYFBRequest alloc] init];
     self.request.delegate = self;
-    [self.request placesNearLocation:self.locationManager.location.coordinate];
+    [self.request placesNearLocation:self.location.coordinate];
 }
 
 -(void) loadPageData {
@@ -141,6 +150,7 @@
     }
     else {
         self.allItems = [results objectForKey:@"data"];
+        [self sortItems];
         [SVProgressHUD dismiss];
         [self.tableView reloadData];
     }
@@ -148,7 +158,6 @@
 
 -(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
     [SVProgressHUD showErrorWithStatus:@"We couldn't access your facebook account. This might be temporary, please try again later."];
-    // TODO: Add a #if DEBUG condition.
     DebugLog(@"%@", err);
 }
 
@@ -158,6 +167,58 @@
     [[[self.searchBar subviews] objectAtIndex:0] setAlpha:0.0];
     self.searchBar.tintColor = [UIColor colorWithHexString:@"BFB8B0"];
     [self.searchBar setClipsToBounds:YES];
+}
+
+
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searching = YES;
+    searchBar.showsCancelButton = YES;
+    searchBar.autocorrectionType = UITextAutocapitalizationTypeNone;
+    [self.searchResults removeAllObjects];
+    
+    // Loop through, find matching friends and populate search results.
+    for(TYPage *page in self.allItems)
+    {
+        NSRange range = [page.pageName rangeOfString:searchBar.text options:NSCaseInsensitiveSearch];
+        if(range.location != NSNotFound)
+        {
+            [self.searchResults addObject:page];
+        }
+    }
+    [self.tableView reloadData];
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searching = NO;
+    [searchBar endEditing:YES];
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    self.searching = NO;
+    searchBar.showsCancelButton = NO;
+    [self.tableView reloadData];
+}
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    // Clear search results
+    [self.searchResults removeAllObjects];
+    
+    // Return if blank.
+    if ([searchText isBlank]) {
+        [self.tableView reloadData];
+        return;
+    }
+    
+    // Loop through, find matching friends and populate search results.
+    for(TYPage *page in self.allItems)
+    {
+        NSRange range = [page.pageName rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        if(range.location != NSNotFound)
+        {
+            [self.searchResults addObject:page];
+        }
+    }
+    [self.tableView reloadData];
 }
 
 #pragma mark -
@@ -191,6 +252,7 @@
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    [manager stopUpdatingLocation];
     self.locationManager = nil;
     self.reloading = NO;
     [SVProgressHUD showErrorWithStatus:@"Couldn't find your current location. Please try again when you have sufficient signal strength."];
@@ -198,8 +260,36 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     self.location = newLocation;
-    [self.locationManager stopUpdatingLocation];
+    [manager stopUpdatingLocation];
+    self.locationManager = nil;
     [self loadPages];
+}
+
+#pragma mark - Helpers
+
+-(void) sortItems {
+    [self.allItems sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        TYPage *page1 = (TYPage *) obj1;
+        TYPage *page2 = (TYPage *) obj2;
+        CLLocationDistance distance1 = [self distanceBetweenCoordinate:page1.location andCoordinate:self.location.coordinate];
+        CLLocationDistance distance2 = [self distanceBetweenCoordinate:page2.location andCoordinate:self.location.coordinate];
+        if (distance1 < distance2) {
+            return NSOrderedAscending;
+        }
+        else if(distance1 > distance2) {
+            return NSOrderedDescending;
+        }
+        else {
+            return NSOrderedSame;
+        }
+    }];
+}
+
+-(CLLocationDistance) distanceBetweenCoordinate:(CLLocationCoordinate2D) location1 andCoordinate:(CLLocationCoordinate2D) location2 {
+    CLLocation *loc1 = [[CLLocation alloc] initWithLatitude:location1.latitude longitude:location1.longitude];
+    CLLocation *loc2 = [[CLLocation alloc] initWithLatitude:location2.latitude longitude:location2.longitude];
+    CLLocationDistance meters = [loc2 distanceFromLocation:loc1];
+    return meters;
 }
 
 @end

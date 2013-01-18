@@ -149,7 +149,7 @@
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     else {
-        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum | UIImagePickerControllerSourceTypePhotoLibrary;
     }
     [self presentModalViewController:picker animated:YES];
 }
