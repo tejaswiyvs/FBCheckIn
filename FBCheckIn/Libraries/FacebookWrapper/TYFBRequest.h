@@ -57,7 +57,7 @@ typedef enum {
 -(void) loadMetaDataForPage:(TYPage *) page;
 -(void) loadMetaDataForUser:(TYUser *) user;
 -(void) loadPageData:(NSMutableArray *) pages;
--(void) placesNearLocation:(CLLocationCoordinate2D) location;
+-(void) placesNearLocation:(CLLocationCoordinate2D) location withQuery:(NSString *) query limit:(int) limt;
 -(void) checkInAtPage:(TYPage *) page message:(NSString *) message taggedUsers:(NSMutableArray *) taggedUsers withPhotoId:(NSString *) photoId;
 -(void) postPhoto:(UIImage *) image;
 -(void) friendsForUser:(TYUser *) user;

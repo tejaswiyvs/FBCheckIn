@@ -176,14 +176,18 @@
     self.request = [facebook requestWithMethodName:@"fql.multiquery" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
 
--(void) placesNearLocation:(CLLocationCoordinate2D) location {
+-(void) placesNearLocation:(CLLocationCoordinate2D) location withQuery:(NSString *) query limit:(int) limit {
     self.requestType = TYFBRequestTypePlacesNearLocation;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:@"place" forKey:@"type"];
-    [params setObject:@"100" forKey:@"limit"];
-    [params setObject:[NSString stringWithFormat:@"%lf,%lf", location.latitude, location.longitude] forKey:@"center"];
+    [params setObject:[NSString stringWithFormat:@"%d", limit] forKey:@"limit"];
+    [params setObject:[NSString stringWithFormat:@"%.5lf,%.5lf", location.latitude, location.longitude] forKey:@"center"];
     [params setObject:@"id" forKey:@"fields"];
+    [params setObject:@"2000" forKey:@"distance"];
+    if (query && ![query isBlank]) {
+        [params setObject:query forKey:@"q"];
+    }
     self.request = [facebook requestWithGraphPath:@"search" andParams:params andDelegate:self];
 }
 
