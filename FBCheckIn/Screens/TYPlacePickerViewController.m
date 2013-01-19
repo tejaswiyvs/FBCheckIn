@@ -131,10 +131,14 @@
     [self updateLocation];
 }
 
--(void) loadPages {
+-(void) loadPagesWithQuery:(NSString *) query {
+    // Cancel any request that are open currently
+    [self cancelPendingRequests];
+    
+    // Start new request for search query. If blank, we load all. If not we load only search results.
     self.request = [[TYFBRequest alloc] init];
     self.request.delegate = self;
-    [self.request placesNearLocation:self.location.coordinate];
+    [self.request placesNearLocation:self.location.coordinate withQuery:query limit:20];
 }
 
 -(void) loadPageData {
@@ -151,8 +155,13 @@
     else {
         self.allItems = [results objectForKey:@"data"];
         [self sortItems];
-        [SVProgressHUD dismiss];
-        [self.tableView reloadData];
+        if (self.searching) {
+            [self updateSearchResultsWithText:self.searchBar.text];
+        }
+        else {
+            [SVProgressHUD dismiss];
+            [self.tableView reloadData];
+        }
     }
 }
 
@@ -169,23 +178,22 @@
     [self.searchBar setClipsToBounds:YES];
 }
 
-
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.searching = YES;
     searchBar.showsCancelButton = YES;
     searchBar.autocorrectionType = UITextAutocapitalizationTypeNone;
     [self.searchResults removeAllObjects];
     
-    // Loop through, find matching friends and populate search results.
+    // Loop through, and copy allItems -> searchResults
     for(TYPage *page in self.allItems)
     {
-        NSRange range = [page.pageName rangeOfString:searchBar.text options:NSCaseInsensitiveSearch];
-        if(range.location != NSNotFound)
-        {
-            [self.searchResults addObject:page];
-        }
+        [self.searchResults addObject:page];
     }
     [self.tableView reloadData];
+}
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [self loadPagesWithQuery:searchText];
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
@@ -193,32 +201,8 @@
     [searchBar endEditing:YES];
 }
 
--(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    self.searching = NO;
-    searchBar.showsCancelButton = NO;
-    [self.tableView reloadData];
-}
-
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    // Clear search results
-    [self.searchResults removeAllObjects];
-    
-    // Return if blank.
-    if ([searchText isBlank]) {
-        [self.tableView reloadData];
-        return;
-    }
-    
-    // Loop through, find matching friends and populate search results.
-    for(TYPage *page in self.allItems)
-    {
-        NSRange range = [page.pageName rangeOfString:searchText options:NSCaseInsensitiveSearch];
-        if(range.location != NSNotFound)
-        {
-            [self.searchResults addObject:page];
-        }
-    }
-    [self.tableView reloadData];
+-(void) searchBarSearchButtonClicked:(UISearchBar*) searchBar {
+    [searchBar resignFirstResponder];
 }
 
 #pragma mark -
@@ -262,10 +246,40 @@
     self.location = newLocation;
     [manager stopUpdatingLocation];
     self.locationManager = nil;
-    [self loadPages];
+    [self loadPagesWithQuery:@""];
 }
 
 #pragma mark - Helpers
+
+-(void) cancelPendingRequests {
+    [self.request cancel];
+    [self.pageDataRequest cancel];
+}
+
+-(void) updateSearchResultsWithText:(NSString *) searchText {
+    // Clear search results
+    [self.searchResults removeAllObjects];
+    
+    // If blank, show all.
+    if (!searchText || [searchText isBlank]) {
+        for (TYPage *page in self.allItems) {
+            [self.searchResults addObject:page];
+        }
+        [self.tableView reloadData];
+        return;
+    }
+    
+    // Else, Loop through, find current matching places and populate search results.
+    for(TYPage *page in self.allItems)
+    {
+        NSRange range = [page.pageName rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        if(range.location != NSNotFound)
+        {
+            [self.searchResults addObject:page];
+        }
+    }
+    [self.tableView reloadData];
+}
 
 -(void) sortItems {
     [self.allItems sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
