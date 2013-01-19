@@ -96,6 +96,11 @@
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [TYIndeterminateProgressBar hideFromView:self.view];
+}
+
 -(void) dealloc {
     DebugLog(@"HomeView dealloc");
     [self unsubscribeFromNotifications];
