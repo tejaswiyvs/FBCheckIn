@@ -66,6 +66,7 @@ NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    [self.checkInCache commit];
     DebugLog(@"Application will resign active");
 }
 
