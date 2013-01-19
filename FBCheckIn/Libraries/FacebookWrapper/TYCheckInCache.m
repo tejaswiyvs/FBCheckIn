@@ -92,7 +92,6 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
     else {
         [self.checkInsRequest checkInsForUser:nil since:self.lastRefreshDate];
     }
-
 }
 
 -(void)fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
@@ -150,6 +149,18 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
     if (!checkIns) {
         checkIns = [NSMutableArray array];
     }
+    
+    // Remove any duplicate checkins
+    for (TYCheckIn *checkIn in results) {
+        @synchronized(checkIns) {
+            for (TYCheckIn *checkIn2 in checkIns) {
+                if ([checkIn.checkInId isEqualToString:checkIn2.checkInId]) {
+                    [checkIns removeObject:checkIn2];
+                }
+            }
+        }
+    }
+    
     NSMutableArray *tempArr = [NSMutableArray array];
     [tempArr addObjectsFromArray:results];
     [tempArr addObjectsFromArray:checkIns];
