@@ -68,7 +68,7 @@
     DebugLog(@"Loading nearby places");
     self.request = [[TYFBRequest alloc] init];
     self.request.delegate = self;
-    [self.request placesNearLocation:self.location.coordinate];
+    [self.request placesNearLocation:self.location.coordinate withQuery:@"" limit:100];
 }
 
 -(void) loadPageData:(NSMutableArray *) pages {
@@ -235,7 +235,7 @@
 }
 
 -(NSMutableArray *) coffeeShops:(NSMutableArray *) pages {
-    return [self pages:pages matchingCategories:[NSMutableArray arrayWithObjects:@"cafe", @"coffee", nil] exactMatch:NO];
+    return [self pages:pages matchingCategories:[NSMutableArray arrayWithObjects:@"coffee", nil] exactMatch:NO];
 }
 
 -(NSMutableArray *) nightLife:(NSMutableArray *) pages {
