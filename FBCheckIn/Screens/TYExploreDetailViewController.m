@@ -11,9 +11,9 @@
 #import "SVProgressHUD.h"
 #import "TYPlaceProfileViewController.h"
 #import "Constants.h"
-#import "UIImageView+AFNetworking.h"
 #import "UIColor+HexString.h"
 #import "UIImage+Convinience.h"
+#import "UIImageView+WebCache.h"
 
 @interface TYExploreDetailViewController ()
 -(NSMutableArray *) filteredPages:(NSMutableArray *) pages;
@@ -149,24 +149,14 @@
     [cell.pageNameLbl setText:page.pageName];
     [cell.pageCategoriesLbl setText:[self pageCategoriesTxtFromArray:page.categories]];
     if (page.coverPictureUrl) {
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:page.coverPictureUrl]];
         __unsafe_unretained UIImageView *coverPictureView2 = cell.coverImg;
-        [cell.coverImg setImageWithURLRequest:request placeholderImage:nil
-                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                             dispatch_async(dispatch_get_main_queue(), ^(void){
-                                                 CGRect cropRect = CGRectMake(0.0f, page.coverOffSetY, 851.0f, 315.0f);
-                                                 CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], cropRect);
-                                                 // or use the UIImage wherever you like
-                                                 [coverPictureView2 setImage:[UIImage imageWithCGImage:imageRef]];
-                                                 CGImageRelease(imageRef);
-                                             });
-                                         }
-                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                             dispatch_async(dispatch_get_main_queue(), ^(void){
-                                                 DebugLog(@"Error loading user's cover photo : %@", error);
-                                             });
-                                         }
-         ];
+        [cell.coverImg setImageWithURL:[NSURL URLWithString:page.coverPictureUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            CGRect cropRect = CGRectMake(0.0f, page.coverOffSetY, 851.0f, 315.0f);
+            CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], cropRect);
+            // or use the UIImage wherever you like
+            [coverPictureView2 setImage:[UIImage imageWithCGImage:imageRef]];
+            CGImageRelease(imageRef);
+        }];
     }
     else {
         UIImage *image = [UIImage imageWithColor:[UIColor dullWhite] frame:cell.coverImg.frame];
