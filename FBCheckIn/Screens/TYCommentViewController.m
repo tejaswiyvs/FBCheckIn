@@ -16,6 +16,7 @@
 #import "UIBarButtonItem+Convinience.h"
 #import "TYUserProfileViewController.h"
 #import "SCNavigationBar.h"
+#import "TYIndeterminateProgressBar.h"
 
 @interface TYCommentViewController ()
 -(float) heightForComment:(TYComment *) comment;
@@ -85,7 +86,7 @@ static float kDefaultFontSize = 17.0f;
 
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (self.checkIn.comments.count == 0) {
+    if (!self.checkIn.comments || self.checkIn.comments.count == 0) {
         DebugLog(@"No comments for this check-in. Displaying keyboard automatically");
         [self.textView becomeFirstResponder];
     }
@@ -200,10 +201,12 @@ static float kDefaultFontSize = 17.0f;
     if (!self.checkIn.comments) {
         self.checkIn.comments = [NSMutableArray array];
     }
+    [TYIndeterminateProgressBar showInView:self.view backgroundColor:[UIColor dullWhite] indicatorColor:[UIColor dullRed] borderColor:[UIColor darkGrayColor]];
     [self.checkIn.comments addObject:comment];
     TYFBRequest *request = [[TYFBRequest alloc] init];
-    [self.requests addObject:request];
+    request.delegate = self;
     [request postComment:comment];
+    [self.requests addObject:request];
     [self.tableView reloadData];
 }
 
@@ -213,11 +216,15 @@ static float kDefaultFontSize = 17.0f;
 
 -(void) fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
     DebugLog(@"Comment posted to facebook succesfully");
+    [TYIndeterminateProgressBar hideFromView:self.view];
     [self.requests removeObject:helper];
 }
 
 -(void) fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
     DebugLog(@"Comment post to facebook failed");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention" message:@"Something went wrong while posting this comment. Please try again." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alert show];
+    [TYIndeterminateProgressBar hideFromView:self.view];
     [self.requests removeObject:helper];
 }
 
@@ -323,7 +330,7 @@ static float kDefaultFontSize = 17.0f;
 	[UIView commitAnimations];
 }
 
--(void) keyboardWillHide:(NSNotification *)note{
+-(void) keyboardWillHide:(NSNotification *) note {
     NSNumber *duration = [note.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     NSNumber *curve = [note.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
 	

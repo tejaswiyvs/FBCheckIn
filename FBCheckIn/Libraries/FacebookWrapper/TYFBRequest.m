@@ -146,7 +146,7 @@
 -(void) postComment:(TYComment *) comment {
     self.requestType = TYFBRequestTypePostComment;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
-    self.request = [facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/comments", comment.checkInId] andParams:[NSMutableDictionary dictionary] andHttpMethod:@"POST" andDelegate:self];
+    self.request = [facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/comments", comment.checkInId] andParams:[NSMutableDictionary dictionaryWithObject:comment.text forKey:@"message"] andHttpMethod:@"POST" andDelegate:self];
 }
 
 -(void) deleteComment:(TYComment *) comment {
@@ -415,14 +415,7 @@
 }
 
 -(void) parsePostCommentResult:(id) result {
-    NSDictionary *resultDict = (NSDictionary *) result;
-    BOOL resultValue = [[resultDict objectForKey:@"result"] boolValue];
-    if (resultValue) {
-        [self.delegate fbHelper:self didCompleteWithResults:nil];
-    }
-    else {
-        [self.delegate fbHelper:self didFailWithError:nil];
-    }
+    [self.delegate fbHelper:self didCompleteWithResults:nil];
 }
 
 -(void) parseDeleteCommentResult:(id) result {

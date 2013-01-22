@@ -118,13 +118,13 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
 
 -(void) refreshInBg {
     // Been more than a minute? Go refresh the whole thing also. But in the background.
-    long now = [NSDate timeIntervalSinceReferenceDate];
-    long lastRefreshDate = [self.lastRefreshDate timeIntervalSinceReferenceDate];
-    if ((now - lastRefreshDate) > 6) {
+//    long now = [NSDate timeIntervalSinceReferenceDate];
+//    long lastRefreshDate = [self.lastRefreshDate timeIntervalSinceReferenceDate];
+//    if ((now - lastRefreshDate) > 6) {
         self.checkInsRequest2 = [[TYFBRequest alloc] init];
         self.checkInsRequest2.delegate = self;
         [self.checkInsRequest2 checkInsForUser:nil since:nil];
-    }
+//    }
 }
 
 -(NSMutableArray *) sortedCheckIns:(NSMutableArray *) checkIns {
