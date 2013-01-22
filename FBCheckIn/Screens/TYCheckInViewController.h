@@ -35,8 +35,7 @@
 @property (nonatomic, assign) BOOL aviaryUsed;
 
 @property (nonatomic, strong) TYFBRequest *postCheckInRequest;
-@property (nonatomic, strong) TYFBRequest *postPhotoRequest;
-
+@property (nonatomic, strong) TYFBRequest *postImageRequest;
 
 -(IBAction)checkInButtonClicked:(id)sender;
 -(IBAction)tagFriendsButtonClicked:(id)sender;

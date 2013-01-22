@@ -191,7 +191,7 @@
     self.request = [facebook requestWithGraphPath:@"search" andParams:params andDelegate:self];
 }
 
--(void) checkInAtPage:(TYPage *) page message:(NSString *) message taggedUsers:(NSMutableArray *) taggedUsers withPhotoId:(NSString *) photoId {
+-(void) checkInAtPage:(TYPage *) page message:(NSString *) message taggedUsers:(NSMutableArray *) taggedUsers {
     self.requestType = TYFBRequestTypeCheckIn;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
@@ -212,19 +212,34 @@
         [params setObject:tagsString forKey:@"tags"];
     }
     [params setObject:page.pageId forKey:@"place"];
-    if (photoId && ![photoId isBlank]) {
-        [params setObject:photoId forKey:@"object_attachment"];
-    }
     NSString *coordinatesString = [NSString stringWithFormat:@"{\"latitude\" : \"%f\", \"longitude\" : \"%f\"}", page.location.latitude, page.location.longitude];
     [params setObject:coordinatesString forKey:@"coordinates"];
     self.request = [facebook requestWithGraphPath:@"me/checkins" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
 
--(void) postPhoto:(UIImage *) image {
+-(void) checkInAtPage:(TYPage *) page message:(NSString *) message taggedUsers:(NSMutableArray *) taggedUsers withPhoto:(UIImage *) photo {
     self.requestType = TYFBRequestTypePostPhoto;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [params setObject:UIImageJPEGRepresentation(image, 10) forKey:@"data"];
+    if (photo) {
+        [params setObject:UIImageJPEGRepresentation(photo, 10) forKey:@"data"];
+    }
+    if (page.pageId && ![page.pageId isBlank]) {
+        [params setObject:page.pageId forKey:@"place"];
+    }
+    if (message && ![message isBlank]) {
+        [params setObject:message forKey:@"message"];
+    }
+    NSString *coordinates = [NSString stringWithFormat:@"{\"latitude\" : \"%.5lf\", \"longitude\" : \"%.5lf\"}", page.location.latitude, page.location.longitude];
+    [params setObject:coordinates forKey:@"coordinates"];
+    if ([taggedUsers count] > 0) {
+        NSString *tags = @"[";
+        for (TYUser *user in taggedUsers) {
+            tags = [tags stringByAppendingFormat:@"{\"tag_uid\" : \"%@\"}", user.userId];
+        }
+        tags = [tags stringByAppendingString:@"]"];
+        DebugLog(@"Tagged users: %@", tags);
+    }
     self.request = [facebook requestWithGraphPath:@"/me/photos" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
 

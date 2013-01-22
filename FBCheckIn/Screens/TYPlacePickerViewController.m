@@ -194,6 +194,7 @@
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     [self loadPagesWithQuery:searchText];
+    [self updateSearchResultsWithText:searchText];
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {

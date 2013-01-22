@@ -25,7 +25,8 @@
 
 @synthesize checkIns = _checkIns;
 @synthesize lastRefreshDate = _lastRefreshDate;
-@synthesize checkInsRequest = _helper;
+@synthesize checkInsRequest = _checkInsRequest;
+@synthesize checkInsRequest2 = _checkInsRequest2;
 
 static NSString * const kSaveFileName = @"check_in_cache";
 static NSString * const kSaveTimeKey = @"check_in_cache_last_updated";
@@ -97,10 +98,15 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
 -(void)fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
     DebugLog(@"Cache update did Complete %@", self.checkIns);
     NSArray *updatedCheckIns = [self sortedCheckIns:[results objectForKey:@"data"]];
-    self.checkIns = [self checkInsByAppendingResults:updatedCheckIns toCheckIns:self.checkIns];
+    @synchronized(self.checkIns) {
+        self.checkIns = [self checkInsByAppendingResults:updatedCheckIns toCheckIns:self.checkIns];
+    }
     self.loading = NO;
     [self commit];
     [self notifyCacheUpdateComplete];
+    if (helper == self.checkInsRequest) {
+        [self refreshInBg];
+    }
 }
 
 -(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
@@ -109,6 +115,17 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
 }
 
 #pragma mark - Helpers
+
+-(void) refreshInBg {
+    // Been more than a minute? Go refresh the whole thing also. But in the background.
+    long now = [NSDate timeIntervalSinceReferenceDate];
+    long lastRefreshDate = [self.lastRefreshDate timeIntervalSinceReferenceDate];
+    if ((now - lastRefreshDate) > 6) {
+        self.checkInsRequest2 = [[TYFBRequest alloc] init];
+        self.checkInsRequest2.delegate = self;
+        [self.checkInsRequest2 checkInsForUser:nil since:nil];
+    }
+}
 
 -(NSMutableArray *) sortedCheckIns:(NSMutableArray *) checkIns {
     [checkIns sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
@@ -150,16 +167,18 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
         checkIns = [NSMutableArray array];
     }
     
+    NSMutableArray *checkInsCopy = [checkIns mutableCopy];
+    
     // Remove any duplicate checkins
+    NSMutableArray *objectsToBeRemoved = [NSMutableArray array];
     for (TYCheckIn *checkIn in results) {
-        @synchronized(checkIns) {
-            for (TYCheckIn *checkIn2 in checkIns) {
-                if ([checkIn.checkInId isEqualToString:checkIn2.checkInId]) {
-                    [checkIns removeObject:checkIn2];
-                }
+        for (TYCheckIn *checkIn2 in checkInsCopy) {
+            if ([checkIn.checkInId isEqualToString:checkIn2.checkInId]) {
+                [objectsToBeRemoved addObject:checkIn2];
             }
         }
     }
+    [checkInsCopy removeObjectsInArray:objectsToBeRemoved];
     
     NSMutableArray *tempArr = [NSMutableArray array];
     [tempArr addObjectsFromArray:results];

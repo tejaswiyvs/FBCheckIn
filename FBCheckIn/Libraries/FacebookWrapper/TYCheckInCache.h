@@ -18,7 +18,7 @@ NSString * const kNotificationCacheRefreshEnd;
 @property (nonatomic, retain) NSDate *lastRefreshDate;
 @property (nonatomic, strong) NSMutableArray *checkIns;
 @property (nonatomic, strong) TYFBRequest *checkInsRequest;
-@property (nonatomic, strong) TYFBRequest *photoCheckInsRequest;
+@property (nonatomic, strong) TYFBRequest *checkInsRequest2;
 @property (nonatomic, assign) BOOL loading;
 
 +(TYCheckInCache *) sharedInstance;

@@ -41,7 +41,7 @@
 @synthesize aviaryController = _aviaryController;
 @synthesize aviaryUsed = _aviaryUsed;
 @synthesize postCheckInRequest = _postCheckInRequest;
-@synthesize postPhotoRequest = _postPhotoRequest;
+@synthesize postImageRequest = _postImageRequest;
 @synthesize tagFriendsBtn = _tagFriendsBtn;
 
 
@@ -85,13 +85,42 @@
     [SVProgressHUD showWithStatus:@"Checking in..."];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     TYUser *currentUser = [TYCurrentUser sharedInstance].user;
-    [mixpanel track:@"CheckInCompleted" properties:[NSDictionary dictionaryWithObjectsAndKeys:currentUser.userId, @"userId", currentUser.sex, @"sex", self.currentPage.pageId, @"pageId", [self hasPicture], @"hasPhoto", [self hasTags], @"hasTags", self.aviaryUsed, @"aviaryUsed", nil]];
-    if (self.checkInImage) {
-        [self postPhoto];
+    NSString *hasPic = @"";
+    if ([self hasPicture]) {
+        hasPic = @"yes";
     }
     else {
-        [self postCheckInWithPhotoId:@""];
+        hasPic = @"no";
     }
+    NSString *hasTags = @"";
+    if ([self hasTags]) {
+        hasTags = @"yes";
+    }
+    else {
+        hasTags = @"no";
+    }
+    NSString *aviaryUsed = @"";
+    if (self.aviaryUsed) {
+        aviaryUsed= @"yes";
+    }
+    else {
+        aviaryUsed = @"no";
+    }
+    [mixpanel track:@"CheckInCompleted" properties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                    currentUser.userId, @"userId",
+                                                    currentUser.sex, @"sex",
+                                                    self.currentPage.pageId, @"pageId",
+                                                    [NSString stringWithFormat:@"%d", [self hasPicture]], @"hasPhoto",
+                                                    [NSString stringWithFormat:@"%d", [self hasTags]], @"hasTags",
+                                                    [NSString stringWithFormat:@"%d", self.aviaryUsed], @"aviaryUsed",
+                                                    nil]];
+    if ([self hasPicture]) {
+        [self checkInWithPhoto];
+    }
+    else {
+        [self checkInWithoutPhoto];
+    }
+
 }
 
 -(IBAction)tagFriendsButtonClicked:(id)sender {
@@ -165,35 +194,24 @@
 
 #pragma mark - Facebook
 
--(void) postPhoto {
-    self.postPhotoRequest = [[TYFBRequest alloc] init];
-    self.postPhotoRequest.delegate = self;
-    [self.postPhotoRequest postPhoto:self.checkInImage];
-}
-
--(void) postCheckInWithPhotoId:(NSString *) photoId {
+-(void) checkInWithPhoto {
     self.postCheckInRequest = [[TYFBRequest alloc] init];
     self.postCheckInRequest.delegate = self;
-    [self.postCheckInRequest checkInAtPage:self.currentPage message:self.statusText.text taggedUsers:self.taggedUsers withPhotoId:photoId];
+    [self.postCheckInRequest checkInAtPage:self.currentPage message:self.statusText.text taggedUsers:self.taggedUsers withPhoto:self.checkInImage];
+}
+
+-(void) checkInWithoutPhoto {
+    self.postCheckInRequest = [[TYFBRequest alloc] init];
+    self.postCheckInRequest.delegate = self;
+    [self.postCheckInRequest checkInAtPage:self.currentPage message:self.statusText.text taggedUsers:self.taggedUsers];
 }
 
 -(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
-    if (helper == self.postPhotoRequest) {
-        [SVProgressHUD showErrorWithStatus:@"Could not check-in. Please try again"];
-    }
-    else if (helper == self.postCheckInRequest) {
-        [SVProgressHUD showErrorWithStatus:@"Could not check-in. Please try again."];
-    }
+    [SVProgressHUD showErrorWithStatus:@"Could not check-in. Please try again."];
 }
 
 -(void)fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
-    if(helper == self.postPhotoRequest) {
-        NSString *photoId = [results objectForKey:@"data"];
-        [self postCheckInWithPhotoId:photoId];
-    }
-    else if (helper == self.postCheckInRequest) {
-        [self dismiss];
-    }
+    [self dismiss];
 }
 
 #pragma mark - Helpers
