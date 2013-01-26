@@ -26,7 +26,6 @@
 @synthesize filter = _filter;
 @synthesize locationManager = _locationManager;
 @synthesize location = _location;
-@synthesize reloading = _reloading;
 @synthesize pageDataRequest = _pageDataRequest;
 
 -(id) initWithFilter:(NSString *) filter {
@@ -52,7 +51,7 @@
     [self.request cancel];
     [self.pageDataRequest cancel];
     if ([SVProgressHUD isVisible]) {
-        [SVProgressHUD showErrorWithStatus:@"Dismissed"];
+        [SVProgressHUD dismiss];
     }
 }
 
@@ -66,9 +65,16 @@
 
 -(void) loadPlaces {
     DebugLog(@"Loading nearby places");
-    self.request = [[TYFBRequest alloc] init];
-    self.request.delegate = self;
-    [self.request placesNearLocation:self.location.coordinate withQuery:@"" limit:100];
+    if (![self.filter isEqualToString:kFriendsBeenToFilter]) {
+        self.request = [[TYFBRequest alloc] init];
+        self.request.delegate = self;
+        [self.request placesNearLocation:self.location.coordinate withQuery:@"" limit:100];
+    }
+    else {
+        self.request = [[TYFBRequest alloc] init];
+        self.request.delegate = self;
+        [self.request placesVisitedByFriendsNearLocation:self.location.coordinate];
+    }
 }
 
 -(void) loadPageData:(NSMutableArray *) pages {
@@ -112,15 +118,14 @@
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     DebugLog(@"Updating location failed.");
     [self.locationManager stopUpdatingLocation];
-    self.locationManager = nil;
-    self.reloading = NO;
+    self.locationManager.delegate = nil;
     [SVProgressHUD showErrorWithStatus:@"Couldn't find your current location. Please try again when you have sufficient signal strength."];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     self.location = newLocation;
     [self.locationManager stopUpdatingLocation];
-    self.locationManager = nil;
+    self.locationManager.delegate = nil;
     [self loadPlaces];
 }
 
@@ -245,7 +250,7 @@
 }
 
 -(NSMutableArray *) friendsHaveBeenTo:(NSMutableArray *) pages {
-    return nil;
+    return pages;
 }
 
 -(NSMutableArray *) events:(NSMutableArray *) pages {

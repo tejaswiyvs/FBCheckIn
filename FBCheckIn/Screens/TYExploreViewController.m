@@ -39,7 +39,7 @@
 
 @implementation TYExploreViewController
 
-const int kNumberOfCategories = 7;
+const int kNumberOfCategories = 8;
 
 @synthesize tableView = _tableView;
 @synthesize categories = _categories;
@@ -118,7 +118,7 @@ const int kNumberOfCategories = 7;
     TYExploreTblModel *model5 = [[TYExploreTblModel alloc] initWithCategoryName:kArtsFilter imageName:@""];
     TYExploreTblModel *model6 = [[TYExploreTblModel alloc] initWithCategoryName:kShoppingFilter imageName:@""];
     TYExploreTblModel *model7 = [[TYExploreTblModel alloc] initWithCategoryName:kSightsFilter imageName:@""];
-//    TYExploreTblModel *model8 = [[TYExploreTblModel alloc] initWithCategoryName:kFriendsBeenToFilter imageName:@""];
-    self.categories = [NSMutableArray arrayWithObjects:model1, model2, model3, model4, model5, model6, model7, nil];
+    TYExploreTblModel *model8 = [[TYExploreTblModel alloc] initWithCategoryName:kFriendsBeenToFilter imageName:@""];
+    self.categories = [NSMutableArray arrayWithObjects:model1, model2, model3, model4, model5, model6, model7, model8, nil];
 }
 @end

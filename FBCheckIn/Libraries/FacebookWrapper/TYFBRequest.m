@@ -75,7 +75,9 @@
         fql2 = [NSString stringWithFormat:@"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, page_id, coords FROM checkin WHERE author_uid IN (SELECT uid FROM #query1) AND timestamp > %ld ORDER BY timestamp DESC LIMIT 20", since];
     }
     else {
-        fql2 = @"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, page_id, coords FROM checkin WHERE author_uid IN (SELECT uid FROM #query1) ORDER BY timestamp DESC LIMIT 50";
+        // If no date is passed, we just load the last two weeks' worth of info
+        long twoWeeksAgo = [self twoWeeksAgo];
+        fql2 = [NSString stringWithFormat:@"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, page_id, coords FROM checkin WHERE author_uid IN (SELECT uid FROM #query1) AND timestamp > %ld ORDER BY timestamp DESC LIMIT 20", twoWeeksAgo];
     }
     
     // Get checkins FROM location_post
@@ -191,6 +193,19 @@
     self.request = [facebook requestWithGraphPath:@"search" andParams:params andDelegate:self];
 }
 
+-(void) placesVisitedByFriendsNearLocation:(CLLocationCoordinate2D) location {
+    self.requestType = TYFBRequestTypePlacesNearLocationThatFriendsVisited;
+    Facebook *facebook = [TYFBManager sharedInstance].facebook;
+    // Get checkins from Checkin
+    NSString *fql1 = [NSString stringWithFormat:@"SELECT page_id, id FROM location_post WHERE author_uid IN (SELECT uid2 FROM friend WHERE uid1=me())"];
+    // Get checkins FROM location_post
+    NSString *fql2 = [NSString stringWithFormat:@"SELECT page_id, name FROM place WHERE page_id IN (SELECT page_id FROM #query1) AND distance(latitude, longitude, '%.5lf', '%.5lf') < 5000", location.latitude, location.longitude];
+    NSString *fql = [NSString stringWithFormat:@"{\"query1\":\"%@\",\"query2\":\"%@\"}", fql1, fql2];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:fql forKey:@"queries"];
+    self.request = [facebook requestWithMethodName:@"fql.multiquery" andParams:params andHttpMethod:@"POST" andDelegate:self];
+}
+
+
 -(void) checkInAtPage:(TYPage *) page message:(NSString *) message taggedUsers:(NSMutableArray *) taggedUsers {
     self.requestType = TYFBRequestTypeCheckIn;
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
@@ -301,6 +316,9 @@
         case TYFBRequestTypePostPhoto:
             [self parsePostPhotoResponse:result];
             break;
+        case TYFBRequestTypePlacesNearLocationThatFriendsVisited:
+            [self parsePlacesFriendsHaveBeenTo:result];
+            break;
         default:
             [self.delegate fbHelper:self didCompleteWithResults:[NSMutableDictionary dictionaryWithObjectsAndKeys:result, @"data", nil]];
             break;
@@ -308,6 +326,24 @@
 }
 
 #pragma mark - Parsers
+
+-(void) parsePlacesFriendsHaveBeenTo:(id) result {
+    NSArray *resultArray = (NSArray *) result;
+    
+    if ([resultArray count] != 2) {
+        [self.delegate fbHelper:self didFailWithError:nil];
+        return;
+    }
+    NSDictionary *pagesDict = [resultArray objectAtIndex:1];
+    NSArray *pagesArray = [pagesDict objectForKey:@"fql_result_set"];
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    for (NSDictionary *pageDict in pagesArray) {
+        TYPage *page = [[TYPage alloc] init];
+        page.pageId = [pageDict objectForKey:@"page_id"];
+        [results addObject:page];
+    }
+    [self.delegate fbHelper:self didCompleteWithResults:[NSMutableDictionary dictionaryWithObjectsAndKeys:results, @"data", nil]];
+}
 
 -(void) parseFriends:(id) result {
     NSArray *resultArray = (NSArray *) result;
@@ -587,6 +623,14 @@
 }
 
 #pragma mark - Helpers
+
+-(long) twoWeeksAgo {
+    NSDate *today = [[NSDate alloc] init];
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:[[NSDate alloc] init]];
+    [components setHour:(-24 * 14)];
+    return [[cal dateByAddingComponents:components toDate:today options:0] timeIntervalSince1970];
+}
 
 -(NSMutableArray *) checkInsForPageId:(NSString *) pageId fromCheckins:(NSMutableArray *) checkIns {
     NSMutableArray *checkInsForPageId = [NSMutableArray array];

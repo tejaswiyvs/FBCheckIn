@@ -84,6 +84,7 @@
 }
 
 -(IBAction)dismissButtonClicked:(id)sender {
+    [SVProgressHUD dismiss];
     [self dismissScreen];
 }
 

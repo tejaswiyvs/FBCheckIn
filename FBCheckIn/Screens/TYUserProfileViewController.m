@@ -305,7 +305,7 @@ const int kRequestTagLast3CheckIns = 1;
 }
 
 -(UIView *) makeFooterView {
-    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 200.0f)];
+    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 300.0f, 200.0f)];
     [self.mapView setMapType:MKMapTypeStandard];
     self.mapView.delegate = self;
     return self.mapView;

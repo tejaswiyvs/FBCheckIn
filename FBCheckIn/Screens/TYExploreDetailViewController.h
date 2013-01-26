@@ -15,7 +15,6 @@
 @property (nonatomic, strong) NSMutableArray *pages;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *location;
-@property (nonatomic, assign) BOOL reloading;
 @property (nonatomic, strong) TYFBRequest *request;
 @property (nonatomic, strong) TYFBRequest *pageDataRequest;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;

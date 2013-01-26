@@ -185,6 +185,7 @@
 		B76FF730157178A900676F47 /* TYLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B76FF72E157178A900676F47 /* TYLogInViewController.m */; };
 		B7713C1B164D2F16002E3E82 /* TYPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7713C1A164D2F16002E3E82 /* TYPictureViewController.m */; };
 		B7713C1D164D2F2B002E3E82 /* TYPictureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7713C1C164D2F2B002E3E82 /* TYPictureView.xib */; };
+		B782C4D916B4843A00CCEA97 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B782C4D816B4843A00CCEA97 /* Icon.png */; };
 		B788B42D16347C97000C99FC /* TYCurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = B788B42C16347C97000C99FC /* TYCurrentUser.m */; };
 		B78AFF26160E30720073B97F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B78AFF25160E30720073B97F /* Default-568h@2x.png */; };
 		B7995B5D16A576390061FF51 /* dismiss@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7995B5C16A576390061FF51 /* dismiss@2x.png */; };
@@ -517,6 +518,7 @@
 		B7713C19164D2F16002E3E82 /* TYPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYPictureViewController.h; path = Screens/TYPictureViewController.h; sourceTree = "<group>"; };
 		B7713C1A164D2F16002E3E82 /* TYPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYPictureViewController.m; path = Screens/TYPictureViewController.m; sourceTree = "<group>"; };
 		B7713C1C164D2F2B002E3E82 /* TYPictureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TYPictureView.xib; path = Screens/TYPictureView.xib; sourceTree = "<group>"; };
+		B782C4D816B4843A00CCEA97 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		B788B42B16347C97000C99FC /* TYCurrentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYCurrentUser.h; path = Screens/TYCurrentUser.h; sourceTree = "<group>"; };
 		B788B42C16347C97000C99FC /* TYCurrentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYCurrentUser.m; path = Screens/TYCurrentUser.m; sourceTree = "<group>"; };
 		B78AFF25160E30720073B97F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -789,6 +791,7 @@
 		B73F6CD7156ED27F004A20E4 = {
 			isa = PBXGroup;
 			children = (
+				B782C4D816B4843A00CCEA97 /* Icon.png */,
 				B7D24CD016A43F1E009062B0 /* icon@2x.png */,
 				B78AFF25160E30720073B97F /* Default-568h@2x.png */,
 				B705F638157C202500A1BF86 /* TODO */,
@@ -1513,6 +1516,7 @@
 				B7D24CD116A43F1E009062B0 /* icon@2x.png in Resources */,
 				B7995B5D16A576390061FF51 /* dismiss@2x.png in Resources */,
 				B7D4C7FE16A6D5CD00092E45 /* tempview.xib in Resources */,
+				B782C4D916B4843A00CCEA97 /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1853,8 +1857,8 @@
 		B73F6D10156ED281004A20E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tejaswi Yerukalapudi (RDKM9UC3U5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tejaswi Yerukalapudi (RDKM9UC3U5)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tejaswi Yerukalapudi";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tejaswi Yerukalapudi";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FBCheckIn/CheckedIn-Prefix.pch";
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
@@ -1869,8 +1873,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B2478EBE-A9DB-46EB-ACC6-AB5F5F5796CD";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B2478EBE-A9DB-46EB-ACC6-AB5F5F5796CD";
+				PROVISIONING_PROFILE = "82A5FCB5-4A48-4CC4-A188-DC5AD2957430";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "82A5FCB5-4A48-4CC4-A188-DC5AD2957430";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1879,8 +1883,8 @@
 		B73F6D11156ED281004A20E4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tejaswi Yerukalapudi (RDKM9UC3U5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tejaswi Yerukalapudi (RDKM9UC3U5)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tejaswi Yerukalapudi";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tejaswi Yerukalapudi";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FBCheckIn/CheckedIn-Prefix.pch";
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
@@ -1895,8 +1899,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B2478EBE-A9DB-46EB-ACC6-AB5F5F5796CD";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B2478EBE-A9DB-46EB-ACC6-AB5F5F5796CD";
+				PROVISIONING_PROFILE = "82A5FCB5-4A48-4CC4-A188-DC5AD2957430";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "82A5FCB5-4A48-4CC4-A188-DC5AD2957430";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

@@ -70,9 +70,9 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
 
 -(void) commit {
     // Set last updated time.
-    NSDate *now = [[NSDate alloc] init];
+    self.lastRefreshDate = [[NSDate alloc] init];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:now forKey:kSaveTimeKey];
+    [defaults setObject:self.lastRefreshDate forKey:kSaveTimeKey];
     [defaults synchronize];
     
     NSString *filePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:kSaveFileName];
@@ -88,7 +88,8 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
     self.checkInsRequest = [[TYFBRequest alloc] init];
     self.checkInsRequest.delegate = self;
     if (!self.checkIns || [self.checkIns count] == 0) {
-        [self.checkInsRequest checkInsForUser:nil since:nil];
+        NSDate *yesterday = [self lastWeekDate];
+        [self.checkInsRequest checkInsForUser:nil since:yesterday];
     }
     else {
         [self.checkInsRequest checkInsForUser:nil since:self.lastRefreshDate];
@@ -102,11 +103,19 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
         self.checkIns = [self checkInsByAppendingResults:updatedCheckIns toCheckIns:self.checkIns];
     }
     self.loading = NO;
+    
+    if (helper == self.checkInsRequest) {
+        long now = [NSDate timeIntervalSinceReferenceDate];
+        long lastRefreshDate = [self.lastRefreshDate timeIntervalSinceReferenceDate];
+        // Been more than a minute? Go refresh the whole thing also. But in the background.
+        if ((now - lastRefreshDate) > 180) {
+            [self refreshInBg];
+        }
+    }
+    
+    // Update last refresh time.
     [self commit];
     [self notifyCacheUpdateComplete];
-    if (helper == self.checkInsRequest) {
-        [self refreshInBg];
-    }
 }
 
 -(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
@@ -116,15 +125,20 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
 
 #pragma mark - Helpers
 
+-(NSDate *) lastWeekDate {
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:[[NSDate alloc] init]];
+    [components setHour:(-24 * 7)];
+    [components setMinute:0];
+    [components setSecond:0];
+    NSDate *yesterday = [cal dateByAddingComponents:components toDate:[[NSDate alloc] init] options:0];
+    return yesterday;
+}
+
 -(void) refreshInBg {
-    // Been more than a minute? Go refresh the whole thing also. But in the background.
-//    long now = [NSDate timeIntervalSinceReferenceDate];
-//    long lastRefreshDate = [self.lastRefreshDate timeIntervalSinceReferenceDate];
-//    if ((now - lastRefreshDate) > 6) {
-        self.checkInsRequest2 = [[TYFBRequest alloc] init];
-        self.checkInsRequest2.delegate = self;
-        [self.checkInsRequest2 checkInsForUser:nil since:nil];
-//    }
+    self.checkInsRequest2 = [[TYFBRequest alloc] init];
+    self.checkInsRequest2.delegate = self;
+    [self.checkInsRequest2 checkInsForUser:nil since:nil];
 }
 
 -(NSMutableArray *) sortedCheckIns:(NSMutableArray *) checkIns {
@@ -182,7 +196,7 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
     
     NSMutableArray *tempArr = [NSMutableArray array];
     [tempArr addObjectsFromArray:results];
-    [tempArr addObjectsFromArray:checkIns];
+    [tempArr addObjectsFromArray:checkInsCopy];
     
     // If length of the check-in array is > 50, we remove the oldest check-ins.
     if (tempArr.count > 50) {

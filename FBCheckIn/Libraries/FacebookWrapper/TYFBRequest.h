@@ -28,6 +28,7 @@ typedef enum {
     TYFBRequestTypeLoadUserMetaData,
     TYFBRequestTypeLoadPageData,
     TYFBRequestTypePlacesNearLocation,
+    TYFBRequestTypePlacesNearLocationThatFriendsVisited,
     TYFBRequestTypeCheckIn,
     TYFBRequestTypePostPhoto,
     TYFBRequestTypePostPhotoMetaData
@@ -59,6 +60,7 @@ typedef enum {
 -(void) loadMetaDataForUser:(TYUser *) user;
 -(void) loadPageData:(NSMutableArray *) pages;
 -(void) placesNearLocation:(CLLocationCoordinate2D) location withQuery:(NSString *) query limit:(int) limt;
+-(void) placesVisitedByFriendsNearLocation:(CLLocationCoordinate2D) location;
 -(void) checkInAtPage:(TYPage *) page message:(NSString *) message taggedUsers:(NSMutableArray *) taggedUsers;
 -(void) checkInAtPage:(TYPage *) page message:(NSString *) message taggedUsers:(NSMutableArray *) taggedUsers withPhoto:(UIImage *) photo;
 -(void) friendsForUser:(TYUser *) user;

@@ -58,7 +58,7 @@
 						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
 						<bool key="IBUIShowsVerticalScrollIndicator">NO</bool>
 						<bool key="IBUIEditable">NO</bool>
-						<string key="IBUIText">CheckedIn was brainstormed on a lazy sunday weekend in the Sunshine state by @_tejaswi and @subgutti.    Tweet @_tejaswi for any support with the app or just to say hi!</string>
+						<string key="IBUIText">CheckedIn was brainstormed on a lazy sunday in the sunshine state by @_tejaswi and @subgutti.    Tweet @_tejaswi for any support with the app or just to say hi!</string>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">2</int>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -115,6 +115,7 @@
 						<string key="NSFrame">{{93, 243}, {134, 45}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>

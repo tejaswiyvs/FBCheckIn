@@ -288,6 +288,8 @@ const int kNumberOfRows = 3;
     [cell addSubview:[self infoViewWithFrame:CGRectMake(212.0f, 11.0f, 88.0f, 77.0f)
                                     mainText:[NSString stringWithFormat:@"%d", self.place.checkIns]
                                      subText:@"checkins here"]];
+
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

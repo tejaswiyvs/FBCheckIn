@@ -70,9 +70,10 @@
     [self registerObserver];
 
     // Setup UITableView
+    self.view.backgroundColor = [UIColor bgColor];
+    self.tableView.opaque = NO;
     self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[UIColor clearColor]];
-    self.view.backgroundColor = [UIColor bgColor];
     self.tableView.separatorColor = [UIColor subtitleTextColor];
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 10.0)]];
 
@@ -124,19 +125,14 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *kReuseId = @"check_in_cell";
+//    static NSString *kReuseId = @"check_in_cell";
     TYCheckIn *checkIn = [self.cache.checkIns objectAtIndex:indexPath.row];
     
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kReuseId];
-    UITableViewCell *cell = nil;
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kReuseId];
-    }
-    cell.clipsToBounds = YES;
-    
+    // Need to figure out reUseIds with dynamic cell heights etc.
     float height = [self heightForIndexPath:indexPath];
     CGRect rect = CGRectMake(10.0f, 0.0f, 300.0f, height);
-    [cell setFrame:rect];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithFrame:rect];
+    cell.clipsToBounds = YES;
     
     UITapGestureRecognizer *profilePictureTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profilePictureTapped:)];
     [profilePictureTapRecognizer setNumberOfTouchesRequired:1];
