@@ -40,6 +40,8 @@ NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
     DebugLog(@"Starting Application..");
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    self.mixPanel = [Mixpanel sharedInstanceWithToken:kMixpanelToken];
+    [self.mixPanel track:@"App Launched"];
     self.manager = [TYFBManager sharedInstance];
     self.window.rootViewController = [self sideMenu].navigationController;
     self.window.backgroundColor = [UIColor whiteColor];
@@ -50,11 +52,7 @@ NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
         [self.window.rootViewController presentModalViewController:self.loginScreen animated:NO];
     }
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-
     // Override point for customization after application launch.
-    self.mixPanel = [Mixpanel sharedInstanceWithToken:kMixpanelToken];
-    [self.mixPanel track:@"App Launched"];
-    
     // Force refresh friends on app launch
     self.friendCache = [TYFriendCache sharedInstance];
     [self.friendCache forceRefresh];

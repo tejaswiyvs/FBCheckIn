@@ -87,13 +87,16 @@
 	}        
 }
 
-- (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     DebugLog(@"HomeView viewDidAppear. Checking if cache is empty.")
     if (![self.cache checkIns] || [self.cache.checkIns count] == 0) {
         DebugLog(@"Cache is empty, so force refreshing");
         [self.cache forceRefresh];
         [TYIndeterminateProgressBar showInView:self.view backgroundColor:[UIColor dullWhite] indicatorColor:[UIColor dullRed] borderColor:[UIColor darkGrayColor]];
+    }
+    else {
+        [self.tableView reloadData];
     }
 }
 
@@ -436,6 +439,9 @@
         [self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
         [TYIndeterminateProgressBar hideFromView:self.view];
     }
+    else if([notification.name isEqualToString:@"checkedIn"]) {
+        [self.tableView reloadData];
+    }
 }
 
 -(void) subscribeToNotifications {
@@ -445,6 +451,7 @@
     // Listen to notification if check-in cache starts / ends up dating itself and display an unintrusive "working" animation.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:kNotificationCacheRefreshStart object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:kNotificationCacheRefreshEnd object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:@"checkedIn" object:nil];
 }
 
 -(void) unsubscribeFromNotifications {

@@ -184,7 +184,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:@"place" forKey:@"type"];
     [params setObject:[NSString stringWithFormat:@"%d", limit] forKey:@"limit"];
-    [params setObject:[NSString stringWithFormat:@"%.5lf,%.5lf", location.latitude, location.longitude] forKey:@"center"];
+    [params setObject:[NSString stringWithFormat:@"%.8lf,%.8lf", location.latitude, location.longitude] forKey:@"center"];
     [params setObject:@"id" forKey:@"fields"];
     [params setObject:@"2000" forKey:@"distance"];
     if (query && ![query isBlank]) {

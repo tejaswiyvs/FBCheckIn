@@ -19,6 +19,7 @@
 #import "UIColor+HexString.h"
 #import "UIBarButtonItem+Convinience.h"
 #import "SCNavigationBar.h"
+#import "TYCheckInCache.h"
 
 @interface TYCheckInViewController ()
 -(void) doneButtonClicked:(id) sender;
@@ -175,7 +176,7 @@
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     [picker setDelegate:self];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])  {
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera | UIImagePickerControllerSourceTypePhotoLibrary | UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     else {
         picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum | UIImagePickerControllerSourceTypePhotoLibrary;
@@ -211,6 +212,25 @@
 }
 
 -(void)fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
+    NSString *checkInId = [results objectForKey:@"data"];
+    TYCheckIn *checkIn = [[TYCheckIn alloc] init];
+    checkIn.checkInId = checkInId;
+    checkIn.page = self.currentPage;
+    checkIn.user = [TYCurrentUser sharedInstance].user;
+    checkIn.checkInDate = [[NSDate alloc] init];
+    if ([self hasPicture]) {
+        TYPhoto *photo = [[TYPhoto alloc] init];
+        photo.objectId = @"";
+        photo.src = @"http://www.facebook.com";
+        checkIn.type = @"photo";
+    }
+    if ([self hasTags]) {
+        checkIn.taggedUsers = self.taggedUsers;
+    }
+
+    // Add object to cache directly. We'll refresh this from the server later.
+    [[TYCheckInCache sharedInstance] addCheckInToCache:checkIn];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"checkedIn" object:nil];
     [self dismiss];
 }
 

@@ -1387,7 +1387,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PP;
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = B73F6CDC156ED27F004A20E4 /* Build configuration list for PBXProject "CheckedIn" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1807,6 +1807,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Tejaswi Yerukalapudi (6AGEQ2EXD6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tejaswi Yerukalapudi (6AGEQ2EXD6)";
 				COPY_PHASE_STRIP = NO;
@@ -1836,6 +1840,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Tejaswi Yerukalapudi (6AGEQ2EXD6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tejaswi Yerukalapudi (6AGEQ2EXD6)";
 				COPY_PHASE_STRIP = YES;

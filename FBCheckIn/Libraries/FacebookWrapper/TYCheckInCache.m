@@ -55,6 +55,12 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
     }
 }
 
+-(void) addCheckInToCache:(TYCheckIn *) checkIn {
+    if (checkIn) {
+        [self.checkIns insertObject:checkIn atIndex:0];
+    }
+}
+
 -(void) clearCache {
     self.checkIns = [NSMutableArray array];
     [[NSFileManager defaultManager] removeItemAtPath:[[self applicationDocumentsDirectory] stringByAppendingPathComponent:kSaveFileName] error:nil];

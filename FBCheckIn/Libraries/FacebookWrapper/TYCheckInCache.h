@@ -25,5 +25,6 @@ NSString * const kNotificationCacheRefreshEnd;
 -(void) forceRefresh;
 -(void) clearCache;
 -(void) commit;
+-(void) addCheckInToCache:(TYCheckIn *) checkIn;
 
 @end

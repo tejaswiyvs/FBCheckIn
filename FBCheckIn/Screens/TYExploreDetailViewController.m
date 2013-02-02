@@ -112,6 +112,7 @@
     [SVProgressHUD showWithStatus:@"Loading ..."];
     self.locationManager = [[CLLocationManager alloc] init];
     [self.locationManager setDelegate:self];
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     [self.locationManager startUpdatingLocation];
 }
 
