@@ -64,7 +64,7 @@
 #pragma mark - TYFBRequest
 
 -(void) loadPlaces {
-    DebugLog(@"Loading nearby places");
+    DDLogInfo(@"Loading nearby places");
     if (![self.filter isEqualToString:kFriendsBeenToFilter]) {
         self.request = [[TYFBRequest alloc] init];
         self.request.delegate = self;
@@ -108,7 +108,7 @@
 #pragma mark - Location Manager
 
 -(void) updateLocation {
-    DebugLog(@"TYExploreDetailViewController: Updating Location.");
+    DDLogInfo(@"TYExploreDetailViewController: Updating Location.");
     [SVProgressHUD showWithStatus:@"Loading ..."];
     self.locationManager = [[CLLocationManager alloc] init];
     [self.locationManager setDelegate:self];
@@ -117,7 +117,7 @@
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    DebugLog(@"Updating location failed.");
+    DDLogInfo(@"Updating location failed.");
     [self.locationManager stopUpdatingLocation];
     self.locationManager.delegate = nil;
     [SVProgressHUD showErrorWithStatus:@"Couldn't find your current location. Please try again when you have sufficient signal strength."];

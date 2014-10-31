@@ -15,7 +15,6 @@
 #import "UIImageView+AFNetworking.h"
 #import "TYCheckInViewController.h"
 #import "UIColor+HexString.h"
-#import "SCNavigationBar.h"
 #import "UIBarButtonItem+Convinience.h"
 #import "NSString+Common.h"
 
@@ -167,7 +166,7 @@
 
 -(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
     [SVProgressHUD showErrorWithStatus:@"We couldn't access your facebook account. This might be temporary, please try again later."];
-    DebugLog(@"%@", err);
+    DDLogInfo(@"%@", err);
 }
 
 #pragma mark - UISearchBar

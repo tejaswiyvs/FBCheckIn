@@ -64,6 +64,8 @@ typedef enum {
 -(void) checkInAtPage:(TYPage *) page message:(NSString *) message taggedUsers:(NSMutableArray *) taggedUsers;
 -(void) checkInAtPage:(TYPage *) page message:(NSString *) message taggedUsers:(NSMutableArray *) taggedUsers withPhoto:(UIImage *) photo;
 -(void) friendsForUser:(TYUser *) user;
+-(void) likeOnFacebook;
+-(void) shareOnFacebook;
 @end
 
 @protocol TYFBRequestDelegate

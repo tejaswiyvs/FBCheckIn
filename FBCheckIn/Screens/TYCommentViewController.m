@@ -66,7 +66,7 @@ static float kDefaultFontSize = 17.0f;
 
 - (void)viewDidLoad
 {
-    DebugLog(@"CommentView viewDidLoad. Setting up UI.");
+    DDLogInfo(@"CommentView viewDidLoad. Setting up UI.");
     [super viewDidLoad];
     [self.tableView reloadData];
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -87,7 +87,7 @@ static float kDefaultFontSize = 17.0f;
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (!self.checkIn.comments || self.checkIn.comments.count == 0) {
-        DebugLog(@"No comments for this check-in. Displaying keyboard automatically");
+        DDLogInfo(@"No comments for this check-in. Displaying keyboard automatically");
         [self.textView becomeFirstResponder];
     }
 }
@@ -160,13 +160,11 @@ static float kDefaultFontSize = 17.0f;
     [cell addSubview:nameLabel];
 
     float textHeight = [TYUtils heightForText:comment.text withFont:[UIFont systemFontOfSize:kDefaultFontSize] forWidth:226.0f];
-    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(74.0f, 33.0f, 226.0f, textHeight)];
+    UITextView *textLabel = [[UITextView alloc] initWithFrame:CGRectMake(74.0f, 33.0f, 226.0f, textHeight)];
     [textLabel setFont:[UIFont systemFontOfSize:kDefaultFontSize]];
     [textLabel setText:comment.text];
     [textLabel setTextColor:[UIColor subtitleTextColor]];
     [textLabel setBackgroundColor:[UIColor clearColor]];
-    [textLabel setLineBreakMode:NSLineBreakByWordWrapping];
-    [textLabel setNumberOfLines:0];
     [cell addSubview:textLabel];
     
     return cell;
@@ -187,14 +185,14 @@ static float kDefaultFontSize = 17.0f;
 }
 
 -(void) doneButtonClicked:(id) sender {
-    DebugLog(@"Dismissed CommentView");
+    DDLogInfo(@"Dismissed CommentView");
     [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - TYFBFacadeDelegate
 
 -(void) postComment:(TYComment *) comment {
-    DebugLog(@"Posted Comment : %@", comment.text);
+    DDLogInfo(@"Posted Comment : %@", comment.text);
     if (!self.requests) {
         self.requests = [NSMutableArray array];
     }
@@ -215,13 +213,13 @@ static float kDefaultFontSize = 17.0f;
 }
 
 -(void) fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
-    DebugLog(@"Comment posted to facebook succesfully");
+    DDLogInfo(@"Comment posted to facebook succesfully");
     [TYIndeterminateProgressBar hideFromView:self.view];
     [self.requests removeObject:helper];
 }
 
 -(void) fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
-    DebugLog(@"Comment post to facebook failed");
+    DDLogInfo(@"Comment post to facebook failed");
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention" message:@"Something went wrong while posting this comment. Please try again." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     [alert show];
     [TYIndeterminateProgressBar hideFromView:self.view];

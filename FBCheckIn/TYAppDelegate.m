@@ -11,14 +11,11 @@
 #import "TYPlacePickerViewController.h"
 #import "TYMapViewController.h"
 #import "TYFBManager.h"
-#import "SCNavigationBar.h"
-#import "TYUITabBarController.h"
 #import "TYCurrentUser.h"
-#import "UINavigationController+MFSideMenu.h"
 #import "MFSideMenu.h"
-#import "SideMenuViewController.h"
 #import "TYFriendCache.h"
 #import "TYSettingsViewController.h"
+#import "Appirater.h"
 
 @interface TYAppDelegate ()
 @end
@@ -37,7 +34,7 @@ NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    DebugLog(@"Starting Application..");
+    DDLogInfo(@"Starting Application..");
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.mixPanel = [Mixpanel sharedInstanceWithToken:kMixpanelToken];
@@ -47,7 +44,7 @@ NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     if (![self.manager isLoggedIn]) {
-        DebugLog(@"Session not valid. Presenting login screen.");
+        DDLogInfo(@"Session not valid. Presenting login screen.");
         self.loginScreen = [[TYLogInViewController alloc] initWithNibName:@"TYLoginView" bundle:nil];
         [self.window.rootViewController presentModalViewController:self.loginScreen animated:NO];
     }
@@ -58,34 +55,35 @@ NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
     [self.friendCache forceRefresh];
     self.checkInCache = [TYCheckInCache sharedInstance];
     [self registerForNotifications];
-    self.currentUser = [TYCurrentUser sharedInstance];
+    self.currentUser = [TYCurrentUser sharedInstance];    
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     [self.checkInCache commit];
-    DebugLog(@"Application will resign active");
+    DDLogInfo(@"Application will resign active");
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    DebugLog(@"Application did enter background");
+    DDLogInfo(@"Application did enter background");
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    DebugLog(@"Application will enter foreground");
+    DDLogInfo(@"Application will enter foreground");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    DebugLog(@"Application did become active");
+    DDLogInfo(@"Application did become active");
+    [self configureRater];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    DebugLog(@"Application will terminate");
+    DDLogInfo(@"Application will terminate");
     [self unregisterFromNotifications];
 }
 
@@ -106,7 +104,7 @@ NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
 }
 
 -(void) logoutNotificationReceived:(NSNotification *) notification {
-    DebugLog(@"Logging Out..");
+    DDLogInfo(@"Logging Out..");
     [self.checkInCache clearCache];
     [self.friendCache clearCache];
     [self.currentUser clearCache];
@@ -114,10 +112,21 @@ NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
     self.loginScreen = [[TYLogInViewController alloc] initWithNibName:@"TYLoginView" bundle:nil];
     [self.window.rootViewController presentModalViewController:self.loginScreen animated:NO];
 }
+
+#pragma mark - Appirater
+
+-(void) configureRater {
+    // Configure app-iRater
+    [Appirater setAppId:@"596726594"];
+    [Appirater setDelegate:self];
+    [Appirater setUsesUntilPrompt:10];
+    [Appirater appEnteredForeground:YES];
+}
+
 #pragma mark - Helpers
 
 -(void) checkInButtonClicked:(id)sender {
-    DebugLog(@"Checkin button clicked. Launching PlacePicker");
+    DDLogInfo(@"Checkin button clicked. Launching PlacePicker");
     TYPlacePickerViewController *checkInScreen = [[TYPlacePickerViewController alloc] initWithNibName:@"TYPlacePickerView" bundle:nil];
     UINavigationController *navigationController = [SCNavigationBar customizedNavigationController];
     navigationController.viewControllers = [NSArray arrayWithObject:checkInScreen];
@@ -125,8 +134,8 @@ NSString * const kMixpanelToken = @"89bdac1836eed79c9b92634ffbe3b173";
 }
 
 void uncaughtExceptionHandler(NSException *exception) {
-    DebugLog(@"CRASH: %@", exception);
-    DebugLog(@"Stack Trace: %@", [exception callStackSymbols]);
+    DDLogInfo(@"CRASH: %@", exception);
+    DDLogInfo(@"Stack Trace: %@", [exception callStackSymbols]);
 }
 
 #pragma mark - SideMenu

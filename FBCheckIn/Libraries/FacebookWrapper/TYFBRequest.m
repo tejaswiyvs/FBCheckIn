@@ -72,12 +72,12 @@
     // Get checkins FROM location_post and checkin. Both sources because sometimes location_post gets spammed with a ton of photos.
     NSString *fql2 = @"";
     if (date) {
-        fql2 = [NSString stringWithFormat:@"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, page_id, coords FROM checkin WHERE author_uid IN (SELECT uid FROM #query1) AND timestamp > %ld ORDER BY timestamp DESC LIMIT 20", since];
+        fql2 = [NSString stringWithFormat:@"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, target_id, coords FROM checkin WHERE author_uid IN (SELECT uid FROM #query1) AND timestamp > %ld ORDER BY timestamp DESC LIMIT 20", since];
     }
     else {
         // If no date is passed, we just load the last two weeks' worth of info
         long twoWeeksAgo = [self twoWeeksAgo];
-        fql2 = [NSString stringWithFormat:@"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, page_id, coords FROM checkin WHERE author_uid IN (SELECT uid FROM #query1) AND timestamp > %ld ORDER BY timestamp DESC LIMIT 20", twoWeeksAgo];
+        fql2 = [NSString stringWithFormat:@"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, target_id, coords FROM checkin WHERE author_uid IN (SELECT uid FROM #query1) AND timestamp > %ld ORDER BY timestamp DESC LIMIT 20", twoWeeksAgo];
     }
     
     // Get checkins FROM location_post
@@ -90,7 +90,7 @@
     }
     
     // Get page details for all the check-ins
-    NSString *fql4 = @"SELECT page_id, name, description, categories, phone, pic, fan_count, website, checkins, location, pic_cover FROM page WHERE page_id IN (SELECT page_id FROM #query2) OR page_id IN (SELECT page_id FROM #query3)";
+    NSString *fql4 = @"SELECT page_id, name, description, categories, phone, pic, fan_count, website, checkins, location, pic_cover FROM page WHERE page_id IN (SELECT target_id FROM #query2) OR page_id IN (SELECT page_id FROM #query3)";
     
     // Get likes
     NSString *fql5 = @"SELECT object_id, post_id, user_id, object_type FROM like WHERE object_id IN (SELECT checkin_id FROM #query2) OR object_id IN (SELECT id FROM #query3)";
@@ -135,7 +135,7 @@
     
     Facebook *facebook = [TYFBManager sharedInstance].facebook;
     // Get checkins from Checkin
-    NSString *fql1 = [NSString stringWithFormat:@"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, page_id, coords FROM checkin WHERE author_uid = '%@' ORDER BY timestamp DESC LIMIT 50", user.userId];
+    NSString *fql1 = [NSString stringWithFormat:@"SELECT message, checkin_id, app_id, author_uid, timestamp, tagged_uids, target_id, coords FROM checkin WHERE author_uid = '%@' ORDER BY timestamp DESC LIMIT 50", user.userId];
     
     // Get checkins FROM location_post
     NSString *fql2 = [NSString stringWithFormat:@"SELECT message, id, app_id, author_uid, timestamp, tagged_uids, page_id, page_type, coords, type FROM location_post WHERE author_uid = '%@' AND type='photo' AND page_id != 'null' ORDER BY timestamp DESC LIMIT 50", user.userId];
@@ -253,7 +253,7 @@
             tags = [tags stringByAppendingFormat:@"{\"tag_uid\" : \"%@\"}", user.userId];
         }
         tags = [tags stringByAppendingString:@"]"];
-        DebugLog(@"Tagged users: %@", tags);
+        DDLogInfo(@"Tagged users: %@", tags);
     }
     self.request = [facebook requestWithGraphPath:@"/me/photos" andParams:params andHttpMethod:@"POST" andDelegate:self];
 }
@@ -265,6 +265,22 @@
     NSString *fql = @"SELECT uid, username, first_name, middle_name, last_name, name, pic, sex, about_me, pic_cover, pic_big, current_location FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1=me()) OR uid=me()";
     NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:fql, @"query", nil];
     self.request = [facebook requestWithMethodName:@"fql.query" andParams:params andHttpMethod:@"POST" andDelegate:self];
+}
+
+-(void) likeOnFacebook {
+    Facebook *facebook = [TYFBManager sharedInstance].facebook;
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    [dictionary setObject:@"" forKey:@""];
+    [dictionary setObject:@"" forKey:@""];
+    [facebook requestWithGraphPath:@"me/feed" andParams:nil andHttpMethod:@"POST" andDelegate:nil];
+}
+
+-(void) shareOnFacebook {
+    Facebook *facebook = [TYFBManager sharedInstance].facebook;
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    [dictionary setObject:@"object" forKey:@""];
+    [dictionary setObject:@"" forKey:@""];
+    [facebook requestWithGraphPath:@"me/feed" andParams:nil andHttpMethod:@"POST" andDelegate:nil];
 }
 
 #pragma mark - FBRequestDelegate
@@ -512,7 +528,7 @@
 -(void) parseCheckins:(id) result {
     
     if (!result || [result count] != 8) {
-        DebugLog(@"%@", result);
+        DDLogInfo(@"%@", result);
         [self.delegate fbHelper:self didFailWithError:nil];
         return;
     }
@@ -661,7 +677,7 @@
                 difference = difference * -1;
             }
             if (checkIn2 != checkIn && [checkIn2.page.pageId isEqualToString:checkIn.page.pageId] && [checkIn.user.userId isEqualToString:checkIn2.user.userId] && difference < 24 * 60 * 60 * 1000) {
-//                DebugLog(@"Should not add checkIn");
+//                DDLogInfo(@"Should not add checkIn");
                 flag = NO;
             }
         }

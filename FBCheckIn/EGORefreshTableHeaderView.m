@@ -45,7 +45,7 @@
 		
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ego-header-view.png"]];
-        DebugLog(@"%@", NSStringFromCGRect(frame));
+        DDLogInfo(@"%@", NSStringFromCGRect(frame));
 
 		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 100.0f, self.frame.size.width, 20.0f)];
 		
@@ -54,7 +54,7 @@
 		label.font = [UIFont boldSystemFontOfSize:13.0f];
 		label.textColor = TEXT_COLOR;
 		label.backgroundColor = [UIColor clearColor];
-		label.textAlignment = UITextAlignmentCenter;
+		label.textAlignment = NSTextAlignmentCenter;
 		[self addSubview:label];
 		_statusLabel=label;
 		[label release];

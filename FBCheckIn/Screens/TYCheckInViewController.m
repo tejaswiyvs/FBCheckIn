@@ -14,7 +14,6 @@
 #import "JSONKit.h"
 #import <QuartzCore/QuartzCore.h>
 #import "TYUser.h"
-#import "SCNavigationBar.h"
 #import "TYCurrentUser.h"
 #import "UIColor+HexString.h"
 #import "UIBarButtonItem+Convinience.h"

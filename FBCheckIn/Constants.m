@@ -7,6 +7,7 @@
 //
 
 #import "Constants.h"
+#import "DDLog.h"
 
 NSString * const kTopPicksFilter = @"Top picks";
 NSString * const kFoodFilter = @"Food";
@@ -17,3 +18,5 @@ NSString * const kShoppingFilter = @"Shopping";
 NSString * const kSightsFilter = @"Sights";
 NSString * const kEventsFilter = @"Nearby Events";
 NSString * const kFriendsBeenToFilter = @"Friends have been to";
+
+int const ddLogLevel = LOG_LEVEL_WARN;

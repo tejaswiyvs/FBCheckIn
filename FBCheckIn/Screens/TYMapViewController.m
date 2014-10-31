@@ -12,7 +12,6 @@
 #import "TYCheckIn.h"
 #import "TYAnnotationUtil.h"
 #import "TYCheckInCache.h"
-#import "MKAnnotationView+WebCache.h"
 #import "TYUserProfileViewController.h"
 
 @interface TYMapViewController ()
@@ -46,7 +45,7 @@
     // Add annotations.
     for (TYCheckIn *checkIn in self.checkIns) {
         TYAnnotation *annotation = [[TYAnnotation alloc] initWithCoordinate:checkIn.location];
-        annotation.pictureUrl = checkIn.user.profilePictureUrl;
+        annotation.pictureUrl = [NSString stringWithFormat:@"%@?width=50&height=50", checkIn.user.profilePictureUrl];
         annotation.user = checkIn.user;
         [self.mapView addAnnotation:annotation];
     }
@@ -73,8 +72,9 @@
         pin.annotation = annotation;
     }
     pin.animatesDrop = NO;
+    __weak MKPinAnnotationView *weakPin = pin;
     [pin setImageWithURL:[NSURL URLWithString:((TYAnnotation *) annotation).pictureUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-        pin.image = [TYAnnotationUtil pinImageForImage:image];
+        weakPin.image = [TYAnnotationUtil pinImageForImage:image];
     }];
     return pin;
 }

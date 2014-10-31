@@ -61,7 +61,7 @@
 
 - (void)viewDidLoad
 {
-    DebugLog(@"HomeView Did Load. Setting up UI.");
+    DDLogInfo(@"HomeView Did Load. Setting up UI.");
     [super viewDidLoad];
     // Subscribe to cache refresh notifications.
     [self subscribeToNotifications];
@@ -80,7 +80,7 @@
     // Setup other UI
     if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-        DebugLog(@"Height of the header view = %f", self.tableView.bounds.size.height);
+        DDLogInfo(@"Height of the header view = %f", self.tableView.bounds.size.height);
 		view.delegate = self;
 		[self.tableView addSubview:view];
 		_refreshHeaderView = view;
@@ -89,9 +89,9 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    DebugLog(@"HomeView viewDidAppear. Checking if cache is empty.")
+    DDLogInfo(@"HomeView viewDidAppear. Checking if cache is empty.")
     if (![self.cache checkIns] || [self.cache.checkIns count] == 0) {
-        DebugLog(@"Cache is empty, so force refreshing");
+        DDLogInfo(@"Cache is empty, so force refreshing");
         [self.cache forceRefresh];
         [TYIndeterminateProgressBar showInView:self.view backgroundColor:[UIColor dullWhite] indicatorColor:[UIColor dullRed] borderColor:[UIColor darkGrayColor]];
     }
@@ -106,7 +106,7 @@
 }
 
 -(void) dealloc {
-    DebugLog(@"HomeView dealloc");
+    DDLogInfo(@"HomeView dealloc");
     [self unsubscribeFromNotifications];
     [self unregisterObserver];
     self.tableView = nil;
@@ -246,7 +246,7 @@
     
     UILabel *commentCountLbl = [[UILabel alloc] initWithFrame:CGRectMake(204.0f, y, 20.0f, 20.0f)];
     [commentCountLbl setText:[NSString stringWithFormat:@"%d", [checkIn.comments count]]];
-    [commentCountLbl setTextAlignment:UITextAlignmentCenter];
+    [commentCountLbl setTextAlignment:NSTextAlignmentCenter];
     [commentCountLbl setTextColor:[UIColor subtitleTextColor]];
 //    [commentCountLbl setFont:[UIFont boldSystemFontOfSize:13.0f]];
     [commentCountLbl setBackgroundColor:[UIColor clearColor]];
@@ -254,7 +254,7 @@
     
     UILabel *likeCountLbl = [[UILabel alloc] initWithFrame:CGRectMake(256.0f, y, 20.0f, 20.0f)];
     [likeCountLbl setText:[NSString stringWithFormat:@"%d", [checkIn.likes count]]];
-    [likeCountLbl setTextAlignment:UITextAlignmentCenter];
+    [likeCountLbl setTextAlignment:NSTextAlignmentCenter];
     [likeCountLbl setTextColor:[UIColor subtitleTextColor]];
     //    [likeCountLbl setFont:[UIFont boldSystemFontOfSize:13.0f]];
     [likeCountLbl setBackgroundColor:[UIColor clearColor]];
@@ -342,7 +342,7 @@
 }
 
 -(void) likeButtonClicked:(id) sender {
-    DebugLog(@"Like Check-in Button Clicked");
+    DDLogInfo(@"Like Check-in Button Clicked");
     UIButton *button = (UIButton *) sender;
     NSMutableArray *checkIns = self.cache.checkIns;
     TYCheckIn *selectedCheckIn = [checkIns objectAtIndex:button.tag];
@@ -366,7 +366,7 @@
 }
 
 -(void) commentButtonClicked:(id) sender {
-    DebugLog(@"Comment Button Clicked. Launching CommentView");
+    DDLogInfo(@"Comment Button Clicked. Launching CommentView");
     [self.mixPanel track:@"Comment Button Clicked"];
     UIButton *button = (UIButton *) sender;
     NSMutableArray *checkIns = self.cache.checkIns;
@@ -423,7 +423,7 @@
 #pragma mark - Helpers
 
 -(void) didReceiveNotification:(NSNotification *) notification {
-    DebugLog(@"Notification received: %@", [notification name]);
+    DDLogInfo(@"Notification received: %@", [notification name]);
     if ([notification.name isEqualToString:kFBManagerLoginNotification]) {
         [self.cache forceRefresh];
     }
@@ -445,7 +445,7 @@
 }
 
 -(void) subscribeToNotifications {
-    DebugLog(@"Notification constants = %@-%@-%@-%@", kFBManagerLoginNotification, kFBManagerLogOutNotification, kNotificationCacheRefreshStart, kNotificationCacheRefreshEnd);
+    DDLogInfo(@"Notification constants = %@-%@-%@-%@", kFBManagerLoginNotification, kFBManagerLogOutNotification, kNotificationCacheRefreshStart, kNotificationCacheRefreshEnd);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:kFBManagerLoginNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:kFBManagerLogOutNotification object:nil];
     // Listen to notification if check-in cache starts / ends up dating itself and display an unintrusive "working" animation.
@@ -491,7 +491,7 @@
     [label setBackgroundColor:[UIColor clearColor]];
     [label setTextColor:color];
     [label setText:text];
-    [label setTextAlignment:UITextAlignmentCenter];
+    [label setTextAlignment:NSTextAlignmentCenter];
     return label;
 }
 

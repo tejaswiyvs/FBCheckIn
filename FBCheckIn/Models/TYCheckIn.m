@@ -43,6 +43,12 @@
         self.page = [[TYPage alloc] init];
         self.user.userId = [[TYUtils nullSafeObjectFromDictionary:checkInDictionary withKey:@"author_uid"] stringValue];
         self.page.pageId = [[TYUtils nullSafeObjectFromDictionary:checkInDictionary withKey:@"page_id"] stringValue];
+        
+        // July 13 breaking change.
+        if (!self.page.pageId || [self.page.pageId isBlank]) {
+            self.page.pageId = [[TYUtils nullSafeObjectFromDictionary:checkInDictionary withKey:@"target_id"] stringValue];
+        }
+        
         NSDictionary *coordinates = [TYUtils nullSafeObjectFromDictionary:checkInDictionary withKey:@"coords"];
         NSNumber *latitude = [coordinates objectForKey:@"latitude"];
         NSNumber *longitude = [coordinates objectForKey:@"longitude"];

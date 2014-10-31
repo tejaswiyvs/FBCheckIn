@@ -11,6 +11,7 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
-    #import "DebugLog.h"
     #import "Mixpanel.h"
+    #import "DDLog.h"
+    #import "Constants.h"
 #endif

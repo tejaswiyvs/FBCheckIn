@@ -7,51 +7,90 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Libraries/MFSideMenu/MFSideMenuDemo/SideMenuViewController.m"
-         timestampString = "380927491.908866"
+         filePath = "FBCheckIn/Models/TYCheckIn.m"
+         timestampString = "392700661.7705"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "139"
-         endingLineNumber = "139"
-         landmarkName = "-userDidLogin:"
+         startingLineNumber = "34"
+         endingLineNumber = "34"
+         landmarkName = "-initWithDictionary:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Screens/TYLogInViewController.m"
-         timestampString = "380927525.430324"
+         filePath = "FBCheckIn/Libraries/FacebookWrapper/TYCheckInCache.m"
+         timestampString = "392700711.790217"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "103"
-         endingLineNumber = "103"
-         landmarkName = "-facebookDidLogin:"
+         startingLineNumber = "91"
+         endingLineNumber = "91"
+         landmarkName = "-loadFromFacebook"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Screens/TYCheckInViewController.m"
-         timestampString = "381514648.877478"
+         filePath = "FBCheckIn/Libraries/FacebookWrapper/TYFBRequest.m"
+         timestampString = "395533678.006594"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "177"
-         endingLineNumber = "177"
-         landmarkName = "-imageTapped:"
+         startingLineNumber = "536"
+         endingLineNumber = "536"
+         landmarkName = "-parseCheckins:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Screens/TYCheckInViewController.m"
-         timestampString = "381515961.888762"
+         filePath = "FBCheckIn/Libraries/FacebookWrapper/TYFBRequest.m"
+         timestampString = "395533678.006594"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "221"
-         endingLineNumber = "221"
+         startingLineNumber = "584"
+         endingLineNumber = "584"
+         landmarkName = "-parseCheckins:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FBCheckIn/Libraries/FacebookWrapper/TYFBRequest.m"
+         timestampString = "395533678.006594"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "593"
+         endingLineNumber = "593"
+         landmarkName = "-parseCheckins:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FBCheckIn/Models/TYLike.m"
+         timestampString = "392700784.500671"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "20"
+         endingLineNumber = "20"
+         landmarkName = "-initWithDictionary:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FBCheckIn/Libraries/FacebookWrapper/TYCheckInCache.m"
+         timestampString = "395531537.456745"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "106"
+         endingLineNumber = "106"
          landmarkName = "-fbHelper:didCompleteWithResults:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,25 +99,64 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FBCheckIn/Libraries/FacebookWrapper/TYCheckInCache.m"
-         timestampString = "381515272.564019"
+         timestampString = "395531543.456218"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "59"
-         endingLineNumber = "59"
-         landmarkName = "-addCheckInToCache:"
+         startingLineNumber = "128"
+         endingLineNumber = "128"
+         landmarkName = "-fbHelper:didFailWithError:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "FBCheckIn/Screens/TYHomeViewController.m"
-         timestampString = "381515751.329265"
+         filePath = "FBCheckIn/Libraries/FacebookWrapper/TYFBRequest.m"
+         timestampString = "395531718.882023"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "92"
-         endingLineNumber = "92"
-         landmarkName = "-viewWillAppear:"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
+         landmarkName = "-checkInsForUser:since:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FBCheckIn/Screens/TYSettingsViewController.m"
+         timestampString = "395532198.896148"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
+         landmarkName = "-likeButtonClicked:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FBCheckIn/Libraries/FacebookWrapper/TYFBRequest.m"
+         timestampString = "395532205.920126"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "271"
+         endingLineNumber = "271"
+         landmarkName = "-likeOnFacebook"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FBCheckIn/Screens/TYMapViewController.m"
+         timestampString = "395533772.041209"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "49"
+         endingLineNumber = "49"
+         landmarkName = "-viewDidAppear:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

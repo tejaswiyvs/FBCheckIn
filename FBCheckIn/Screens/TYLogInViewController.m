@@ -29,11 +29,11 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        DebugLog(@"Init LoginViewController. Setting up user, cache, registering for notifications.");
+        DDLogInfo(@"Init LoginViewController. Setting up user, cache, registering for notifications.");
         self.user = [TYCurrentUser sharedInstance];
         self.friendCache = [TYFriendCache sharedInstance];
         [self registerForNotifications];
-        DebugLog(@"Done.");
+        DDLogInfo(@"Done.");
     }
     return self;
 }
@@ -59,7 +59,7 @@
 }
 
 -(IBAction)loginButtonClicked:(id)sender {
-    DebugLog(@"Login button clicked");
+    DDLogInfo(@"Login button clicked");
     [[TYFBManager sharedInstance] login];
     [self.mixPanel track:@"Facebook Login Clicked"];
 }
@@ -86,28 +86,28 @@
 }
 
 -(void) currentUserDidLoad:(NSNotification *) notification {
-    DebugLog(@"Succesfully loaded user details. Logged in : Username: %@, UserId: %@", self.user.user.userName, self.user.user.userId);
+    DDLogInfo(@"Succesfully loaded user details. Logged in : Username: %@, UserId: %@", self.user.user.userName, self.user.user.userId);
     [SVProgressHUD dismiss];
     [self dismissModalViewControllerAnimated:YES];
-    DebugLog(@"Loading user's friends asynchronously");
+    DDLogInfo(@"Loading user's friends asynchronously");
     [self.friendCache forceRefresh];
 }
 
 -(void) currentUserDidError:(NSNotification *) notification {
-    DebugLog(@"Userlogin failed");
+    DDLogInfo(@"Userlogin failed");
     [SVProgressHUD dismiss];
     [TYUtils displayAlertWithTitle:@"Attention" message:@"There was an error getting your credentials from facebook. Please try logging in again"];
 }
 
 -(void) facebookDidLogin:(NSNotification *) notification {
     [self.mixPanel track:@"Facebook Login Succesful"];
-    DebugLog(@"Facebook login succesful. Loading current user details..");
+    DDLogInfo(@"Facebook login succesful. Loading current user details..");
     [SVProgressHUD showWithStatus:@"Setting up.." maskType:SVProgressHUDMaskTypeBlack];
     [self.user loadCurrentUser];
 }
 
 -(void) facebookLoginWasCancelled:(NSNotification *) notification {
-    DebugLog(@"Facebook login failed.");
+    DDLogInfo(@"Facebook login failed.");
     [self.mixPanel track:@"Facebook Login Cancelled"];
     [TYUtils displayAlertWithTitle:@"Attention" message:@"You need to login with your facebook account to continue using this application"];
 }

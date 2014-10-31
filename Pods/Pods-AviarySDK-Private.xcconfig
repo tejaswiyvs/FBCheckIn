@@ -1,0 +1,6 @@
+#include "Pods-AviarySDK.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/AviarySDK" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/Appirater" "${PODS_ROOT}/Headers/AviarySDK" "${PODS_ROOT}/Headers/CocoaLumberjack" "${PODS_ROOT}/Headers/EGOTableViewPullRefresh" "${PODS_ROOT}/Headers/HPGrowingTextView" "${PODS_ROOT}/Headers/MFSideMenu" "${PODS_ROOT}/Headers/Mixpanel" "${PODS_ROOT}/Headers/SVProgressHUD"
+LIBRARY_SEARCH_PATHS = ${PODS_AVIARYSDK_LIBRARY_SEARCH_PATHS}
+OTHER_LDFLAGS = -ObjC ${PODS_AVIARYSDK_OTHER_LDFLAGS}
+PODS_ROOT = ${SRCROOT}

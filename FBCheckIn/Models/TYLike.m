@@ -17,7 +17,7 @@
 -(id) initWithDictionary:(NSDictionary *) params {
     self = [super init];
     if (self) {
-        self.checkInId = [[TYUtils nullSafeObjectFromDictionary:params withKey:@"object_id"] stringValue];
+        self.checkInId = [TYUtils nullSafeObjectFromDictionary:params withKey:@"object_id"];
         self.user = [[TYUser alloc] init];
         self.user.userId = [[TYUtils nullSafeObjectFromDictionary:params withKey:@"user_id"] stringValue];
     }

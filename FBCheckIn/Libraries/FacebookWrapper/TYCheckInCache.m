@@ -49,7 +49,7 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
 }
 
 -(void) forceRefresh {
-    DebugLog(@"Force refreshing cache");
+    DDLogInfo(@"Force refreshing cache");
     if (!self.loading) {
         [self loadFromFacebook];
     }
@@ -89,7 +89,7 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
 
 -(void) loadFromFacebook {
     [self notifyCacheUpdateStart];
-    DebugLog(@"Cache update start Notification Posted.");
+    DDLogInfo(@"Cache update start Notification Posted.");
     self.loading = YES;
     self.checkInsRequest = [[TYFBRequest alloc] init];
     self.checkInsRequest.delegate = self;
@@ -103,7 +103,7 @@ static long const kAutoRefreshInterval = 3600; // >60 minutes since last refresh
 }
 
 -(void)fbHelper:(TYFBRequest *)helper didCompleteWithResults:(NSMutableDictionary *)results {
-    DebugLog(@"Cache update did Complete %@", self.checkIns);
+    DDLogInfo(@"Cache update did Complete %@", self.checkIns);
     NSArray *updatedCheckIns = [self sortedCheckIns:[results objectForKey:@"data"]];
     @synchronized(self.checkIns) {
         self.checkIns = [self checkInsByAppendingResults:updatedCheckIns toCheckIns:self.checkIns];

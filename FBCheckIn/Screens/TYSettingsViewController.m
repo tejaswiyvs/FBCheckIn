@@ -9,6 +9,7 @@
 #import "TYSettingsViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIColor+HexString.h"
+#import "TYFBRequest.h"
 
 @interface TYSettingsViewController ()
 
@@ -37,12 +38,9 @@ NSString * const kLogoutNotification = @"logout";
     [self.aboutTxtView.layer setBorderColor:[[UIColor darkGrayColor] CGColor]];
     [self.aboutTxtView.layer setBorderWidth:1.0f];
     self.view.backgroundColor = [UIColor bgColor];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    // Set the right image for liked / shared buttons depending on status
+    [self refreshLikeAndShareButtons];
 }
 
 -(IBAction) logout:(id)sender {
@@ -53,4 +51,59 @@ NSString * const kLogoutNotification = @"logout";
     
 }
 
+-(IBAction)likeButtonClicked:(id)sender {
+    TYFBRequest *request = [[TYFBRequest alloc] init];
+    [request likeOnFacebook];
+    [self setLiked:YES];
+    [self refreshLikeAndShareButtons];
+}
+
+-(IBAction)shareButtonClicked:(id)sender {
+    TYFBRequest *request = [[TYFBRequest alloc] init];
+    [request shareOnFacebook];
+    [self setShared:YES];
+    [self refreshLikeAndShareButtons];
+}
+
+#pragma mark - Helpers
+
+-(void) refreshLikeAndShareButtons {
+    if ([self liked]) {
+        [self.likeButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    }
+    else {
+        [self.likeButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    }
+
+    if ([self shared]) {
+        [self.shareButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    }
+    else {
+        [self.shareButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    }
+}
+
+-(BOOL) liked {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:@"liked"];
+}
+
+-(void) setLiked:(BOOL) liked {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:liked forKey:@"liked"];
+    [defaults synchronize];
+    return;
+}
+
+-(BOOL) shared {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:@"shared"];
+}
+
+-(void) setShared:(BOOL) shared {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:shared forKey:@"shared"];
+    [defaults synchronize];
+    return;
+}
 @end

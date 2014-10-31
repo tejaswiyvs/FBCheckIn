@@ -135,7 +135,7 @@ const int kNumberOfRows = 3;
 
 -(void)fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
     [TYIndeterminateProgressBar hideFromView:self.view];
-    DebugLog(@"%@", err);
+    DDLogInfo(@"%@", err);
 }
 
 #pragma mark - Event Handlers
@@ -263,7 +263,7 @@ const int kNumberOfRows = 3;
         [noContactLbl setTextColor:[UIColor headerTextColor]];
         [noContactLbl setFont:[UIFont boldSystemFontOfSize:14.0f]];
         [noContactLbl setBackgroundColor:[UIColor clearColor]];
-        [noContactLbl setTextAlignment:UITextAlignmentCenter];
+        [noContactLbl setTextAlignment:NSTextAlignmentCenter];
         [noContactLbl setText:@"Contact Information Unavailable"];
         [cell addSubview:noContactLbl];
     }
@@ -301,7 +301,7 @@ const int kNumberOfRows = 3;
     [view.layer setBorderWidth:1.0f];
     
     UILabel *mainTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 9.0f, 88.0f, 30.0f)];
-    [mainTextLabel setTextAlignment:UITextAlignmentCenter];
+    [mainTextLabel setTextAlignment:NSTextAlignmentCenter];
     [mainTextLabel setText:mainTxt];
     [mainTextLabel setFont:[UIFont boldSystemFontOfSize:18.0f]];
     [mainTextLabel setLineBreakMode:NSLineBreakByWordWrapping];
@@ -309,7 +309,7 @@ const int kNumberOfRows = 3;
     [mainTextLabel setBackgroundColor:[UIColor clearColor]];
     
     UILabel *subTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 47.0f, 88.0f, 30.0f)];
-    [subTextLabel setTextAlignment:UITextAlignmentCenter];
+    [subTextLabel setTextAlignment:NSTextAlignmentCenter];
     [subTextLabel setText:subTxt];
     [subTextLabel setFont:[UIFont systemFontOfSize:12.0f]];
     [subTextLabel setLineBreakMode:NSLineBreakByWordWrapping];

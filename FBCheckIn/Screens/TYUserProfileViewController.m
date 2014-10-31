@@ -93,7 +93,7 @@ const int kRequestTagLast3CheckIns = 1;
 #pragma mark - TYFBFacade
 
 -(void) loadUserMetaData {
-    DebugLog(@"Loading User Meta Data");
+    DDLogInfo(@"Loading User Meta Data");
     [TYIndeterminateProgressBar showInView:self.view backgroundColor:[UIColor dullWhite] indicatorColor:[UIColor dullRed] borderColor:[UIColor darkGrayColor]];
     self.userCheckInsRequest = [[TYFBRequest alloc] init];
     self.userCheckInsRequest.delegate = self;
@@ -258,7 +258,7 @@ const int kRequestTagLast3CheckIns = 1;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 20.0f, 20.0f)];
     [label setText:[checkInCount stringValue]];
     [label setBackgroundColor:[UIColor clearColor]];
-    [label setTextAlignment:UITextAlignmentCenter];
+    [label setTextAlignment:NSTextAlignmentCenter];
     [label setFont:[UIFont boldSystemFontOfSize:15.0f]];
     [label setTextColor:[UIColor headerTextColor]];
     [checkInCountHolderView addSubview:label];
@@ -380,7 +380,7 @@ const int kRequestTagLast3CheckIns = 1;
                                          }
                                          failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                              dispatch_async(dispatch_get_main_queue(), ^(void){
-                                                 DebugLog(@"Error loading user's cover photo : %@", error);
+                                                 DDLogInfo(@"Error loading user's cover photo : %@", error);
                                              });
                                          }
          ];

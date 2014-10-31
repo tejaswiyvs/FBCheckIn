@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TYUITabBarController.h"
 #import "TYLogInViewController.h"
 #import "TYFBManager.h"
 #import "TYCheckInCache.h"
 #import "TYFriendCache.h"
+#import "Appirater.h"
 
-@interface TYAppDelegate : UIResponder <UIApplicationDelegate>
+@interface TYAppDelegate : UIResponder <UIApplicationDelegate, AppiraterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) TYFBManager *manager;

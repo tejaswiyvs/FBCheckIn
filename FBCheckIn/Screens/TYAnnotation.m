@@ -7,8 +7,6 @@
 //
 
 #import "TYAnnotation.h"
-#import "SDWebImageManager.h"
-#import "SDImageCache.h"
 
 @implementation TYAnnotation
 

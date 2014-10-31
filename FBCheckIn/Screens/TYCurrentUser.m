@@ -91,7 +91,7 @@ static NSString * const kCacheFileName = @"current_user";
 }
 
 -(void) fbHelper:(TYFBRequest *)helper didFailWithError:(NSError *)err {
-    DebugLog(@"%@", err);
+    DDLogInfo(@"%@", err);
     [self postFailureNotification];
 }
 

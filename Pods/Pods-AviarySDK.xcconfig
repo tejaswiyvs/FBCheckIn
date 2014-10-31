@@ -1,0 +1,2 @@
+PODS_AVIARYSDK_LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/AviarySDK/3.3.11-master-basic/AviarySDK"
+PODS_AVIARYSDK_OTHER_LDFLAGS = -ObjC -force_load "$(PODS_ROOT)/AviarySDK/3.3.11-master-basic/AviarySDK/libAviarySDK.a" -lsqlite3 -lz -framework Accelerate -framework CoreData -framework CoreText -framework MessageUI -framework OpenGLES -framework QuartzCore -framework StoreKit -framework SystemConfiguration -weak_framework AdSupport
